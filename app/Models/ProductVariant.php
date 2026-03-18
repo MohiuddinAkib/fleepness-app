@@ -5,27 +5,29 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\ProductReviewFactory;
+use Database\Factories\ProductVariantFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ProductReview extends Model
+class ProductVariant extends Model
 {
-    /** @use HasFactory<ProductReviewFactory> */
+    /** @use HasFactory<ProductVariantFactory> */
     use HasFactory;
 
     /** @var list<string> */
     protected $fillable = [
-        'user_id',
         'product_id',
-        'rating',
-        'review',
+        'name',
+        'price',
+        'stock',
     ];
 
-    /** @return BelongsTo<User, $this> */
-    public function user(): BelongsTo
+    /** @return array<string, string> */
+    protected function casts(): array
     {
-        return $this->belongsTo(User::class);
+        return [
+            'price' => 'decimal:2',
+        ];
     }
 
     /** @return BelongsTo<Product, $this> */

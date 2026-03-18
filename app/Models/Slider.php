@@ -1,27 +1,52 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Spatie\MediaLibrary\HasMedia;
+use Database\Factories\SliderFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Slider extends Model
+class Slider extends Model implements HasMedia
 {
-    use HasFactory;
+    /** @use HasFactory<SliderFactory> */
+    use HasFactory, InteractsWithMedia;
 
-    public function category()
+    /** @var list<string> */
+    protected $fillable = [
+        'category_id',
+        'tag_id',
+        'url',
+        'is_active',
+        'sort_order',
+    ];
+
+    /** @return array<string, string> */
+    protected function casts(): array
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return [
+            'is_active' => 'boolean',
+        ];
     }
 
-    public function getPhotoAttribute($value)
+    public function registerMediaCollections(): void
     {
-        return $value ? Storage::url($value) : null;
+        $this->addMediaCollection('image')->singleFile();
     }
 
-    public function tag()
+    /** @return BelongsTo<Category, $this> */
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'tag_id');
+        return $this->belongsTo(Category::class);
+    }
+
+    /** @return BelongsTo<Tag, $this> */
+    public function tag(): BelongsTo
+    {
+        return $this->belongsTo(Tag::class);
     }
 }

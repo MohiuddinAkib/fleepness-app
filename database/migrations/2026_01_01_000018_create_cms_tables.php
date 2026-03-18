@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('tag_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('image_path');
             $table->string('url')->nullable();
             $table->boolean('is_active')->default(true);
             $table->unsignedSmallInteger('sort_order')->default(0);
@@ -30,8 +29,6 @@ return new class extends Migration
             $table->string('type')->default(SectionType::ScrollableProduct->value);
             $table->text('description')->nullable();
             $table->string('placement_type')->nullable();
-            $table->string('background_image_path')->nullable();
-            $table->string('banner_image_path')->nullable();
             $table->unsignedSmallInteger('sort_order')->default(0);
             $table->unsignedSmallInteger('category_sort_order')->default(0);
             $table->boolean('is_visible')->default(true);
@@ -42,7 +39,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->foreignId('tag_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('image_path')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->unsignedSmallInteger('sort_order')->default(0);

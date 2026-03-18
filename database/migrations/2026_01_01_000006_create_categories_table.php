@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('slug', 100)->unique();
             $table->text('description')->nullable();
             $table->string('store_title')->nullable();
-            $table->string('profile_image_path')->nullable();
-            $table->string('cover_image_path')->nullable();
             $table->string('status')->default(CategoryStatus::Active->value);
             $table->unsignedSmallInteger('sort_order')->default(0);
             $table->timestamps();

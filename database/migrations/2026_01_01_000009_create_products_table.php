@@ -37,14 +37,6 @@ return new class extends Migration
             $table->primary(['product_id', 'tag_id']);
         });
 
-        Schema::create('product_images', function (Blueprint $table): void {
-            $table->id();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->string('path');
-            $table->unsignedSmallInteger('sort_order')->default(0);
-            $table->timestamps();
-        });
-
         Schema::create('product_variants', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
@@ -68,7 +60,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('product_reviews');
         Schema::dropIfExists('product_variants');
-        Schema::dropIfExists('product_images');
         Schema::dropIfExists('product_tag');
         Schema::dropIfExists('products');
     }

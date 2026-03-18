@@ -65,3 +65,14 @@ public function comments(): MorphMany
     return $this->morphMany(Comment::class, 'commentable');
 }
 ```
+
+## Foreign Key Access
+
+- Avoid directly accessing foreign key columns like `user_id`, `order_id`.
+- Use relation-derived methods such as:
+  - `$model->relation()->getForeignKeyName()`
+  - `$model->relation()->getOwnerKeyName()`
+  - `$model->relation()->getMorphType()`
+- Prefer relation checks (`->is()`) over manual key comparisons.
+
+The goal is to eliminate hardcoded database assumptions and rely entirely on Laravel's relationship system.

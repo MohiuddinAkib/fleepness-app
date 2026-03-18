@@ -1,38 +1,53 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Database\Factories\SectionItemFactory;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-/**
- * @property-read ?string $image
- */
-class SectionItem extends Model
+class SectionItem extends Model implements HasMedia
 {
-    use HasFactory;
+    /** @use HasFactory<SectionItemFactory> */
+    use HasFactory, InteractsWithMedia;
 
-    /**
-     * @return BelongsTo<Section,$this>
-     */
+    /** @var list<string> */
+    protected $fillable = [
+        'section_id',
+        'tag_id',
+        'title',
+        'description',
+        'sort_order',
+        'is_visible',
+    ];
+
+    /** @return array<string, string> */
+    protected function casts(): array
+    {
+        return [
+            'is_visible' => 'boolean',
+        ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')->singleFile();
+    }
+
+    /** @return BelongsTo<Section, $this> */
     public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
     }
 
-    /**
-     * @return BelongsTo<Category,$this>
-     */
+    /** @return BelongsTo<Tag, $this> */
     public function tag(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'tag_id');
-    }
-
-    protected function image(): Attribute
-    {
-        return Attribute::get(fn ($value) => $value ? Storage::url($value) : null);
+        return $this->belongsTo(Tag::class);
     }
 }

@@ -1,42 +1,60 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use App\Enums\SectionType;
+use Spatie\MediaLibrary\HasMedia;
+use Database\Factories\SectionFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\Storage;
 
-class Section extends Model
+class Section extends Model implements HasMedia
 {
-    use HasFactory;
+    /** @use HasFactory<SectionFactory> */
+    use HasFactory, InteractsWithMedia;
 
-    /**
-     * @return HasMany<SectionItem,$this>
-     */
-    public function items(): HasMany
+    /** @var list<string> */
+    protected $fillable = [
+        'category_id',
+        'name',
+        'title',
+        'type',
+        'description',
+        'placement_type',
+        'sort_order',
+        'category_sort_order',
+        'is_visible',
+    ];
+
+    /** @return array<string, string> */
+    protected function casts(): array
     {
-        return $this->hasMany(SectionItem::class);
+        return [
+            'type' => SectionType::class,
+            'is_visible' => 'boolean',
+        ];
     }
 
-    /**
-     * @return BelongsTo<Category,$this>
-     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('background_image')->singleFile();
+        $this->addMediaCollection('banner_image')->singleFile();
+    }
+
+    /** @return HasMany<SectionItem, $this> */
+    public function items(): HasMany
+    {
+        return $this->hasMany(SectionItem::class)->orderBy('sort_order');
+    }
+
+    /** @return BelongsTo<Category, $this> */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
-    }
-
-    
-    protected function backgroundImage(): Attribute
-    {
-        return Attribute::get(fn ($value) => $value ? Storage::url($value) : null);
-    }
-
-    protected function bannerImage(): Attribute
-    {
-        return Attribute::get(fn ($value) => $value ? Storage::url($value) : null);
     }
 }

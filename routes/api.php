@@ -6,13 +6,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Me\FollowController;
 use App\Http\Controllers\Me\AddressController;
 use App\Http\Controllers\Me\ProfileController;
+use App\Http\Controllers\Public\TagController;
 use App\Http\Controllers\Auth\OTPAuthController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Public\VendorController;
+use App\Http\Controllers\Public\ProductController;
+use App\Http\Controllers\Public\SectionController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Auth\DeviceTokenController;
 use App\Http\Controllers\Me\VendorProfileController;
 use App\Http\Controllers\Me\PaymentAccountController;
+use App\Http\Controllers\Vendor\ProductController as VendorProductController;
 
 // Auth
 Route::prefix('auth')->group(function (): void {
@@ -61,6 +66,14 @@ Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
     Route::post('vendor-application', [VendorProfileController::class, 'apply']);
     Route::get('vendor-application/status', [VendorProfileController::class, 'applicationStatus']);
 
+    // Vendor product management
+    Route::get('vendor/products', [VendorProductController::class, 'index']);
+    Route::post('vendor/products', [VendorProductController::class, 'store']);
+    Route::get('vendor/products/{product}', [VendorProductController::class, 'show']);
+    Route::patch('vendor/products/{product}', [VendorProductController::class, 'update']);
+    Route::delete('vendor/products/{product}', [VendorProductController::class, 'destroy']);
+    Route::post('vendor/products/{product}/toggle-status', [VendorProductController::class, 'toggleStatus']);
+
     // Vendor follow/unfollow (auth required)
     Route::post('vendors/{vendorProfile}/follow', [VendorController::class, 'follow']);
     Route::delete('vendors/{vendorProfile}/follow', [VendorController::class, 'unfollow']);
@@ -68,9 +81,25 @@ Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
     // Vendor reviews (auth required)
     Route::post('vendors/{vendorProfile}/reviews', [VendorController::class, 'storeReview']);
     Route::delete('vendors/{vendorProfile}/reviews/{review}', [VendorController::class, 'destroyReview']);
+
+    // Product reviews (auth required)
+    Route::post('products/{product}/reviews', [ProductController::class, 'storeReview']);
+    Route::delete('products/{product}/reviews/{review}', [ProductController::class, 'destroyReview']);
 });
 
 // Public routes
 Route::get('vendors', [VendorController::class, 'index']);
 Route::get('vendors/{vendorProfile}', [VendorController::class, 'show']);
 Route::get('vendors/{vendorProfile}/reviews', [VendorController::class, 'reviews']);
+
+Route::get('products', [ProductController::class, 'index']);
+Route::get('products/{product}', [ProductController::class, 'show']);
+Route::get('products/{product}/reviews', [ProductController::class, 'reviews']);
+
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('categories/{category}', [CategoryController::class, 'show']);
+
+Route::get('tags', [TagController::class, 'index']);
+
+Route::get('sections', [SectionController::class, 'index']);
+Route::get('sliders', [SectionController::class, 'sliders']);

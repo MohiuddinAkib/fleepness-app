@@ -15,8 +15,6 @@ return new class extends Migration
             $table->foreignId('vendor_profile_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('video_path');
-            $table->string('thumbnail_path')->nullable();
             $table->unsignedInteger('likes_count')->default(0);
             $table->timestamps();
         });

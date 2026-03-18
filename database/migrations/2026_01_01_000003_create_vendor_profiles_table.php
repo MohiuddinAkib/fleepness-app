@@ -17,8 +17,6 @@ return new class extends Migration
             $table->foreignId('shop_category_id')->nullable()->constrained()->nullOnDelete();
             $table->string('shop_name');
             $table->text('description')->nullable();
-            $table->string('banner_image_path')->nullable();
-            $table->string('cover_image_path')->nullable();
             $table->string('pickup_location')->nullable();
             $table->decimal('balance', 12, 2)->default(0);
             $table->decimal('total_sales', 15, 2)->default(0);
