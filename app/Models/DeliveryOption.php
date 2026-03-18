@@ -4,29 +4,30 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Database\Factories\FeeFactory;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\DeliveryOptionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Fee extends Model
+class DeliveryOption extends Model
 {
-    /** @use HasFactory<FeeFactory> */
+    /** @use HasFactory<DeliveryOptionFactory> */
     use HasFactory;
 
     /** @var list<string> */
     protected $fillable = [
-        'vat',
-        'platform_fee',
-        'commission',
+        'name',
+        'description',
+        'estimated_minutes',
+        'fee',
+        'is_active',
     ];
 
     /** @return array<string, string> */
     protected function casts(): array
     {
         return [
-            'vat' => 'decimal:2',
-            'platform_fee' => 'decimal:2',
-            'commission' => 'decimal:2',
+            'is_active' => 'boolean',
+            'fee' => 'decimal:2',
         ];
     }
 }

@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Me\CartController;
+use App\Http\Controllers\Me\OrderController;
 use App\Http\Controllers\Me\FollowController;
 use App\Http\Controllers\Me\AddressController;
 use App\Http\Controllers\Me\ProfileController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\Public\TagController;
 use App\Http\Controllers\Auth\OTPAuthController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Public\VendorController;
+use App\Http\Controllers\Me\VendorOrderController;
 use App\Http\Controllers\Public\ProductController;
 use App\Http\Controllers\Public\SectionController;
 use App\Http\Controllers\Auth\SocialAuthController;
@@ -17,6 +20,7 @@ use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Auth\DeviceTokenController;
 use App\Http\Controllers\Me\VendorProfileController;
 use App\Http\Controllers\Me\PaymentAccountController;
+use App\Http\Controllers\Public\DeliveryOptionController;
 use App\Http\Controllers\Vendor\ProductController as VendorProductController;
 
 // Auth
@@ -85,6 +89,24 @@ Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
     // Product reviews (auth required)
     Route::post('products/{product}/reviews', [ProductController::class, 'storeReview']);
     Route::delete('products/{product}/reviews/{review}', [ProductController::class, 'destroyReview']);
+
+    // Cart
+    Route::get('cart', [CartController::class, 'index']);
+    Route::post('cart/items', [CartController::class, 'store']);
+    Route::patch('cart/items/{cartItem}', [CartController::class, 'update']);
+    Route::delete('cart/items/{cartItem}', [CartController::class, 'destroy']);
+    Route::get('cart/summary', [CartController::class, 'summary']);
+
+    // Customer orders
+    Route::post('orders', [OrderController::class, 'store']);
+    Route::get('me/orders', [OrderController::class, 'index']);
+    Route::get('me/orders/{order}', [OrderController::class, 'show']);
+
+    // Vendor orders
+    Route::get('me/vendor-orders', [VendorOrderController::class, 'index']);
+    Route::get('me/vendor-orders/{vendorOrder}', [VendorOrderController::class, 'show']);
+    Route::patch('me/vendor-orders/{vendorOrder}/accept', [VendorOrderController::class, 'accept']);
+    Route::patch('me/vendor-orders/{vendorOrder}/reject', [VendorOrderController::class, 'reject']);
 });
 
 // Public routes
@@ -103,3 +125,5 @@ Route::get('tags', [TagController::class, 'index']);
 
 Route::get('sections', [SectionController::class, 'index']);
 Route::get('sliders', [SectionController::class, 'sliders']);
+
+Route::get('delivery-options', [DeliveryOptionController::class, 'index']);

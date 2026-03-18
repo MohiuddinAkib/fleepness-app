@@ -4,37 +4,39 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Database\Factories\CartItemFactory;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\VendorOrderItemFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CartItem extends Model
+class VendorOrderItem extends Model
 {
-    /** @use HasFactory<CartItemFactory> */
+    /** @use HasFactory<VendorOrderItemFactory> */
     use HasFactory;
 
     /** @var list<string> */
     protected $fillable = [
-        'user_id',
+        'vendor_order_id',
         'product_id',
         'product_variant_id',
         'quantity',
-        'is_selected',
+        'unit_price',
+        'total_price',
     ];
 
     /** @return array<string, string> */
     protected function casts(): array
     {
         return [
-            'is_selected' => 'boolean',
+            'unit_price' => 'decimal:2',
+            'total_price' => 'decimal:2',
         ];
     }
 
-    /** @return BelongsTo<User, $this> */
-    public function user(): BelongsTo
+    /** @return BelongsTo<VendorOrder, $this> */
+    public function vendorOrder(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(VendorOrder::class);
     }
 
     /** @return BelongsTo<Product, $this> */

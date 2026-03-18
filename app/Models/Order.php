@@ -1,55 +1,68 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Database\Factories\OrderFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-/**
- * @property float|null $platform_fee
- * @property float|null $delivery_fee
- */
 class Order extends Model
 {
+    /** @use HasFactory<OrderFactory> */
     use HasFactory;
 
-    protected $casts = [
-        'platform_fee_added' => 'boolean',
-        'product_cost' => 'float',
-        'commission' => 'float',
-        'delivery_fee' => 'float',
-        'platform_fee' => 'float',
-        'vat' => 'float',
-        'grand_total' => 'float',
-        'balance' => 'float',
-        'is_multi_seller' => 'boolean',
-        'total_sellers' => 'integer',
-        'completed_order' => 'boolean',
+    /** @var list<string> */
+    protected $fillable = [
+        'user_id',
+        'delivery_option_id',
+        'order_number',
+        'is_multi_vendor',
+        'vendor_count',
+        'product_total',
+        'delivery_fee',
+        'platform_fee',
+        'vat',
+        'commission',
+        'grand_total',
+        'balance',
+        'is_completed',
     ];
 
-    /**
-     * @return BelongsTo<User,$this>
-     */
+    /** @return array<string, string> */
+    protected function casts(): array
+    {
+        return [
+            'is_multi_vendor' => 'boolean',
+            'is_completed' => 'boolean',
+            'product_total' => 'decimal:2',
+            'delivery_fee' => 'decimal:2',
+            'platform_fee' => 'decimal:2',
+            'vat' => 'decimal:2',
+            'commission' => 'decimal:2',
+            'grand_total' => 'decimal:2',
+            'balance' => 'decimal:2',
+        ];
+    }
+
+    /** @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @return HasMany<SellerOrder,$this>
-     */
-    public function sellerOrders(): HasMany
+    /** @return BelongsTo<DeliveryOption, $this> */
+    public function deliveryOption(): BelongsTo
     {
-        return $this->hasMany(SellerOrder::class);
+        return $this->belongsTo(DeliveryOption::class);
     }
 
-    /**
-     * @return BelongsTo<DeliveryModel,$this>
-     */
-    public function deliveryModel(): BelongsTo
+    /** @return HasMany<VendorOrder, $this> */
+    public function vendorOrders(): HasMany
     {
-        return $this->belongsTo(DeliveryModel::class, 'delivery_model_id');
+        return $this->hasMany(VendorOrder::class);
     }
 }
