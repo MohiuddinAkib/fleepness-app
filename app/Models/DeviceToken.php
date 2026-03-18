@@ -1,18 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\DeviceTokenFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DeviceToken extends Model
 {
-    protected $fillable = ['user_id', 'token', 'meta'];
+    /** @use HasFactory<DeviceTokenFactory> */
+    use HasFactory;
 
-    protected $casts = [
-        'meta' => 'array',
-    ];
+    /** @var list<string> */
+    protected $fillable = ['user_id', 'token', 'platform'];
 
-    public function user()
+    /** @return BelongsTo<User, $this> */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

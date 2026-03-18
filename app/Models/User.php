@@ -1,17 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use App\Enums\SellerStatus;
-use Illuminate\Support\Arr;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Stringable;
-use Illuminate\Support\Facades\Storage;
+use Database\Factories\UserFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use App\Notifications\LoginOtpNotification;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,206 +19,128 @@ use App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice;
 
 class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, FcmNotifiableByDevice
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
-    use InteractsWithMedia;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    /** @var list<string> */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    /** @return array<string, string> */
     protected function casts(): array
     {
         return [
             'password' => 'hashed',
             'email_verified_at' => 'datetime',
-            'status' => SellerStatus::class,
         ];
     }
 
-    public function removeDeviceToken(array|string $token): mixed
-    {
-        $tokens = Arr::wrap($token);
+    // -------------------------------------------------------------------------
+    // OTP helpers
+    // -------------------------------------------------------------------------
 
-        return $this
-            ->deviceTokens()
-            ->whereIn('token', $tokens)
-            ->delete();
+    public function otpCacheKey(): string
+    {
+        return "otp_{$this->phone_number}";
     }
 
-    public function receivesBroadcastNotificationsOn()
+    public function cacheOtpFor10Minutes(string $otp): bool
     {
-        return sprintf('user_%s', $this->getKey());
+        return cache()->put($this->otpCacheKey(), $otp, now()->addMinutes(10));
     }
 
-    public function routeBroadcastNotificationForFcmTokens(): null|array|string
+    public function getCachedOtp(mixed $default = null): mixed
     {
-        return $this->deviceTokens->pluck('token')->toArray();
+        return cache()->get($this->otpCacheKey(), $default);
     }
 
-    public function routeNotificationForFcmTokens(Notification&SupportsFcmChannel $notification): null|array|string
+    public function forgetCachedOtp(): bool
     {
-        return $this->deviceTokens->pluck('token')->toArray();
+        return cache()->forget($this->otpCacheKey());
     }
 
-    public function routeNotificationForSms($notification = null)
-    {
-        return $this->phone_number;
-    }
-
-    protected function phoneNumber(): Attribute
-    {
-        return Attribute::get(function (?string $value) {
-            if (empty($value)) {
-                return null;
-            }
-
-            return str($value)
-                ->pipe(function (Stringable $str) {
-                    return $str->when($str->startsWith('0'))->prepend('88');
-                })
-                ->pipe(function (Stringable $str) {
-                    return $str->unless($str->startsWith('880'))->prepend('880');
-                })
-                ->value();
-        });
-    }
-
-    /**
-     * Get all device tokens associated with the user.
-     *
-     * @return HasMany<DeviceToken,$this>
-     */
-    public function deviceTokens()
-    {
-        return $this->hasMany(DeviceToken::class);
-    }
-
-    public function sendOtpNotification(int|string $otp)
+    public function sendOtpNotification(string $otp): void
     {
         $this->notify(new LoginOtpNotification($otp));
     }
 
-    public function registerMediaCollections(): void
+    /** @param string|list<string> $token */
+    public function removeDeviceToken(array|string $token): mixed
     {
-        $this->addMediaCollection('thumbnail_pictures')
-            ->useDisk('public'); 
+        return $this->deviceTokens()->whereIn('token', (array) $token)->delete();
     }
 
-    protected function coverImage(): Attribute
+    // -------------------------------------------------------------------------
+    // Notification routing
+    // -------------------------------------------------------------------------
+
+    public function receivesBroadcastNotificationsOn(): string
     {
-        return Attribute::get(fn ($value) => $value ? Storage::url($value) : null);
+        return "user_{$this->getKey()}";
     }
 
-    protected function bannerImage(): Attribute
+    /** @return list<string> */
+    public function routeBroadcastNotificationForFcmTokens(): array
     {
-        return Attribute::get(fn ($value) => $value ? Storage::url($value) : null);
+        return $this->deviceTokens->pluck('token')->all();
     }
 
-    /**
-     * Get all vendor reviews written for the user.
-     *
-     * @return HasMany<VendorReview,$this>
-     */
-    public function reviews()
+    /** @return list<string> */
+    public function routeNotificationForFcmTokens(Notification&SupportsFcmChannel $notification): array
     {
-        return $this->hasMany(VendorReview::class);
+        return $this->deviceTokens->pluck('token')->all();
     }
 
-    /**
-     * Get the shop category that the user belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ShopCategory,$this>
-     */
-    public function shopCategory()
+    public function routeNotificationForSms(mixed $notification = null): ?string
     {
-        return $this->belongsTo(ShopCategory::class, 'shop_category');
+        return $this->phone_number;
     }
 
-    /**
-     * Get all payments associated with the user.
-     *
-     * @return HasMany<UserPayment,$this>
-     */
-    public function payments()
+    // -------------------------------------------------------------------------
+    // Relations
+    // -------------------------------------------------------------------------
+
+    /** @return HasOne<VendorProfile, $this> */
+    public function vendorProfile(): HasOne
     {
-        return $this->hasMany(UserPayment::class);
+        return $this->hasOne(VendorProfile::class);
     }
 
-    /**
-     * @return HasMany<Livestream,$this>
-     */
-    public function livestreams(): HasMany
-    {
-        return $this->hasMany(Livestream::class, 'vendor_id');
-    }
-
-    /**
-     * Get all livestreams liked by the user.
-     *
-     * @return HasMany<LivestreamLike,$this>
-     */
-    public function likedLivestreams()
-    {
-        return $this->hasMany(LivestreamLike::class);
-    }
-
-    /**
-     * Get all livestreams saved by the user.
-     *
-     * @return HasMany<LivestreamSave,$this>
-     */
-    public function savedLivestreams()
-    {
-        return $this->hasMany(LivestreamSave::class);
-    }
-
-    public function getOtpCacheKey()
-    {
-        return "otp_$this->phone_number";
-    }
-
-    public function getCachedOtp(mixed $default = null)
-    {
-        return cache()->get($this->getOtpCacheKey(), $default);
-    }
-
-    public function cacheOtpFor10Minutes(string $otp)
-    {
-        return cache()->put($this->getOtpCacheKey(), $otp, now()->addMinutes(10));
-    }
-
-    public function forgetCachedOtp()
-    {
-        return cache()->forget($this->getOtpCacheKey());
-    }
-
-    public function addresses()
+    /** @return HasMany<Address, $this> */
+    public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
     }
 
-    public function defaultAddress()
+    /** @return HasOne<Address, $this> */
+    public function defaultAddress(): HasOne
     {
         return $this->hasOne(Address::class)->where('is_default', true);
     }
 
+    /** @return HasMany<DeviceToken, $this> */
+    public function deviceTokens(): HasMany
+    {
+        return $this->hasMany(DeviceToken::class);
+    }
+
+    /** @return HasMany<UserPaymentAccount, $this> */
+    public function paymentAccounts(): HasMany
+    {
+        return $this->hasMany(UserPaymentAccount::class);
+    }
+
+    /** @return HasMany<Transaction, $this> */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    /** @return HasMany<Order, $this> */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

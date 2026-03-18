@@ -1,128 +1,100 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Data\UserData;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Data\Auth\SendOtpData;
+use App\Data\Auth\RegisterData;
+use App\Data\Auth\VerifyOtpData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class OTPAuthController extends Controller
 {
-    // Register user and send OTP via SMS
-    public function register(Request $request): JsonResponse
+    public function register(RegisterData $data): JsonResponse
     {
-        $rules = [
-            'phone_number' => 'required|digits:11|unique:users,phone_number',
-            'name' => 'nullable|string|max:255',
-        ];
-
-        $messages = [
-            'phone_number.digits' => 'Invalid number. Phone number must be exactly 11 digits.',
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            if (
-                $validator->errors()->has('phone_number') &&
-                str_contains($validator->errors()->first('phone_number'), 'Invalid number')
-            ) {
-                return response()->json(['message' => $validator->errors()->first('phone_number')], 400);
-            }
-
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
         $user = User::create([
-            'name' => $request->name,
-            'phone_number' => $request->phone_number,
+            'name' => $data->name,
+            'phone_number' => $data->phoneNumber,
         ]);
 
         $otp = Str::otp();
-
         $user->cacheOtpFor10Minutes($otp);
-
         $user->sendOtpNotification($otp);
 
-        $payloadToReturn = [
+        $payload = [
             'message' => 'OTP sent to your phone.',
-            'user_id' => $user->getKey(),
-            'phone_number' => $user->phone_number,
-            'otp' => $otp,
+            'user' => UserData::fromModel($user),
         ];
 
-        if (app()->isProduction()) {
-            unset($payloadToReturn['otp']);
+        if (! app()->isProduction()) {
+            $payload['otp'] = $otp;
         }
 
-        return response()->json($payloadToReturn);
+        return Response::json($payload, HttpResponse::HTTP_CREATED);
     }
 
-    // Verify OTP
-    public function verifyOtp(Request $request): JsonResponse
+    public function verifyOtp(VerifyOtpData $data): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'phone_number' => 'required|string|exists:users,phone_number',
-            'otp' => 'required|digits:4',
-        ]);
-
-        $validator->validate();
-
-        $user = User::where('phone_number', $request->phone_number)->first();
+        $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
 
         $cachedOtp = $user->getCachedOtp();
+
         if (! $cachedOtp) {
-            return response()->json(['message' => 'OTP expired.'], 400);
+            return Response::json(['message' => 'OTP has expired.'], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if ((string) $cachedOtp !== (string) $request->otp) {
-            return response()->json(['message' => 'Invalid OTP.'], 400);
+        if ((string) $cachedOtp !== $data->otp) {
+            return Response::json(['message' => 'Invalid OTP.'], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        // OTP verified, remove OTP from cache
         $user->forgetCachedOtp();
-        // Create and return a token
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
+        return Response::json([
             'message' => 'OTP verified successfully.',
             'token' => $token,
+            'user' => UserData::fromModel($user),
         ]);
     }
 
-    // Resend OTP
-    public function resendOtp(Request $request): JsonResponse
+    public function resendOtp(SendOtpData $data): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'phone_number' => 'required|string|exists:users,phone_number',
-        ]);
+        $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $user = User::where('phone_number', $request->phone_number)->first();
-
-        // Generate a new OTP
         $otp = Str::otp();
-
-        // Store the new OTP in cache
-        cache()->put('otp_'.$user->phone_number, $otp, now()->addMinutes(10));
-
+        $user->cacheOtpFor10Minutes($otp);
         $user->sendOtpNotification($otp);
 
-        $payloadToReturn = [
-            'message' => 'New OTP sent to your phone_number.',
-            'otp' => $otp,
-        ];
+        $payload = ['message' => 'OTP resent successfully.'];
 
-        if (app()->isProduction()) {
-            unset($payloadToReturn['otp']);
+        if (! app()->isProduction()) {
+            $payload['otp'] = $otp;
         }
 
-        return response()->json($payloadToReturn);
+        return Response::json($payload);
+    }
+
+    public function login(SendOtpData $data): JsonResponse
+    {
+        $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
+
+        $otp = Str::otp();
+        $user->cacheOtpFor10Minutes($otp);
+        $user->sendOtpNotification($otp);
+
+        $payload = ['message' => 'Login OTP sent.'];
+
+        if (! app()->isProduction()) {
+            $payload['otp'] = $otp;
+        }
+
+        return Response::json($payload);
     }
 }
