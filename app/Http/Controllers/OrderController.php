@@ -51,7 +51,7 @@ class OrderController extends Controller
             $order->order_code = Str::orderId();
             $order->is_multi_seller = $isMultiSeller;
             $order->total_sellers = $uniqueSellerCount;
-            $order->delivery_model = $deliveryModel->id;
+            $order->delivery_model_id = $deliveryModel->getKey();
             $order->delivery_fee = $deliveryModel->fee * $uniqueSellerCount;
             $order->product_cost = 0;
             $order->commission = 0;
@@ -302,7 +302,7 @@ class OrderController extends Controller
         $order->status_message = $request->input('message', 'The order is in packaging');
         $order->delivery_start_time = now();
 
-        $deliveryModel = DeliveryModel::query()->find($order->order->delivery_model);
+        $deliveryModel = $order->order->deliveryModel;
 
         if ($deliveryModel) {
             $order->delivery_end_time = now()->addMinutes($deliveryModel->minutes);

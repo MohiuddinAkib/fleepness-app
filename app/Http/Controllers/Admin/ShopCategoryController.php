@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\ShopCategory;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class ShopCategoryController extends Controller
 {
@@ -12,15 +13,16 @@ class ShopCategoryController extends Controller
     public function index()
     {
         $categories = ShopCategory::all();
+
         return response()->json($categories);
     }
 
     public function index_view(Request $request)
     {
         $categories = ShopCategory::paginate(10);  // Paginate categories (10 per page)
+
         return view('admin.shop_category.index', compact('categories'));
     }
-
 
     // Store new category
     public function store(Request $request)
@@ -40,7 +42,7 @@ class ShopCategoryController extends Controller
 
         return response()->json([
             'message' => 'Category created successfully',
-            'data' => $category
+            'data' => $category,
         ], 201);
     }
 
@@ -63,25 +65,22 @@ class ShopCategoryController extends Controller
     }
 
     // Show a single category
-    public function show($id)
+    public function show(ShopCategory $shopCategory): JsonResponse
     {
-        $category = ShopCategory::findOrFail($id);
-        return response()->json($category);
+        return response()->json($shopCategory);
     }
 
     // Update existing category
-    public function update(Request $request, $id)
+    public function update(Request $request, ShopCategory $shopCategory): JsonResponse
     {
-        $category = ShopCategory::findOrFail($id);
-
-        $validated = $request->validate([
-            'name' => 'required|max:255|unique:shop_categories,name,' . $id,
+        $request->validate([
+            'name' => 'required|max:255|unique:shop_categories,name,'.$shopCategory->getKey(),
             'description' => 'nullable|string',
         ]);
 
         $slug = $this->generateSlug($request->name);
 
-        $category->update([
+        $shopCategory->update([
             'name' => $request->name,
             'slug' => $slug,
             'description' => $request->description,
@@ -89,7 +88,7 @@ class ShopCategoryController extends Controller
 
         return response()->json([
             'message' => 'Category updated successfully',
-            'data' => $category
+            'data' => $shopCategory,
         ]);
     }
 
@@ -98,7 +97,7 @@ class ShopCategoryController extends Controller
         $category = ShopCategory::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:shop_categories,name,' . $id,
+            'name' => 'required|max:255|unique:shop_categories,name,'.$id,
             'description' => 'nullable|string',
         ]);
 
@@ -110,17 +109,16 @@ class ShopCategoryController extends Controller
             'description' => $request->description,
         ]);
 
-         return redirect()->route('admin.shop-categories.index')->with('success', 'Category updated successfully');
+        return redirect()->route('admin.shop-categories.index')->with('success', 'Category updated successfully');
     }
 
     // Delete category
-    public function destroy($id)
+    public function destroy(ShopCategory $shopCategory): JsonResponse
     {
-        $category = ShopCategory::findOrFail($id);
-        $category->delete();
+        $shopCategory->delete();
 
         return response()->json([
-            'message' => 'Category deleted successfully'
+            'message' => 'Category deleted successfully',
         ]);
     }
 
@@ -129,9 +127,8 @@ class ShopCategoryController extends Controller
         $category = ShopCategory::findOrFail($id);
         $category->delete();
 
-       return redirect()->route('admin.shop-categories.index')->with('success', 'Category deleted successfully');
+        return redirect()->route('admin.shop-categories.index')->with('success', 'Category deleted successfully');
     }
-
 
     // Slug generator
     private function generateSlug($string)

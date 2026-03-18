@@ -2,24 +2,27 @@
 
 namespace App\Http\Resources;
 
+use App\Models\ShortVideo;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin ShortVideo
+ */
 class ShortVideoResource extends JsonResource
 {
-    public function toArray($request)
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            $this->getKeyName() => $this->getKey(),
             'title' => $this->title,
-            'video' => $this->video, 
+            'video' => $this->video,
             'likes_count' => $this->likes_count ?? 0,
-            'products' => $this->products->map(fn($product) => [
-                'id' => $product->id,
-                'name' => $product->name,
-                'short_description' => $product->short_description,
-                'images' => $product->images->map(fn($img) => asset($img->path)),
-            ]),
             'created_at' => $this->created_at,
+            'products' => $this->whenLoaded('products', fn () => ShortsProductResource::collection($this->products)),
         ];
     }
 }

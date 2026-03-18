@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\user;
 
+use App\Models\Fee;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\CartItem;
@@ -89,9 +90,10 @@ class CartController extends Controller
             return $price * $item->quantity;
         });
 
-        $platformFee = 30;
-        $vatFee = 15;
-        $deliveryFee = $deliveryModel?->fee ?? 0;
+        $fee = Fee::query()->first();
+        $platformFee = (float) ($fee?->platform_fee ?? 0);
+        $vatFee = $fee ? round($itemTotal * ($fee->vat / 100), 2) : 0;
+        $deliveryFee = (float) ($deliveryModel?->fee ?? 0);
 
         return response()->json([
             'item_total' => $itemTotal,

@@ -2,20 +2,25 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
+use App\Models\ShortsComment;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin ShortsComment
+ */
 class ShortCommentResource extends JsonResource
 {
-    public function toArray($request)
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'user' => [
-                'id' => $this->user->id,
-                'name' => $this->user->name,
-            ],
+            $this->getKeyName() => $this->getKey(),
             'comment' => $this->comment,
             'created_at' => $this->created_at->diffForHumans(),
+            'user' => $this->whenLoaded('user', fn () => UserResource::make($this->user)),
         ];
     }
 }

@@ -4,16 +4,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
 use App\Models\SectionItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 use App\Http\Resources\SectionResource;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class SectionController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function index(): Factory|View
     {
         // Non-search sections
         $sections = Section::with('items')
@@ -39,7 +46,7 @@ class SectionController extends Controller
 
         if ('' !== $categoryName) {
             $query->whereIn('placement_type', ['category', 'global'])
-                ->whereHas('category', function (\Illuminate\Contracts\Database\Query\Builder $q) use ($categoryName): void {
+                ->whereHas('category', function (Builder $q) use ($categoryName): void {
                     $q->where('name', '=', $categoryName);
                 })
                 ->orderBy('cat_index', 'asc')
@@ -51,22 +58,77 @@ class SectionController extends Controller
 
         $sections = $query->paginate(5);
 
+        $this->preloadSectionItemProducts($sections->getCollection());
+
         return SectionResource::collection($sections);
     }
 
-    public function searchSection()
+    public function searchSection(): AnonymousResourceCollection
     {
-        $section = \App\Models\Section::query()->where('section_type', 'search')
+        $sections = Section::query()->where('section_type', 'search')
             ->with(['category', 'items.tag'])
             ->orderBy('index')
             ->paginate(5);
 
-        return SectionResource::collection($section);
+        $this->preloadSectionItemProducts($sections->getCollection());
+
+        return SectionResource::collection($sections);
     }
 
-    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    /**
+     * Pre-load products for all section items in a single query, avoiding N+1.
+     * Products are grouped by their first tag ID (using the global withTagId scope)
+     * and set as a relation on each SectionItem via setRelation().
+     *
+     * @param  Collection<int, Section>  $sections
+     */
+    private function preloadSectionItemProducts(Collection $sections): void
     {
-        $categories = \App\Models\Category::query()->whereNull('parent_id')->get();
+        $allowedTypes = ['scrollable_product', 'spotlight_deals', 'lighting_deals', 'search'];
+
+        $tagIds = $sections
+            ->filter(fn (Section $section): bool => in_array($section->section_type, $allowedTypes, true))
+            ->flatMap(fn (Section $section): Collection => $section->items)
+            ->pluck('tag_id')
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
+
+        $productsByTag = collect();
+
+        if (! empty($tagIds)) {
+            $placeholders = implode(',', array_fill(0, count($tagIds), '?'));
+
+            $products = Product::with(['images', 'sizes'])
+                ->whereNull('deleted_at')
+                ->where('status', 'active')
+                ->whereRaw(
+                    "CAST(JSON_UNQUOTE(JSON_EXTRACT(JSON_UNQUOTE(tags), '$[0]')) AS UNSIGNED) IN ({$placeholders})",
+                    $tagIds
+                )
+                ->latest()
+                ->get();
+
+            $productsByTag = $products->groupBy(fn (Product $p): int => (int) $p->tag_id);
+        }
+
+        $sections->each(function (Section $section) use ($productsByTag, $allowedTypes): void {
+            $showProducts = in_array($section->section_type, $allowedTypes, true);
+
+            $section->items->each(function (SectionItem $item) use ($productsByTag, $showProducts): void {
+                $products = $showProducts && $item->tag_id
+                    ? ($productsByTag[(int) $item->tag_id] ?? collect())->take(12)->values()
+                    : collect();
+
+                $item->setRelation('products', $products);
+            });
+        });
+    }
+
+    public function create(): Factory|View
+    {
+        $categories = Category::query()->whereNull('parent_id')->get();
 
         return view('admin.sections.create', ['categories' => $categories]);
     }
@@ -104,9 +166,9 @@ class SectionController extends Controller
             : null;
 
         if ('search' === $validated['section_type']) {
-            $lastIndex = \App\Models\Section::query()->where('section_type', 'search')->max('index');
+            $lastIndex = Section::query()->where('section_type', 'search')->max('index');
         } else {
-            $lastIndex = \App\Models\Section::query()->where('section_type', '!=', 'search')->max('index');
+            $lastIndex = Section::query()->where('section_type', '!=', 'search')->max('index');
         }
         $newIndex = $lastIndex + 1;
 
@@ -162,7 +224,7 @@ class SectionController extends Controller
         return $image->store('upload/'.$folder, 'r2');
     }
 
-    public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function edit($id): Factory|View
     {
         $section = Section::with(['items' => function ($query) {
             $query->orderBy('index', 'asc');
@@ -171,11 +233,11 @@ class SectionController extends Controller
         $categories = Category::whereNull('parent_id')->get();
 
         if ('search' === $section->section_type) {
-            $sectionsGroup = \App\Models\Section::query()->where('section_type', 'search')
+            $sectionsGroup = Section::query()->where('section_type', 'search')
                 ->orderBy('index')
                 ->get();
         } else {
-            $sectionsGroup = \App\Models\Section::query()->where('section_type', '!=', 'search')
+            $sectionsGroup = Section::query()->where('section_type', '!=', 'search')
                 ->orderBy('index')
                 ->get();
         }
@@ -190,7 +252,7 @@ class SectionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $section = \App\Models\Section::query()->findOrFail($id);
+        $section = Section::query()->findOrFail($id);
 
         $validated = $request->validate([
             'section_name' => ['nullable', 'string', 'max:255'],
@@ -230,12 +292,12 @@ class SectionController extends Controller
             $banner_img = $this->uploadImage($request->file('banner_image'), 'sections/banners/');
         }
 
-        \Illuminate\Support\Facades\DB::transaction(function () use ($section, $validated, $background, $banner_img, $newIndex, $request): void {
+        DB::transaction(function () use ($section, $validated, $background, $banner_img, $newIndex, $request): void {
             $oldCategoryId = (int) $section->category_id;
             $newCategoryId = (int) $validated['category_id'];
             $oldCatIndex = (int) ($section->cat_index ?? 0);
 
-            $maxInTarget = (int) \App\Models\Section::query()->where('category_id', $newCategoryId)->count();
+            $maxInTarget = (int) Section::query()->where('category_id', $newCategoryId)->count();
             if ($newCategoryId !== $oldCategoryId) {
                 $maxInTarget++;
             }
@@ -245,14 +307,14 @@ class SectionController extends Controller
 
             if ($newCategoryId !== $oldCategoryId) {
                 if (0 < $oldCatIndex) {
-                    \Illuminate\Support\Facades\DB::table('sections')
+                    DB::table('sections')
                         ->where('category_id', $oldCategoryId)
                         ->where('id', '!=', $section->id)
                         ->where('cat_index', '>', $oldCatIndex)
                         ->decrement('cat_index');
                 }
 
-                \Illuminate\Support\Facades\DB::table('sections')
+                DB::table('sections')
                     ->where('category_id', $newCategoryId)
                     ->where('cat_index', '>=', $targetCatIndex)
                     ->increment('cat_index');
@@ -276,7 +338,7 @@ class SectionController extends Controller
             $updatedItems = $request->input('items', []);
 
             foreach ($updatedItems as $i => $itemData) {
-                $itemModel = $oldItems[$i] ?? new \App\Models\SectionItem;
+                $itemModel = $oldItems[$i] ?? new SectionItem;
                 $itemModel->section_id = $section->id;
 
                 if ($request->hasFile("items.$i.image")) {
@@ -305,12 +367,12 @@ class SectionController extends Controller
     {
         if ('search' === $section->section_type) {
             // Reorder only within 'search' sections
-            $sections = \App\Models\Section::query()->where('section_type', 'search')
+            $sections = Section::query()->where('section_type', 'search')
                 ->orderBy('index')
                 ->get();
         } else {
             // Reorder among all sections except 'search'
-            $sections = \App\Models\Section::query()->where('section_type', '!=', 'search')
+            $sections = Section::query()->where('section_type', '!=', 'search')
                 ->orderBy('index')
                 ->get();
         }
@@ -349,7 +411,7 @@ class SectionController extends Controller
         $orderedIds = $request->input('orderedIds');
 
         foreach ($orderedIds as $index => $id) {
-            $section = \App\Models\Section::query()->find($id);
+            $section = Section::query()->find($id);
             if ($section) {
                 $section->index = $index + 1;
                 $section->save();
@@ -394,7 +456,7 @@ class SectionController extends Controller
         }
 
         if (! is_null($deletedCatIndex)) {
-            \Illuminate\Support\Facades\DB::table('sections')
+            DB::table('sections')
                 ->where('category_id', $categoryId)
                 ->where('cat_index', '>', $deletedCatIndex)
                 ->decrement('cat_index');
@@ -418,12 +480,12 @@ class SectionController extends Controller
 
     protected function nextCatIndex(int $categoryId): int
     {
-        return (int) \App\Models\Section::query()->where('category_id', $categoryId)->max('cat_index') + 1;
+        return (int) Section::query()->where('category_id', $categoryId)->max('cat_index') + 1;
     }
 
     protected function compactCategoryAfterRemoval(int $categoryId, int $removedIndex, ?int $exceptId = null): void
     {
-        \App\Models\Section::query()->where('category_id', $categoryId)
+        Section::query()->where('category_id', $categoryId)
             ->when($exceptId, fn ($q) => $q->where('id', '!=', $exceptId))
             ->where('cat_index', '>', $removedIndex)
             ->orderBy('cat_index', 'asc')

@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\VendorReview;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class UserVendorReviewController extends Controller
 {
-    // Store a new review
-    public function store(Request $request, $vendor_id)
+    public function store(Request $request, User $vendor): JsonResponse
     {
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string',
         ]);
 
-        $vendor = User::findOrFail($vendor_id);
-
         $review = VendorReview::create([
-            'vendor_id' => $vendor->id,
+            'vendor_id' => $vendor->getKey(),
             'user_id' => auth()->id(),
             'rating' => $request->rating,
             'comment' => $request->comment,
@@ -32,11 +30,9 @@ class UserVendorReviewController extends Controller
         ], 201);
     }
 
-    // Fetch reviews for a vendor
-    public function index($vendor_id)
+    public function index(User $vendor): JsonResponse
     {
-        $vendor = User::findOrFail($vendor_id);
-        $reviews = VendorReview::where('vendor_id', $vendor->id)->get();
+        $reviews = VendorReview::where('vendor_id', $vendor->getKey())->get();
 
         return response()->json([
             'vendor' => $vendor,
@@ -44,16 +40,14 @@ class UserVendorReviewController extends Controller
         ]);
     }
 
-    public function delete($review_id)
+    public function destroy(VendorReview $review): JsonResponse
     {
-        $review = VendorReview::where('id', $review_id)
-            ->where('user_id', auth()->id()) // Ensure the user can only delete their own reviews
-            ->firstOrFail();
+        abort_unless($review->user_id === auth()->id(), 403, 'Unauthorized');
 
         $review->delete();
 
         return response()->json([
-            'message' => 'Review deleted successfully'
-        ], 200);
+            'message' => 'Review deleted successfully',
+        ]);
     }
 }

@@ -2,60 +2,57 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Follower;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class UserVendorFollowController extends Controller
 {
-    // Follow a vendor
-    public function follow($vendor_id)
+    public function follow(User $vendor): JsonResponse
     {
-        $user_id = auth()->id();
+        $userId = auth()->id();
 
-        // Check if already following
-        $existingFollow = Follower::where('follower_id', $user_id)
-            ->where('vendor_id', $vendor_id)
-            ->first();
+        $existingFollow = Follower::where('follower_id', $userId)
+            ->where('vendor_id', $vendor->getKey())
+            ->exists();
 
         if ($existingFollow) {
             return response()->json([
-                'message' => 'You are already following this vendor.'
+                'message' => 'You are already following this vendor.',
             ], 400);
         }
 
-        // Create a new follow entry
         Follower::create([
-            'follower_id' => $user_id,
-            'vendor_id' => $vendor_id,
+            'follower_id' => $userId,
+            'vendor_id' => $vendor->getKey(),
         ]);
 
         return response()->json([
-            'message' => 'Vendor followed successfully.'
+            'message' => 'Vendor followed successfully.',
         ], 201);
     }
 
-    // Unfollow a vendor
-    public function unfollow($vendor_id)
+    public function unfollow(User $vendor): JsonResponse
     {
-        $user_id = auth()->id();
+        $userId = auth()->id();
 
-        $follow = Follower::where('follower_id', $user_id)
-            ->where('vendor_id', $vendor_id)
+        $follow = Follower::where('follower_id', $userId)
+            ->where('vendor_id', $vendor->getKey())
             ->first();
 
-        if (!$follow) {
+        if (! $follow) {
             return response()->json([
-                'message' => 'You are not following this vendor.'
+                'message' => 'You are not following this vendor.',
             ], 400);
         }
 
         $follow->delete();
 
         return response()->json([
-            'message' => 'Vendor unfollowed successfully.'
-        ], 200);
+            'message' => 'Vendor unfollowed successfully.',
+        ]);
     }
 
     // Get all vendors the logged-in user is following
@@ -71,6 +68,7 @@ class UserVendorFollowController extends Controller
         // Transform data
         $followingData = $following->map(function ($item) {
             $vendor = $item->vendor;
+
             return [
                 'id' => $vendor->id,
                 'name' => $vendor->name ?? $vendor->shop_name,
@@ -100,6 +98,7 @@ class UserVendorFollowController extends Controller
         // Transform data
         $followersData = $followers->map(function ($item) {
             $follower = $item->follower;
+
             return [
                 'id' => $follower->id,
                 'name' => $follower->name,
@@ -114,5 +113,4 @@ class UserVendorFollowController extends Controller
             'followers' => $followersData,
         ]);
     }
-
 }

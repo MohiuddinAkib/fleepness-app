@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Vendor;
 
-use App\Http\Controllers\Controller;
-use App\Models\ShortsProduct;
 use App\Models\ShortVideo;
 use Illuminate\Http\Request;
+use App\Models\ShortsProduct;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class VendorShortVideoController extends Controller
 {
-    public function index_api()
+    public function indexApi()
     {
         $userId = auth()->id();
 
@@ -21,10 +21,7 @@ class VendorShortVideoController extends Controller
         return response()->json($videos);
     }
 
-
-
-
-    public function store_api(Request $request)
+    public function storeApi(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
@@ -57,15 +54,15 @@ class VendorShortVideoController extends Controller
                     'product_id' => $productId,
                 ]);
 
-                $product = $sp->product()->first(); 
+                $product = $sp->product()->first();
                 if ($product) {
-                $products[] = [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'short_description' => $product->short_description,
-                    'images' => $product->images->map(fn($img) => asset($img->path)),
-                ];
-            }
+                    $products[] = [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'short_description' => $product->short_description,
+                        'images' => $product->images->map(fn ($img) => asset($img->path)),
+                    ];
+                }
             }
         }
 
@@ -78,21 +75,21 @@ class VendorShortVideoController extends Controller
         ], 201);
     }
 
-
-    public function show_api($id)
+    public function showApi($id)
     {
         $video = ShortVideo::find($id);
-        if (!$video) {
+        if (! $video) {
             return response()->json(['message' => 'Video not found.'], 404);
         }
 
         $products = $video->products()->with('product.images')->get()->map(function ($sp) {
             $product = $sp->product;
+
             return [
                 'id' => $product->id,
                 'name' => $product->name,
                 'short_description' => $product->short_description,
-                'images' => $product->images->map(fn($img) => asset($img->path)),
+                'images' => $product->images->map(fn ($img) => asset($img->path)),
             ];
         });
 
@@ -102,11 +99,10 @@ class VendorShortVideoController extends Controller
         ]);
     }
 
-
-    public function update_api(Request $request, $id)
+    public function updateApi(Request $request, $id)
     {
         $video = ShortVideo::find($id);
-        if (!$video) {
+        if (! $video) {
             return response()->json(['message' => 'Video not found.'], 404);
         }
 
@@ -154,17 +150,18 @@ class VendorShortVideoController extends Controller
                         'id' => $product->id,
                         'name' => $product->name,
                         'short_description' => $product->short_description,
-                        'images' => $product->images->map(fn($img) => asset($img->path)),
+                        'images' => $product->images->map(fn ($img) => asset($img->path)),
                     ];
                 }
             }
         } else {
             $products = $video->products()->with('product.images')->get()->map(function ($sp) {
                 $product = $sp->product;
+
                 return [
                     'name' => $product->name,
                     'short_description' => $product->short_description,
-                    'images' => $product->images->map(fn($img) => asset($img->path)),
+                    'images' => $product->images->map(fn ($img) => asset($img->path)),
                 ];
             });
         }
@@ -178,11 +175,10 @@ class VendorShortVideoController extends Controller
         ]);
     }
 
-
-    public function destroy_api($id)
+    public function destroyApi($id)
     {
         $video = ShortVideo::find($id);
-        if (!$video) {
+        if (! $video) {
             return response()->json(['message' => 'Video not found.'], 404);
         }
 
@@ -201,12 +197,11 @@ class VendorShortVideoController extends Controller
         return response()->json(['message' => 'Short video deleted successfully.']);
     }
 
-
-
     // *** Show videos in Web view ***
     public function Videos()
     {
         $data['shorts'] = ShortVideo::where('user_id', auth()->id())->get();
+
         return view('vendor.media.short-videos', $data);
     }
 
@@ -220,13 +215,13 @@ class VendorShortVideoController extends Controller
         ]);
 
         $video = $request->file('video');
-        $name_gen = hexdec(uniqid()) . '.' . $video->getClientOriginalExtension();
+        $name_gen = hexdec(uniqid()).'.'.$video->getClientOriginalExtension();
 
         // Define storage path
         $path = public_path('upload/videos');
 
         // Create directory if not exists
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             mkdir($path, 0777, true);
         }
 
@@ -234,7 +229,7 @@ class VendorShortVideoController extends Controller
         $video->move($path, $name_gen);
 
         // Save video details in the database
-        $video_url = 'upload/videos/' . $name_gen;
+        $video_url = 'upload/videos/'.$name_gen;
 
         ShortVideo::create([
             'user_id' => auth()->id(),
@@ -245,8 +240,6 @@ class VendorShortVideoController extends Controller
 
         return redirect()->back()->with('success', 'Video uploaded successfully!');
     }
-
-
 
     // Update video details
     public function update(Request $request, $id)

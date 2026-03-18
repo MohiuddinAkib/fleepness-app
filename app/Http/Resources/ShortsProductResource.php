@@ -2,19 +2,27 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Product
+ */
 class ShortsProductResource extends JsonResource
 {
-    public function toArray($request)
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            $this->getKeyName() => $this->getKey(),
             'name' => $this->name,
             'short_description' => $this->short_description,
             'selling_price' => $this->selling_price,
             'discount_price' => $this->discount_price,
-            'images' => $this->images->map(fn($img) => asset($img->path)),
+            'images' => $this->whenLoaded('images', fn () => $this->images->map(fn ($img) => asset($img->path))),
         ];
     }
 }

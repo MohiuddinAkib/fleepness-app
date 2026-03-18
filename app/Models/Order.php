@@ -17,16 +17,16 @@ class Order extends Model
 
     protected $casts = [
         'platform_fee_added' => 'boolean',
-        'product_cost'       => 'float',
-        'commission'         => 'float',
-        'delivery_fee'       => 'float',
-        'platform_fee'       => 'float',
-        'vat'                => 'float',
-        'grand_total'        => 'float',
-        'balance'            => 'float',
-        'is_multi_seller'    => 'boolean',
-        'total_sellers'      => 'integer',
-        'completed_order'    => 'boolean',
+        'product_cost' => 'float',
+        'commission' => 'float',
+        'delivery_fee' => 'float',
+        'platform_fee' => 'float',
+        'vat' => 'float',
+        'grand_total' => 'float',
+        'balance' => 'float',
+        'is_multi_seller' => 'boolean',
+        'total_sellers' => 'integer',
+        'completed_order' => 'boolean',
     ];
 
     /**
@@ -43,5 +43,13 @@ class Order extends Model
     public function sellerOrders(): HasMany
     {
         return $this->hasMany(SellerOrder::class);
+    }
+
+    /**
+     * @return BelongsTo<DeliveryModel,$this>
+     */
+    public function deliveryModel(): BelongsTo
+    {
+        return $this->belongsTo(DeliveryModel::class, 'delivery_model_id');
     }
 }
