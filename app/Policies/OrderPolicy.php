@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
-use App\Models\Product;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Product;
 use Lunar\Models\Order;
 use Lunar\Models\OrderLine;
 use Lunar\Models\ProductVariant;
+use Illuminate\Auth\Access\Response;
 
 class OrderPolicy
 {
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function makePickupRequestToPathao(User $seller, Order $order): Response|bool
+    public function makePickupRequestToPathao(User $seller, Order $order): bool|Response
     {
         $vendor = $seller->vendors->first();
 

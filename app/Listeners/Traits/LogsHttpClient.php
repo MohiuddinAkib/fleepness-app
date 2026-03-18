@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listeners\Traits;
 
 use const JSON_ERROR_NONE;
@@ -20,7 +22,7 @@ trait LogsHttpClient
     /**
      * Determine if the content is within the set limits.
      *
-     * @param  string $content
+     * @param  string  $content
      * @return bool
      */
     public function contentWithinLimits($content)
@@ -33,7 +35,7 @@ trait LogsHttpClient
     /**
      * Format the given headers.
      *
-     * @param  array $headers
+     * @param  array  $headers
      * @return array
      */
     protected function headers($headers)
@@ -66,7 +68,7 @@ trait LogsHttpClient
             if ($data['contents'] instanceof UploadedFile) {
                 $value = [
                     'name' => $data['filename'] ?? $data['contents']->getClientOriginalName(),
-                    'size' => ($data['contents']->getSize() / 1_000) . 'KB',
+                    'size' => ($data['contents']->getSize() / 1_000).'KB',
                     'headers' => $data['headers'] ?? [],
                 ];
             } elseif (is_resource($data['contents'])) {
@@ -74,13 +76,13 @@ trait LogsHttpClient
 
                 $value = [
                     'name' => $data['filename'] ?? null,
-                    'size' => $filesize ? ($filesize / 1_000) . 'KB' : null,
+                    'size' => $filesize ? ($filesize / 1_000).'KB' : null,
                     'headers' => $data['headers'] ?? [],
                 ];
             } elseif (false === json_encode($data['contents'])) {
                 $value = [
                     'name' => $data['filename'] ?? null,
-                    'size' => (strlen($data['contents']) / 1_000) . 'KB',
+                    'size' => (strlen($data['contents']) / 1_000).'KB',
                     'headers' => $data['headers'] ?? [],
                 ];
             } else {
@@ -146,7 +148,7 @@ trait LogsHttpClient
         }
 
         if ($response->redirect()) {
-            return 'Redirected to ' . $response->header('Location');
+            return 'Redirected to '.$response->header('Location');
         }
 
         if (empty($content)) {
@@ -159,7 +161,7 @@ trait LogsHttpClient
     /**
      * Format the given payload.
      *
-     * @param  array $payload
+     * @param  array  $payload
      * @return array
      */
     protected function payload($payload)

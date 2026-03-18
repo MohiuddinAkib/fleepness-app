@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Follower;
-use App\Models\Product;
 use App\Models\SellerTags;
 use App\Models\ShortVideo;
-use App\Models\User;
 use App\Models\VendorReview;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserVendorController extends Controller
 {
@@ -44,8 +46,6 @@ class UserVendorController extends Controller
         ], 200);
     }
 
-
-
     public function vendorData($vendor)
     {
         // Fetch vendor basic info
@@ -59,10 +59,10 @@ class UserVendorController extends Controller
             'total_sales'
         )->with('shopCategory:id,name')->find($vendor);
 
-        if (!$vendorInfo) {
+        if (! $vendorInfo) {
             return response()->json([
                 'status' => false,
-                'message' => 'Vendor not found'
+                'message' => 'Vendor not found',
             ], 404);
         }
 
@@ -75,14 +75,13 @@ class UserVendorController extends Controller
         // Fetch reviews
         $reviews = VendorReview::where('vendor_id', $vendor)->get();
 
-        $reviewPercentage = $reviews->count() > 0 ? round(($reviews->where('rating', '>=', 4)->count() / $reviews->count()) * 100) : 0;
+        $reviewPercentage = 0 < $reviews->count() ? round(($reviews->where('rating', '>=', 4)->count() / $reviews->count()) * 100) : 0;
 
         // Fetch followers
         $followers = Follower::where('vendor_id', $vendor)->get();
 
         // Fetch tags
         $sellerTags = SellerTags::where('vendor_id', $vendor)->first();
-
 
         // Return response
         return response()->json([
@@ -104,10 +103,10 @@ class UserVendorController extends Controller
         // Fetch the vendor's shop category
         $vendorInfo = User::select('shop_category')->find($vendor);
 
-        if (!$vendorInfo) {
+        if (! $vendorInfo) {
             return response()->json([
                 'status' => false,
-                'message' => 'Vendor not found'
+                'message' => 'Vendor not found',
             ], 404);
         }
 
@@ -126,7 +125,6 @@ class UserVendorController extends Controller
         ], 200);
     }
 
-
     public function getShortVideos($vendor)
     {
         // Fetch videos where user_id matches the given id
@@ -137,7 +135,7 @@ class UserVendorController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'No videos found for this vendor',
-                'data' => []
+                'data' => [],
             ], 404);
         }
 
@@ -145,7 +143,7 @@ class UserVendorController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Videos retrieved successfully',
-            'data' => $videos
+            'data' => $videos,
         ], 200);
     }
 }

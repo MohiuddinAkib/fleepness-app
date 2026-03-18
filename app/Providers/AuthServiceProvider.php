@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
+use App\Constants\GateNames;
 use App\Policies\LivestreamPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -22,8 +25,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define(\App\Constants\GateNames::CREATE_LIVESTREAM->value, [LivestreamPolicy::class, 'create']);
-        Gate::define(\App\Constants\GateNames::GET_LIVESTREAM_PUBLISHER_TOKEN->value, [LivestreamPolicy::class, 'getPublisherToken']);
-        Gate::define(\App\Constants\GateNames::GET_LIVESTREAM_SUBSCRIBER_TOKEN->value, [LivestreamPolicy::class, 'getSubscriberToken']);
+        Gate::define(GateNames::CREATE_LIVESTREAM->value, [LivestreamPolicy::class, 'create']);
+        Gate::define(GateNames::GET_LIVESTREAM_PUBLISHER_TOKEN->value, [LivestreamPolicy::class, 'getPublisherToken']);
+        Gate::define(GateNames::GET_LIVESTREAM_SUBSCRIBER_TOKEN->value, [LivestreamPolicy::class, 'getSubscriberToken']);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Sms\Providers;
 
 use Illuminate\Support\Arr;

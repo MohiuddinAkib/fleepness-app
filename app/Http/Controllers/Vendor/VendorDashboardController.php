@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Vendor;
 
-use App\Http\Controllers\Controller;
-use App\Models\MainOrder;
-use App\Models\Product;
-use App\Models\User;
 use Auth;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\MainOrder;
+use App\Http\Controllers\Controller;
 
 class VendorDashboardController extends Controller
 {
@@ -20,6 +20,7 @@ class VendorDashboardController extends Controller
         $data['total_sales'] = MainOrder::where('vendor_id', Auth::id())
             ->where('status', 'deliverd')->sum('amount');
         $data['total_products'] = Product::where('user_id', Auth::id())->count();
+
         return view('vendor.index', $data);
     }
 }

@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use Closure;
 use Exception;
 use Generator;
+use League\Uri\Uri;
 use GuzzleHttp\Utils;
 use Psr\Log\LogLevel;
 use GuzzleHttp\Promise;
@@ -13,15 +16,18 @@ use Illuminate\Support\Str;
 use League\Uri\UriTemplate;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\RetryMiddleware;
 use GuzzleHttp\MessageFormatter;
 use Cerbero\JsonParser\JsonParser;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Stringable;
 use Illuminate\Http\Client\Factory;
+use Illuminate\Http\Client\Request;
 use App\Support\Http\LazyHttpClient;
 use App\Support\Sms\SmsApiConnector;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use App\Support\Http\HttpClientFactory;
 use Illuminate\Support\ServiceProvider;
@@ -43,7 +49,7 @@ class HttpClientServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(Factory::class, HttpClientFactory::class);
-        $this->app->singleton(function (): \GuzzleHttp\HandlerStack {
+        $this->app->singleton(function (): HandlerStack {
             $stack = new HandlerStack;
 
             return tap($stack)->setHandler(Utils::chooseHandler());
@@ -76,7 +82,7 @@ class HttpClientServiceProvider extends ServiceProvider
         }
 
         Http::globalRequestMiddleware(static function (RequestInterface $request) {
-            return LogBatch::withinBatch(static function ($reqTraceId) use ($request): \Psr\Http\Message\MessageInterface {
+            return LogBatch::withinBatch(static function ($reqTraceId) use ($request): MessageInterface {
                 return $request->withHeader(
                     'x-trace-id',
                     $reqTraceId
@@ -85,7 +91,7 @@ class HttpClientServiceProvider extends ServiceProvider
         });
 
         Http::globalResponseMiddleware(static function (ResponseInterface $response) {
-            return LogBatch::withinBatch(static function ($reqTraceId) use ($response): \Psr\Http\Message\MessageInterface {
+            return LogBatch::withinBatch(static function ($reqTraceId) use ($response): MessageInterface {
                 return $response->withHeader(
                     'x-trace-id',
                     $reqTraceId
@@ -122,7 +128,7 @@ class HttpClientServiceProvider extends ServiceProvider
                 ]);
             };
 
-            $middlewareImpl = static function (RequestInterface $request, array $options) use ($onRequestNonNull, $die): \Psr\Http\Message\RequestInterface {
+            $middlewareImpl = static function (RequestInterface $request, array $options) use ($onRequestNonNull, $die): RequestInterface {
                 $onRequestNonNull($request, $options);
 
                 if ($die) {
@@ -132,7 +138,7 @@ class HttpClientServiceProvider extends ServiceProvider
                 return $request;
             };
 
-            $handlerStack->push(function (callable $handler) use ($middlewareImpl): \Closure {
+            $handlerStack->push(function (callable $handler) use ($middlewareImpl): Closure {
                 return function (RequestInterface $request, array $options) use ($handler, $middlewareImpl): PromiseInterface {
                     return $handler($middlewareImpl($request, $options), $options);
                 };
@@ -154,11 +160,11 @@ class HttpClientServiceProvider extends ServiceProvider
                     'status' => $response->getStatusCode(),
                     'headers' => $response->getHeaders(),
                     'raw_body' => $body,
-                    'parsed_body' => Str::isJson($body) ? \Illuminate\Database\Eloquent\Casts\Json::decode($body) : [],
+                    'parsed_body' => Str::isJson($body) ? Json::decode($body) : [],
                 ]);
             };
 
-            $middlewareImpl = static function (ResponseInterface $response) use ($onResponseNonNull, $die, $handlerStack): \Psr\Http\Message\ResponseInterface {
+            $middlewareImpl = static function (ResponseInterface $response) use ($onResponseNonNull, $die, $handlerStack): ResponseInterface {
                 $handlerStack->remove('debugResponseMiddleware');
 
                 $onResponseNonNull($response);
@@ -185,7 +191,7 @@ class HttpClientServiceProvider extends ServiceProvider
 
             return tap($this, function (PendingRequest $request) use ($template, $variables): void {
                 $request->baseUrl(
-                    (string) \League\Uri\Uri::fromTemplate($template, $variables)
+                    (string) Uri::fromTemplate($template, $variables)
                 );
             });
         });
@@ -194,8 +200,8 @@ class HttpClientServiceProvider extends ServiceProvider
          * Specify the number of times the request should be attempted.
          *
          * @param  array<int,int>|int  $times
-         * @param  (Closure(int $attempts,\Illuminate\Http\Client\Request $request,?\Illuminate\Http\Client\Response $response):int)|int|null  $sleepMilliseconds
-         * @param  (Closure(int $attempts,\Illuminate\Http\Client\Request $request,?\Illuminate\Http\Client\Response $response,?Exception $exception):bool)|null  $when
+         * @param  (Closure(int $attempts,Request $request,?Response $response):int)|int|null  $sleepMilliseconds
+         * @param  (Closure(int $attempts,Request $request,?Response $response,?Exception $exception):bool)|null  $when
          */
         $withRetryMiddleware = function (array|int $times, null|Closure|int $sleepMilliseconds = null, ?Closure $when = null, bool $throw = true, ?string $name = null, ?bool $unique = false, ?bool $scoped = false, ?string $before = null, ?string $after = null): PendingRequest {
             /**
@@ -218,12 +224,12 @@ class HttpClientServiceProvider extends ServiceProvider
                 if ($attempts > $times) {
                     return false;
                 }
-                $illuminateResponse = $response instanceof \Psr\Http\Message\ResponseInterface ? new \Illuminate\Http\Client\Response($response) : null;
+                $illuminateResponse = $response instanceof ResponseInterface ? new Response($response) : null;
                 if ($illuminateResponse && $illuminateResponse->failed()) {
                     $exception = $illuminateResponse->toException() ?? $exception;
                 }
-                if ($when instanceof \Closure) {
-                    return $when($attempts, new \Illuminate\Http\Client\Request($request), $illuminateResponse, $exception);
+                if ($when instanceof Closure) {
+                    return $when($attempts, new Request($request), $illuminateResponse, $exception);
                 }
 
                 return false;
@@ -233,15 +239,15 @@ class HttpClientServiceProvider extends ServiceProvider
                 ?ResponseInterface $response,
                 RequestInterface $request
             ) use ($sleepMilliseconds, $backoff): int {
-                $delay = $backoff[$attempts - 1] ?? $sleepMilliseconds ?? \GuzzleHttp\RetryMiddleware::exponentialDelay($attempts);
-                $illuminateResponse = $response instanceof \Psr\Http\Message\ResponseInterface ? new \Illuminate\Http\Client\Response($response) : null;
+                $delay = $backoff[$attempts - 1] ?? $sleepMilliseconds ?? RetryMiddleware::exponentialDelay($attempts);
+                $illuminateResponse = $response instanceof ResponseInterface ? new Response($response) : null;
 
                 // If closure provided for dynamic delay
-                return value($delay, $attempts, new \Illuminate\Http\Client\Request($request), $illuminateResponse);
+                return value($delay, $attempts, new Request($request), $illuminateResponse);
             };
             /** @var (callable(callable):(callable(RequestInterface,array):PromiseInterface)) */
             $middleware = Middleware::retry($decider, $delay);
-            $middlewareImpl = (function (callable $handler) use ($middleware, $throw): \Closure {
+            $middlewareImpl = (function (callable $handler) use ($middleware, $throw): Closure {
                 return function (RequestInterface $request, array $options) use ($handler, $throw, $middleware) {
                     /** @var PromiseInterface */
                     $promise = $middleware($handler)($request, $options);
@@ -282,7 +288,7 @@ class HttpClientServiceProvider extends ServiceProvider
              *
              * @var PendingRequest $this
              */
-            /** @var \Illuminate\Support\Collection<int,callable> $middlewares */
+            /** @var Collection<int,callable> $middlewares */
             // @phpstan-ignore-next-line property.protected
             $middlewares = $this->middleware;
             // Find if this middleware already exists
@@ -298,7 +304,7 @@ class HttpClientServiceProvider extends ServiceProvider
                  *
                  * @phpstan-ignore-next-line property.protected
                  */
-                $this->middleware = $middlewares->push(new HttpClientNamedMiddleware('request_normalizer', $this, function (callable $handler): \Closure {
+                $this->middleware = $middlewares->push(new HttpClientNamedMiddleware('request_normalizer', $this, function (callable $handler): Closure {
                     return function (RequestInterface $request, array $options) use ($handler) {
                         /**
                          * @disregard P1056
@@ -323,11 +329,11 @@ class HttpClientServiceProvider extends ServiceProvider
              *
              * @var PendingRequest $this
              */
-            return $this->withMiddleware(function (callable $handler): \Closure {
+            return $this->withMiddleware(function (callable $handler): Closure {
                 /**
                  * @var PendingRequest $this
                  */
-                /** @var \Illuminate\Support\Collection<int,callable> $middlewares */
+                /** @var Collection<int,callable> $middlewares */
                 // @phpstan-ignore-next-line property.protected
                 $middlewares = $this->middleware;
                 // Find if this middleware already exists
@@ -359,21 +365,21 @@ class HttpClientServiceProvider extends ServiceProvider
             });
         });
 
-        PendingRequest::macro('getRequest', function (): ?\Illuminate\Http\Client\Request {
+        PendingRequest::macro('getRequest', function (): ?Request {
             /** @var PendingRequest $this */
             return data_get($this, 'request');
         });
 
         /**
-         * @param  callable(\App\Support\Http\LazyHttpClientPool):(Generator<array-key,(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|iterable<(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|list<(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|void)  $callback
-         * @return array<array-key,\Illuminate\Http\Client\Response>
+         * @param  callable(LazyHttpClientPool):(Generator<array-key,(callable():PromiseInterface)|PromiseInterface>|iterable<(callable():PromiseInterface)|PromiseInterface>|list<(callable():PromiseInterface)|PromiseInterface>|void)  $callback
+         * @return array<array-key,Response>
          */
         $ofLimit = function (callable $callback, int $concurrency = 25): array {
             $results = [];
             $asyncPool = resolve(LazyHttpClientPool::class);
-            /** @var (Generator<array-key,(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|iterable<(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|list<(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|null) */
+            /** @var (Generator<array-key,(callable():PromiseInterface)|PromiseInterface>|iterable<(callable():PromiseInterface)|PromiseInterface>|list<(callable():PromiseInterface)|PromiseInterface>|null) */
             $returned = $callback($asyncPool);
-            /** @var Generator<array-key,\App\Support\Http\LazyHttpClient|(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface|iterable> $iterable */
+            /** @var Generator<array-key,LazyHttpClient|(callable():PromiseInterface)|PromiseInterface|iterable> $iterable */
             $iterable = Promise\Create::iterFor($returned ?? $asyncPool->lazyClients);
             $requests = static function () use ($iterable) {
                 foreach ($iterable as $key => $rfn) {
@@ -509,7 +515,7 @@ class HttpClientServiceProvider extends ServiceProvider
             ?string $after = null
         ): PendingRequest {
             /** @var PendingRequest $this */
-            /** @var \Illuminate\Support\Collection<int, callable> $middlewares */
+            /** @var Collection<int, callable> $middlewares */
             // @phpstan-ignore-next-line property.protected
             $middlewares = $this->middleware;
             // 1️⃣ Find existing middleware with the same name
@@ -596,7 +602,7 @@ class HttpClientServiceProvider extends ServiceProvider
          * Register a named before-sending callback, optionally positioning it before or after another one.
          *
          * @param  string  $name  Callback name to add or replace
-         * @param  Closure(\Illuminate\Http\Client\Request,array,PendingRequest):(\Illuminate\Http\Client\Request|RequestInterface)  $fn
+         * @param  Closure(Request,array,PendingRequest):(Request|RequestInterface)  $fn
          * @param  bool  $unique  If true, skip adding if it already exists
          * @param  string|null  $before  Insert before this named callback
          * @param  string|null  $after  Insert after this named callback
@@ -609,7 +615,7 @@ class HttpClientServiceProvider extends ServiceProvider
             ?string $after = null
         ): PendingRequest {
             /** @var PendingRequest $this */
-            /** @var \Illuminate\Support\Collection<int,callable> $callbacks */
+            /** @var Collection<int,callable> $callbacks */
             // @phpstan-ignore-next-line property.protected
             $callbacks = $this->beforeSendingCallbacks;
             // Find if this callback already exists

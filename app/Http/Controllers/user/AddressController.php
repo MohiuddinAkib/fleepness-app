@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Address;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AddressController extends Controller
 {
@@ -30,7 +32,7 @@ class AddressController extends Controller
 
         $exists = Address::where('user_id', auth()->id())->exists();
 
-        if ($request->is_default || !$exists) {
+        if ($request->is_default || ! $exists) {
             Address::where('user_id', auth()->id())->update(['is_default' => false]);
             $defaultValue = true;
         } else {
@@ -38,27 +40,27 @@ class AddressController extends Controller
         }
 
         $address = Address::create([
-            'user_id'            => auth()->id(),
-            'label'              => $request->label,
-            'latitude'           => $request->latitude,
-            'longitude'          => $request->longitude,
-            'address_text'       => $request->address_text,
-            'address_line_1'     => $request->address_line_1,
-            'address_line_2'     => $request->address_line_2,
-            'area'               => $request->area,
-            'city'               => $request->city,
-            'postal_code'        => $request->postal_code,
-            'formatted_address'  => $request->formatted_address,
-            'is_default'         => $defaultValue,
+            'user_id' => auth()->id(),
+            'label' => $request->label,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'address_text' => $request->address_text,
+            'address_line_1' => $request->address_line_1,
+            'address_line_2' => $request->address_line_2,
+            'area' => $request->area,
+            'city' => $request->city,
+            'postal_code' => $request->postal_code,
+            'formatted_address' => $request->formatted_address,
+            'is_default' => $defaultValue,
         ]);
 
         return response()->json($address, 201);
     }
 
-
     public function index(Request $request)
     {
         $addresses = Address::where('user_id', Auth::user()->id)->get();
+
         return response()->json(['addresses' => $addresses]);
     }
 
@@ -78,7 +80,7 @@ class AddressController extends Controller
 
         return response()->json([
             'message' => 'Default address updated successfully.',
-            'address' => $address
+            'address' => $address,
         ]);
     }
 
@@ -89,10 +91,9 @@ class AddressController extends Controller
             ->first();
 
         return response()->json([
-            'default_address' => $address
+            'default_address' => $address,
         ]);
     }
-
 
     public function update(Request $request, $address_id)
     {

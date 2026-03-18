@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Broadcaster;
 
 use Illuminate\Support\Str;
@@ -57,8 +59,8 @@ class FcmBroadcaster extends Broadcaster
     }
 
     /**
-     * @param  \Illuminate\Support\Collection<int,string>  $channels
-     * @return \Illuminate\Support\Collection<int,string>
+     * @param  Collection<int,string>  $channels
+     * @return Collection<int,string>
      */
     private function normalizeChannelCollection(Collection $channels)
     {

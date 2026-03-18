@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
@@ -7,11 +9,14 @@ use App\Models\Order;
 use App\Models\SellerOrder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Enums\SellerOrderStatus;
+use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
 
 class AdminOrderController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function index(): Factory|View
     {
         $orders = Order::with(['user', 'sellerOrders.items.product'])
             ->whereColumn('total_sellers', '!=', 'completed_order')
@@ -21,7 +26,7 @@ class AdminOrderController extends Controller
         return view('admin.order.index', ['orders' => $orders]);
     }
 
-    public function completed(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function completed(): Factory|View
     {
         $orders = Order::with(['user', 'sellerOrders.items.product'])
             ->whereColumn('total_sellers', '=', 'completed_order')
@@ -31,7 +36,7 @@ class AdminOrderController extends Controller
         return view('admin.order.completed', ['orders' => $orders]);
     }
 
-    public function show($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function show($id): Factory|View
     {
         $order = Order::with(['user', 'sellerOrders.items.product'])->findOrFail($id);
 
@@ -41,22 +46,22 @@ class AdminOrderController extends Controller
     public function updateSellerOrder(Request $request, $id)
     {
         $request->validate([
-            'status' => ['nullable', Rule::enum(\App\Enums\SellerOrderStatus::class)->only([
-                \App\Enums\SellerOrderStatus::On_The_Way,
-                \App\Enums\SellerOrderStatus::Delivered,
+            'status' => ['nullable', Rule::enum(SellerOrderStatus::class)->only([
+                SellerOrderStatus::On_The_Way,
+                SellerOrderStatus::Delivered,
             ])],
         ]);
 
-        $sellerOrder = \App\Models\SellerOrder::query()->findOrFail($id);
+        $sellerOrder = SellerOrder::query()->findOrFail($id);
 
         $riderAssigned = $request->boolean('rider_assigned');
         $sellerOrder->rider_assigned = $riderAssigned;
 
         if ($riderAssigned) {
-            $sellerOrder->status = \App\Enums\SellerOrderStatus::On_The_Way;
+            $sellerOrder->status = SellerOrderStatus::On_The_Way;
             $sellerOrder->status_message = 'Order is on the way';
         } else {
-            $status = $request->enum('status', \App\Enums\SellerOrderStatus::class);
+            $status = $request->enum('status', SellerOrderStatus::class);
             if ($status) {
                 $sellerOrder->status = $status;
             }
@@ -85,7 +90,7 @@ class AdminOrderController extends Controller
             $order->balance = $orderBalance;
             $order->save();
 
-            $user = \App\Models\User::query()->find($sellerOrder->seller_id);
+            $user = User::query()->find($sellerOrder->seller_id);
             if ($user) {
                 $user->total_sales = ($user->total_sales ?? 0) + $sellerOrder->product_cost;
                 $user->balance = ($user->balance ?? 0) + $sellerOrder->balance;

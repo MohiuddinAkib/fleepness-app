@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Webhooks\Livekit;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\Models\WebhookCall;
 use Spatie\WebhookClient\WebhookConfig;
+use Spatie\WebhookClient\Models\WebhookCall;
 
 /**
  * App\Webhooks\Livekit\LivekitWebhookCall
@@ -17,7 +19,8 @@ use Spatie\WebhookClient\WebhookConfig;
  */
 class LivekitWebhookCall extends WebhookCall
 {
-    protected $table = "webhook_calls";
+    protected $table = 'webhook_calls';
+
     public static function storeWebhook(WebhookConfig $config, Request $request): WebhookCall
     {
         $headers = self::headersToStore($config, $request);

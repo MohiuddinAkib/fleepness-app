@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,6 +12,7 @@ class DeliveryModelController extends Controller
     public function index()
     {
         $models = DeliveryModel::all();
+
         return view('admin.delivery_models.index', compact('models'));
     }
 
@@ -60,6 +63,7 @@ class DeliveryModelController extends Controller
     public function destroy(DeliveryModel $model)
     {
         $model->delete();
+
         return redirect()->route('admin.delivery.models.index')->with('success', 'Delivery model deleted.');
     }
 }

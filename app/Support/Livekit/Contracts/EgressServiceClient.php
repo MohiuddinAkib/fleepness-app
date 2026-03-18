@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Livekit\Contracts;
 
 use Livekit\EgressInfo;
 use Livekit\ImageOutput;
 use Livekit\StreamOutput;
 use Livekit\EncodingOptions;
+use Livekit\DirectFileOutput;
 use Livekit\EncodedFileOutput;
 use Livekit\ListEgressResponse;
 use Livekit\SegmentedFileOutput;
@@ -48,7 +51,7 @@ interface EgressServiceClient
 
     public function startTrackEgress(
         string $roomName,
-        \Livekit\DirectFileOutput|string $output,
+        DirectFileOutput|string $output,
         string $trackId
     ): EgressInfo;
 

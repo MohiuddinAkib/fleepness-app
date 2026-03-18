@@ -1,21 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Vendor;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\OrderItem;
-use App\Models\ProductImage;
-use App\Models\ProductSize;
-use App\Models\Stock;
-use App\Models\SizeTemplate;
-use App\Models\SizeTemplateItem;
-use App\Models\SellerTags;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use App\Models\Stock;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\OrderItem;
+use App\Models\SellerTags;
+use App\Models\ProductSize;
+use App\Models\ProductImage;
+use App\Models\SizeTemplate;
 use Illuminate\Http\Request;
+use App\Models\SizeTemplateItem;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VendorProductController extends Controller
 {
@@ -24,23 +28,24 @@ class VendorProductController extends Controller
         $data['products'] = Product::with('category')->latest()->whereNull('deleted_at')->where('user_id', auth()->id())->get();
         $data['categories'] = Category::whereNull('parent_id')->get();
         $data['size_templates'] = SizeTemplate::where('seller_id', auth()->id())->get();
+
         return view('vendor.products.index', $data);
     }
 
     public function getAllMyProducts(Request $request)
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         $perPage = $request->input('per_page', 10);
 
         $products = Product::with([
-                'category',
-                'images',
-                'sizes',
-                'sizeTemplate.items'
-            ])
+            'category',
+            'images',
+            'sizes',
+            'sizeTemplate.items',
+        ])
             ->latest()
             ->whereNull('deleted_at')
             ->where('user_id', auth()->id())
@@ -53,6 +58,7 @@ class VendorProductController extends Controller
         $products->getCollection()->transform(function ($product) {
             $data = $product->toArray();
             $data['tags_data'] = $product->tagCategories();
+
             return $data;
         });
 
@@ -72,21 +78,18 @@ class VendorProductController extends Controller
 
     public function getMyProducts()
     {
-       $user = User::find(23);
-        dd($user);
-
         $products = Product::with([
-                'category',
-                'sizes',
-                'sizeTemplate.items'
-            ])
+            'category',
+            'sizes',
+            'sizeTemplate.items',
+        ])
             ->latest()
             ->whereNull('deleted_at')
             ->where('user_id', $user->id())
             ->get();
 
         // If you also want to append full tag data:
-        $products->transform(function($product) {
+        $products->transform(function ($product) {
             $data = $product->toArray();
 
             // Add resolved categories for tags (if any)
@@ -96,7 +99,7 @@ class VendorProductController extends Controller
         });
 
         return response()->json([
-            'success'  => true,
+            'success' => true,
             'products' => $products,
         ]);
     }
@@ -104,16 +107,16 @@ class VendorProductController extends Controller
     public function getSingleProduct($id)
     {
         $product = Product::with([
-                'images',
-                'category',
-                'sizes',
-                'sizeTemplate.items'
-            ])
+            'images',
+            'category',
+            'sizes',
+            'sizeTemplate.items',
+        ])
             ->whereNull('deleted_at')
             ->where('user_id', auth()->id())
             ->find($id);
 
-        if (!$product) {
+        if (! $product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
 
@@ -128,9 +131,7 @@ class VendorProductController extends Controller
         ]);
     }
 
-
-
-   public function search(Request $request)
+    public function search(Request $request)
     {
         $query = $request->input('query');
         $tag = $request->input('tag');
@@ -140,7 +141,7 @@ class VendorProductController extends Controller
         $products = collect();
 
         // If neither query nor tag is provided, return all products
-        if (!$query && !$tag) {
+        if (! $query && ! $tag) {
             $products = Product::with('images')->where('user_id', auth()->id())->get();
         }
 
@@ -167,6 +168,7 @@ class VendorProductController extends Controller
                     if (is_string($tags)) {
                         $tags = json_decode($tags, true);
                     }
+
                     return is_array($tags) && in_array($tag, $tags);
                 });
 
@@ -179,7 +181,7 @@ class VendorProductController extends Controller
         // Manual pagination
         $sliced = $products->slice(($page - 1) * $perPage, $perPage)->values();
 
-        $paginated = new \Illuminate\Pagination\LengthAwarePaginator(
+        $paginated = new LengthAwarePaginator(
             $sliced,
             $products->count(),
             $perPage,
@@ -201,9 +203,6 @@ class VendorProductController extends Controller
         ]);
     }
 
-
-
-
     protected function generateUniqueCode()
     {
         do {
@@ -212,7 +211,6 @@ class VendorProductController extends Controller
 
         return $code;
     }
-
 
     public function store(Request $request)
     {
@@ -252,17 +250,17 @@ class VendorProductController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $photo) {
-                    $path = $photo->store('products/images'); 
+                    $path = $photo->store('products/images');
 
                     ProductImage::create([
                         'product_id' => $product->id,
-                        'path' => $path, 
+                        'path' => $path,
                         'alt_text' => $request->input('alt_text', ''),
                     ]);
                 }
             }
 
-            if (!empty($request->tags)) {
+            if (! empty($request->tags)) {
                 $sellerTag = SellerTags::firstOrNew([
                     'vendor_id' => auth()->id(),
                 ]);
@@ -311,7 +309,7 @@ class VendorProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Validation failed',
-                'errors' => $e->errors()
+                'errors' => $e->errors(),
             ], 422);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -319,7 +317,7 @@ class VendorProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Something went wrong',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -329,38 +327,37 @@ class VendorProductController extends Controller
         $random = rand(100, 150);
         $value = $random / 100;
 
-        return number_format($value, 2) . 'k';
+        return number_format($value, 2).'k';
     }
-
-
 
     private function generateRandomTime(): string
     {
         $minutes = rand(30, 90);
-        if ($minutes >= 60) {
+        if (60 <= $minutes) {
             $hours = intdiv($minutes, 60);
             $remaining = $minutes % 60;
-            return $remaining > 0 ? "{$hours}h {$remaining}m" : "{$hours}h";
+
+            return 0 < $remaining ? "{$hours}h {$remaining}m" : "{$hours}h";
         }
+
         return "{$minutes}m";
     }
 
     private function generateRandomDiscount(): float
     {
-        return rand(1, 20); 
+        return rand(1, 20);
     }
-
-
 
     public function edit(Product $product)
     {
         // dd($product);
         $productImageCount = ProductImage::where('product_id', $product->id)->count();
         $categories = Category::whereNull('parent_id')->get();
+
         return view('vendor.products.product_edit', compact('product', 'categories', 'productImageCount'));
     }
 
-   public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         // dd($request->all());
         try {
@@ -404,7 +401,7 @@ class VendorProductController extends Controller
 
                     // If the size exists, update its value if available is true
                     if ($size) {
-                        if ($sizeData['available'] === 'false') {
+                        if ('false' === $sizeData['available']) {
                             // If available is false, delete the size
                             $size->delete();
                         } else {
@@ -413,7 +410,7 @@ class VendorProductController extends Controller
                             $size->save();
                         }
                     } else {
-                        if ($sizeData['available'] === 'true') {
+                        if ('true' === $sizeData['available']) {
                             ProductSize::create([
                                 'product_id' => $product->id,
                                 'size_name' => $sizeData['size_name'], // Ensure size name is lowercase
@@ -426,17 +423,17 @@ class VendorProductController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $photo) {
-                    $path = $photo->store('products/images'); 
+                    $path = $photo->store('products/images');
 
                     ProductImage::create([
                         'product_id' => $product->id,
-                        'path' => $path, 
+                        'path' => $path,
                         'alt_text' => $request->input('alt_text', ''),
                     ]);
                 }
             }
 
-            if (!empty($request->tags)) {
+            if (! empty($request->tags)) {
                 $sellerTag = SellerTags::firstOrNew([
                     'vendor_id' => auth()->id(),
                 ]);
@@ -446,12 +443,12 @@ class VendorProductController extends Controller
             }
 
             $tags = json_decode($product->tags, true);
-            $tag = $tags ? $tags[0] : null; 
+            $tag = $tags ? $tags[0] : null;
 
             $tagName = null;
             $category = null;
             if ($tag) {
-                $tagName = Category::where('id', $tag)->pluck('name')->first(); 
+                $tagName = Category::where('id', $tag)->pluck('name')->first();
                 $tagCategory = Category::where('id', $tag)->first();
 
                 if ($tagCategory) {
@@ -476,17 +473,17 @@ class VendorProductController extends Controller
             $productSizes = ProductSize::where('product_id', $product->id)->get();
 
             return response()->json(['success' => true,
-            'message' => 'Product updated successfully',
-            'product' => $product,
-            'sizes' => $productSizes,
-            'images' => ProductImage::where('product_id', $product->id)->get(),
-            'tag' => $tagName,
-            'category_name' => $categoryName,
+                'message' => 'Product updated successfully',
+                'product' => $product,
+                'sizes' => $productSizes,
+                'images' => ProductImage::where('product_id', $product->id)->get(),
+                'tag' => $tagName,
+                'category_name' => $categoryName,
             ]);
 
-            } catch (\Exception $e) {
-                return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
-            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function deleteImage($id, $img)
@@ -502,8 +499,8 @@ class VendorProductController extends Controller
             }
 
             $image = ProductImage::where('id', $img)
-                                ->where('product_id', $product->id)
-                                ->firstOrFail();
+                ->where('product_id', $product->id)
+                ->firstOrFail();
 
             if (\Storage::exists($image->path)) {
                 \Storage::delete($image->path);
@@ -516,7 +513,7 @@ class VendorProductController extends Controller
                 'message' => 'Image deleted successfully.',
             ]);
 
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Product or image not found.',
@@ -530,9 +527,6 @@ class VendorProductController extends Controller
             ], 500);
         }
     }
-
-
-
 
     public function destroy($id, Request $request)
     {
@@ -581,7 +575,6 @@ class VendorProductController extends Controller
 
         $message = 'Product inactivated successfully.';
 
-
         return response()->json([
             'success' => true,
             'message' => $message,
@@ -606,11 +599,10 @@ class VendorProductController extends Controller
         ]);
     }
 
-
     public function ImageDelete($id)
     {
         $data = ProductImage::find($id);
-        if (!$data) {
+        if (! $data) {
             return response()->json(['error' => 'Image not found.'], 404);
         }
 
@@ -619,9 +611,9 @@ class VendorProductController extends Controller
         }
 
         $data->delete();
+
         return back();
     }
-
 
     public function StockDelete($id)
     {
@@ -631,10 +623,11 @@ class VendorProductController extends Controller
         }
         $data->delete();
 
-        $notification = array(
+        $notification = [
             'message' => 'Data Deleted Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
+
         return redirect()->back()->with($notification);
     }
 }

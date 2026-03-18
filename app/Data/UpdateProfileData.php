@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Data;
 
-use AhmedAliraqi\LaravelMediaUploader\Entities\TemporaryFile;
-use App\Constants\GenderTypes;
-use Spatie\LaravelData\Attributes\MapName;
-use Spatie\LaravelData\Attributes\Validation\Exists;
 use Spatie\LaravelData\Data;
-use Spatie\LaravelData\Mappers\SnakeCaseMapper;
+use App\Constants\GenderTypes;
 use Spatie\LaravelData\Optional;
+use Spatie\LaravelData\Attributes\MapName;
+use Spatie\LaravelData\Mappers\SnakeCaseMapper;
+use Spatie\LaravelData\Attributes\Validation\Exists;
+use AhmedAliraqi\LaravelMediaUploader\Entities\TemporaryFile;
 
 #[MapName(SnakeCaseMapper::class)]
 class UpdateProfileData extends Data
 {
     public function __construct(
-        public string|Optional $name,
+        public Optional|string $name,
         #[Exists(TemporaryFile::class, 'token')]
-        public string|Optional $profilePicture,
+        public Optional|string $profilePicture,
         public GenderTypes|Optional $gender,
-        public string|Optional $address,
-        public string|Optional $phonenumber,
+        public Optional|string $address,
+        public Optional|string $phonenumber,
     ) {}
 }

@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
+use App\Http\Controllers\Controller;
 
 class PaymentMethodController extends Controller
 {
     public function index()
     {
         $methods = PaymentMethod::all();
+
         return view('admin.payment_methods.index', compact('methods'));
     }
 
@@ -31,9 +34,9 @@ class PaymentMethodController extends Controller
         $path = null;
         if ($request->hasFile('icon')) {
             $icon = $request->file('icon');
-            $filename = uniqid() . '.' . $icon->getClientOriginalExtension();
+            $filename = uniqid().'.'.$icon->getClientOriginalExtension();
             $icon->move(public_path('upload/payment_icons'), $filename);
-            $path = 'upload/payment_icons/' . $filename;
+            $path = 'upload/payment_icons/'.$filename;
         }
 
         PaymentMethod::create([
@@ -45,10 +48,10 @@ class PaymentMethodController extends Controller
         return redirect()->route('admin.payment-methods.index')->with('success', 'Payment method added.');
     }
 
-
     public function edit($id)
     {
         $method = PaymentMethod::findOrFail($id);
+
         return view('admin.payment_methods.edit', compact('method'));
     }
 
@@ -57,7 +60,7 @@ class PaymentMethodController extends Controller
         $method = PaymentMethod::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:payment_methods,name,' . $method->id,
+            'name' => 'required|string|max:255|unique:payment_methods,name,'.$method->id,
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'is_active' => 'required|boolean',  // Add validation for status
         ]);
@@ -66,9 +69,9 @@ class PaymentMethodController extends Controller
 
         if ($request->hasFile('icon')) {
             $icon = $request->file('icon');
-            $filename = uniqid() . '.' . $icon->getClientOriginalExtension();
+            $filename = uniqid().'.'.$icon->getClientOriginalExtension();
             $icon->move(public_path('upload/payment_icons'), $filename);
-            $method->icon = 'upload/payment_icons/' . $filename;
+            $method->icon = 'upload/payment_icons/'.$filename;
         }
 
         $method->is_active = $validated['is_active'];  // Update status from input
@@ -77,7 +80,6 @@ class PaymentMethodController extends Controller
 
         return redirect()->route('admin.payment-methods.index')->with('success', 'Payment method updated.');
     }
-
 
     public function destroy($id)
     {
@@ -90,7 +92,7 @@ class PaymentMethodController extends Controller
     public function toggleStatus($id)
     {
         $method = PaymentMethod::findOrFail($id);
-        $method->is_active = !$method->is_active;
+        $method->is_active = ! $method->is_active;
         $method->save();
 
         return redirect()->back()->with('success', 'Payment method status updated.');

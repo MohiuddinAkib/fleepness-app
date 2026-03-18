@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Http;
 
 use Closure;
@@ -12,7 +14,7 @@ class HttpClientNamedMiddleware
     private bool $silent = false;
 
     /**
-     * @param Closure(callable $handler,PendingRequest):(Closure(RequestInterface,array):PromiseInterface) $fn
+     * @param  Closure(callable $handler,PendingRequest):(Closure(RequestInterface,array):PromiseInterface)  $fn
      */
     public function __construct(
         public readonly string $name,

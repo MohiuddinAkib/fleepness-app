@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\User;
@@ -15,7 +17,7 @@ class VendorPolicy
     {
         $user->loadCount('vendors');
 
-        return $user->vendors_count === 0;
+        return 0 === $user->vendors_count;
     }
 
     /**

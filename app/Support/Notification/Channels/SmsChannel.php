@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Notification\Channels;
 
 use Illuminate\Support\Arr;

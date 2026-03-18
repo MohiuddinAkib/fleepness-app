@@ -1,8 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use App\Enums\SellerOrderStatus;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\OrderStatusChanged;
+use App\Notifications\OrderReceivedFromBuyer;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +24,7 @@ class SellerOrder extends Model
         'delivery_end_time' => 'datetime',
         'rider_assigned' => 'boolean',
 
-        'status' => \App\Enums\SellerOrderStatus::class,
+        'status' => SellerOrderStatus::class,
 
         'product_cost' => 'float',
         'commission' => 'float',
@@ -27,6 +32,7 @@ class SellerOrder extends Model
         'delivery_fee' => 'float',
         'balance' => 'float',
     ];
+
     /**
      * @return BelongsTo<Order,$this>
      */
@@ -61,11 +67,11 @@ class SellerOrder extends Model
 
     public function notifySellerAboutNewOrderFromBuyer()
     {
-        $this->seller->notify(new \App\Notifications\OrderReceivedFromBuyer($this));
+        $this->seller->notify(new OrderReceivedFromBuyer($this));
     }
 
     public function notifyBuyerAboutOrderStatus()
     {
-        $this->customer->notify(new \App\Notifications\OrderStatusChanged($this));
+        $this->customer->notify(new OrderStatusChanged($this));
     }
 }

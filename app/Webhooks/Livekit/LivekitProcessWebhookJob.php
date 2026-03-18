@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Webhooks\Livekit;
 
+use App\Models\User;
 use App\Models\Livestream;
 use App\Constants\LivestreamStatuses;
 use Agence104\LiveKit\WebhookReceiver;
@@ -29,7 +32,7 @@ class LivekitProcessWebhookJob extends ProcessWebhookJob
                 if ($event->hasRoom()) {
                     $roomMetadata = Json::decode($event->getRoom()->getMetadata());
                     $livestreamId = data_get($roomMetadata, 'livestream_identity');
-                    $livestream = \App\Models\Livestream::query()->find($livestreamId);
+                    $livestream = Livestream::query()->find($livestreamId);
                     if ($livestream) {
                         $livestream->ended_at = now();
                         $livestream->status = LivestreamStatuses::FINISHED;
@@ -41,14 +44,14 @@ class LivekitProcessWebhookJob extends ProcessWebhookJob
                 if ($event->hasRoom() && $event->hasParticipant()) {
                     $roomMetadata = Json::decode($event->getRoom()->getMetadata());
                     $livestreamId = data_get($roomMetadata, 'livestream_identity');
-                    $livestream = \App\Models\Livestream::query()->find($livestreamId);
+                    $livestream = Livestream::query()->find($livestreamId);
 
                     if ($event->getParticipant()->getPermission()->getCanPublish()) {
                         return;
                     }
 
                     $participantUserId = $event->getParticipant()->getIdentity();
-                    $user = \App\Models\User::query()->find($participantUserId);
+                    $user = User::query()->find($participantUserId);
 
                     if ($livestream) {
                         if ($user) {
@@ -99,7 +102,7 @@ class LivekitProcessWebhookJob extends ProcessWebhookJob
                 logger()->info('egress ended', [$event->hasEgressInfo(), $event->hasRoom()]);
                 if ($event->hasEgressInfo()) {
                     $eventEgressId = $event->getEgressInfo()->getEgressId();
-                    $livestream = \App\Models\Livestream::query()->firstWhere([
+                    $livestream = Livestream::query()->firstWhere([
                         'egress_id' => $eventEgressId,
                     ]);
 

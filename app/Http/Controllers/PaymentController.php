@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Models\MainOrder;
-use Illuminate\Http\Request;
 use App\Models\Bill;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,12 +21,10 @@ class PaymentController extends Controller
         return view('vendor.payment.request', compact('max_withdrawable'));
     }
 
-
     public function paymentHistory()
     {
         $bills = Bill::where('user_id', Auth::id())->get();
+
         return view('vendor.payment.history', compact('bills'));
     }
-
-
 }

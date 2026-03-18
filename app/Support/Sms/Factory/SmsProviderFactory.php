@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Sms\Factory;
 
 use Illuminate\Support\Manager;

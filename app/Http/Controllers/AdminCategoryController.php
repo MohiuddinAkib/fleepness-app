@@ -1,35 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
-
+use Illuminate\Http\UploadedFile;
 
 class AdminCategoryController extends Controller
 {
     public function index()
-        {
-            $categories = Category::with(['children' => function ($query) {
-                $query->orderBy('order', 'asc');
-            }])
+    {
+        $categories = Category::with(['children' => function ($query) {
+            $query->orderBy('order', 'asc');
+        }])
             ->whereNull('parent_id')
             ->orderBy('order', 'asc')
             ->get();
 
-            return view('admin.categories.index', compact('categories'));
-        }
+        return view('admin.categories.index', compact('categories'));
+    }
 
-        public function getChildren($parentId)
-        {
-            $parent = Category::find($parentId);
-            return response()->json($parent->children);
-        }
+    public function getChildren($parentId)
+    {
+        $parent = Category::find($parentId);
 
+        return response()->json($parent->children);
+    }
 
     // public function create()
     // {
@@ -57,7 +56,7 @@ class AdminCategoryController extends Controller
             'cover_img' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg,webp,bmp|max:2048',
         ]);
 
-        $data = $request->only(['name', 'description', 'parent_id', 'store_title','mark',]);
+        $data = $request->only(['name', 'description', 'parent_id', 'store_title', 'mark']);
 
         if ($request->parent_id) {
             $maxOrder = Category::where('parent_id', $request->parent_id)->max('order');
@@ -65,7 +64,7 @@ class AdminCategoryController extends Controller
             $maxOrder = Category::whereNull('parent_id')->max('order');
         }
 
-        $data['order'] = $maxOrder ? $maxOrder + 1 : 1; 
+        $data['order'] = $maxOrder ? $maxOrder + 1 : 1;
 
         if ($request->hasFile('profile_img')) {
             $data['profile_img'] = $this->uploadImage($request->file('profile_img'), 'category_images');
@@ -80,19 +79,15 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
 
-
     private function uploadImage(UploadedFile $image, $folder)
     {
         return $image->store('upload/'.$folder);
     }
 
-
-
-
     public function edit(Category $category)
     {
         $categories = Category::whereNull('parent_id')
-            ->where('id', '!=', $category->id) 
+            ->where('id', '!=', $category->id)
             ->get();
 
         $parentCategory = $category->parent;
@@ -102,10 +97,9 @@ class AdminCategoryController extends Controller
         return view('admin.categories.category_edit', compact('category', 'categories', 'parentCategory', 'grandChildCategory'));
     }
 
-
     public function update(Request $request, Category $category)
     {
-    //    dd($request->all());
+        //    dd($request->all());
         // Validate the incoming data
         $request->validate([
             'name' => [
@@ -151,7 +145,7 @@ class AdminCategoryController extends Controller
         }
 
         // Reorder categories if the order is updated
-        if ($request->filled('order') && $request->order != $previousOrder) {
+        if ($request->filled('order') && $request->order !== $previousOrder) {
             $this->reorderCategories($category, $previousOrder, $request->order, $previousParentId);
         }
 
@@ -161,14 +155,12 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
 
-
-
     /**
      * Function to reorder categories while keeping main and child categories separate.
      */
     private function reorderCategories($category, $previousOrder, $newOrder, $previousParentId)
     {
-        $isChild = $category->parent_id !== null;
+        $isChild = null !== $category->parent_id;
 
         // Determine the correct query scope
         $query = Category::where('parent_id', $isChild ? $category->parent_id : null);
@@ -189,14 +181,10 @@ class AdminCategoryController extends Controller
         }
     }
 
-
-
-
-
     public function destroy(Category $category)
     {
         $subCategory = Category::where('parent_id', $category->id)->count('id');
-        if ($subCategory > 0) {
+        if (0 < $subCategory) {
             return redirect()->route('admin.categories.index')->with('success', 'You can not deleted this category. Please First Delete all Child Category!');
         }
         // $product = Product::where('category_id', $category->id)->count('id');
@@ -204,6 +192,7 @@ class AdminCategoryController extends Controller
         //     return redirect()->route('categories.index')->with('success', 'You can not deleted this category.Please First Delete all Product under this Subcategory!');
         // }
         $category->delete();
+
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
 }

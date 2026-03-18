@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // app/Http/Controllers/SectionController.php
 
 namespace App\Http\Controllers;

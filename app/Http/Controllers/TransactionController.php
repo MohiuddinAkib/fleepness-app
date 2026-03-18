@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\Factory;
 
 class TransactionController extends Controller
 {
@@ -20,7 +24,7 @@ class TransactionController extends Controller
         $user->balance -= $validated['amount'];
         $user->save();
 
-        $transaction = \App\Models\Transaction::query()->create([
+        $transaction = Transaction::query()->create([
             'user_id' => $user->id,
             'payment_method_id' => $validated['payment_method_id'],
             'amount' => $validated['amount'],
@@ -34,16 +38,16 @@ class TransactionController extends Controller
         ], 201);
     }
 
-    public function PaymentRequests(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function PaymentRequests(): Factory|View
     {
-        $bills = \App\Models\Transaction::query()->where('status', 'pending')->get();
+        $bills = Transaction::query()->where('status', 'pending')->get();
 
         return view('admin.payment.requests', ['bills' => $bills]);
     }
 
     public function update(Request $request, $billId)
     {
-        $bill = \App\Models\Transaction::query()->findOrFail($billId);
+        $bill = Transaction::query()->findOrFail($billId);
         $bill->status = 'approved';
         $bill->transaction_id = $request->transaction_id;
         $bill->save();
@@ -53,7 +57,7 @@ class TransactionController extends Controller
         return back()->with('success', 'Payment details updated successfully.');
     }
 
-    public function AdminPaymentHistory(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function AdminPaymentHistory(Request $request): Factory|View
     {
         $status = $request->query('status');
 
@@ -76,7 +80,7 @@ class TransactionController extends Controller
             'reason' => ['required', 'string', 'max:1000'],
         ]);
 
-        $bill = \App\Models\Transaction::query()->findOrFail($billId);
+        $bill = Transaction::query()->findOrFail($billId);
         $bill->update([
             'status' => 'rejected',
             'note' => $request->reason,

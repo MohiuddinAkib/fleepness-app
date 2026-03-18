@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Livekit;
 
 use Livekit\Egress;
@@ -51,10 +53,10 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
     /**
      * Get the stream output parameters.
      *
-     * @param  \Agence104\LiveKit\EncodedOutputs|\Livekit\EncodedFileOutput|\Livekit\StreamOutput|\Livekit\SegmentedFileOutput|\Livekit\ImageOutput  $output
-     *                                                                                                                                                        The output stream.
-     * @param  \Livekit\EncodingOptionsPreset|\Livekit\EncodingOptions|null  $options
-     *                                                                                 The output options.
+     * @param  EncodedOutputs|EncodedFileOutput|StreamOutput|SegmentedFileOutput|ImageOutput  $output
+     *                                                                                                 The output stream.
+     * @param  EncodingOptionsPreset|EncodingOptions|null  $options
+     *                                                               The output options.
      * @return array
      *               The output parameters as an array.
      */
@@ -120,18 +122,18 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *                            The name of the room.
      * @param  string  $layout
      *                          The egress layout.
-     * @param  \Agence104\LiveKit\EncodedOutputs|\Livekit\EncodedFileOutput|\Livekit\StreamOutput|\Livekit\SegmentedFileOutput|\Livekit\ImageOutput  $output
-     *                                                                                                                                                        The egress output.
-     * @param  \Livekit\EncodingOptionsPreset|\Livekit\EncodingOptions|null  $options
-     *                                                                                 The encoding options or preset.
+     * @param  EncodedOutputs|EncodedFileOutput|StreamOutput|SegmentedFileOutput|ImageOutput  $output
+     *                                                                                                 The egress output.
+     * @param  EncodingOptionsPreset|EncodingOptions|null  $options
+     *                                                               The encoding options or preset.
      * @param  bool  $audioOnly
      *                           The flag which defines if we record only the audio or not.
      * @param  bool  $videoOnly
      *                           The flag which defines if we record only the video or not.
      * @param  string  $customBaseUrl
      *                                 The custom template url. (default https://recorder.livekit.io)
-     * @return \Livekit\EgressInfo
-     *                             The egress info.
+     * @return EgressInfo
+     *                    The egress info.
      */
     public function startRoomCompositeEgress(
         string $roomName,
@@ -198,18 +200,18 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *
      * @param  string  $url
      *                       The URL of the web page to record.
-     * @param  \Agence104\LiveKit\EncodedOutputs|\Livekit\EncodedFileOutput|\Livekit\StreamOutput|\Livekit\SegmentedFileOutput|\Livekit\ImageOutput  $output
-     *                                                                                                                                                        The egress output.
-     * @param  \Livekit\EncodingOptionsPreset|\Livekit\EncodingOptions|null  $options
-     *                                                                                 The encoding options or preset.
+     * @param  EncodedOutputs|EncodedFileOutput|StreamOutput|SegmentedFileOutput|ImageOutput  $output
+     *                                                                                                 The egress output.
+     * @param  EncodingOptionsPreset|EncodingOptions|null  $options
+     *                                                               The encoding options or preset.
      * @param  bool  $audioOnly
      *                           The flag which defines if we record only the audio or not.
      * @param  bool  $videoOnly
      *                           The flag which defines if we record only the video or not.
      * @param  bool  $awaitStartSignal
      *                                  The flag which defines if we wait for the start signal or not.
-     * @return \Livekit\EgressInfo
-     *                             The egress info.
+     * @return EgressInfo
+     *                    The egress info.
      */
     public function startWebEgress(
         string $url,
@@ -276,16 +278,16 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *
      * @param  string  $roomName
      *                            The name of the room.
-     * @param  \Agence104\LiveKit\EncodedOutputs|\Livekit\EncodedFileOutput|\Livekit\StreamOutput|\Livekit\SegmentedFileOutput|\Livekit\ImageOutput  $output
-     *                                                                                                                                                        The file or stream output.
+     * @param  EncodedOutputs|EncodedFileOutput|StreamOutput|SegmentedFileOutput|ImageOutput  $output
+     *                                                                                                 The file or stream output.
      * @param  string  $audioTrackId
      *                                The audio track id.
      * @param  string  $videoTrackId
      *                                The video track id.
-     * @param  \Livekit\EncodingOptionsPreset|\Livekit\EncodingOptions|null  $options
-     *                                                                                 The encoding options or preset.
-     * @return \Livekit\EgressInfo
-     *                             The egress info.
+     * @param  EncodingOptionsPreset|EncodingOptions|null  $options
+     *                                                               The encoding options or preset.
+     * @return EgressInfo
+     *                    The egress info.
      */
     public function startTrackCompositeEgress(
         string $roomName,
@@ -350,12 +352,12 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *
      * @param  string  $roomName
      *                            The name of the room.
-     * @param  \Livekit\DirectFileOutput|string  $output
-     *                                                    The file or websocket output.
+     * @param  DirectFileOutput|string  $output
+     *                                           The file or websocket output.
      * @param  string  $trackId
      *                           The track id.
-     * @return \Livekit\EgressInfo
-     *                             The egress info.
+     * @return EgressInfo
+     *                    The egress info.
      */
     public function startTrackEgress(
         string $roomName,
@@ -387,8 +389,8 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *                            The egress id.
      * @param  string  $layout
      *                          The egress layout.
-     * @return \Livekit\EgressInfo
-     *                             The egress info.
+     * @return EgressInfo
+     *                    The egress info.
      */
     public function updateLayout(
         string $egressId,
@@ -415,8 +417,8 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *                                The output Urls to add to the active stream.
      * @param  array  $removeOutputUrls
      *                                   The output Urls to remove from the active stream.
-     * @return \Livekit\EgressInfo
-     *                             The egress info.
+     * @return EgressInfo
+     *                    The egress info.
      */
     public function updateStream(
         string $egressId,
@@ -445,8 +447,8 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *                            Optional, filter by an egress ID.
      * @param  bool  $active
      *                        Optional, list active egress only.
-     * @return \Livekit\ListEgressResponse
-     *                                     The list of egress.
+     * @return ListEgressResponse
+     *                            The list of egress.
      */
     public function listEgress(
         string $roomName = '',
@@ -471,8 +473,8 @@ class EgressServiceClient extends BaseServiceClient implements EgressServiceClie
      *
      * @param  string  $egressId
      *                            The egress id.
-     * @return \Livekit\EgressInfo
-     *                             The egress info.
+     * @return EgressInfo
+     *                    The egress info.
      */
     public function stopEgress(string $egressId): EgressInfo
     {

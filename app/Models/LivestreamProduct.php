@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -19,5 +21,3 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @mixin \Eloquent
  */
 class LivestreamProduct extends Pivot {}
-
-

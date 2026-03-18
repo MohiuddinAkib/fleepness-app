@@ -1,20 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\user;
 
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Follower;
 use App\Models\UserPayment;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use App\Models\Follower;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
-
     public function show()
     {
         $user = Auth::user()->load('payments.paymentMethod');
@@ -23,24 +24,23 @@ class UserProfileController extends Controller
 
         $formattedPayments = $user->payments->map(function ($payment) {
             return [
-                'payment_method' => $payment->paymentMethod->name, 
-                'account_number' => $payment->account_number, 
+                'payment_method' => $payment->paymentMethod->name,
+                'account_number' => $payment->account_number,
             ];
         });
 
         return response()->json([
             'success' => true,
-            'user' => $user->makeHidden(['payments']), 
+            'user' => $user->makeHidden(['payments']),
             'product_count' => $productCount,
-            'follower_count' => $followerCount ,
-            'payments' => $formattedPayments, 
+            'follower_count' => $followerCount,
+            'payments' => $formattedPayments,
         ]);
     }
 
-
     public function updateSeller(Request $request)
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
 
         $validatedData = $request->validate([
             'address' => 'nullable|string',
@@ -58,7 +58,7 @@ class UserProfileController extends Controller
         ]);
 
         if (! empty($validatedData['payments'])) {
-            $user->payments()->delete(); 
+            $user->payments()->delete();
 
             foreach ($validatedData['payments'] as $method => $number) {
                 if ($number) {
@@ -99,8 +99,8 @@ class UserProfileController extends Controller
 
         $formattedPayments = $user->payments->map(function ($payment) {
             return [
-                'payment_method' => $payment->paymentMethod->name, 
-                'account_number' => $payment->account_number, 
+                'payment_method' => $payment->paymentMethod->name,
+                'account_number' => $payment->account_number,
             ];
         });
 
@@ -121,7 +121,7 @@ class UserProfileController extends Controller
     public function updatePaymentAccounts(Request $request)
     {
         $validated = $request->validate([
-            'payments' => 'required|array', 
+            'payments' => 'required|array',
             'payments.*' => 'nullable|string|max:20',
         ]);
 
@@ -141,13 +141,13 @@ class UserProfileController extends Controller
 
         return response()->json([
             'message' => 'Payment accounts updated successfully',
-            'payments' => $user->payments()->get(), 
+            'payments' => $user->payments()->get(),
         ]);
     }
 
     public function updateUser(Request $request)
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
 
         $validatedData = $request->validate([
             'name' => 'nullable|string|max:255',

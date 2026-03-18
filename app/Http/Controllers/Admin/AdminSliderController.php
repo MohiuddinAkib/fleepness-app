@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Slider;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
+use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 
 class AdminSliderController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminSliderController extends Controller
         $data['sliders'] = Slider::latest()->get();
         $data['categories'] = $categories;
         $data['tags'] = Category::whereNotIn('id', Category::whereNotNull('parent_id')->pluck('parent_id'))->get();
+
         // dd($data);
         return view('admin.sliders.index', $data);
     }
@@ -27,6 +29,7 @@ class AdminSliderController extends Controller
     public function getTags(Request $request)
     {
         $tags = Category::where('parent_id', $request->category_id)->get();
+
         return response()->json($tags);
     }
 
@@ -47,9 +50,10 @@ class AdminSliderController extends Controller
         });
 
         return response()->json([
-            'sliders' => $transformed
+            'sliders' => $transformed,
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -61,12 +65,11 @@ class AdminSliderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
-        $data = new Slider();
+        $data = new Slider;
 
         // Validate the image upload
         if ($request->file('photo')) {
@@ -77,21 +80,21 @@ class AdminSliderController extends Controller
             );
 
             // Generate a unique name for the image file
-            $name_gen = hexdec(uniqid()) . '.' . $request->file('photo')->getClientOriginalExtension();
+            $name_gen = hexdec(uniqid()).'.'.$request->file('photo')->getClientOriginalExtension();
 
             // Define the folder path where the image will be stored
             $folder = 'slider/';
 
             // Check if the folder exists, if not create it
-            if (!file_exists(public_path('upload/' . $folder))) {
-                mkdir(public_path('upload/' . $folder), 0777, true);
+            if (! file_exists(public_path('upload/'.$folder))) {
+                mkdir(public_path('upload/'.$folder), 0777, true);
             }
 
             // Move the uploaded file to the folder
-            $request->file('photo')->move(public_path('upload/' . $folder), $name_gen);
+            $request->file('photo')->move(public_path('upload/'.$folder), $name_gen);
 
             // Set the file path to the slider's photo field
-            $save_url = 'upload/' . $folder . $name_gen;
+            $save_url = 'upload/'.$folder.$name_gen;
             $data->photo = $save_url;
         }
 
@@ -108,21 +111,20 @@ class AdminSliderController extends Controller
         $data->save();
 
         // Notification message
-        $notification = array(
+        $notification = [
             'message' => 'Data Saved Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         // Redirect back with the success message
         return redirect()->back()->with($notification);
     }
 
-
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -133,7 +135,7 @@ class AdminSliderController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -143,9 +145,8 @@ class AdminSliderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -165,21 +166,21 @@ class AdminSliderController extends Controller
             }
 
             // Generate a unique file name for the new photo
-            $name_gen = hexdec(uniqid()) . '.' . $request->file('photo')->getClientOriginalExtension();
+            $name_gen = hexdec(uniqid()).'.'.$request->file('photo')->getClientOriginalExtension();
 
             // Define the folder path where the image will be stored
             $folder = 'slider/';
 
             // Check if the folder exists, if not, create it
-            if (!file_exists(public_path('upload/' . $folder))) {
-                mkdir(public_path('upload/' . $folder), 0777, true);
+            if (! file_exists(public_path('upload/'.$folder))) {
+                mkdir(public_path('upload/'.$folder), 0777, true);
             }
 
             // Move the uploaded photo to the folder
-            $request->file('photo')->move(public_path('upload/' . $folder), $name_gen);
+            $request->file('photo')->move(public_path('upload/'.$folder), $name_gen);
 
             // Set the file path to the slider's photo field
-            $save_url = 'upload/' . $folder . $name_gen;
+            $save_url = 'upload/'.$folder.$name_gen;
 
             // Assign the new photo URL to the model's `photo` attribute
             $data->photo = $save_url;
@@ -198,19 +199,19 @@ class AdminSliderController extends Controller
         $data->update();
 
         // Return success notification
-        $notification = array(
+        $notification = [
             'message' => 'Updated Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
+
         return redirect()->back()->with($notification);
     }
-
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
@@ -220,10 +221,11 @@ class AdminSliderController extends Controller
         }
         $data->delete();
 
-        $notification = array(
+        $notification = [
             'message' => 'Data Deleted Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
+
         return redirect()->back()->with($notification);
     }
 }

@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function getCategories(){
+    public function getCategories()
+    {
         $categories = Category::with(['children' => function ($query) {
-                $query->orderBy('order', 'asc')
-                    ->with(['children' => function ($subQuery) {
-                        $subQuery->orderBy('order', 'asc');
-                    }]);
-            }])
+            $query->orderBy('order', 'asc')
+                ->with(['children' => function ($subQuery) {
+                    $subQuery->orderBy('order', 'asc');
+                }]);
+        }])
             ->whereNull('parent_id')
             ->orderBy('order', 'asc')
             ->get(['id', 'name', 'profile_img', 'cover_img']);
@@ -51,11 +53,11 @@ class CategoryController extends Controller
     {
         // Get top-level categories with children and sub-children
         $categories = Category::with(['children' => function ($query) {
-                $query->orderBy('order', 'asc')
-                    ->with(['children' => function ($subQuery) {
-                        $subQuery->orderBy('order', 'asc');
-                    }]);
-            }])
+            $query->orderBy('order', 'asc')
+                ->with(['children' => function ($subQuery) {
+                    $subQuery->orderBy('order', 'asc');
+                }]);
+        }])
             ->whereNull('parent_id')
             ->orderBy('order', 'asc')
             ->take(3) // Take first 3 categories
@@ -90,20 +92,19 @@ class CategoryController extends Controller
         ]);
     }
 
-
-
     public function getCategoriesOnly()
     {
 
         $categories = Category::whereNull('parent_id')->get();
 
         $transformed = $categories->map(function ($category) {
-        return [
-            'id' => $category->id,
-            'name' => $category->name,
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
             ];
         });
-            return response()->json([
+
+        return response()->json([
             'status' => true,
             'categories' => $transformed,
         ]);
@@ -115,7 +116,7 @@ class CategoryController extends Controller
         $children = Category::where('parent_id', $category->id)->get();
 
         // Iterate over children and fetch their own children as tags
-        $category->sub_categories = $children->map(function($child) {
+        $category->sub_categories = $children->map(function ($child) {
             return $this->getCategoryTags($child);  // Get tags for this child
         });
 
@@ -132,5 +133,4 @@ class CategoryController extends Controller
 
         return $category;
     }
-
 }

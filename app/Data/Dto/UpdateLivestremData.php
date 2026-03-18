@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Data\Dto;
 
 use Carbon\Carbon;
+use App\Models\User;
+use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
+use Illuminate\Http\UploadedFile;
 use App\Constants\LivestreamStatuses;
 use Spatie\LaravelData\Attributes\MapName;
-use Spatie\LaravelData\Attributes\Validation\AfterOrEqual;
-use Spatie\LaravelData\Attributes\Validation\Enum;
-use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
-use Spatie\LaravelData\Optional;
-use App\Models\User; // Assuming the media will be associated with a User model
-use Illuminate\Http\UploadedFile;
+use Spatie\LaravelData\Attributes\Validation\Enum; // Assuming the media will be associated with a User model
+use Spatie\LaravelData\Attributes\Validation\AfterOrEqual;
 
 #[MapName(SnakeCaseMapper::class)]
 class UpdateLivestremData extends Data
@@ -19,7 +21,7 @@ class UpdateLivestremData extends Data
     public function __construct(
         public Optional|string $title,
         #[AfterOrEqual('today')]
-        public Optional|Carbon|null $scheduledTime,
+        public null|Carbon|Optional $scheduledTime,
         public Optional|UploadedFile $thumbnailPicture, // Now using UploadedFile for media handling
         #[Enum(LivestreamStatuses::class)]
         public LivestreamStatuses|Optional $status,
@@ -27,9 +29,6 @@ class UpdateLivestremData extends Data
 
     /**
      * Handle the file upload and associate it with a model.
-     *
-     * @param  \App\Models\User  $user
-     * @return void
      */
     public function handleMedia(User $user): void
     {

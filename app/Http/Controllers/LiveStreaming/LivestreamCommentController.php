@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\LiveStreaming;
 
-use App\Http\Controllers\Controller;
-use App\Models\Livestream;
-use App\Models\LivestreamComment;
 use App\Models\User;
-use Illuminate\Container\Attributes\CurrentUser;
+use App\Models\Livestream;
 use Illuminate\Http\Request;
+use App\Models\LivestreamComment;
+use App\Http\Controllers\Controller;
+use Illuminate\Container\Attributes\CurrentUser;
 
 class LivestreamCommentController extends Controller
 {

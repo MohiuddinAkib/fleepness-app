@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Livekit;
 
 use Livekit\Room;
@@ -61,10 +63,10 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      * automatically created when the first participant joins. This
      * method can be used to customize room settings.
      *
-     * @param  \Agence104\LiveKit\RoomCreateOptions  $createOptions
-     *                                                               The room create options.
-     * @return \Livekit\Room
-     *                       The Room object.
+     * @param  RoomCreateOptions  $createOptions
+     *                                            The room create options.
+     * @return Room
+     *              The Room object.
      */
     public function createRoom(RoomCreateOptions $createOptions): Room
     {
@@ -73,7 +75,7 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
 
         return $this->rpc->createRoom(
             $this->authHeader($videoGrant),
-            new createRoomRequest($createOptions->getData())
+            new CreateRoomRequest($createOptions->getData())
         );
     }
 
@@ -83,8 +85,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      * @param  array  $roomNames
      *                            The room names, when undefined or empty, list all rooms,
      *                            otherwise returns rooms with matching names.
-     * @return \Livekit\ListRoomsResponse
-     *                                    The ListRoomsResponse object.
+     * @return ListRoomsResponse
+     *                           The ListRoomsResponse object.
      */
     public function listRooms(array $roomNames = []): ListRoomsResponse
     {
@@ -104,8 +106,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *
      * @param  string  $roomName
      *                            The name of the room.
-     * @return \Livekit\DeleteRoomResponse
-     *                                     The ListRoomsResponse object.
+     * @return DeleteRoomResponse
+     *                            The ListRoomsResponse object.
      */
     public function deleteRoom(string $roomName): DeleteRoomResponse
     {
@@ -127,8 +129,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *                            The name of the room.
      * @param  string  $metadata
      *                            The new metadata for the room.
-     * @return \Livekit\Room
-     *                       The Room object.
+     * @return Room
+     *              The Room object.
      */
     public function updateRoomMetadata(string $roomName, string $metadata): Room
     {
@@ -150,8 +152,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *
      * @param  string  $roomName
      *                            The name of the room.
-     * @return \Livekit\ListParticipantsResponse
-     *                                           The ListParticipantsResponse object.
+     * @return ListParticipantsResponse
+     *                                  The ListParticipantsResponse object.
      */
     public function listParticipants(string $roomName): ListParticipantsResponse
     {
@@ -174,8 +176,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *                            The name of the room.
      * @param  string  $identity
      *                            The identity of the participant.
-     * @return \Livekit\ParticipantInfo
-     *                                  The ParticipantInfo object.
+     * @return ParticipantInfo
+     *                         The ParticipantInfo object.
      */
     public function getParticipant(string $roomName, string $identity): ParticipantInfo
     {
@@ -203,8 +205,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *                            The name of the room.
      * @param  string  $identity
      *                            The identity of the participant.
-     * @return \Livekit\RemoveParticipantResponse
-     *                                            The RemoveParticipantResponse object.
+     * @return RemoveParticipantResponse
+     *                                   The RemoveParticipantResponse object.
      */
     public function removeParticipant(string $roomName, string $identity): RemoveParticipantResponse
     {
@@ -235,8 +237,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *                            The identity of the participant.
      * @param  string  $destinationRoom
      *                                   The name of the destination room.
-     * @return \Livekit\ForwardParticipantResponse
-     *                                             The ForwardParticipantResponse object.
+     * @return ForwardParticipantResponse
+     *                                    The ForwardParticipantResponse object.
      */
     public function forwardParticipant(string $roomName, string $identity, string $destinationRoom): ForwardParticipantResponse
     {
@@ -268,8 +270,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *                            The identity of the participant.
      * @param  string  $destinationRoom
      *                                   The name of the destination room.
-     * @return \Livekit\MoveParticipantResponse
-     *                                          The MoveParticipantResponse object.
+     * @return MoveParticipantResponse
+     *                                 The MoveParticipantResponse object.
      */
     public function moveParticipant(string $roomName, string $identity, string $destinationRoom): MoveParticipantResponse
     {
@@ -300,8 +302,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      * @param  bool  $muted
      *                       The flag which defines if the track needs to be muted or not.
      *                       True to mute, false to unmute.
-     * @return \Livekit\MuteRoomTrackResponse
-     *                                        The MuteRoomTrackResponse object.
+     * @return MuteRoomTrackResponse
+     *                               The MuteRoomTrackResponse object.
      */
     public function mutePublishedTrack(string $roomName, string $identity, string $trackSid, bool $muted): MuteRoomTrackResponse
     {
@@ -329,15 +331,15 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *                            The identity of the participant.
      * @param  string|null  $metadata
      *                                 Optional, the metadata to update.
-     * @param  \Livekit\ParticipantPermission|null  $permission
-     *                                                           Optional, the new permissions to assign to the participant.
+     * @param  ParticipantPermission|null  $permission
+     *                                                  Optional, the new permissions to assign to the participant.
      * @param  string|null  $name
      *                             Optional, the display name to update.
      * @param  array|null  $attributes
      *                                  Optional, attributes to update.
      *                                  To delete attributes, set their value to empty string.
-     * @return \Livekit\ParticipantInfo
-     *                                  The ParticipantInfo object.
+     * @return ParticipantInfo
+     *                         The ParticipantInfo object.
      */
     public function updateParticipant(
         string $roomName,
@@ -376,8 +378,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      * @param  bool  $subscribe
      *                           The flag which defines if the tracks needs to be subscribed or not.
      *                           True to subscribe, false to unsubscribe.
-     * @return \Livekit\UpdateSubscriptionsResponse
-     *                                              The UpdateSubscriptionsResponse object.
+     * @return UpdateSubscriptionsResponse
+     *                                     The UpdateSubscriptionsResponse object.
      */
     public function updateSubscriptions(string $roomName, string $identity, array $trackSids, bool $subscribe): UpdateSubscriptionsResponse
     {
@@ -410,8 +412,8 @@ class RoomServiceClient extends BaseServiceClient implements RoomServiceClientCo
      *                                           leave blank to send the packet to everyone.
      * @param  string|null  $topic
      *                              Optional, topic for the packet.
-     * @return \Livekit\SendDataResponse
-     *                                   The SendDataResponse object.
+     * @return SendDataResponse
+     *                          The SendDataResponse object.
      */
     public function sendData(string $roomName, string $data, int $kind, array $destinationIdentities = [], ?string $topic = null): SendDataResponse
     {

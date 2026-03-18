@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Vendor;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Stock;
 use App\Models\MainOrder;
 use App\Models\OrderItem;
-use App\Models\Product;
-use App\Models\Stock;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 
 class VendorOrderController extends Controller
 {
@@ -28,8 +29,10 @@ class VendorOrderController extends Controller
     {
 
         $orderInfo = MainOrder::with('orderDetails', 'customerInfo', 'orderDetails.productInfo', 'orderDetails.productInfo.imagesProduct', 'orderDetails.stockInfo')->where('id', $request->id)->first();
+
         return view('vendor.order.details', compact('orderInfo'));
     }
+
     public function PendingToCancel($order_id)
     {
         MainOrder::findOrFail($order_id)->update([
@@ -45,11 +48,10 @@ class VendorOrderController extends Controller
             $product->save();
         }
 
-
-        $notification = array(
+        $notification = [
             'message' => 'Order Cancel Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         return redirect()->route('vendor.order.cancled')->with($notification);
     }
@@ -58,34 +60,36 @@ class VendorOrderController extends Controller
     {
         MainOrder::findOrFail($order_id)->update(['status' => 'confirm', 'confirmed_date' => Carbon::now()->format('d F Y')]);
 
-        $notification = array(
+        $notification = [
             'message' => 'Order Confirm Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         return redirect()->route('vendor.order.confirmed')->with($notification);
     }
+
     public function PendingOrder()
     {
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'pending')->orderBy('id', 'DESC')->get();
 
         $countOrder = MainOrder::where('status', 'pending')->count('id');
+
         return view('vendor.order.pending', compact('orderList', 'countOrder'));
     }
+
     public function ConfirmedOrder()
     {
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'confirm')->orderBy('id', 'DESC')->get();
 
-
         return view('vendor.order.confirm', compact('orderList'));
     }
+
     public function ProcessingOrder()
     {
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'processing')->orderBy('id', 'DESC')->get();
-
 
         return view('vendor.order.processing', compact('orderList'));
     }
@@ -95,7 +99,6 @@ class VendorOrderController extends Controller
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'ready')->orderBy('id', 'DESC')->get();
 
-
         return view('vendor.order.ready', compact('orderList'));
     }
 
@@ -103,7 +106,6 @@ class VendorOrderController extends Controller
     {
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'shipped')->orderBy('id', 'DESC')->get();
-
 
         return view('vendor.order.shipped', compact('orderList'));
     }
@@ -113,33 +115,33 @@ class VendorOrderController extends Controller
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'deliverd')->orderBy('id', 'DESC')->get();
 
-
         return view('vendor.order.delivered', compact('orderList'));
     }
+
     public function completedOrder()
     {
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'deliverd')->where('payment_status', 'received')->orderBy('id', 'DESC')->get();
+
         return view('vendor.order.completed', compact('orderList'));
     }
+
     public function CancledOrder()
     {
 
         $orderList = MainOrder::with('customerInfo')->where('vendor_id', auth()->id())->where('status', 'cancel')->orderBy('id', 'DESC')->get();
 
-
         return view('vendor.order.cancle', compact('orderList'));
     }
-
 
     public function ConfirmToProcess($order_id)
     {
         MainOrder::findOrFail($order_id)->update(['status' => 'processing', 'processing_date' => Carbon::now()->format('d F Y')]);
 
-        $notification = array(
+        $notification = [
             'message' => 'Order Processing Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         return redirect()->route('vendor.order.processing')->with($notification);
     }
@@ -147,13 +149,12 @@ class VendorOrderController extends Controller
     public function ProcessToDelivered($order_id)
     {
 
-
         MainOrder::findOrFail($order_id)->update(['status' => 'deliverd', 'delivered_date' => Carbon::now()]);
 
-        $notification = array(
+        $notification = [
             'message' => 'Order Deliverd Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         return redirect()->route('vendor.order.delivered')->with($notification);
     }
@@ -161,17 +162,15 @@ class VendorOrderController extends Controller
     public function ProcessToReadyToShip($order_id)
     {
 
-
         MainOrder::findOrFail($order_id)->update(['status' => 'ready']);
 
-        $notification = array(
+        $notification = [
             'message' => 'Order is Ready to Ship',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         return redirect()->route('vendor.order.ready')->with($notification);
     }
-
 
     public function AdminInvoiceDownload($order_id)
     {
@@ -186,6 +185,7 @@ class VendorOrderController extends Controller
             'isRemoteEnabled' => true,
             'defaultFont' => 'DejaVu Sans',
         ]);
-        return $pdf->download($order->invoice_no . '.pdf');
+
+        return $pdf->download($order->invoice_no.'.pdf');
     }
 }

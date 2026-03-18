@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\LiveStreaming;
 
 use Closure;
 use App\Models\User;
 use App\Models\Livestream;
 use Illuminate\Http\Request;
+use App\Models\LivestreamLike;
+use App\Models\LivestreamSave;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller;
@@ -18,6 +22,7 @@ use Illuminate\Support\Facades\Pipeline;
 use App\Http\Resources\LivestreamResource;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Container\Attributes\CurrentUser;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Notifications\LivestreamLikeCountChangedNotification;
 
@@ -42,7 +47,7 @@ class LivestreamController extends Controller
 
     public function myLivestreams()
     {
-        $livestreams = \App\Models\Livestream::query()
+        $livestreams = Livestream::query()
             ->where('vendor_id', Auth::id())
             ->oldest()
             ->cursorPaginate();
@@ -92,7 +97,7 @@ class LivestreamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Livestream $ls): \Illuminate\Http\Resources\Json\JsonResource
+    public function show(Livestream $ls): JsonResource
     {
         $livestream = $ls->load(['livestreamProducts', 'comments', 'likes']);
 
@@ -102,10 +107,10 @@ class LivestreamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLivestremData $updateLivestremData, $livestreamId): \Illuminate\Http\Resources\Json\JsonResource
+    public function update(UpdateLivestremData $updateLivestremData, $livestreamId): JsonResource
     {
         /** @var Livestream */
-        $livestream = \App\Models\Livestream::query()->find($livestreamId);
+        $livestream = Livestream::query()->find($livestreamId);
         $livestream->fill($updateLivestremData->except('status')->toArray());
 
         Pipeline::send($updateLivestremData)
@@ -150,9 +155,9 @@ class LivestreamController extends Controller
     {
         $userId = Auth::id();
 
-        $livestream = \App\Models\Livestream::query()->findOrFail($id);
+        $livestream = Livestream::query()->findOrFail($id);
 
-        $like = \App\Models\LivestreamLike::query()
+        $like = LivestreamLike::query()
             ->where('user_id', $userId)
             ->where('livestream_id', $livestream->id)
             ->first();
@@ -163,7 +168,7 @@ class LivestreamController extends Controller
             $message = 'Livestream unliked successfully';
 
         } else {
-            \App\Models\LivestreamLike::query()
+            LivestreamLike::query()
                 ->create([
                     'user_id' => $userId,
                     'livestream_id' => $livestream->id,
@@ -183,9 +188,9 @@ class LivestreamController extends Controller
     {
         $userId = Auth::id();
 
-        $livestream = \App\Models\Livestream::query()->findOrFail($id);
+        $livestream = Livestream::query()->findOrFail($id);
 
-        $save = \App\Models\LivestreamSave::query()->where('user_id', $userId)
+        $save = LivestreamSave::query()->where('user_id', $userId)
             ->where('livestream_id', $livestream->id)
             ->first();
 
@@ -194,7 +199,7 @@ class LivestreamController extends Controller
 
             return response()->json(['message' => 'Livestream unsaved successfully'], 200);
         } else {
-            \App\Models\LivestreamSave::query()->create([
+            LivestreamSave::query()->create([
                 'user_id' => $userId,
                 'livestream_id' => $livestream->id,
             ]);
@@ -207,10 +212,10 @@ class LivestreamController extends Controller
     {
         $userId = Auth::id();
 
-        $likedLivestreamIds = \App\Models\LivestreamLike::query()->where('user_id', $userId)
+        $likedLivestreamIds = LivestreamLike::query()->where('user_id', $userId)
             ->pluck('livestream_id');
 
-        $likedLivestreams = \App\Models\Livestream::query()->select('id', 'title', 'vendor_id')
+        $likedLivestreams = Livestream::query()->select('id', 'title', 'vendor_id')
             ->with([
                 'vendor:id,shop_name,cover_image',
             ])
@@ -239,10 +244,10 @@ class LivestreamController extends Controller
     {
         $userId = Auth::id();
 
-        $savedLivestreamIds = \App\Models\LivestreamSave::query()->where('user_id', $userId)
+        $savedLivestreamIds = LivestreamSave::query()->where('user_id', $userId)
             ->pluck('livestream_id');
 
-        $savedLivestreams = \App\Models\Livestream::query()->select('id', 'title', 'vendor_id')
+        $savedLivestreams = Livestream::query()->select('id', 'title', 'vendor_id')
             ->with([
                 'vendor:id,shop_name,cover_image',
             ])
@@ -273,7 +278,7 @@ class LivestreamController extends Controller
 
     public function getLikesCount($id)
     {
-        $livestream = \App\Models\Livestream::query()->findOrFail($id);
+        $livestream = Livestream::query()->findOrFail($id);
 
         $likesCount = $livestream->likes()->count();
 

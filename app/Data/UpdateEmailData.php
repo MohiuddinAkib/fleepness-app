@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Data;
 
-use Spatie\LaravelData\Attributes\Validation\Email;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Attributes\Validation\Email;
 
 class UpdateEmailData extends Data
 {
@@ -11,6 +13,5 @@ class UpdateEmailData extends Data
         public string $otp,
         #[Email]
         public string $email,
-    ) {
-    }
+    ) {}
 }

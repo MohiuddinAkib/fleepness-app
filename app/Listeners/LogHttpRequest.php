@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listeners;
 
 use const JSON_ERROR_NONE;
@@ -56,7 +58,7 @@ class LogHttpRequest
     /**
      * Determine if the content is within the set limits.
      *
-     * @param  string $content
+     * @param  string  $content
      * @return bool
      */
     public function contentWithinLimits($content)
@@ -69,7 +71,7 @@ class LogHttpRequest
     /**
      * Determine if the request should be ignored based on its method.
      *
-     * @param  mixed $event
+     * @param  mixed  $event
      * @return bool
      */
     protected function shouldIgnoreHttpMethod($event)
@@ -83,7 +85,7 @@ class LogHttpRequest
     /**
      * Determine if the request should be ignored based on its status code.
      *
-     * @param  mixed $event
+     * @param  mixed  $event
      * @return bool
      */
     protected function shouldIgnoreStatusCode($event)
@@ -97,7 +99,7 @@ class LogHttpRequest
     /**
      * Format the given headers.
      *
-     * @param  array $headers
+     * @param  array  $headers
      * @return array
      */
     protected function headers($headers)
@@ -114,7 +116,7 @@ class LogHttpRequest
     /**
      * Format the given payload.
      *
-     * @param  array $payload
+     * @param  array  $payload
      * @return array
      */
     protected function payload($payload)
@@ -127,8 +129,8 @@ class LogHttpRequest
     /**
      * Hide the given parameters.
      *
-     * @param  array $data
-     * @param  array $hidden
+     * @param  array  $data
+     * @param  array  $hidden
      * @return mixed
      */
     protected function hideParameters($data, $hidden)
@@ -165,7 +167,7 @@ class LogHttpRequest
         }
 
         if ($response instanceof RedirectResponse) {
-            return 'Redirected to ' . $response->getTargetUrl();
+            return 'Redirected to '.$response->getTargetUrl();
         }
 
         if ($response instanceof Response && $response->getOriginalContent() instanceof View) {
@@ -185,7 +187,7 @@ class LogHttpRequest
     /**
      * Extract the data from the given view in array form.
      *
-     * @param  \Illuminate\View\View $view
+     * @param  View  $view
      * @return array
      */
     protected function extractDataFromView($view)
@@ -226,7 +228,7 @@ class LogHttpRequest
         array_walk_recursive($files, static function (&$file): void {
             $file = [
                 'name' => $file->getClientOriginalName(),
-                'size' => $file->isFile() ? ($file->getSize() / 1_000) . 'KB' : '0',
+                'size' => $file->isFile() ? ($file->getSize() / 1_000).'KB' : '0',
             ];
         });
 
