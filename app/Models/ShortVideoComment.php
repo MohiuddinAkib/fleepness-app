@@ -5,25 +5,26 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\LivestreamSaveFactory;
+use Database\Factories\ShortVideoCommentFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class LivestreamSave extends Model
+class ShortVideoComment extends Model
 {
-    /** @use HasFactory<LivestreamSaveFactory> */
+    /** @use HasFactory<ShortVideoCommentFactory> */
     use HasFactory;
 
     /** @var list<string> */
     protected $fillable = [
-        'livestream_id',
+        'short_video_id',
         'user_id',
+        'comment',
     ];
 
-    /** @return BelongsTo<Livestream, $this> */
-    public function livestream(): BelongsTo
+    /** @return BelongsTo<ShortVideo, $this> */
+    public function shortVideo(): BelongsTo
     {
-        return $this->belongsTo(Livestream::class);
+        return $this->belongsTo(ShortVideo::class);
     }
 
     /** @return BelongsTo<User, $this> */

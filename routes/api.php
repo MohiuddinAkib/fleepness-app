@@ -20,7 +20,11 @@ use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Auth\DeviceTokenController;
 use App\Http\Controllers\Me\VendorProfileController;
 use App\Http\Controllers\Me\PaymentAccountController;
+use App\Http\Controllers\Public\LivestreamController;
+use App\Http\Controllers\Public\ShortVideoController;
 use App\Http\Controllers\Public\DeliveryOptionController;
+use App\Http\Controllers\Me\LivestreamController as MeLivestreamController;
+use App\Http\Controllers\Me\ShortVideoController as MeShortVideoController;
 use App\Http\Controllers\Vendor\ProductController as VendorProductController;
 
 // Auth
@@ -107,6 +111,30 @@ Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
     Route::get('me/vendor-orders/{vendorOrder}', [VendorOrderController::class, 'show']);
     Route::patch('me/vendor-orders/{vendorOrder}/accept', [VendorOrderController::class, 'accept']);
     Route::patch('me/vendor-orders/{vendorOrder}/reject', [VendorOrderController::class, 'reject']);
+
+    // Short videos (vendor CRUD + engagement)
+    Route::get('me/short-videos', [MeShortVideoController::class, 'index']);
+    Route::post('me/short-videos', [MeShortVideoController::class, 'store']);
+    Route::patch('me/short-videos/{shortVideo}', [MeShortVideoController::class, 'update']);
+    Route::delete('me/short-videos/{shortVideo}', [MeShortVideoController::class, 'destroy']);
+
+    // Short video engagement (auth required)
+    Route::post('short-videos/{shortVideo}/comments', [ShortVideoController::class, 'storeComment']);
+    Route::delete('short-videos/{shortVideo}/comments/{comment}', [ShortVideoController::class, 'destroyComment']);
+    Route::post('short-videos/{shortVideo}/like', [ShortVideoController::class, 'like']);
+    Route::post('short-videos/{shortVideo}/save', [ShortVideoController::class, 'save']);
+
+    // Livestreams (vendor CRUD + engagement)
+    Route::get('me/livestreams', [MeLivestreamController::class, 'index']);
+    Route::post('me/livestreams', [MeLivestreamController::class, 'store']);
+    Route::patch('me/livestreams/{livestream}', [MeLivestreamController::class, 'update']);
+    Route::delete('me/livestreams/{livestream}', [MeLivestreamController::class, 'destroy']);
+
+    // Livestream engagement (auth required)
+    Route::post('livestreams/{livestream}/comments', [LivestreamController::class, 'storeComment']);
+    Route::delete('livestreams/{livestream}/comments/{comment}', [LivestreamController::class, 'destroyComment']);
+    Route::post('livestreams/{livestream}/like', [LivestreamController::class, 'like']);
+    Route::post('livestreams/{livestream}/save', [LivestreamController::class, 'save']);
 });
 
 // Public routes
@@ -127,3 +155,13 @@ Route::get('sections', [SectionController::class, 'index']);
 Route::get('sliders', [SectionController::class, 'sliders']);
 
 Route::get('delivery-options', [DeliveryOptionController::class, 'index']);
+
+// Short videos (public)
+Route::get('short-videos', [ShortVideoController::class, 'index']);
+Route::get('short-videos/{shortVideo}', [ShortVideoController::class, 'show']);
+Route::get('short-videos/{shortVideo}/comments', [ShortVideoController::class, 'comments']);
+
+// Livestreams (public)
+Route::get('livestreams', [LivestreamController::class, 'index']);
+Route::get('livestreams/{livestream}', [LivestreamController::class, 'show']);
+Route::get('livestreams/{livestream}/comments', [LivestreamController::class, 'comments']);
