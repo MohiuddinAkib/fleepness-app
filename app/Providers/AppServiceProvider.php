@@ -25,9 +25,10 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Broadcasting\BroadcastManager;
 use Illuminate\Concurrency\ConcurrencyManager;
+use App\Support\Concurrency\Drivers\OctaneDriver;
 use App\Support\Notification\Channels\SmsChannel;
-use App\Support\Notification\Channels\FcmTopicChannel;
 use App\Support\Notification\Channels\FcmDeviceChannel;
 use Illuminate\Support\Stringable as SupportStringable;
 
@@ -44,10 +45,6 @@ class AppServiceProvider extends ServiceProvider
                 return $app->make(FcmDeviceChannel::class);
             });
 
-            $service->extend('fcm-topic', function (Application $app) {
-                return $app->make(FcmTopicChannel::class);
-            });
-
             $service->extend('sms', function (Application $app) {
                 return $app->make(SmsChannel::class);
             });
@@ -55,13 +52,13 @@ class AppServiceProvider extends ServiceProvider
 
         Concurrency::resolved(function (ConcurrencyManager $service): void {
             $service->extend('octane', function (Application $app, $config) {
-                return $app->make(\App\Support\Concurrency\Drivers\OctaneDriver::class, [
+                return $app->make(OctaneDriver::class, [
                     'config' => $config,
                 ]);
             });
         });
 
-        Broadcast::resolved(function (\Illuminate\Broadcasting\BroadcastManager $service): void {
+        Broadcast::resolved(function (BroadcastManager $service): void {
             $service->extend('fcm', function (Application $app, array $config) {
                 return $app->make(FcmBroadcaster::class);
             });
@@ -125,10 +122,10 @@ class AppServiceProvider extends ServiceProvider
                 })
                 ->value();
 
-            $randomNumber = mt_rand(10000, 99999); 
-            return $prefix . $randomNumber;
-        });
+            $randomNumber = mt_rand(10000, 99999);
 
+            return $prefix.$randomNumber;
+        });
 
         context()->hydrated(static function (Repository $context): void {
             if ($context->has('traceId') && $traceId = $context->get('traceId')) {
