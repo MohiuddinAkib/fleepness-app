@@ -27,6 +27,18 @@ return Response::json($data, HttpResponse::HTTP_CREATED);
 abort_unless($condition, HttpResponse::HTTP_FORBIDDEN);
 ```
 
+## Migration Foreign Keys
+
+Always use `$table->foreignIdFor(Model::class)->constrained()->cascadeOnDelete()` instead of `$table->foreignId('user_id')->constrained()->cascadeOnDelete()`. This ties the column name to the model class, avoiding typos and keeping migrations consistent with the actual model.
+
+```php
+// ✅ Correct
+$table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+
+// ❌ Avoid
+$table->foreignId('user_id')->constrained()->cascadeOnDelete();
+```
+
 ## HTTP Client
 
 - Use `Http::macro()` to integrate third-party API services rather than instantiating custom HTTP clients manually.

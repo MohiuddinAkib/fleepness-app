@@ -5,21 +5,19 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\VendorReviewFactory;
+use Database\Factories\VendorFollowerFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class VendorReview extends Model
+class VendorFollower extends Model
 {
-    /** @use HasFactory<VendorReviewFactory> */
+    /** @use HasFactory<VendorFollowerFactory> */
     use HasFactory;
 
     /** @var list<string> */
     protected $fillable = [
-        'vendor_profile_id',
         'user_id',
-        'rating',
-        'comment',
+        'vendor_profile_id',
     ];
 
     /** @return BelongsTo<User, $this> */

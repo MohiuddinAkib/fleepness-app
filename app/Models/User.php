@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Support\Notification\Contracts\SupportsFcmChannel;
 use App\Support\Notification\Contracts\FcmNotifiableByDevice;
 use App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice;
@@ -142,5 +143,12 @@ class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, Fc
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    /** @return BelongsToMany<VendorProfile, $this> */
+    public function following(): BelongsToMany
+    {
+        return $this->belongsToMany(VendorProfile::class, 'vendor_followers', 'user_id', 'vendor_profile_id')
+            ->withTimestamps();
     }
 }

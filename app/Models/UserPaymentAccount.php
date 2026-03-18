@@ -4,38 +4,29 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Database\Factories\AddressFactory;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\UserPaymentAccountFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Address extends Model
+class UserPaymentAccount extends Model
 {
-    /** @use HasFactory<AddressFactory> */
+    /** @use HasFactory<UserPaymentAccountFactory> */
     use HasFactory;
 
     /** @var list<string> */
     protected $fillable = [
         'user_id',
-        'label',
-        'formatted_address',
-        'address_line_1',
-        'address_line_2',
-        'area',
-        'city',
-        'postal_code',
-        'latitude',
-        'longitude',
-        'is_default',
+        'payment_method_id',
+        'account_number',
+        'is_primary',
     ];
 
     /** @return array<string, string> */
     protected function casts(): array
     {
         return [
-            'is_default' => 'boolean',
-            'latitude' => 'decimal:7',
-            'longitude' => 'decimal:7',
+            'is_primary' => 'boolean',
         ];
     }
 
@@ -43,5 +34,11 @@ class Address extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /** @return BelongsTo<PaymentMethod, $this> */
+    public function paymentMethod(): BelongsTo
+    {
+        return $this->belongsTo(PaymentMethod::class);
     }
 }
