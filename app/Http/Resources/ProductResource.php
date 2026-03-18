@@ -3,16 +3,18 @@
 namespace App\Http\Resources;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property Product $resource
- *
  * @mixin Product
  */
 class ProductResource extends JsonResource
 {
-    public function toArray($request)
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
     {
         return [
             $this->getKeyName() => $this->getKey(),
@@ -29,7 +31,6 @@ class ProductResource extends JsonResource
             'deleted_at' => $this->deleted_at,
             'status' => $this->status,
             'admin_approval' => $this->admin_approval,
-            'description' => $this->long_description,
             'reviews' => $this->reviews,
             'time' => $this->time,
             'discount' => $this->discount,

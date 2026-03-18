@@ -176,7 +176,7 @@ Route::middleware(['api', 'throttle:api'])->group(function (): void {
     Route::middleware('auth:sanctum')->group(function (): void {
         Route::post('/cart', [CartController::class, 'addOrUpdate']);
         Route::get('/cart', [CartController::class, 'index']);
-        Route::delete('/cart/{item}', [CartController::class, 'destroy']);
+        Route::delete('/cart/{cartItem}', [CartController::class, 'destroy']);
         Route::get('/cart/summary', [CartController::class, 'summary']);
 
         Route::get('/orders', [OrderController::class, 'index']);
@@ -185,7 +185,7 @@ Route::middleware(['api', 'throttle:api'])->group(function (): void {
 
         Route::get('/my-orders', [OrderController::class, 'MyOrders']);
         Route::get('/my-orders/search', [OrderController::class, 'searchOrderById']);
-        Route::get('/my-order/{id}', [OrderController::class, 'myOrderDetail']);
+        Route::get('/my-order/{order}', [OrderController::class, 'myOrderDetail']);
         Route::get('/my-store-orders', [OrderController::class, 'MyStoreOrders']);
 
         Route::get('/seller/orders', [OrderController::class, 'sellerOrders']);

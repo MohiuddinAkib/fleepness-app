@@ -2,159 +2,103 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\CartItem;
+use App\Models\User;
 use App\Models\Product;
-use Illuminate\Validation\Rule;
-use App\Models\DeliveryModel;
+use App\Models\CartItem;
 use App\Models\ProductSize;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use App\Models\DeliveryModel;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CartItemResource;
+use App\Data\Dto\AddOrUpdateCartItemData;
+use Illuminate\Container\Attributes\CurrentUser;
 
 class CartController extends Controller
 {
-    use AuthorizesRequests;
-
-    public function addOrUpdate(Request $request)
+    public function addOrUpdate(AddOrUpdateCartItemData $data, #[CurrentUser] User $user): JsonResponse
     {
-        try {
-            $productId = $request->input('product_id');
-            $hasSizes  = $productId ? ProductSize::where('product_id', $productId)->exists() : false;
+        $product = Product::findOrFail($data->productId);
 
-            $sizeRules = [
-                Rule::exists('product_sizes', 'id')->where(fn ($q) =>
-                    $q->where('product_id', $productId)
-                ),
-            ];
-            array_unshift($sizeRules, $hasSizes ? 'required' : 'nullable');
+        if ($data->quantity > $product->quantity) {
+            return response()->json(['message' => 'Quantity exceeds available stock.'], 400);
+        }
 
-            $validated = $request->validate([
-                'product_id' => ['required', 'exists:products,id'],
-                'quantity'   => ['required', 'integer', 'min:1'],
-                'size_id'    => $sizeRules,
-            ], [
-                'size_id.required' => 'Please select a size for this product.',
-            ]);
+        $hasSizes = ProductSize::where('product_id', $data->productId)->exists();
 
-            $user = Auth::user();
-            $product = Product::findOrFail($request->product_id);
-
-            if ($request->quantity <= 0) {
-                return response()->json(['message' => 'Quantity must be greater than zero.'], 400);
-            }
-
-            if ($request->quantity > $product->quantity) {
-                return response()->json(['message' => 'Quantity exceeds available stock.'], 400);
-            }
-
-            $cartItem = CartItem::updateOrCreate(
-                [
-                    'user_id' => $user->id,
-                    'product_id' => $product->id,
-                    'size_id' => $request->size_id,
-                ],
-                [
-                    'quantity' => $request->quantity,
-                    'selected' => true,
-                ]
-            );
-
-            return response()->json([
-                'message' => 'Cart item created or updated',
-                'cart_item' => [
-                    'id' => $cartItem->id,
-                    'product_id' => $cartItem->product_id,
-                    'size_id' => $cartItem->size_id,
-                    'quantity' => $cartItem->quantity,
-                ]
-            ]);
-
-        } catch (ValidationException $e) {
+        if ($hasSizes && blank($data->sizeId)) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $e->errors()
+                'errors' => ['size_id' => ['Please select a size for this product.']],
             ], 422);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went wrong',
-                'error' => $e->getMessage()
-            ], 500);
         }
-    }
 
-    public function index(Request $request)
-    {
-        $user = Auth::user();
+        $cartItem = CartItem::updateOrCreate(
+            [
+                'user_id' => $user->getKey(),
+                'product_id' => $data->productId,
+                'size_id' => $data->sizeId,
+            ],
+            [
+                'quantity' => $data->quantity,
+                'selected' => true,
+            ]
+        );
 
-        $cartItems = CartItem::with(['product.firstImage', 'size'])->where('user_id', $user->id)->get();
+        $cartItem->load(['product.images', 'size']);
 
         return response()->json([
-            'cart_items' => $cartItems->map(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'product' => [
-                        'id' => $item->product->id,
-                        'name' => $item->product->name,
-                        'store' => $item->product->user->name,
-                        'price' => $item->product->discount_price ?? $item->product->selling_price,
-                        'image_url' => $item->product->images,
-                        'description' => $item->product->short_description,
-                    ],
-                    'size' => $item->size_id ? [
-                        'id' => $item->size->id,
-                        'name' => $item->size->size_name,
-                        'value' => $item->size->size_value,
-                    ] : null,
-                    'quantity' => $item->quantity,
-                ];
-            }),
+            'message' => 'Cart item created or updated',
+            'cart_item' => CartItemResource::make($cartItem),
         ]);
     }
 
-
-    public function destroy($id)
+    public function index(#[CurrentUser] User $user): JsonResponse
     {
-        $authUserId = Auth::id();
-        $item = CartItem::findOrFail($id);
-        if ($authUserId !== $item->user_id) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        $cartItems = CartItem::with(['product.images', 'size'])
+            ->where('user_id', $user->getKey())
+            ->get();
 
-        $item->delete();
+        return response()->json([
+            'cart_items' => CartItemResource::collection($cartItems),
+        ]);
+    }
+
+    public function destroy(CartItem $cartItem, #[CurrentUser] User $user): JsonResponse
+    {
+        abort_unless($cartItem->user_id === $user->getKey(), 403, 'Unauthorized');
+
+        $cartItem->delete();
 
         return response()->json(['message' => 'Item removed from cart']);
     }
 
-    public function summary(Request $request)
+    public function summary(Request $request, #[CurrentUser] User $user): JsonResponse
     {
-        $user = Auth::user();
-        $deliveryModelId = $request->query('delivery_model_id', 1); 
+        $deliveryModelId = $request->query('delivery_model_id', 1);
         $deliveryModel = DeliveryModel::find($deliveryModelId) ?? DeliveryModel::find(1);
 
         $selectedItems = CartItem::with('product')
-            ->where('user_id', $user->id)
+            ->where('user_id', $user->getKey())
             ->where('selected', true)
             ->get();
 
-        $itemTotal = $selectedItems->sum(function ($item) {
+        $itemTotal = $selectedItems->sum(function (CartItem $item): float {
             $price = $item->product->discount_price ?? $item->product->selling_price;
+
             return $price * $item->quantity;
         });
 
-        $platformFee = 30;  
-        $vatFee = 15;       
-        $deliveryFee = $deliveryModel->fee ?? 0;
-
-        $grandTotal = $itemTotal + $platformFee + $vatFee + $deliveryFee;
+        $platformFee = 30;
+        $vatFee = 15;
+        $deliveryFee = $deliveryModel?->fee ?? 0;
 
         return response()->json([
             'item_total' => $itemTotal,
             'delivery_fee' => $deliveryFee,
             'platform_fee' => $platformFee,
             'vat_fee' => $vatFee,
-            'grand_total' => $grandTotal,
+            'grand_total' => $itemTotal + $platformFee + $vatFee + $deliveryFee,
         ]);
     }
 }

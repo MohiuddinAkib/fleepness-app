@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fee;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\CartItem;
 use App\Models\SellerOrder;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\DeliveryModel;
 use Illuminate\Http\Response;
 use App\Models\SellerOrderItem;
+use App\Data\Dto\StoreOrderData;
 use App\Enums\SellerOrderStatus;
-use App\Models\DeliveryModel;
-use App\Models\Fee;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\OrderResource;
+use App\Http\Resources\SellerOrderResource;
 use Illuminate\Container\Attributes\CurrentUser;
+use Illuminate\Contracts\Database\Query\Builder;
 
 class OrderController extends Controller
 {
-    public function store(Request $request, #[CurrentUser()] User $user)
+    public function store(StoreOrderData $data, #[CurrentUser()] User $user): JsonResponse
     {
         $fee = Fee::query()->first();
 
@@ -31,11 +36,7 @@ class OrderController extends Controller
             return response()->json(['message' => 'No items selected in cart.'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $deliveryModel = DeliveryModel::query()->find($request->delivery_model_id);
-
-        if (! $deliveryModel) {
-            return response()->json(['message' => 'Invalid delivery model.'], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        $deliveryModel = DeliveryModel::query()->findOrFail($data->deliveryModelId);
 
         DB::beginTransaction();
 
@@ -51,9 +52,7 @@ class OrderController extends Controller
             $order->is_multi_seller = $isMultiSeller;
             $order->total_sellers = $uniqueSellerCount;
             $order->delivery_model = $deliveryModel->id;
-
             $order->delivery_fee = $deliveryModel->fee * $uniqueSellerCount;
-
             $order->product_cost = 0;
             $order->commission = 0;
             $order->platform_fee = 0;
@@ -109,9 +108,7 @@ class OrderController extends Controller
                 $sellerOrder->product_cost = $sellerTotal;
                 $sellerOrder->commission = $sellerTotal * ($fee->commission / 100);
                 $sellerOrder->vat = $sellerTotal * ($fee->vat / 100);
-
                 $sellerOrder->delivery_fee = $order->delivery_fee / $uniqueSellerCount;
-
                 $sellerOrder->save();
 
                 $sellerOrder->notifySellerAboutNewOrderFromBuyer();
@@ -123,52 +120,43 @@ class OrderController extends Controller
             $order->commission = $orderProductCost * ($fee->commission / 100);
             $order->platform_fee = $fee->platform_fee;
             $order->vat = $orderProductCost * ($fee->vat / 100);
-
             $order->grand_total = $orderProductCost
                 + (float) $order->delivery_fee
                 + (float) $order->platform_fee
                 + (float) $order->vat;
             $order->save();
 
-            CartItem::query()->where('user_id', $userId)
-                ->where('selected', 1)
-                ->delete();
+            CartItem::query()->where('user_id', $userId)->where('selected', 1)->delete();
 
             DB::commit();
 
             $order->load([
-                'sellerOrders.items.product',
+                'sellerOrders.items.product.images',
                 'sellerOrders.seller',
+                'user.defaultAddress',
             ]);
-
-            $user->load('defaultAddress');
 
             return response()->json([
                 'message' => 'Order created successfully',
-                'order' => $order,
-                'default_address' => $user->defaultAddress,
-            ], 201);
+                'order' => OrderResource::make($order),
+            ], Response::HTTP_CREATED);
         } catch (\Throwable $e) {
             DB::rollBack();
 
             return response()->json([
                 'message' => 'Failed to create order',
                 'error' => $e->getMessage(),
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function sellerOrders(#[CurrentUser()] User $seller, Request $request)
+    public function sellerOrders(#[CurrentUser()] User $seller, Request $request): JsonResponse
     {
-
         $query = SellerOrder::with([
-            'items' => function ($q) {
-                $q->with(['product:id,name,selling_price,discount_price', 'product.images:id,product_id,path']);
-            },
-            'customer:id,name,phone_number,email',
-            'customer.defaultAddress'
-        ])
-            ->where('seller_id', $seller->getKey());
+            'items.product.images',
+            'customer',
+            'customer.defaultAddress',
+        ])->where('seller_id', $seller->getKey());
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -176,16 +164,15 @@ class OrderController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-
             $numericPart = preg_replace('/[^0-9]/', '', $search);
 
-            $query->where(function ($q) use ($search, $numericPart) {
+            $query->where(function ($q) use ($search, $numericPart): void {
                 $q->where('seller_order_code', 'like', "%{$search}%")
                     ->orWhere('seller_order_code', 'like', "%{$numericPart}%")
-                    ->orWhereHas('items.product', function ($q2) use ($search) {
+                    ->orWhereHas('items.product', function ($q2) use ($search): void {
                         $q2->where('name', 'like', "%{$search}%");
                     })
-                    ->orWhereHas('customer', function ($q3) use ($search) {
+                    ->orWhereHas('customer', function ($q3) use ($search): void {
                         $q3->where('phone_number', 'like', "%{$search}%");
                     });
             });
@@ -195,41 +182,39 @@ class OrderController extends Controller
 
         return response()->json([
             'message' => 'Seller orders retrieved successfully',
-            'data' => $orders,
+            'data' => SellerOrderResource::collection($orders),
         ]);
     }
 
-    public function MyOrders(Request $request, #[CurrentUser()] User $user)
+    public function MyOrders(Request $request, #[CurrentUser()] User $user): JsonResponse
     {
         $status = $request->enum('status', SellerOrderStatus::class);
 
         $orders = Order::with([
-             'sellerOrders' => function ($q) {
-                $q->with(['seller:id,shop_name,shop_category,banner_image,cover_image']);
-            },
+            'sellerOrders.seller',
         ])
             ->where('user_id', $user->getKey())
             ->latest()
             ->when($status?->isDelivered())
-            ->whereHas('sellerOrders', function (\Illuminate\Contracts\Database\Query\Builder $q): void {
+            ->whereHas('sellerOrders', function (Builder $q): void {
                 $q->where('status', SellerOrderStatus::Delivered);
             })
             ->when($status?->isActive())
-            ->whereHas('sellerOrders', function (\Illuminate\Contracts\Database\Query\Builder $q): void {
+            ->whereHas('sellerOrders', function (Builder $q): void {
                 $q->whereNotIn('status', [SellerOrderStatus::Delivered, SellerOrderStatus::Rejected]);
             })
-            ->when($status?->isActive())->whereHas('sellerOrders', function (\Illuminate\Contracts\Database\Query\Builder $q): void {
+            ->when($status?->isActive())->whereHas('sellerOrders', function (Builder $q): void {
                 $q->where('status', SellerOrderStatus::Rejected);
             })
             ->paginate(10);
 
         return response()->json([
             'message' => 'Orders retrieved successfully',
-            'data' => $orders,
+            'data' => OrderResource::collection($orders),
         ]);
     }
 
-    public function MyStoreOrders(Request $request, #[CurrentUser()] User $seller)
+    public function MyStoreOrders(Request $request, #[CurrentUser()] User $seller): JsonResponse
     {
         $search = $request->query('search');
         $status = $request->enum('status', SellerOrderStatus::class);
@@ -240,7 +225,7 @@ class OrderController extends Controller
             ->when(filled($status))
             ->where('status', $status)
             ->when(filled($search))
-            ->whereHas('customer', function (\Illuminate\Contracts\Database\Query\Builder $query) use ($search): void {
+            ->whereHas('customer', function (Builder $query) use ($search): void {
                 $query->whereLike('name', "%{$search}%")
                     ->orWhereLike('phone_number', "%{$search}%");
             })
@@ -248,11 +233,11 @@ class OrderController extends Controller
 
         return response()->json([
             'message' => 'Store orders retrieved successfully',
-            'data' => $orders,
+            'data' => SellerOrderResource::collection($orders),
         ]);
     }
 
-    public function searchOrderById(Request $request, #[CurrentUser()] User $user)
+    public function searchOrderById(Request $request, #[CurrentUser()] User $user): JsonResponse
     {
         $search = $request->query('order_code');
 
@@ -263,9 +248,9 @@ class OrderController extends Controller
 
         $numericPart = preg_replace('/[^0-9]/', '', $search);
 
-        $order = Order::with(['sellerOrders'])
+        $order = Order::with(['sellerOrders.items.product', 'sellerOrders.seller'])
             ->where('user_id', $user->getKey())
-            ->where(function (\Illuminate\Contracts\Database\Query\Builder $query) use ($search, $numericPart): void {
+            ->where(function (Builder $query) use ($search, $numericPart): void {
                 $query->whereLike('order_code', "%$search%")
                     ->orWhereLike('order_code', "%$numericPart%");
             })
@@ -273,141 +258,77 @@ class OrderController extends Controller
 
         return response()->json([
             'message' => 'Order retrieved successfully',
-            'data' => $order,
+            'data' => OrderResource::make($order),
         ]);
     }
 
-    public function sellerOrderDetail(SellerOrder $order, #[CurrentUser()] User $seller)
+    public function sellerOrderDetail(SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse
     {
         abort_unless($order->seller()->is($seller), Response::HTTP_NOT_FOUND, 'Seller order not found.');
 
         $order->load([
-            'items' => function ($query): void {
-                $query->with([
-                    'product:id,name,discount_price,selling_price,quantity',
-                    'product.images',
-                ]);
-            },
-            'customer:id,name,phone_number,email',
+            'items.product.images',
+            'customer',
             'customer.defaultAddress',
         ]);
 
         return response()->json([
             'message' => 'Seller order retrieved successfully',
-            'data' => $order,
+            'data' => SellerOrderResource::make($order),
         ]);
     }
 
-    public function myOrderDetail($id)
+    public function myOrderDetail(Order $order, #[CurrentUser()] User $user): JsonResponse
     {
-        $userId = auth()->id();
-        $customer = auth()->user();
+        abort_unless($order->user()->is($user), Response::HTTP_NOT_FOUND, 'Order not found.');
 
-        if (! $userId) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
-        }
-
-        $order = Order::with([
-            'sellerOrders.seller:id,name,shop_name,cover_image',
-            'sellerOrders.items.product' => function ($query) {
-                $query->select('id', 'name', 'discount_price', 'selling_price', 'quantity')
-                    ->with(['images:id,product_id,path']);
-            },
-        ])
-            ->where('user_id', $userId)
-            ->find($id);
-
-        if (! $order) {
-            return response()->json(['message' => 'Order not found.'], 404);
-        }
+        $order->load([
+            'sellerOrders.seller',
+            'sellerOrders.items.product.images',
+            'user.defaultAddress',
+        ]);
 
         return response()->json([
             'message' => 'Order detail fetched successfully.',
-            'order' => [
-                'id' => $order->id,
-                'order_code' => $order->order_code,
-                'created_at' => $order->created_at->toDateTimeString(),
-                'is_multi_seller' => $order->is_multi_seller,
-                'delivery_model' => $order->deliveryModel->name ?? null,
-                'delivery_fee' => $order->delivery_fee,
-                'product_cost' => $order->product_cost,
-                'vat' => $order->vat,
-                'platform_fee' => $order->platform_fee,
-                'grand_total' => $order->grand_total,
-                'address' => $customer->defaultAddress,
-
-                'sellers' => $order->sellerOrders->map(function ($sellerOrder) {
-                    return [
-                        'seller_id' => $sellerOrder->seller->id,
-                        'seller_name' => $sellerOrder->seller->shop_name ?? $sellerOrder->seller->name,
-                        'status' => $sellerOrder->status,
-                        'delivery_fee' => $sellerOrder->delivery_fee,
-                        'product_cost' => $sellerOrder->product_cost,
-                        'vat' => $sellerOrder->vat,
-                        'items' => $sellerOrder->items->map(function ($item) {
-                            $product = $item->product;
-
-                            return [
-                                'product_id' => $product->id,
-                                'product_name' => $product->name ?? '',
-                                'quantity' => $item->quantity,
-                                'size' => $item->size,
-                                'total_cost' => $item->total_cost,
-                                'unit_price' => $product->discount_price ?? $product->selling_price,
-                                'images' => $product->images->map(function ($img) {
-                                    return asset('upload/'.$img->path);
-                                }),
-                            ];
-                        }),
-                    ];
-                }),
-            ],
+            'order' => OrderResource::make($order),
         ]);
     }
 
-    // Accept Seller Order
-    public function acceptSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller)
+    public function acceptSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse
     {
         abort_unless($order->seller()->is($seller), Response::HTTP_NOT_FOUND, 'Seller order not found.');
 
         $order->status = SellerOrderStatus::Packaging;
         $order->status_message = $request->input('message', 'The order is in packaging');
-
         $order->delivery_start_time = now();
 
-        $mainOrder = $order->order;
+        $deliveryModel = DeliveryModel::query()->find($order->order->delivery_model);
 
-        $delivery_model = $mainOrder->delivery_model;
-
-        $deliveryModel = DeliveryModel::query()->find($delivery_model);
         if ($deliveryModel) {
             $order->delivery_end_time = now()->addMinutes($deliveryModel->minutes);
         }
 
         $order->save();
-
         $order->notifyBuyerAboutOrderStatus();
 
         return response()->json([
             'message' => 'Seller order accepted successfully',
-            'data' => $order,
+            'data' => SellerOrderResource::make($order),
         ]);
     }
 
-    // Reject Seller Order
-    public function rejectSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller)
+    public function rejectSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse
     {
         abort_unless($order->seller()->is($seller), Response::HTTP_NOT_FOUND, 'Seller order not found.');
 
         $order->status = SellerOrderStatus::Rejected;
         $order->status_message = $request->input('message', 'The order is rejected by the seller');
         $order->save();
-
         $order->notifyBuyerAboutOrderStatus();
 
         return response()->json([
             'message' => 'You rejected the order successfully',
-            'data' => $order,
+            'data' => SellerOrderResource::make($order),
         ]);
     }
 }
