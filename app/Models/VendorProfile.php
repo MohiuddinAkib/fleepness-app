@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\VendorStatus;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Database\Factories\VendorProfileFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class VendorProfile extends Model
+class VendorProfile extends Model implements HasMedia
 {
     /** @use HasFactory<VendorProfileFactory> */
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     /** @var list<string> */
     protected $fillable = [
@@ -22,8 +24,6 @@ class VendorProfile extends Model
         'shop_category_id',
         'shop_name',
         'description',
-        'banner_image_path',
-        'cover_image_path',
         'pickup_location',
         'balance',
         'total_sales',
@@ -42,6 +42,12 @@ class VendorProfile extends Model
             'total_sales' => 'decimal:2',
             'withdrawn_amount' => 'decimal:2',
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('banner_image')->singleFile();
+        $this->addMediaCollection('cover_image')->singleFile();
     }
 
     /** @return BelongsTo<User, $this> */
