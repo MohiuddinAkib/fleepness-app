@@ -8,9 +8,10 @@ use App\Enums\SellerOrderStatus;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Kreait\Firebase\Messaging\CloudMessage;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Support\Notification\Contracts\SupportsFcmDeviceChannel;
 
-class OrderReceivedFromBuyer extends Notification implements ShouldQueue, SupportsFcmDeviceChannel
+class OrderReceivedFromBuyer extends Notification implements ShouldBroadcast, ShouldQueue, SupportsFcmDeviceChannel
 {
     use Queueable;
 
@@ -52,9 +53,20 @@ class OrderReceivedFromBuyer extends Notification implements ShouldQueue, Suppor
      *
      * @return array<int, string>
      */
+    public function broadcastAs(): string
+    {
+        return 'order_received_from_buyer';
+    }
+
+    public function toBroadcast(object $notifiable): array
+    {
+        return $this->buildNotificationData();
+    }
+
     public function via(object $notifiable): array
     {
         return [
+            'broadcast',
             'fcm-device',
             'database',
         ];

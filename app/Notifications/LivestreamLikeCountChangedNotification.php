@@ -6,8 +6,10 @@ use App\Models\Livestream;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class LivestreamLikeCountChangedNotification extends Notification implements ShouldQueue
+class LivestreamLikeCountChangedNotification extends Notification implements ShouldBroadcast, ShouldQueue
 {
     use Queueable;
 
@@ -42,10 +44,10 @@ class LivestreamLikeCountChangedNotification extends Notification implements Sho
     }
 
     #[\Override]
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
         return [
-            $this->livestream->room_name,
+            new PresenceChannel($this->livestream->getRoomName()),
         ];
     }
 

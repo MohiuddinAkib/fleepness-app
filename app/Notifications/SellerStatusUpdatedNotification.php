@@ -5,11 +5,14 @@ namespace App\Notifications;
 use App\Enums\SellerStatus;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use Kreait\Firebase\Messaging\CloudMessage;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use App\Support\Notification\Contracts\SupportsSmsChannel;
+use Kreait\Firebase\Messaging\Notification as FcmNotification;
+use App\Support\Notification\Contracts\SupportsFcmDeviceChannel;
 
-class SellerStatusUpdatedNotification extends Notification implements ShouldBroadcast, ShouldQueueAfterCommit, SupportsSmsChannel
+class SellerStatusUpdatedNotification extends Notification implements ShouldBroadcast, ShouldQueueAfterCommit, SupportsFcmDeviceChannel, SupportsSmsChannel
 {
     use Queueable;
 
@@ -32,7 +35,7 @@ class SellerStatusUpdatedNotification extends Notification implements ShouldBroa
      */
     public function via(object $notifiable): array
     {
-        return ['sms', 'broadcast'];
+        return ['sms', 'broadcast', 'fcm-device'];
     }
 
     public function toSms(object $notifiable): string
@@ -54,9 +57,23 @@ class SellerStatusUpdatedNotification extends Notification implements ShouldBroa
         ];
     }
 
-    public function broadcastAs()
+    public function broadcastAs(): string
     {
         return 'seller_status_updated';
+    }
+
+    public function toFcm(object $notifiable): CloudMessage
+    {
+        return CloudMessage::new()
+            ->withNotification(FcmNotification::create(
+                $this->status->messageTitle(),
+                $this->status->messageBody(),
+            ));
+    }
+
+    public function toFcmTokens(object $notifiable): null|array|string
+    {
+        return $notifiable->routeNotificationForFcmTokens($this);
     }
 
     /**

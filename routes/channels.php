@@ -14,6 +14,14 @@ Broadcast::channel('livestream_feed', function () {
     return true;
 });
 
-Broadcast::channel('livestream_{livestream}', function (?User $user, Livestream $livestream) { // can join the livestream notifications only when livestream is started
-    return LivestreamStatuses::STARTED === $livestream->status;
+// Presence channel — Reverb tracks member join/leave automatically, enabling live viewer counts
+Broadcast::channel('presence-livestream_{livestream}', function (User $user, Livestream $livestream) {
+    if (LivestreamStatuses::STARTED !== $livestream->status) {
+        return false;
+    }
+
+    return [
+        'id' => $user->getKey(),
+        'name' => $user->name,
+    ];
 }, ['guards' => ['sanctum']]);

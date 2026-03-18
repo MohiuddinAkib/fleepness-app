@@ -8,8 +8,9 @@ use Illuminate\Support\Number;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class SellerWithdrawalApprovedNotification extends Notification implements ShouldQueue
+class SellerWithdrawalApprovedNotification extends Notification implements ShouldBroadcast, ShouldQueue
 {
     use Queueable;
 

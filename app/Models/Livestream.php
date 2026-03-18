@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Http\Resources\LivestreamResource;
 use Illuminate\Notifications\Notification;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -227,23 +228,24 @@ class Livestream extends Model implements FcmNotifiableByTopic, HasMedia
     }
 
     /**
-     * The channels the user receives notification broadcasts on.
+     * The channels the livestream receives notification broadcasts on.
+     * Uses the presence channel name so in-room clients receive comments, likes, etc.
      */
     public function receivesBroadcastNotificationsOn(): string
     {
-        return $this->getRoomName();
+        return 'presence-'.$this->getRoomName();
     }
 
     /**
      * Get the channels that model events should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel|\Illuminate\Database\Eloquent\Model>
+     * @return array<int, Channel|Model>
      */
     public function broadcastOn(string $event): array
     {
         return match ($event) {
             'created' => [new Channel('livestream_feed')],
-            'updated' => [new Channel('livestream_feed'), new Channel($this->getRoomName())],
+            'updated' => [new Channel('livestream_feed'), new PresenceChannel($this->getRoomName())],
             default => []
         };
     }

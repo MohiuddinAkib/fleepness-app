@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use App\Models\LivestreamComment;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
@@ -34,10 +35,10 @@ class NewLivestreamCommentNotification extends Notification implements ShouldBro
     }
 
     #[\Override]
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
         return [
-            $this->comment->livestream->room_name,
+            new PresenceChannel($this->comment->livestream->getRoomName()),
         ];
     }
 
