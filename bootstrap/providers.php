@@ -1,8 +1,15 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\AuthServiceProvider;
+use App\Providers\HttpClientServiceProvider;
+use App\Providers\LivestreamServiceProvider;
+use App\Providers\Filament\AdminPanelProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\AuthServiceProvider::class,
-    App\Providers\HttpClientServiceProvider::class,
-    App\Providers\LivestreamServiceProvider::class,
+    AppServiceProvider::class,
+    AdminPanelProvider::class,
+    AuthServiceProvider::class,
+    HttpClientServiceProvider::class,
+    LivestreamServiceProvider::class,
 ];
