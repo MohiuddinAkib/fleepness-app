@@ -27,7 +27,7 @@ class DeviceTokenController extends Controller
 
     public function destroy(DeviceToken $deviceToken, #[CurrentUser] User $user): JsonResponse
     {
-        abort_unless($deviceToken->user_id === $user->getKey(), HttpResponse::HTTP_FORBIDDEN);
+        abort_unless($deviceToken->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $deviceToken->delete();
 
