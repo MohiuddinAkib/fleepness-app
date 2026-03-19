@@ -16,7 +16,8 @@ it('generates and serves API documentation artifacts', function (): void {
         ->toContain('/api/v1/me/followings')
         ->toContain('/api/v1/me/vendors')
         ->toContain('/api/v1/me/balances')
-        ->toContain('/api/v1/vendor-applications/status');
+        ->toContain('/api/v1/vendor-applications/status')
+        ->toContain('/api/v1/deprecations/legacy-endpoints');
 
     $this->get('/docs')->assertOk();
     $this->get('/docs.postman')->assertOk();
