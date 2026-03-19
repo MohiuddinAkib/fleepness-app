@@ -130,182 +130,6 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: api/shorts/saved
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List saved short videos'
-      description: 'Legacy compatibility alias for `/api/shorts/saved`. Prefer `/api/me/short-videos/saved` for the authenticated saved collection in new clients.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":1,"title":"New Collection Drop"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/lives/liked
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List liked livestreams'
-      description: 'Legacy compatibility alias for `/api/lives/liked`. Prefer `/api/me/livestreams/liked` in new consumers.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":1,"title":"Friday Live Sale"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/lives/saved
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List saved livestreams'
-      description: 'Legacy compatibility alias for `/api/lives/saved`. Prefer `/api/me/livestreams/saved` in new clients.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":1,"title":"Friday Live Sale"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/lives/{livestream_id}/likes-count'
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get livestream likes count'
-      description: 'Legacy compatibility alias for `/api/lives/{livestream}/likes-count`. Prefer the main livestream resource payload and real-time events for new clients.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      livestream_id:
-        custom: []
-        name: livestream_id
-        description: 'The ID of the livestream.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      livestream_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"likes_count":1}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
     uri: api/short-videos
     metadata:
       custom: []
@@ -1147,6 +971,1194 @@ endpoints:
     httpMethods:
       - GET
     uri: 'api/livestreams/{livestream_id}/subscriber-token'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Generate livestream subscriber token'
+      description: 'Returns a LiveKit subscriber token for an authenticated user or a guest viewer.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"token":"eyJhbGciOi..."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/shorts/saved
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List saved short videos'
+      description: 'Legacy compatibility alias for `/api/shorts/saved`. Prefer `/api/me/short-videos/saved` for the authenticated saved collection in new clients.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"New Collection Drop"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/lives/liked
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List liked livestreams'
+      description: 'Legacy compatibility alias for `/api/lives/liked`. Prefer `/api/me/livestreams/liked` in new consumers.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"Friday Live Sale"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/lives/saved
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List saved livestreams'
+      description: 'Legacy compatibility alias for `/api/lives/saved`. Prefer `/api/me/livestreams/saved` in new clients.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"Friday Live Sale"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/lives/{livestream_id}/likes-count'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get livestream likes count'
+      description: 'Legacy compatibility alias for `/api/lives/{livestream}/likes-count`. Prefer the main livestream resource payload and real-time events for new clients.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"likes_count":1}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/me/short-videos/saved
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: "Manage the authenticated user's saved short videos."
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List saved short videos'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"New Collection Drop"}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/me/livestreams/liked
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: "Manage the authenticated user's liked livestreams."
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List liked livestreams'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/me/livestreams/saved
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: "Manage the authenticated user's saved livestreams."
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List saved livestreams'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/short-videos
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List short videos'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"New Collection Drop"}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/short-videos/{shortVideo_id}'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get short video'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      shortVideo_id:
+        custom: []
+        name: shortVideo_id
+        description: 'The ID of the shortVideo.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      shortVideo_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":1,"title":"New Collection Drop","products":[]}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/short-videos/{shortVideo_id}/products'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List short video products'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      shortVideo_id:
+        custom: []
+        name: shortVideo_id
+        description: 'The ID of the shortVideo.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      shortVideo_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":15,"name":"Blue T-Shirt"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/short-videos/{shortVideo_id}/comments'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List short video comments'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      shortVideo_id:
+        custom: []
+        name: shortVideo_id
+        description: 'The ID of the shortVideo.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      shortVideo_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"comment":"Great video!"}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/short-videos/{shortVideo_id}/comments'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Post short video comment'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      shortVideo_id:
+        custom: []
+        name: shortVideo_id
+        description: 'The ID of the shortVideo.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      shortVideo_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      comment:
+        custom: []
+        name: comment
+        description: ''
+        required: true
+        example: 'Great video!'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      comment: 'Great video!'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":1,"comment":"Great video!"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/short-videos/{shortVideo_id}/comments/{comment_id}'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete short video comment'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      shortVideo_id:
+        custom: []
+        name: shortVideo_id
+        description: 'The ID of the shortVideo.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      comment_id:
+        custom: []
+        name: comment_id
+        description: 'The ID of the comment.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      shortVideo_id: 16
+      comment_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Comment deleted."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/short-videos/{shortVideo_id}/like'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Like short video'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      shortVideo_id:
+        custom: []
+        name: shortVideo_id
+        description: 'The ID of the shortVideo.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      shortVideo_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Liked."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/short-videos/{shortVideo_id}/save'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Save short video'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      shortVideo_id:
+        custom: []
+        name: shortVideo_id
+        description: 'The ID of the shortVideo.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      shortVideo_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Saved."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/livestreams
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List livestreams'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/livestreams/{livestream_id}'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get livestream'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":1,"title":"Friday Live Sale","products":[]}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/livestreams/{livestream_id}/products'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List livestream products'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":15,"name":"Blue T-Shirt"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/livestreams/{livestream_id}/comments'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List livestream comments'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"comment":"Watching now!"}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/livestreams/{livestream_id}/comments'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Post livestream comment'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      comment:
+        custom: []
+        name: comment
+        description: ''
+        required: true
+        example: 'Watching now!'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      comment: 'Watching now!'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":1,"comment":"Watching now!"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/livestreams/{livestream_id}/comments/{comment_id}'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete livestream comment'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      comment_id:
+        custom: []
+        name: comment_id
+        description: 'The ID of the comment.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+      comment_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Comment deleted."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/livestreams/{livestream_id}/like'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Like livestream'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Liked."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/livestreams/{livestream_id}/save'
+    metadata:
+      custom: []
+      groupName: Content
+      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Save livestream'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Saved."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/livestreams/{livestream_id}/subscriber-token'
     metadata:
       custom: []
       groupName: Content

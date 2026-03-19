@@ -1,21 +1,19 @@
-name: Misc
-description: ''
+name: Discovery
+description: 'Homepage discovery endpoints such as sections and sliders.'
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/notifications
+    uri: api/sections
     metadata:
       custom: []
-      groupName: Misc
-      groupDescription: ''
+      groupName: Discovery
+      groupDescription: 'Homepage discovery endpoints such as sections and sliders.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Legacy notifications listing endpoint used by the mobile client.'
-      description: |-
-        Prefer `/api/me/notifications` for new consumers so authenticated resources stay grouped
-        consistently with the rest of the API.
+      title: 'List visible sections'
+      description: ''
       authenticated: false
       deprecated: false
     headers:
@@ -28,83 +26,444 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/notifications/mark-as-read
-    metadata:
-      custom: []
-      groupName: Misc
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Legacy bulk mark-as-read alias kept for the current mobile client contract.'
-      description: 'New consumers should prefer `/api/me/notifications/read`.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/notifications/{notification_id}/mark-as-read'
-    metadata:
-      custom: []
-      groupName: Misc
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Legacy alias for marking a single notification as read.'
-      description: |-
-        Retained for `/api/notifications/{notification}/mark-as-read`. New consumers should prefer
-        `/api/me/notifications/{notification}/read`.
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      notification_id:
+    responses:
+      -
         custom: []
-        name: notification_id
-        description: 'The ID of the notification.'
+        status: 200
+        content: '{"data":[{"id":1,"title":"Featured","items":[]}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/sliders
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Homepage discovery endpoints such as sections and sliders.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List active sliders'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"image_url":"https://example.com/slider.jpg","url":"https://example.com/promo"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/delivery-options
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Reference data used during checkout and storefront browsing.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List delivery options'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Standard Delivery","fee":"60.00"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/shop-categories
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Reference data used during checkout and storefront browsing.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List shop categories'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Fashion"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/payment-methods
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Reference data used during checkout and storefront browsing.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List payment methods'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Cash on Delivery"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/search
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Search across marketplace products and vendor profiles.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Search products and vendors'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      q:
+        custom: []
+        name: q
+        description: ''
         required: true
-        example: architecto
+        example: 'flash sale'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanUrlParameters:
-      notification_id: architecto
+    cleanQueryParameters:
+      q: 'flash sale'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"products":[{"id":15,"name":"Flash Deal Tee"}],"vendors":[{"id":4,"shop_name":"Flash Store"}]}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/sections
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Homepage discovery endpoints such as sections and sliders.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List visible sections'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"title":"Featured","items":[]}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/sliders
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Homepage discovery endpoints such as sections and sliders.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List active sliders'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"image_url":"https://example.com/slider.jpg","url":"https://example.com/promo"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/delivery-options
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Reference data used during checkout and storefront browsing.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List delivery options'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Standard Delivery","fee":"60.00"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/shop-categories
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Reference data used during checkout and storefront browsing.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List shop categories'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Fashion"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/payment-methods
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Reference data used during checkout and storefront browsing.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List payment methods'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Cash on Delivery"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/search
+    metadata:
+      custom: []
+      groupName: Discovery
+      groupDescription: 'Search across marketplace products and vendor profiles.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Search products and vendors'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      q:
+        custom: []
+        name: q
+        description: ''
+        required: true
+        example: 'flash sale'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      q: 'flash sale'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"products":[{"id":15,"name":"Flash Deal Tee"}],"vendors":[{"id":4,"shop_name":"Flash Store"}]}}'
+        headers: []
+        description: ''
     responseFields: []
     auth: []
     controller: null
