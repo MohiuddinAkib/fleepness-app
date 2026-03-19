@@ -6,11 +6,13 @@ namespace App\Providers;
 
 use Throwable;
 use Stringable;
+use Filament\Forms\Form;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Uri;
 use League\Uri\UriTemplate;
 use App\Services\SMSService;
+use Filament\Schemas\Schema;
 use Illuminate\Http\Request;
 use Sentry\Laravel\Integration;
 use League\Uri\Uri as LeagueUri;
@@ -44,6 +46,10 @@ class AppServiceProvider extends ServiceProvider
     #[\Override]
     public function register(): void
     {
+        if (! class_exists(Form::class) && class_exists(Schema::class)) {
+            class_alias(Schema::class, Form::class);
+        }
+
         Notification::resolved(function (ChannelManager $service): void {
             $service->extend('fcm-device', function (Application $app) {
                 return $app->make(FcmDeviceChannel::class);

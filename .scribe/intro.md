@@ -41,6 +41,7 @@ Fleepness is a quick-commerce multi-vendor marketplace API. It powers a mobile s
 
     - Legacy endpoints are documented with explicit replacement paths in their endpoint descriptions
     - Runtime responses from those aliases include `X-Fleepness-Legacy-Endpoint`, `X-Fleepness-Migration-Key`, and `X-Fleepness-Replacement-Endpoints` headers
+    - A machine-readable migration manifest is available at `/api/v1/deprecations/legacy-endpoints`
     - New integrations should always prefer the modern me-scoped or resource-scoped replacement paths over the legacy aliases
 
     ### Response Format

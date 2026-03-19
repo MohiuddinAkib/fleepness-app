@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\VendorOrderStatus;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Concerns\LogsModelActivity;
 use Database\Factories\VendorOrderFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class VendorOrder extends Model
 {
     /** @use HasFactory<VendorOrderFactory> */
-    use HasFactory;
+    use HasFactory, LogsModelActivity;
 
     /** @var list<string> */
     protected $fillable = [

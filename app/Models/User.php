@@ -6,12 +6,15 @@ namespace App\Models;
 
 use Filament\Panel;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
 use Database\Factories\UserFactory;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Concerns\LogsModelActivity;
 use Illuminate\Notifications\Notification;
 use App\Notifications\LoginOtpNotification;
 use Filament\Models\Contracts\FilamentUser;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,10 +24,10 @@ use App\Support\Notification\Contracts\SupportsFcmChannel;
 use App\Support\Notification\Contracts\FcmNotifiableByDevice;
 use App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice;
 
-class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, FcmNotifiableByDevice, FilamentUser
+class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, FcmNotifiableByDevice, FilamentUser, HasMedia
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, HasRoles, Notifiable;
+    use HasApiTokens, HasFactory, HasRoles, InteractsWithMedia, LogsModelActivity, Notifiable;
 
     /** @var list<string> */
     protected $hidden = [
@@ -52,6 +55,12 @@ class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, Fc
         }
 
         return $this->hasRole('admin');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('banner_image')->singleFile();
+        $this->addMediaCollection('cover_image')->singleFile();
     }
 
     // -------------------------------------------------------------------------

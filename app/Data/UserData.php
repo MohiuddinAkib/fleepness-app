@@ -17,6 +17,9 @@ class UserData extends Data
         public readonly string $name,
         public readonly ?string $email,
         public readonly string $phoneNumber,
+        public readonly ?string $bannerImage,
+        public readonly ?string $coverImage,
+        public readonly string $notificationChannel,
     ) {}
 
     public static function fromModel(User $user): self
@@ -26,6 +29,9 @@ class UserData extends Data
             name: $user->name,
             email: $user->email,
             phoneNumber: $user->phone_number,
+            bannerImage: $user->getFirstMediaUrl('banner_image') ?: null,
+            coverImage: $user->getFirstMediaUrl('cover_image') ?: null,
+            notificationChannel: $user->receivesBroadcastNotificationsOn(),
         );
     }
 }

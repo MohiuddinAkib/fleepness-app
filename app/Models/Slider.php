@@ -7,14 +7,17 @@ namespace App\Models;
 use Spatie\MediaLibrary\HasMedia;
 use Database\Factories\SliderFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Concerns\LogsModelActivity;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Slider extends Model implements HasMedia
 {
     /** @use HasFactory<SliderFactory> */
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, LogsModelActivity;
 
     /** @var list<string> */
     protected $fillable = [
@@ -36,6 +39,12 @@ class Slider extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('image')->singleFile();
+    }
+
+    #[Scope]
+    public function active(Builder $query): void
+    {
+        $query->where('is_active', true);
     }
 
     /** @return BelongsTo<Category, $this> */

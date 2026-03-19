@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $categories = Category::query()
             ->active()
             ->whereNull('parent_id')
-            ->with('children')
+            ->with('children.children')
             ->orderBy('sort_order')
             ->get();
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     #[Unauthenticated]
     public function show(Category $category): JsonResponse|Responsable
     {
-        return CategoryData::fromModel($category->load('children'));
+        return CategoryData::fromModel($category->load(['parent', 'children.children']));
     }
 
     #[Endpoint('List products in category')]

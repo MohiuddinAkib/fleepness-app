@@ -6,8 +6,6 @@ namespace App\Models;
 
 use App\Enums\SellerOrderStatus;
 use Illuminate\Database\Eloquent\Model;
-use App\Notifications\OrderStatusChanged;
-use App\Notifications\OrderReceivedFromBuyer;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -63,15 +61,5 @@ class SellerOrder extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_id');
-    }
-
-    public function notifySellerAboutNewOrderFromBuyer()
-    {
-        $this->seller->notify(new OrderReceivedFromBuyer($this));
-    }
-
-    public function notifyBuyerAboutOrderStatus()
-    {
-        $this->customer->notify(new OrderStatusChanged($this));
     }
 }

@@ -24,7 +24,7 @@ class DeliveryOptionController extends Controller
     public function index(): JsonResponse|Responsable
     {
         $options = DeliveryOption::query()
-            ->where('is_active', true)
+            ->active()
             ->orderBy('fee')
             ->get();
 

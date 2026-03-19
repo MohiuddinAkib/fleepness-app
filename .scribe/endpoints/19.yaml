@@ -1,24 +1,23 @@
-name: Misc
-description: ''
+name: Compatibility
+description: 'Legacy compatibility aliases retained for the current mobile client. Prefer the replacement paths called out in each endpoint description.'
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/notifications
+    uri: api/me/role
     metadata:
       custom: []
-      groupName: Misc
-      groupDescription: ''
+      groupName: Compatibility
+      groupDescription: 'Legacy compatibility aliases retained for the current mobile client. Prefer the replacement paths called out in each endpoint description.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Legacy notifications listing endpoint used by the mobile client.'
-      description: |-
-        Prefer `/api/me/notifications` for new consumers so authenticated resources stay grouped
-        consistently with the rest of the API.
-      authenticated: false
+      title: 'Get user role summary'
+      description: 'Legacy compatibility alias for `/api/me/role`. Prefer `/api/v1/me/summaries` and `/api/v1/me/vendors` for the canonical authenticated-user and vendor payloads.'
+      authenticated: true
       deprecated: false
     headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -28,85 +27,100 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/notifications/mark-as-read
-    metadata:
-      custom: []
-      groupName: Misc
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Legacy bulk mark-as-read alias kept for the current mobile client contract.'
-      description: 'New consumers should prefer `/api/me/notifications/read`.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/notifications/{notification_id}/mark-as-read'
-    metadata:
-      custom: []
-      groupName: Misc
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Legacy alias for marking a single notification as read.'
-      description: |-
-        Retained for `/api/notifications/{notification}/mark-as-read`. New consumers should prefer
-        `/api/me/notifications/{notification}/read`.
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      notification_id:
+    responses:
+      -
         custom: []
-        name: notification_id
-        description: 'The ID of the notification.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      notification_id: architecto
+        status: 200
+        content: '{"user_id":1,"name":"Vendor User","role":"vendor","status":"approved"}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/seller/status
+    metadata:
+      custom: []
+      groupName: Compatibility
+      groupDescription: 'Legacy compatibility aliases retained for the current mobile client. Prefer the replacement paths called out in each endpoint description.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get seller status'
+      description: 'Legacy compatibility alias for `/api/seller/status`. Prefer `/api/v1/me/summaries` for a compact summary, `/api/v1/vendor-applications/status` for application workflow checks, or `/api/v1/me/vendors` for the richer vendor payload.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"status":"approved"}'
+        headers: []
+        description: ''
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/user/balance-stats
+    metadata:
+      custom: []
+      groupName: Compatibility
+      groupDescription: 'Legacy compatibility aliases retained for the current mobile client. Prefer the replacement paths called out in each endpoint description.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get vendor balance stats'
+      description: 'Legacy compatibility alias for `/api/user/balance-stats`. Prefer `/api/v1/me/balances`, which now includes both current balance fields and delivered-order aggregates.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"user_id":1,"name":"Vendor User","daily_balance":"50.00","weekly_balance":"50.00","monthly_balance":"50.00","lifetime_balance":"250.00"}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null

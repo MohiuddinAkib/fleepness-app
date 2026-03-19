@@ -41,7 +41,7 @@ class VendorStatusUpdated extends Notification implements ShouldBroadcast, Shoul
 
     public function broadcastAs(): string
     {
-        return 'vendor_status_updated';
+        return 'vendor_application_status_updated';
     }
 
     /** @return array<string, mixed> */
@@ -58,7 +58,7 @@ class VendorStatusUpdated extends Notification implements ShouldBroadcast, Shoul
         return CloudMessage::new()->withNotification(
             FcmNotification::create('Vendor Application Update', $this->message())
         )->withData([
-            'type' => 'vendor_status_updated',
+            'type' => 'vendor_application_status_updated',
             'status' => $this->status->value,
         ]);
     }
@@ -73,7 +73,7 @@ class VendorStatusUpdated extends Notification implements ShouldBroadcast, Shoul
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'vendor_status_updated',
+            'type' => 'vendor_application_status_updated',
             'status' => $this->status->value,
             'message' => $this->message(),
         ];

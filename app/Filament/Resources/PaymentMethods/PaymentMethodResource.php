@@ -8,7 +8,7 @@ use BackedEnum;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
 use App\Models\PaymentMethod;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\PaymentMethods\Pages\EditPaymentMethod;
 use App\Filament\Resources\PaymentMethods\Pages\ListPaymentMethods;
@@ -34,13 +34,6 @@ class PaymentMethodResource extends Resource
     public static function table(Table $table): Table
     {
         return PaymentMethodsTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

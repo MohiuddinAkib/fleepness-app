@@ -8,7 +8,7 @@ use BackedEnum;
 use Filament\Tables\Table;
 use App\Models\Transaction;
 use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\Transactions\Pages\EditTransaction;
 use App\Filament\Resources\Transactions\Pages\ListTransactions;
@@ -34,13 +34,6 @@ class TransactionResource extends Resource
     public static function table(Table $table): Table
     {
         return TransactionsTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

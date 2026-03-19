@@ -55,4 +55,9 @@ enum TransactionStatus: string implements HasColor, HasIcon, HasLabel
     {
         return self::Rejected === $this;
     }
+
+    public function shouldBroadcastWithdrawalApproval(): bool
+    {
+        return $this->isApproved();
+    }
 }

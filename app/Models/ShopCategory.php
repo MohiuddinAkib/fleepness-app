@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Concerns\LogsModelActivity;
 use Database\Factories\ShopCategoryFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ShopCategory extends Model
 {
     /** @use HasFactory<ShopCategoryFactory> */
-    use HasFactory;
+    use HasFactory, LogsModelActivity;
 
     /** @var list<string> */
     protected $fillable = [

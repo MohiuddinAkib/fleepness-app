@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Data\LivestreamData;
 use App\Enums\LivestreamStatus;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Database\Factories\LivestreamFactory;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Facades\Livestream as LivestreamFacade;
@@ -15,11 +18,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\BroadcastsEventsAfterCommit;
 
 class Livestream extends Model implements HasMedia
 {
     /** @use HasFactory<LivestreamFactory> */
-    use HasFactory, InteractsWithMedia;
+    use BroadcastsEventsAfterCommit, HasFactory, InteractsWithMedia, Notifiable;
 
     /** @var list<string> */
     protected $fillable = [
@@ -106,9 +110,32 @@ class Livestream extends Model implements HasMedia
         return Attribute::get(fn (): string => sprintf('livestream_%s', $this->getKey()));
     }
 
+    public function receivesBroadcastNotificationsOn(): string
+    {
+        return $this->room_name;
+    }
+
     public function recordingOutputPath(): Attribute
     {
         return Attribute::get(fn (): string => sprintf('livestreams/%s/%s', $this->room_name, now()->timestamp));
+    }
+
+    public function recordings(): Attribute
+    {
+        return Attribute::get(
+            fn (): array => is_array($this->egress_metadata)
+                ? (array) ($this->egress_metadata['recordings'] ?? [])
+                : []
+        );
+    }
+
+    public function thumbnails(): Attribute
+    {
+        return Attribute::get(
+            fn (): array => is_array($this->egress_metadata)
+                ? (array) ($this->egress_metadata['thumbnails'] ?? [])
+                : []
+        );
     }
 
     public function startRecording(): void
@@ -125,5 +152,28 @@ class Livestream extends Model implements HasMedia
         }
 
         LivestreamFacade::stopRecording($this->egress_id);
+    }
+
+    /** @return list<Channel> */
+    public function broadcastOn(string $event): array
+    {
+        return match ($event) {
+            'created' => [new Channel('livestream_feed')],
+            'updated' => [new Channel('livestream_feed'), new Channel($this->room_name)],
+            default => [],
+        };
+    }
+
+    public function broadcastAs(string $event): ?string
+    {
+        return "livestream_{$event}";
+    }
+
+    /** @return array<string, mixed> */
+    public function broadcastWith(string $event): array
+    {
+        return LivestreamData::fromModel(
+            $this->loadMissing(['media', 'vendorProfile'])
+        )->toArray();
     }
 }

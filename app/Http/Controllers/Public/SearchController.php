@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Public;
 
 use App\Models\Product;
-use App\Data\ProductData;
 use Illuminate\Http\Request;
 use App\Models\VendorProfile;
-use App\Data\VendorProfileData;
+use App\Data\SearchResultsData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
-use Spatie\LaravelData\DataCollection;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\QueryParam;
@@ -31,9 +29,7 @@ class SearchController extends Controller
         $query = (string) $request->string('q');
 
         if ('' === $query) {
-            return response()->json([
-                'data' => ['products' => [], 'vendors' => []],
-            ]);
+            return SearchResultsData::fromModels(collect(), collect());
         }
 
         $products = Product::query()
@@ -50,11 +46,6 @@ class SearchController extends Controller
             ->limit(15)
             ->get();
 
-        return response()->json([
-            'data' => [
-                'products' => ProductData::collect($products, DataCollection::class),
-                'vendors' => VendorProfileData::collect($vendors, DataCollection::class),
-            ],
-        ]);
+        return SearchResultsData::fromModels($products, $vendors);
     }
 }

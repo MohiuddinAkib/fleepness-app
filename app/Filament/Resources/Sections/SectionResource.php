@@ -8,7 +8,7 @@ use BackedEnum;
 use App\Models\Section;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\Sections\Pages\EditSection;
 use App\Filament\Resources\Sections\Pages\ListSections;
@@ -34,13 +34,6 @@ class SectionResource extends Resource
     public static function table(Table $table): Table
     {
         return SectionsTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

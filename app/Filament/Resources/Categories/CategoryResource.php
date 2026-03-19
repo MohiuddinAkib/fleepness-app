@@ -8,7 +8,7 @@ use BackedEnum;
 use App\Models\Category;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\Categories\Pages\EditCategory;
 use App\Filament\Resources\Categories\Pages\CreateCategory;
@@ -34,13 +34,6 @@ class CategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return CategoriesTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

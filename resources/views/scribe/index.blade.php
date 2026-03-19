@@ -288,9 +288,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="products-PUTapi-me-products--product_id--status">
                                 <a href="#products-PUTapi-me-products--product_id--status">Update product status</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="products-DELETEapi-me-products--product_id--images--mediaId-">
-                                <a href="#products-DELETEapi-me-products--product_id--images--mediaId-">Delete product image</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="products-GETapi-v1-me-products">
                                 <a href="#products-GETapi-v1-me-products">List own products</a>
                             </li>
@@ -309,9 +306,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="products-PUTapi-v1-me-products--product_id--status">
                                 <a href="#products-PUTapi-v1-me-products--product_id--status">Update product status</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="products-DELETEapi-v1-me-products--product_id--images--mediaId-">
-                                <a href="#products-DELETEapi-v1-me-products--product_id--images--mediaId-">Delete product image</a>
-                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-size-templates" class="tocify-header">
@@ -328,15 +322,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="size-templates-DELETEapi-me-size-templates--sizeTemplate_id-">
                                 <a href="#size-templates-DELETEapi-me-size-templates--sizeTemplate_id-">DELETE api/me/size-templates/{sizeTemplate_id}</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="size-templates-POSTapi-me-size-templates--sizeTemplate_id--items">
-                                <a href="#size-templates-POSTapi-me-size-templates--sizeTemplate_id--items">POST api/me/size-templates/{sizeTemplate_id}/items</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="size-templates-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-                                <a href="#size-templates-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">PATCH api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="size-templates-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-                                <a href="#size-templates-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">DELETE api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="size-templates-GETapi-v1-me-size-templates">
                                 <a href="#size-templates-GETapi-v1-me-size-templates">List size templates</a>
                             </li>
@@ -345,15 +330,6 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="size-templates-DELETEapi-v1-me-size-templates--sizeTemplate_id-">
                                 <a href="#size-templates-DELETEapi-v1-me-size-templates--sizeTemplate_id-">DELETE api/v1/me/size-templates/{sizeTemplate_id}</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="size-templates-POSTapi-v1-me-size-templates--sizeTemplate_id--items">
-                                <a href="#size-templates-POSTapi-v1-me-size-templates--sizeTemplate_id--items">POST api/v1/me/size-templates/{sizeTemplate_id}/items</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="size-templates-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-                                <a href="#size-templates-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">PATCH api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="size-templates-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-                                <a href="#size-templates-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">DELETE api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -377,12 +353,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="livestreams-GETapi-me-livestreams--livestream_id--publisher-token">
                                 <a href="#livestreams-GETapi-me-livestreams--livestream_id--publisher-token">Get publisher token</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="livestreams-POSTapi-me-livestreams--livestream_id--products">
-                                <a href="#livestreams-POSTapi-me-livestreams--livestream_id--products">Attach product to livestream</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="livestreams-DELETEapi-me-livestreams--livestream_id--products--product_id-">
-                                <a href="#livestreams-DELETEapi-me-livestreams--livestream_id--products--product_id-">Detach product from livestream</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="livestreams-GETapi-v1-me-livestreams">
                                 <a href="#livestreams-GETapi-v1-me-livestreams">List own livestreams</a>
                             </li>
@@ -397,12 +367,6 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="livestreams-GETapi-v1-me-livestreams--livestream_id--publisher-token">
                                 <a href="#livestreams-GETapi-v1-me-livestreams--livestream_id--publisher-token">Get publisher token</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="livestreams-POSTapi-v1-me-livestreams--livestream_id--products">
-                                <a href="#livestreams-POSTapi-v1-me-livestreams--livestream_id--products">Attach product to livestream</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="livestreams-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-">
-                                <a href="#livestreams-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-">Detach product from livestream</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -569,8 +533,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="catalog-POSTapi-products--product_id--reviews">
                                 <a href="#catalog-POSTapi-products--product_id--reviews">Write a product review</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="catalog-DELETEapi-products--product_id--reviews--review_id-">
-                                <a href="#catalog-DELETEapi-products--product_id--reviews--review_id-">Delete own product review</a>
+                                                                                <li class="tocify-item level-2" data-unique="catalog-DELETEapi-products--product_id--reviews--id-">
+                                <a href="#catalog-DELETEapi-products--product_id--reviews--id-">Delete own product review</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="catalog-GETapi-categories">
                                 <a href="#catalog-GETapi-categories">List categories</a>
@@ -602,8 +566,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="catalog-POSTapi-v1-products--product_id--reviews">
                                 <a href="#catalog-POSTapi-v1-products--product_id--reviews">Write a product review</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="catalog-DELETEapi-v1-products--product_id--reviews--review_id-">
-                                <a href="#catalog-DELETEapi-v1-products--product_id--reviews--review_id-">Delete own product review</a>
+                                                                                <li class="tocify-item level-2" data-unique="catalog-DELETEapi-v1-products--product_id--reviews--id-">
+                                <a href="#catalog-DELETEapi-v1-products--product_id--reviews--id-">Delete own product review</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="catalog-GETapi-v1-categories">
                                 <a href="#catalog-GETapi-v1-categories">List categories</a>
@@ -642,20 +606,20 @@
                                                                                 <li class="tocify-item level-2" data-unique="vendors-GETapi-vendors--vendorProfile_id--short-videos">
                                 <a href="#vendors-GETapi-vendors--vendorProfile_id--short-videos">List vendor short videos</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendors-GETapi-vendors--vendorProfile_id--reviews">
-                                <a href="#vendors-GETapi-vendors--vendorProfile_id--reviews">List vendor reviews</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-POSTapi-vendors--vendorProfile_id--follow">
                                 <a href="#vendors-POSTapi-vendors--vendorProfile_id--follow">Follow vendor</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-DELETEapi-vendors--vendorProfile_id--follow">
                                 <a href="#vendors-DELETEapi-vendors--vendorProfile_id--follow">Unfollow vendor</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="vendors-GETapi-vendors--vendorProfile_id--reviews">
+                                <a href="#vendors-GETapi-vendors--vendorProfile_id--reviews">List vendor reviews</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-POSTapi-vendors--vendorProfile_id--reviews">
                                 <a href="#vendors-POSTapi-vendors--vendorProfile_id--reviews">Write vendor review</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendors-DELETEapi-vendors--vendorProfile_id--reviews--review_id-">
-                                <a href="#vendors-DELETEapi-vendors--vendorProfile_id--reviews--review_id-">Delete own vendor review</a>
+                                                                                <li class="tocify-item level-2" data-unique="vendors-DELETEapi-vendors--vendorProfile_id--reviews--id-">
+                                <a href="#vendors-DELETEapi-vendors--vendorProfile_id--reviews--id-">Delete own vendor review</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-GETapi-following">
                                 <a href="#vendors-GETapi-following">List followed vendors</a>
@@ -678,20 +642,20 @@
                                                                                 <li class="tocify-item level-2" data-unique="vendors-GETapi-v1-vendors--vendorProfile_id--short-videos">
                                 <a href="#vendors-GETapi-v1-vendors--vendorProfile_id--short-videos">List vendor short videos</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendors-GETapi-v1-vendors--vendorProfile_id--reviews">
-                                <a href="#vendors-GETapi-v1-vendors--vendorProfile_id--reviews">List vendor reviews</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-POSTapi-v1-vendors--vendorProfile_id--follow">
                                 <a href="#vendors-POSTapi-v1-vendors--vendorProfile_id--follow">Follow vendor</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-DELETEapi-v1-vendors--vendorProfile_id--follow">
                                 <a href="#vendors-DELETEapi-v1-vendors--vendorProfile_id--follow">Unfollow vendor</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="vendors-GETapi-v1-vendors--vendorProfile_id--reviews">
+                                <a href="#vendors-GETapi-v1-vendors--vendorProfile_id--reviews">List vendor reviews</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-POSTapi-v1-vendors--vendorProfile_id--reviews">
                                 <a href="#vendors-POSTapi-v1-vendors--vendorProfile_id--reviews">Write vendor review</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendors-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-">
-                                <a href="#vendors-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-">Delete own vendor review</a>
+                                                                                <li class="tocify-item level-2" data-unique="vendors-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-">
+                                <a href="#vendors-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-">Delete own vendor review</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -718,20 +682,20 @@
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-short-videos--shortVideo_id--products">
                                 <a href="#content-GETapi-short-videos--shortVideo_id--products">List short video products</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-short-videos--shortVideo_id--comments">
-                                <a href="#content-GETapi-short-videos--shortVideo_id--comments">List short video comments</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-short-videos--shortVideo_id--comments">
-                                <a href="#content-POSTapi-short-videos--shortVideo_id--comments">Post short video comment</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-short-videos--shortVideo_id--comments--comment_id-">
-                                <a href="#content-DELETEapi-short-videos--shortVideo_id--comments--comment_id-">Delete short video comment</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-POSTapi-short-videos--shortVideo_id--like">
                                 <a href="#content-POSTapi-short-videos--shortVideo_id--like">Like short video</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-POSTapi-short-videos--shortVideo_id--save">
                                 <a href="#content-POSTapi-short-videos--shortVideo_id--save">Save short video</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-short-videos--short_video_id--comments">
+                                <a href="#content-GETapi-short-videos--short_video_id--comments">List short video comments</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-short-videos--short_video_id--comments">
+                                <a href="#content-POSTapi-short-videos--short_video_id--comments">Post short video comment</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-short-videos--short_video_id--comments--id-">
+                                <a href="#content-DELETEapi-short-videos--short_video_id--comments--id-">Delete short video comment</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-livestreams">
                                 <a href="#content-GETapi-livestreams">List livestreams</a>
@@ -742,15 +706,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-livestreams--livestream_id--products">
                                 <a href="#content-GETapi-livestreams--livestream_id--products">List livestream products</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-livestreams--livestream_id--comments">
-                                <a href="#content-GETapi-livestreams--livestream_id--comments">List livestream comments</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-livestreams--livestream_id--comments">
-                                <a href="#content-POSTapi-livestreams--livestream_id--comments">Post livestream comment</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-livestreams--livestream_id--comments--comment_id-">
-                                <a href="#content-DELETEapi-livestreams--livestream_id--comments--comment_id-">Delete livestream comment</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-POSTapi-livestreams--livestream_id--like">
                                 <a href="#content-POSTapi-livestreams--livestream_id--like">Like livestream</a>
                             </li>
@@ -759,6 +714,18 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-livestreams--livestream_id--subscriber-token">
                                 <a href="#content-GETapi-livestreams--livestream_id--subscriber-token">Generate livestream subscriber token</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-livestreams--livestream_id--comments">
+                                <a href="#content-GETapi-livestreams--livestream_id--comments">List livestream comments</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-livestreams--livestream_id--comments">
+                                <a href="#content-POSTapi-livestreams--livestream_id--comments">Post livestream comment</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-PUTapi-livestreams--livestream_id--comments--id-">
+                                <a href="#content-PUTapi-livestreams--livestream_id--comments--id-">Update livestream comment</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-livestreams--livestream_id--comments--id-">
+                                <a href="#content-DELETEapi-livestreams--livestream_id--comments--id-">Delete livestream comment</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-shorts-saved">
                                 <a href="#content-GETapi-shorts-saved">List saved short videos</a>
@@ -790,20 +757,20 @@
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-v1-short-videos--shortVideo_id--products">
                                 <a href="#content-GETapi-v1-short-videos--shortVideo_id--products">List short video products</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-v1-short-videos--shortVideo_id--comments">
-                                <a href="#content-GETapi-v1-short-videos--shortVideo_id--comments">List short video comments</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-v1-short-videos--shortVideo_id--comments">
-                                <a href="#content-POSTapi-v1-short-videos--shortVideo_id--comments">Post short video comment</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-">
-                                <a href="#content-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-">Delete short video comment</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-POSTapi-v1-short-videos--shortVideo_id--like">
                                 <a href="#content-POSTapi-v1-short-videos--shortVideo_id--like">Like short video</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-POSTapi-v1-short-videos--shortVideo_id--save">
                                 <a href="#content-POSTapi-v1-short-videos--shortVideo_id--save">Save short video</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-v1-short-videos--short_video_id--comments">
+                                <a href="#content-GETapi-v1-short-videos--short_video_id--comments">List short video comments</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-v1-short-videos--short_video_id--comments">
+                                <a href="#content-POSTapi-v1-short-videos--short_video_id--comments">Post short video comment</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-v1-short-videos--short_video_id--comments--id-">
+                                <a href="#content-DELETEapi-v1-short-videos--short_video_id--comments--id-">Delete short video comment</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-v1-livestreams">
                                 <a href="#content-GETapi-v1-livestreams">List livestreams</a>
@@ -814,15 +781,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-v1-livestreams--livestream_id--products">
                                 <a href="#content-GETapi-v1-livestreams--livestream_id--products">List livestream products</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-v1-livestreams--livestream_id--comments">
-                                <a href="#content-GETapi-v1-livestreams--livestream_id--comments">List livestream comments</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-v1-livestreams--livestream_id--comments">
-                                <a href="#content-POSTapi-v1-livestreams--livestream_id--comments">Post livestream comment</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-">
-                                <a href="#content-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-">Delete livestream comment</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-POSTapi-v1-livestreams--livestream_id--like">
                                 <a href="#content-POSTapi-v1-livestreams--livestream_id--like">Like livestream</a>
                             </li>
@@ -831,6 +789,18 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-v1-livestreams--livestream_id--subscriber-token">
                                 <a href="#content-GETapi-v1-livestreams--livestream_id--subscriber-token">Generate livestream subscriber token</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-v1-livestreams--livestream_id--comments">
+                                <a href="#content-GETapi-v1-livestreams--livestream_id--comments">List livestream comments</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-POSTapi-v1-livestreams--livestream_id--comments">
+                                <a href="#content-POSTapi-v1-livestreams--livestream_id--comments">Post livestream comment</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-PUTapi-v1-livestreams--livestream_id--comments--id-">
+                                <a href="#content-PUTapi-v1-livestreams--livestream_id--comments--id-">Update livestream comment</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-DELETEapi-v1-livestreams--livestream_id--comments--id-">
+                                <a href="#content-DELETEapi-v1-livestreams--livestream_id--comments--id-">Delete livestream comment</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -893,12 +863,40 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-migration" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="migration">
+                    <a href="#migration">Migration</a>
+                </li>
+                                    <ul id="tocify-subheader-migration" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="migration-GETapi-v1-deprecations-legacy-endpoints">
+                                <a href="#migration-GETapi-v1-deprecations-legacy-endpoints">List legacy endpoint deprecations</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-misc" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="misc">
                     <a href="#misc">Misc</a>
                 </li>
                                     <ul id="tocify-subheader-misc" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="misc-GETapi-notifications">
+                                                    <li class="tocify-item level-2" data-unique="misc-DELETEapi-me-products--product_id--images--mediaId-">
+                                <a href="#misc-DELETEapi-me-products--product_id--images--mediaId-">Delete product image</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-POSTapi-me-size-templates--size_template_id--items">
+                                <a href="#misc-POSTapi-me-size-templates--size_template_id--items">POST api/me/size-templates/{size_template_id}/items</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+                                <a href="#misc-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">PUT api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+                                <a href="#misc-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">DELETE api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-POSTapi-me-livestreams--livestream_id--products">
+                                <a href="#misc-POSTapi-me-livestreams--livestream_id--products">Attach product to livestream</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-DELETEapi-me-livestreams--livestream_id--products--id-">
+                                <a href="#misc-DELETEapi-me-livestreams--livestream_id--products--id-">Detach product from livestream</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-GETapi-notifications">
                                 <a href="#misc-GETapi-notifications">Legacy notifications listing endpoint used by the mobile client.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="misc-POSTapi-notifications-mark-as-read">
@@ -906,6 +904,24 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="misc-POSTapi-notifications--notification_id--mark-as-read">
                                 <a href="#misc-POSTapi-notifications--notification_id--mark-as-read">Legacy alias for marking a single notification as read.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-DELETEapi-v1-me-products--product_id--images--mediaId-">
+                                <a href="#misc-DELETEapi-v1-me-products--product_id--images--mediaId-">Delete product image</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-POSTapi-v1-me-size-templates--size_template_id--items">
+                                <a href="#misc-POSTapi-v1-me-size-templates--size_template_id--items">POST api/v1/me/size-templates/{size_template_id}/items</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+                                <a href="#misc-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">PUT api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+                                <a href="#misc-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">DELETE api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-POSTapi-v1-me-livestreams--livestream_id--products">
+                                <a href="#misc-POSTapi-v1-me-livestreams--livestream_id--products">Attach product to livestream</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-DELETEapi-v1-me-livestreams--livestream_id--products--id-">
+                                <a href="#misc-DELETEapi-v1-me-livestreams--livestream_id--products--id-">Detach product from livestream</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -990,6 +1006,7 @@ Some historical mobile-client routes are still published under the main API surf
 
 - Legacy endpoints are documented with explicit replacement paths in their endpoint descriptions
 - Runtime responses from those aliases include `X-Fleepness-Legacy-Endpoint`, `X-Fleepness-Migration-Key`, and `X-Fleepness-Replacement-Endpoints` headers
+- A machine-readable migration manifest is available at `/api/v1/deprecations/legacy-endpoints`
 - New integrations should always prefer the modern me-scoped or resource-scoped replacement paths over the legacy aliases
 
 ### Response Format
@@ -10691,7 +10708,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/me/products" \
+    --get "https://fleepness-app.test/api/me/products?q=sku-001" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -10701,6 +10718,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <pre><code class="language-javascript">const url = new URL(
     "https://fleepness-app.test/api/me/products"
 );
+
+const params = {
+    "q": "sku-001",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
     "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
@@ -10725,6 +10748,9 @@ $response = $client-&gt;get(
             'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'q' =&gt; 'sku-001',
         ],
     ]
 );
@@ -10837,7 +10863,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>q</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="q"                data-endpoint="GETapi-me-products"
+               value="sku-001"
+               data-component="query">
+    <br>
+<p>Example: <code>sku-001</code></p>
+            </div>
+                </form>
 
                     <h2 id="products-POSTapi-me-products">Create product</h2>
 
@@ -11955,183 +11994,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="products-DELETEapi-me-products--product_id--images--mediaId-">Delete product image</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-me-products--product_id--images--mediaId-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/me/products/16/images/architecto" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/products/16/images/architecto"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/products/16/images/architecto';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-me-products--product_id--images--mediaId-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Image deleted.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-me-products--product_id--images--mediaId-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-me-products--product_id--images--mediaId-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-me-products--product_id--images--mediaId-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-me-products--product_id--images--mediaId-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-me-products--product_id--images--mediaId-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-me-products--product_id--images--mediaId-" data-method="DELETE"
-      data-path="api/me/products/{product_id}/images/{mediaId}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-me-products--product_id--images--mediaId-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-me-products--product_id--images--mediaId-"
-                    onclick="tryItOut('DELETEapi-me-products--product_id--images--mediaId-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-me-products--product_id--images--mediaId-"
-                    onclick="cancelTryOut('DELETEapi-me-products--product_id--images--mediaId-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-me-products--product_id--images--mediaId-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/me/products/{product_id}/images/{mediaId}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the product. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>mediaId</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="mediaId"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
-               value="architecto"
-               data-component="url">
-    <br>
-<p>Example: <code>architecto</code></p>
-            </div>
-                    </form>
-
                     <h2 id="products-GETapi-v1-me-products">List own products</h2>
 
 <p>
@@ -12146,7 +12008,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/products" \
+    --get "https://fleepness-app.test/api/v1/me/products?q=sku-001" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12156,6 +12018,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <pre><code class="language-javascript">const url = new URL(
     "https://fleepness-app.test/api/v1/me/products"
 );
+
+const params = {
+    "q": "sku-001",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
     "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
@@ -12180,6 +12048,9 @@ $response = $client-&gt;get(
             'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'q' =&gt; 'sku-001',
         ],
     ]
 );
@@ -12292,7 +12163,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>q</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="q"                data-endpoint="GETapi-v1-me-products"
+               value="sku-001"
+               data-component="query">
+    <br>
+<p>Example: <code>sku-001</code></p>
+            </div>
+                </form>
 
                     <h2 id="products-POSTapi-v1-me-products">Create product</h2>
 
@@ -13410,183 +13294,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="products-DELETEapi-v1-me-products--product_id--images--mediaId-">Delete product image</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-v1-me-products--product_id--images--mediaId-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/products/16/images/architecto" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products/16/images/architecto"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products/16/images/architecto';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-v1-me-products--product_id--images--mediaId-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Image deleted.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-v1-me-products--product_id--images--mediaId-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-me-products--product_id--images--mediaId-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-me-products--product_id--images--mediaId-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-v1-me-products--product_id--images--mediaId-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-me-products--product_id--images--mediaId-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-v1-me-products--product_id--images--mediaId-" data-method="DELETE"
-      data-path="api/v1/me/products/{product_id}/images/{mediaId}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-me-products--product_id--images--mediaId-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-me-products--product_id--images--mediaId-"
-                    onclick="tryItOut('DELETEapi-v1-me-products--product_id--images--mediaId-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-me-products--product_id--images--mediaId-"
-                    onclick="cancelTryOut('DELETEapi-v1-me-products--product_id--images--mediaId-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-me-products--product_id--images--mediaId-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/me/products/{product_id}/images/{mediaId}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the product. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>mediaId</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="mediaId"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
-               value="architecto"
-               data-component="url">
-    <br>
-<p>Example: <code>architecto</code></p>
-            </div>
-                    </form>
-
                 <h1 id="size-templates">Size Templates</h1>
 
     <p>Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).</p>
@@ -14073,450 +13780,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="size-templates-POSTapi-me-size-templates--sizeTemplate_id--items">POST api/me/size-templates/{sizeTemplate_id}/items</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-me-size-templates--sizeTemplate_id--items">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/me/size-templates/16/items" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/size-templates/16/items"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "POST",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/size-templates/16/items';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-me-size-templates--sizeTemplate_id--items">
-</span>
-<span id="execution-results-POSTapi-me-size-templates--sizeTemplate_id--items" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-me-size-templates--sizeTemplate_id--items"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-me-size-templates--sizeTemplate_id--items"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-me-size-templates--sizeTemplate_id--items" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-me-size-templates--sizeTemplate_id--items">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-me-size-templates--sizeTemplate_id--items" data-method="POST"
-      data-path="api/me/size-templates/{sizeTemplate_id}/items"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-me-size-templates--sizeTemplate_id--items', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-me-size-templates--sizeTemplate_id--items"
-                    onclick="tryItOut('POSTapi-me-size-templates--sizeTemplate_id--items');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-me-size-templates--sizeTemplate_id--items"
-                    onclick="cancelTryOut('POSTapi-me-size-templates--sizeTemplate_id--items');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-me-size-templates--sizeTemplate_id--items"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/me/size-templates/{sizeTemplate_id}/items</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-me-size-templates--sizeTemplate_id--items"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-me-size-templates--sizeTemplate_id--items"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplate_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplate_id"                data-endpoint="POSTapi-me-size-templates--sizeTemplate_id--items"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplate. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="size-templates-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">PATCH api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/me/size-templates/16/items/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/size-templates/16/items/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "PATCH",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/size-templates/16/items/16';
-$response = $client-&gt;patch(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-</span>
-<span id="execution-results-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" data-method="PATCH"
-      data-path="api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="tryItOut('PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="cancelTryOut('PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-purple">PATCH</small>
-            <b><code>api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplate_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplate_id"                data-endpoint="PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplate. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplateItem_id"                data-endpoint="PATCHapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="size-templates-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">DELETE api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/me/size-templates/16/items/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/size-templates/16/items/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/size-templates/16/items/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-</span>
-<span id="execution-results-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" data-method="DELETE"
-      data-path="api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="tryItOut('DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="cancelTryOut('DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplate_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplate_id"                data-endpoint="DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplate. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplateItem_id"                data-endpoint="DELETEapi-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
-            </div>
-                    </form>
-
                     <h2 id="size-templates-GETapi-v1-me-size-templates">List size templates</h2>
 
 <p>
@@ -14996,450 +14259,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the sizeTemplate. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="size-templates-POSTapi-v1-me-size-templates--sizeTemplate_id--items">POST api/v1/me/size-templates/{sizeTemplate_id}/items</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-me-size-templates--sizeTemplate_id--items">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "POST",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-me-size-templates--sizeTemplate_id--items">
-</span>
-<span id="execution-results-POSTapi-v1-me-size-templates--sizeTemplate_id--items" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-me-size-templates--sizeTemplate_id--items"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-me-size-templates--sizeTemplate_id--items"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-me-size-templates--sizeTemplate_id--items" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-me-size-templates--sizeTemplate_id--items">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-me-size-templates--sizeTemplate_id--items" data-method="POST"
-      data-path="api/v1/me/size-templates/{sizeTemplate_id}/items"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-me-size-templates--sizeTemplate_id--items', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-me-size-templates--sizeTemplate_id--items"
-                    onclick="tryItOut('POSTapi-v1-me-size-templates--sizeTemplate_id--items');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-me-size-templates--sizeTemplate_id--items"
-                    onclick="cancelTryOut('POSTapi-v1-me-size-templates--sizeTemplate_id--items');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-me-size-templates--sizeTemplate_id--items"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/me/size-templates/{sizeTemplate_id}/items</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-me-size-templates--sizeTemplate_id--items"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-me-size-templates--sizeTemplate_id--items"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplate_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplate_id"                data-endpoint="POSTapi-v1-me-size-templates--sizeTemplate_id--items"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplate. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="size-templates-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">PATCH api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "PATCH",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items/16';
-$response = $client-&gt;patch(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-</span>
-<span id="execution-results-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" data-method="PATCH"
-      data-path="api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="tryItOut('PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="cancelTryOut('PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-purple">PATCH</small>
-            <b><code>api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplate_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplate_id"                data-endpoint="PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplate. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplateItem_id"                data-endpoint="PATCHapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="size-templates-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">DELETE api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-</span>
-<span id="execution-results-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-" data-method="DELETE"
-      data-path="api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="tryItOut('DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    onclick="cancelTryOut('DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplate_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplate_id"                data-endpoint="DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplate. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="sizeTemplateItem_id"                data-endpoint="DELETEapi-v1-me-size-templates--sizeTemplate_id--items--sizeTemplateItem_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -16390,372 +15209,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="livestreams-POSTapi-me-livestreams--livestream_id--products">Attach product to livestream</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-me-livestreams--livestream_id--products">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/me/livestreams/16/products" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"product_id\": 5
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/livestreams/16/products"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "product_id": 5
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/livestreams/16/products';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'product_id' =&gt; 5,
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-me-livestreams--livestream_id--products">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Product attached.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-me-livestreams--livestream_id--products" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-me-livestreams--livestream_id--products"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-me-livestreams--livestream_id--products"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-me-livestreams--livestream_id--products" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-me-livestreams--livestream_id--products">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-me-livestreams--livestream_id--products" data-method="POST"
-      data-path="api/me/livestreams/{livestream_id}/products"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-me-livestreams--livestream_id--products', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-me-livestreams--livestream_id--products"
-                    onclick="tryItOut('POSTapi-me-livestreams--livestream_id--products');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-me-livestreams--livestream_id--products"
-                    onclick="cancelTryOut('POSTapi-me-livestreams--livestream_id--products');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-me-livestreams--livestream_id--products"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/me/livestreams/{livestream_id}/products</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-me-livestreams--livestream_id--products"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
-               value="5"
-               data-component="body">
-    <br>
-<p>Example: <code>5</code></p>
-        </div>
-        </form>
-
-                    <h2 id="livestreams-DELETEapi-me-livestreams--livestream_id--products--product_id-">Detach product from livestream</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-me-livestreams--livestream_id--products--product_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/me/livestreams/16/products/16" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/livestreams/16/products/16"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/livestreams/16/products/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-me-livestreams--livestream_id--products--product_id-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Product detached.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-me-livestreams--livestream_id--products--product_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-me-livestreams--livestream_id--products--product_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-me-livestreams--livestream_id--products--product_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-me-livestreams--livestream_id--products--product_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-me-livestreams--livestream_id--products--product_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-me-livestreams--livestream_id--products--product_id-" data-method="DELETE"
-      data-path="api/me/livestreams/{livestream_id}/products/{product_id}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-me-livestreams--livestream_id--products--product_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-me-livestreams--livestream_id--products--product_id-"
-                    onclick="tryItOut('DELETEapi-me-livestreams--livestream_id--products--product_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-me-livestreams--livestream_id--products--product_id-"
-                    onclick="cancelTryOut('DELETEapi-me-livestreams--livestream_id--products--product_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-me-livestreams--livestream_id--products--product_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/me/livestreams/{livestream_id}/products/{product_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-me-livestreams--livestream_id--products--product_id-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--product_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--product_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--product_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--product_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the product. Example: <code>16</code></p>
-            </div>
-                    </form>
-
                     <h2 id="livestreams-GETapi-v1-me-livestreams">List own livestreams</h2>
 
 <p>
@@ -17699,372 +16152,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="livestreams-POSTapi-v1-me-livestreams--livestream_id--products">Attach product to livestream</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-me-livestreams--livestream_id--products">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"product_id\": 5
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "product_id": 5
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/16/products';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'product_id' =&gt; 5,
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-me-livestreams--livestream_id--products">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Product attached.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-v1-me-livestreams--livestream_id--products" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-me-livestreams--livestream_id--products"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-me-livestreams--livestream_id--products"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-me-livestreams--livestream_id--products" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-me-livestreams--livestream_id--products">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-me-livestreams--livestream_id--products" data-method="POST"
-      data-path="api/v1/me/livestreams/{livestream_id}/products"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-me-livestreams--livestream_id--products', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-me-livestreams--livestream_id--products"
-                    onclick="tryItOut('POSTapi-v1-me-livestreams--livestream_id--products');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-me-livestreams--livestream_id--products"
-                    onclick="cancelTryOut('POSTapi-v1-me-livestreams--livestream_id--products');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-me-livestreams--livestream_id--products"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/me/livestreams/{livestream_id}/products</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
-               value="5"
-               data-component="body">
-    <br>
-<p>Example: <code>5</code></p>
-        </div>
-        </form>
-
-                    <h2 id="livestreams-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-">Detach product from livestream</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products/16" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products/16"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/16/products/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Product detached.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-" data-method="DELETE"
-      data-path="api/v1/me/livestreams/{livestream_id}/products/{product_id}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-me-livestreams--livestream_id--products--product_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-                    onclick="tryItOut('DELETEapi-v1-me-livestreams--livestream_id--products--product_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-                    onclick="cancelTryOut('DELETEapi-v1-me-livestreams--livestream_id--products--product_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/me/livestreams/{livestream_id}/products/{product_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--product_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the product. Example: <code>16</code></p>
-            </div>
-                    </form>
-
                 <h1 id="short-videos">Short Videos</h1>
 
     <p>Vendor short-video management. Short videos are TikTok-style shoppable content.</p>
@@ -18249,8 +16336,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "title=Summer Collection"\
     --form "description=Eius et animi quos velit et."\
-    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpj3noqq11m4bcfk9YRnv" \
-    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpvlsm2g6dfvopckTVcJX" </code></pre></div>
+    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpmovbm56m4thmeaZfeI9" \
+    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpdcekg60o42lq3to4DHJ" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -18299,11 +16386,11 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'video',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpj3noqq11m4bcfk9YRnv', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpmovbm56m4thmeaZfeI9', 'r')
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpvlsm2g6dfvopckTVcJX', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpdcekg60o42lq3to4DHJ', 'r')
             ],
         ],
     ]
@@ -18445,7 +16532,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpj3noqq11m4bcfk9YRnv</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpmovbm56m4thmeaZfeI9</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -18457,7 +16544,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpvlsm2g6dfvopckTVcJX</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpdcekg60o42lq3to4DHJ</code></p>
         </div>
         </form>
 
@@ -19013,8 +17100,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "title=Summer Collection"\
     --form "description=Eius et animi quos velit et."\
-    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpm58187mbmtgl9khFF20" \
-    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php4t9tbgrvnjgbbVCWQuL" </code></pre></div>
+    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php7njn81a7n7g3daEkfWB" \
+    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php0r5td9qjl1ra6Znk5T3" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -19063,11 +17150,11 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'video',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpm58187mbmtgl9khFF20', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php7njn81a7n7g3daEkfWB', 'r')
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php4t9tbgrvnjgbbVCWQuL', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php0r5td9qjl1ra6Znk5T3', 'r')
             ],
         ],
     ]
@@ -19209,7 +17296,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpm58187mbmtgl9khFF20</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php7njn81a7n7g3daEkfWB</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -19221,7 +17308,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php4t9tbgrvnjgbbVCWQuL</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php0r5td9qjl1ra6Znk5T3</code></p>
         </div>
         </form>
 
@@ -25466,7 +23553,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="catalog-DELETEapi-products--product_id--reviews--review_id-">Delete own product review</h2>
+                    <h2 id="catalog-DELETEapi-products--product_id--reviews--id-">Delete own product review</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -25474,7 +23561,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-DELETEapi-products--product_id--reviews--review_id-">
+<span id="example-requests-DELETEapi-products--product_id--reviews--id-">
 <blockquote>Example request:</blockquote>
 
 
@@ -25522,7 +23609,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-DELETEapi-products--product_id--reviews--review_id-">
+<span id="example-responses-DELETEapi-products--product_id--reviews--id-">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -25533,43 +23620,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-DELETEapi-products--product_id--reviews--review_id-" hidden>
+<span id="execution-results-DELETEapi-products--product_id--reviews--id-" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-products--product_id--reviews--review_id-"></span>:
+                id="execution-response-status-DELETEapi-products--product_id--reviews--id-"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-products--product_id--reviews--review_id-"
+    <pre class="json"><code id="execution-response-content-DELETEapi-products--product_id--reviews--id-"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-DELETEapi-products--product_id--reviews--review_id-" hidden>
+<span id="execution-error-DELETEapi-products--product_id--reviews--id-" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-products--product_id--reviews--review_id-">
+    <pre><code id="execution-error-message-DELETEapi-products--product_id--reviews--id-">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-DELETEapi-products--product_id--reviews--review_id-" data-method="DELETE"
-      data-path="api/products/{product_id}/reviews/{review_id}"
+<form id="form-DELETEapi-products--product_id--reviews--id-" data-method="DELETE"
+      data-path="api/products/{product_id}/reviews/{id}"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-products--product_id--reviews--review_id-', this);">
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-products--product_id--reviews--id-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-products--product_id--reviews--review_id-"
-                    onclick="tryItOut('DELETEapi-products--product_id--reviews--review_id-');">Try it out ⚡
+                    id="btn-tryout-DELETEapi-products--product_id--reviews--id-"
+                    onclick="tryItOut('DELETEapi-products--product_id--reviews--id-');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-products--product_id--reviews--review_id-"
-                    onclick="cancelTryOut('DELETEapi-products--product_id--reviews--review_id-');" hidden>Cancel 🛑
+                    id="btn-canceltryout-DELETEapi-products--product_id--reviews--id-"
+                    onclick="cancelTryOut('DELETEapi-products--product_id--reviews--id-');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-products--product_id--reviews--review_id-"
+                    id="btn-executetryout-DELETEapi-products--product_id--reviews--id-"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -25577,7 +23664,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-red">DELETE</small>
-            <b><code>api/products/{product_id}/reviews/{review_id}</code></b>
+            <b><code>api/products/{product_id}/reviews/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -25586,7 +23673,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-products--product_id--reviews--review_id-"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-products--product_id--reviews--id-"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -25598,7 +23685,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-products--product_id--reviews--review_id-"
+                              name="Content-Type"                data-endpoint="DELETEapi-products--product_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -25610,7 +23697,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-products--product_id--reviews--review_id-"
+                              name="Accept"                data-endpoint="DELETEapi-products--product_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -25623,19 +23710,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="DELETEapi-products--product_id--reviews--review_id-"
+               step="any"               name="product_id"                data-endpoint="DELETEapi-products--product_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
 <p>The ID of the product. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>review_id</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="review_id"                data-endpoint="DELETEapi-products--product_id--reviews--review_id-"
+               step="any"               name="id"                data-endpoint="DELETEapi-products--product_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
@@ -27314,7 +25401,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="catalog-DELETEapi-v1-products--product_id--reviews--review_id-">Delete own product review</h2>
+                    <h2 id="catalog-DELETEapi-v1-products--product_id--reviews--id-">Delete own product review</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -27322,7 +25409,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-DELETEapi-v1-products--product_id--reviews--review_id-">
+<span id="example-requests-DELETEapi-v1-products--product_id--reviews--id-">
 <blockquote>Example request:</blockquote>
 
 
@@ -27370,7 +25457,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-DELETEapi-v1-products--product_id--reviews--review_id-">
+<span id="example-responses-DELETEapi-v1-products--product_id--reviews--id-">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -27381,43 +25468,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-DELETEapi-v1-products--product_id--reviews--review_id-" hidden>
+<span id="execution-results-DELETEapi-v1-products--product_id--reviews--id-" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-products--product_id--reviews--review_id-"></span>:
+                id="execution-response-status-DELETEapi-v1-products--product_id--reviews--id-"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-products--product_id--reviews--review_id-"
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-products--product_id--reviews--id-"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-DELETEapi-v1-products--product_id--reviews--review_id-" hidden>
+<span id="execution-error-DELETEapi-v1-products--product_id--reviews--id-" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-products--product_id--reviews--review_id-">
+    <pre><code id="execution-error-message-DELETEapi-v1-products--product_id--reviews--id-">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-DELETEapi-v1-products--product_id--reviews--review_id-" data-method="DELETE"
-      data-path="api/v1/products/{product_id}/reviews/{review_id}"
+<form id="form-DELETEapi-v1-products--product_id--reviews--id-" data-method="DELETE"
+      data-path="api/v1/products/{product_id}/reviews/{id}"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-products--product_id--reviews--review_id-', this);">
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-products--product_id--reviews--id-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-products--product_id--reviews--review_id-"
-                    onclick="tryItOut('DELETEapi-v1-products--product_id--reviews--review_id-');">Try it out ⚡
+                    id="btn-tryout-DELETEapi-v1-products--product_id--reviews--id-"
+                    onclick="tryItOut('DELETEapi-v1-products--product_id--reviews--id-');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-products--product_id--reviews--review_id-"
-                    onclick="cancelTryOut('DELETEapi-v1-products--product_id--reviews--review_id-');" hidden>Cancel 🛑
+                    id="btn-canceltryout-DELETEapi-v1-products--product_id--reviews--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-products--product_id--reviews--id-');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-products--product_id--reviews--review_id-"
+                    id="btn-executetryout-DELETEapi-v1-products--product_id--reviews--id-"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -27425,7 +25512,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/products/{product_id}/reviews/{review_id}</code></b>
+            <b><code>api/v1/products/{product_id}/reviews/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -27434,7 +25521,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-products--product_id--reviews--review_id-"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-products--product_id--reviews--id-"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -27446,7 +25533,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-v1-products--product_id--reviews--review_id-"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-products--product_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -27458,7 +25545,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-v1-products--product_id--reviews--review_id-"
+                              name="Accept"                data-endpoint="DELETEapi-v1-products--product_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -27471,19 +25558,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="DELETEapi-v1-products--product_id--reviews--review_id-"
+               step="any"               name="product_id"                data-endpoint="DELETEapi-v1-products--product_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
 <p>The ID of the product. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>review_id</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="review_id"                data-endpoint="DELETEapi-v1-products--product_id--reviews--review_id-"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-products--product_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
@@ -28407,7 +26494,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-
+<p>Browse approved vendors. This endpoint also replaces the old <code>/similarvendors/{vendor}</code> flow by accepting <code>similar_to_vendor_id</code>, and replaces vendor discovery filtering that previously lived on ad-hoc staging routes.</p>
 
 <span id="example-requests-GETapi-vendors">
 <blockquote>Example request:</blockquote>
@@ -28415,7 +26502,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/vendors?search=architecto&amp;shop_category_id=16" \
+    --get "https://fleepness-app.test/api/vendors?search=flash&amp;shop_category_id=2&amp;similar_to_vendor_id=12" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -28426,8 +26513,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const params = {
-    "search": "architecto",
-    "shop_category_id": "16",
+    "search": "flash",
+    "shop_category_id": "2",
+    "similar_to_vendor_id": "12",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -28455,8 +26543,9 @@ $response = $client-&gt;get(
             'Accept' =&gt; 'application/json',
         ],
         'query' =&gt; [
-            'search' =&gt; 'architecto',
-            'shop_category_id' =&gt; '16',
+            'search' =&gt; 'flash',
+            'shop_category_id' =&gt; '2',
+            'similar_to_vendor_id' =&gt; '12',
         ],
     ]
 );
@@ -28564,10 +26653,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="GETapi-vendors"
-               value="architecto"
+               value="flash"
                data-component="query">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Filter vendors by shop name. Example: <code>flash</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>shop_category_id</code></b>&nbsp;&nbsp;
@@ -28576,10 +26665,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="shop_category_id"                data-endpoint="GETapi-vendors"
-               value="16"
+               value="2"
                data-component="query">
     <br>
-<p>Example: <code>16</code></p>
+<p>Limit the vendor list to a specific shop category. Example: <code>2</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>similar_to_vendor_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="similar_to_vendor_id"                data-endpoint="GETapi-vendors"
+               value="12"
+               data-component="query">
+    <br>
+<p>Modern replacement for the old <code>/similarvendors/{vendor}</code> endpoint. Pass a vendor id to return other approved vendors from the same shop category. Example: <code>12</code></p>
             </div>
                 </form>
 
@@ -28742,7 +26843,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-
+<p>Browse a vendor storefront. This modern endpoint replaces the old vendor-specific staging routes for product search, price-range filtering, and price-category filtering.</p>
 
 <span id="example-requests-GETapi-vendors--vendorProfile_id--products">
 <blockquote>Example request:</blockquote>
@@ -28750,7 +26851,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/vendors/16/products" \
+    --get "https://fleepness-app.test/api/vendors/16/products?q=flash+tee&amp;min_price=200&amp;max_price=500&amp;price_category=low" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -28759,6 +26860,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <pre><code class="language-javascript">const url = new URL(
     "https://fleepness-app.test/api/vendors/16/products"
 );
+
+const params = {
+    "q": "flash tee",
+    "min_price": "200",
+    "max_price": "500",
+    "price_category": "low",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
     "Content-Type": "application/json",
@@ -28781,6 +26891,12 @@ $response = $client-&gt;get(
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'q' =&gt; 'flash tee',
+            'min_price' =&gt; '200',
+            'max_price' =&gt; '500',
+            'price_category' =&gt; 'low',
         ],
     ]
 );
@@ -28892,7 +27008,56 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the vendorProfile. Example: <code>16</code></p>
             </div>
-                    </form>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>q</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="q"                data-endpoint="GETapi-vendors--vendorProfile_id--products"
+               value="flash tee"
+               data-component="query">
+    <br>
+<p>Search within the selected vendor storefront. This is the replacement for the old vendor product search route. Example: <code>flash tee</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>min_price</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="min_price"                data-endpoint="GETapi-vendors--vendorProfile_id--products"
+               value="200"
+               data-component="query">
+    <br>
+<p>Minimum effective product price. Use together with <code>max_price</code> as the replacement for the old in-price-range endpoint. Example: <code>200</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>max_price</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="max_price"                data-endpoint="GETapi-vendors--vendorProfile_id--products"
+               value="500"
+               data-component="query">
+    <br>
+<p>Maximum effective product price. Use together with <code>min_price</code> as the replacement for the old in-price-range endpoint. Example: <code>500</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>price_category</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="price_category"                data-endpoint="GETapi-vendors--vendorProfile_id--products"
+               value="low"
+               data-component="query">
+    <br>
+<p>Named price-band replacement for the old in-price-category endpoint. Supported values: <code>low</code>, <code>medium</code>, <code>premium</code>. Example: <code>low</code></p>
+            </div>
+                </form>
 
                     <h2 id="vendors-GETapi-vendors--vendorProfile_id--short-videos">List vendor short videos</h2>
 
@@ -29041,161 +27206,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="vendorProfile_id"                data-endpoint="GETapi-vendors--vendorProfile_id--short-videos"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the vendorProfile. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="vendors-GETapi-vendors--vendorProfile_id--reviews">List vendor reviews</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-vendors--vendorProfile_id--reviews">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/vendors/16/reviews" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/vendors/16/reviews"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/vendors/16/reviews';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-vendors--vendorProfile_id--reviews">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 1,
-            &quot;rating&quot;: 5,
-            &quot;comment&quot;: &quot;Great vendor!&quot;
-        }
-    ]
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-vendors--vendorProfile_id--reviews" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-vendors--vendorProfile_id--reviews"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-vendors--vendorProfile_id--reviews"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-vendors--vendorProfile_id--reviews" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-vendors--vendorProfile_id--reviews">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-vendors--vendorProfile_id--reviews" data-method="GET"
-      data-path="api/vendors/{vendorProfile_id}/reviews"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-vendors--vendorProfile_id--reviews', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-vendors--vendorProfile_id--reviews"
-                    onclick="tryItOut('GETapi-vendors--vendorProfile_id--reviews');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-vendors--vendorProfile_id--reviews"
-                    onclick="cancelTryOut('GETapi-vendors--vendorProfile_id--reviews');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-vendors--vendorProfile_id--reviews"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/vendors/{vendorProfile_id}/reviews</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-vendors--vendorProfile_id--reviews"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-vendors--vendorProfile_id--reviews"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>vendorProfile_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="vendorProfile_id"                data-endpoint="GETapi-vendors--vendorProfile_id--reviews"
                value="16"
                data-component="url">
     <br>
@@ -29533,6 +27543,161 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="vendors-GETapi-vendors--vendorProfile_id--reviews">List vendor reviews</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-vendors--vendorProfile_id--reviews">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/vendors/16/reviews" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/vendors/16/reviews"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/vendors/16/reviews';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-vendors--vendorProfile_id--reviews">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;rating&quot;: 5,
+            &quot;comment&quot;: &quot;Great vendor!&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-vendors--vendorProfile_id--reviews" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-vendors--vendorProfile_id--reviews"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-vendors--vendorProfile_id--reviews"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-vendors--vendorProfile_id--reviews" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-vendors--vendorProfile_id--reviews">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-vendors--vendorProfile_id--reviews" data-method="GET"
+      data-path="api/vendors/{vendorProfile_id}/reviews"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-vendors--vendorProfile_id--reviews', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-vendors--vendorProfile_id--reviews"
+                    onclick="tryItOut('GETapi-vendors--vendorProfile_id--reviews');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-vendors--vendorProfile_id--reviews"
+                    onclick="cancelTryOut('GETapi-vendors--vendorProfile_id--reviews');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-vendors--vendorProfile_id--reviews"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/vendors/{vendorProfile_id}/reviews</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-vendors--vendorProfile_id--reviews"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-vendors--vendorProfile_id--reviews"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>vendorProfile_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="vendorProfile_id"                data-endpoint="GETapi-vendors--vendorProfile_id--reviews"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the vendorProfile. Example: <code>16</code></p>
+            </div>
+                    </form>
+
                     <h2 id="vendors-POSTapi-vendors--vendorProfile_id--reviews">Write vendor review</h2>
 
 <p>
@@ -29740,7 +27905,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="vendors-DELETEapi-vendors--vendorProfile_id--reviews--review_id-">Delete own vendor review</h2>
+                    <h2 id="vendors-DELETEapi-vendors--vendorProfile_id--reviews--id-">Delete own vendor review</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -29748,7 +27913,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-DELETEapi-vendors--vendorProfile_id--reviews--review_id-">
+<span id="example-requests-DELETEapi-vendors--vendorProfile_id--reviews--id-">
 <blockquote>Example request:</blockquote>
 
 
@@ -29796,7 +27961,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-DELETEapi-vendors--vendorProfile_id--reviews--review_id-">
+<span id="example-responses-DELETEapi-vendors--vendorProfile_id--reviews--id-">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -29807,43 +27972,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-DELETEapi-vendors--vendorProfile_id--reviews--review_id-" hidden>
+<span id="execution-results-DELETEapi-vendors--vendorProfile_id--reviews--id-" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-vendors--vendorProfile_id--reviews--review_id-"></span>:
+                id="execution-response-status-DELETEapi-vendors--vendorProfile_id--reviews--id-"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
+    <pre class="json"><code id="execution-response-content-DELETEapi-vendors--vendorProfile_id--reviews--id-"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-DELETEapi-vendors--vendorProfile_id--reviews--review_id-" hidden>
+<span id="execution-error-DELETEapi-vendors--vendorProfile_id--reviews--id-" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-vendors--vendorProfile_id--reviews--review_id-">
+    <pre><code id="execution-error-message-DELETEapi-vendors--vendorProfile_id--reviews--id-">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-DELETEapi-vendors--vendorProfile_id--reviews--review_id-" data-method="DELETE"
-      data-path="api/vendors/{vendorProfile_id}/reviews/{review_id}"
+<form id="form-DELETEapi-vendors--vendorProfile_id--reviews--id-" data-method="DELETE"
+      data-path="api/vendors/{vendorProfile_id}/reviews/{id}"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-vendors--vendorProfile_id--reviews--review_id-', this);">
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-vendors--vendorProfile_id--reviews--id-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
-                    onclick="tryItOut('DELETEapi-vendors--vendorProfile_id--reviews--review_id-');">Try it out ⚡
+                    id="btn-tryout-DELETEapi-vendors--vendorProfile_id--reviews--id-"
+                    onclick="tryItOut('DELETEapi-vendors--vendorProfile_id--reviews--id-');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
-                    onclick="cancelTryOut('DELETEapi-vendors--vendorProfile_id--reviews--review_id-');" hidden>Cancel 🛑
+                    id="btn-canceltryout-DELETEapi-vendors--vendorProfile_id--reviews--id-"
+                    onclick="cancelTryOut('DELETEapi-vendors--vendorProfile_id--reviews--id-');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
+                    id="btn-executetryout-DELETEapi-vendors--vendorProfile_id--reviews--id-"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -29851,7 +28016,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-red">DELETE</small>
-            <b><code>api/vendors/{vendorProfile_id}/reviews/{review_id}</code></b>
+            <b><code>api/vendors/{vendorProfile_id}/reviews/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -29860,7 +28025,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--id-"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -29872,7 +28037,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
+                              name="Content-Type"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -29884,7 +28049,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
+                              name="Accept"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -29897,19 +28062,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="vendorProfile_id"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
+               step="any"               name="vendorProfile_id"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
 <p>The ID of the vendorProfile. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>review_id</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="review_id"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--review_id-"
+               step="any"               name="id"                data-endpoint="DELETEapi-vendors--vendorProfile_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
@@ -30393,7 +28558,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-
+<p>Browse approved vendors. This endpoint also replaces the old <code>/similarvendors/{vendor}</code> flow by accepting <code>similar_to_vendor_id</code>, and replaces vendor discovery filtering that previously lived on ad-hoc staging routes.</p>
 
 <span id="example-requests-GETapi-v1-vendors">
 <blockquote>Example request:</blockquote>
@@ -30401,7 +28566,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors?search=architecto&amp;shop_category_id=16" \
+    --get "https://fleepness-app.test/api/v1/vendors?search=flash&amp;shop_category_id=2&amp;similar_to_vendor_id=12" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -30412,8 +28577,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const params = {
-    "search": "architecto",
-    "shop_category_id": "16",
+    "search": "flash",
+    "shop_category_id": "2",
+    "similar_to_vendor_id": "12",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -30441,8 +28607,9 @@ $response = $client-&gt;get(
             'Accept' =&gt; 'application/json',
         ],
         'query' =&gt; [
-            'search' =&gt; 'architecto',
-            'shop_category_id' =&gt; '16',
+            'search' =&gt; 'flash',
+            'shop_category_id' =&gt; '2',
+            'similar_to_vendor_id' =&gt; '12',
         ],
     ]
 );
@@ -30550,10 +28717,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="GETapi-v1-vendors"
-               value="architecto"
+               value="flash"
                data-component="query">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Filter vendors by shop name. Example: <code>flash</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>shop_category_id</code></b>&nbsp;&nbsp;
@@ -30562,10 +28729,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="shop_category_id"                data-endpoint="GETapi-v1-vendors"
-               value="16"
+               value="2"
                data-component="query">
     <br>
-<p>Example: <code>16</code></p>
+<p>Limit the vendor list to a specific shop category. Example: <code>2</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>similar_to_vendor_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="similar_to_vendor_id"                data-endpoint="GETapi-v1-vendors"
+               value="12"
+               data-component="query">
+    <br>
+<p>Modern replacement for the old <code>/similarvendors/{vendor}</code> endpoint. Pass a vendor id to return other approved vendors from the same shop category. Example: <code>12</code></p>
             </div>
                 </form>
 
@@ -30728,7 +28907,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-
+<p>Browse a vendor storefront. This modern endpoint replaces the old vendor-specific staging routes for product search, price-range filtering, and price-category filtering.</p>
 
 <span id="example-requests-GETapi-v1-vendors--vendorProfile_id--products">
 <blockquote>Example request:</blockquote>
@@ -30736,7 +28915,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors/16/products" \
+    --get "https://fleepness-app.test/api/v1/vendors/16/products?q=flash+tee&amp;min_price=200&amp;max_price=500&amp;price_category=low" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -30745,6 +28924,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <pre><code class="language-javascript">const url = new URL(
     "https://fleepness-app.test/api/v1/vendors/16/products"
 );
+
+const params = {
+    "q": "flash tee",
+    "min_price": "200",
+    "max_price": "500",
+    "price_category": "low",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
     "Content-Type": "application/json",
@@ -30767,6 +28955,12 @@ $response = $client-&gt;get(
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'q' =&gt; 'flash tee',
+            'min_price' =&gt; '200',
+            'max_price' =&gt; '500',
+            'price_category' =&gt; 'low',
         ],
     ]
 );
@@ -30878,7 +29072,56 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the vendorProfile. Example: <code>16</code></p>
             </div>
-                    </form>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>q</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="q"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--products"
+               value="flash tee"
+               data-component="query">
+    <br>
+<p>Search within the selected vendor storefront. This is the replacement for the old vendor product search route. Example: <code>flash tee</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>min_price</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="min_price"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--products"
+               value="200"
+               data-component="query">
+    <br>
+<p>Minimum effective product price. Use together with <code>max_price</code> as the replacement for the old in-price-range endpoint. Example: <code>200</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>max_price</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="max_price"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--products"
+               value="500"
+               data-component="query">
+    <br>
+<p>Maximum effective product price. Use together with <code>min_price</code> as the replacement for the old in-price-range endpoint. Example: <code>500</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>price_category</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="price_category"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--products"
+               value="low"
+               data-component="query">
+    <br>
+<p>Named price-band replacement for the old in-price-category endpoint. Supported values: <code>low</code>, <code>medium</code>, <code>premium</code>. Example: <code>low</code></p>
+            </div>
+                </form>
 
                     <h2 id="vendors-GETapi-v1-vendors--vendorProfile_id--short-videos">List vendor short videos</h2>
 
@@ -31027,161 +29270,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="vendorProfile_id"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--short-videos"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the vendorProfile. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="vendors-GETapi-v1-vendors--vendorProfile_id--reviews">List vendor reviews</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-vendors--vendorProfile_id--reviews">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors/16/reviews" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/reviews"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/reviews';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-vendors--vendorProfile_id--reviews">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 1,
-            &quot;rating&quot;: 5,
-            &quot;comment&quot;: &quot;Great vendor!&quot;
-        }
-    ]
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-vendors--vendorProfile_id--reviews" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-vendors--vendorProfile_id--reviews"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-vendors--vendorProfile_id--reviews"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-vendors--vendorProfile_id--reviews" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-vendors--vendorProfile_id--reviews">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-vendors--vendorProfile_id--reviews" data-method="GET"
-      data-path="api/v1/vendors/{vendorProfile_id}/reviews"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-vendors--vendorProfile_id--reviews', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-vendors--vendorProfile_id--reviews"
-                    onclick="tryItOut('GETapi-v1-vendors--vendorProfile_id--reviews');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-vendors--vendorProfile_id--reviews"
-                    onclick="cancelTryOut('GETapi-v1-vendors--vendorProfile_id--reviews');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-vendors--vendorProfile_id--reviews"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/vendors/{vendorProfile_id}/reviews</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--reviews"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--reviews"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>vendorProfile_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="vendorProfile_id"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--reviews"
                value="16"
                data-component="url">
     <br>
@@ -31519,6 +29607,161 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="vendors-GETapi-v1-vendors--vendorProfile_id--reviews">List vendor reviews</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-vendors--vendorProfile_id--reviews">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/v1/vendors/16/reviews" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/vendors/16/reviews"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/vendors/16/reviews';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-vendors--vendorProfile_id--reviews">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;rating&quot;: 5,
+            &quot;comment&quot;: &quot;Great vendor!&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-vendors--vendorProfile_id--reviews" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-vendors--vendorProfile_id--reviews"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-vendors--vendorProfile_id--reviews"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-vendors--vendorProfile_id--reviews" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-vendors--vendorProfile_id--reviews">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-vendors--vendorProfile_id--reviews" data-method="GET"
+      data-path="api/v1/vendors/{vendorProfile_id}/reviews"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-vendors--vendorProfile_id--reviews', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-vendors--vendorProfile_id--reviews"
+                    onclick="tryItOut('GETapi-v1-vendors--vendorProfile_id--reviews');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-vendors--vendorProfile_id--reviews"
+                    onclick="cancelTryOut('GETapi-v1-vendors--vendorProfile_id--reviews');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-vendors--vendorProfile_id--reviews"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/vendors/{vendorProfile_id}/reviews</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--reviews"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--reviews"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>vendorProfile_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="vendorProfile_id"                data-endpoint="GETapi-v1-vendors--vendorProfile_id--reviews"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the vendorProfile. Example: <code>16</code></p>
+            </div>
+                    </form>
+
                     <h2 id="vendors-POSTapi-v1-vendors--vendorProfile_id--reviews">Write vendor review</h2>
 
 <p>
@@ -31726,7 +29969,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="vendors-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-">Delete own vendor review</h2>
+                    <h2 id="vendors-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-">Delete own vendor review</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -31734,7 +29977,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-">
+<span id="example-requests-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-">
 <blockquote>Example request:</blockquote>
 
 
@@ -31782,7 +30025,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-">
+<span id="example-responses-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -31793,43 +30036,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-" hidden>
+<span id="execution-results-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"></span>:
+                id="execution-response-status-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-" hidden>
+<span id="execution-error-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-">
+    <pre><code id="execution-error-message-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-" data-method="DELETE"
-      data-path="api/v1/vendors/{vendorProfile_id}/reviews/{review_id}"
+<form id="form-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-" data-method="DELETE"
+      data-path="api/v1/vendors/{vendorProfile_id}/reviews/{id}"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-', this);">
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-vendors--vendorProfile_id--reviews--id-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
-                    onclick="tryItOut('DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-');">Try it out ⚡
+                    id="btn-tryout-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
+                    onclick="tryItOut('DELETEapi-v1-vendors--vendorProfile_id--reviews--id-');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
-                    onclick="cancelTryOut('DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-');" hidden>Cancel 🛑
+                    id="btn-canceltryout-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-vendors--vendorProfile_id--reviews--id-');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
+                    id="btn-executetryout-DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -31837,7 +30080,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/vendors/{vendorProfile_id}/reviews/{review_id}</code></b>
+            <b><code>api/v1/vendors/{vendorProfile_id}/reviews/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -31846,7 +30089,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -31858,7 +30101,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -31870,7 +30113,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
+                              name="Accept"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
                value="application/json"
                data-component="header">
     <br>
@@ -31883,19 +30126,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="vendorProfile_id"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
+               step="any"               name="vendorProfile_id"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
 <p>The ID of the vendorProfile. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>review_id</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="review_id"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--review_id-"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-vendors--vendorProfile_id--reviews--id-"
                value="16"
                data-component="url">
     <br>
@@ -32838,532 +31081,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="content-GETapi-short-videos--shortVideo_id--comments">List short video comments</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-short-videos--shortVideo_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/short-videos/16/comments" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/short-videos/16/comments"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/short-videos/16/comments';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-short-videos--shortVideo_id--comments">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 1,
-            &quot;comment&quot;: &quot;Great video!&quot;
-        }
-    ],
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-short-videos--shortVideo_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-short-videos--shortVideo_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-short-videos--shortVideo_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-short-videos--shortVideo_id--comments" data-method="GET"
-      data-path="api/short-videos/{shortVideo_id}/comments"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-short-videos--shortVideo_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-short-videos--shortVideo_id--comments"
-                    onclick="tryItOut('GETapi-short-videos--shortVideo_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-short-videos--shortVideo_id--comments"
-                    onclick="cancelTryOut('GETapi-short-videos--shortVideo_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-short-videos--shortVideo_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/short-videos/{shortVideo_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>shortVideo_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="shortVideo_id"                data-endpoint="GETapi-short-videos--shortVideo_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the shortVideo. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="content-POSTapi-short-videos--shortVideo_id--comments">Post short video comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-short-videos--shortVideo_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/short-videos/16/comments" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"comment\": \"Great video!\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/short-videos/16/comments"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "comment": "Great video!"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/short-videos/16/comments';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'comment' =&gt; 'Great video!',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-short-videos--shortVideo_id--comments">
-            <blockquote>
-            <p>Example response (201):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;comment&quot;: &quot;Great video!&quot;
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-short-videos--shortVideo_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-short-videos--shortVideo_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-short-videos--shortVideo_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-short-videos--shortVideo_id--comments" data-method="POST"
-      data-path="api/short-videos/{shortVideo_id}/comments"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-short-videos--shortVideo_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-short-videos--shortVideo_id--comments"
-                    onclick="tryItOut('POSTapi-short-videos--shortVideo_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-short-videos--shortVideo_id--comments"
-                    onclick="cancelTryOut('POSTapi-short-videos--shortVideo_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-short-videos--shortVideo_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/short-videos/{shortVideo_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-short-videos--shortVideo_id--comments"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>shortVideo_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="shortVideo_id"                data-endpoint="POSTapi-short-videos--shortVideo_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the shortVideo. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="comment"                data-endpoint="POSTapi-short-videos--shortVideo_id--comments"
-               value="Great video!"
-               data-component="body">
-    <br>
-<p>Example: <code>Great video!</code></p>
-        </div>
-        </form>
-
-                    <h2 id="content-DELETEapi-short-videos--shortVideo_id--comments--comment_id-">Delete short video comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-short-videos--shortVideo_id--comments--comment_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/short-videos/16/comments/16" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/short-videos/16/comments/16"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/short-videos/16/comments/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-short-videos--shortVideo_id--comments--comment_id-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Comment deleted.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-short-videos--shortVideo_id--comments--comment_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-short-videos--shortVideo_id--comments--comment_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-short-videos--shortVideo_id--comments--comment_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-short-videos--shortVideo_id--comments--comment_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-short-videos--shortVideo_id--comments--comment_id-" data-method="DELETE"
-      data-path="api/short-videos/{shortVideo_id}/comments/{comment_id}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-short-videos--shortVideo_id--comments--comment_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-                    onclick="tryItOut('DELETEapi-short-videos--shortVideo_id--comments--comment_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-                    onclick="cancelTryOut('DELETEapi-short-videos--shortVideo_id--comments--comment_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/short-videos/{shortVideo_id}/comments/{comment_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>shortVideo_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="shortVideo_id"                data-endpoint="DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the shortVideo. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>comment_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="comment_id"                data-endpoint="DELETEapi-short-videos--shortVideo_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the comment. Example: <code>16</code></p>
-            </div>
-                    </form>
-
                     <h2 id="content-POSTapi-short-videos--shortVideo_id--like">Like short video</h2>
 
 <p>
@@ -33691,6 +31408,532 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the shortVideo. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-GETapi-short-videos--short_video_id--comments">List short video comments</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-short-videos--short_video_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/short-videos/16/comments" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/short-videos/16/comments"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/short-videos/16/comments';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-short-videos--short_video_id--comments">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;comment&quot;: &quot;Great video!&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-short-videos--short_video_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-short-videos--short_video_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-short-videos--short_video_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-short-videos--short_video_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-short-videos--short_video_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-short-videos--short_video_id--comments" data-method="GET"
+      data-path="api/short-videos/{short_video_id}/comments"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-short-videos--short_video_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-short-videos--short_video_id--comments"
+                    onclick="tryItOut('GETapi-short-videos--short_video_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-short-videos--short_video_id--comments"
+                    onclick="cancelTryOut('GETapi-short-videos--short_video_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-short-videos--short_video_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/short-videos/{short_video_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>short_video_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="short_video_id"                data-endpoint="GETapi-short-videos--short_video_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the short video. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-POSTapi-short-videos--short_video_id--comments">Post short video comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-short-videos--short_video_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/short-videos/16/comments" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"comment\": \"Great video!\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/short-videos/16/comments"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "comment": "Great video!"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/short-videos/16/comments';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'comment' =&gt; 'Great video!',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-short-videos--short_video_id--comments">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;comment&quot;: &quot;Great video!&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-short-videos--short_video_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-short-videos--short_video_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-short-videos--short_video_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-short-videos--short_video_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-short-videos--short_video_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-short-videos--short_video_id--comments" data-method="POST"
+      data-path="api/short-videos/{short_video_id}/comments"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-short-videos--short_video_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-short-videos--short_video_id--comments"
+                    onclick="tryItOut('POSTapi-short-videos--short_video_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-short-videos--short_video_id--comments"
+                    onclick="cancelTryOut('POSTapi-short-videos--short_video_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-short-videos--short_video_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/short-videos/{short_video_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-short-videos--short_video_id--comments"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>short_video_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="short_video_id"                data-endpoint="POSTapi-short-videos--short_video_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the short video. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="comment"                data-endpoint="POSTapi-short-videos--short_video_id--comments"
+               value="Great video!"
+               data-component="body">
+    <br>
+<p>Example: <code>Great video!</code></p>
+        </div>
+        </form>
+
+                    <h2 id="content-DELETEapi-short-videos--short_video_id--comments--id-">Delete short video comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-short-videos--short_video_id--comments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/short-videos/16/comments/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/short-videos/16/comments/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/short-videos/16/comments/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-short-videos--short_video_id--comments--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Comment deleted.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-short-videos--short_video_id--comments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-short-videos--short_video_id--comments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-short-videos--short_video_id--comments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-short-videos--short_video_id--comments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-short-videos--short_video_id--comments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-short-videos--short_video_id--comments--id-" data-method="DELETE"
+      data-path="api/short-videos/{short_video_id}/comments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-short-videos--short_video_id--comments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-short-videos--short_video_id--comments--id-"
+                    onclick="tryItOut('DELETEapi-short-videos--short_video_id--comments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-short-videos--short_video_id--comments--id-"
+                    onclick="cancelTryOut('DELETEapi-short-videos--short_video_id--comments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-short-videos--short_video_id--comments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/short-videos/{short_video_id}/comments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-short-videos--short_video_id--comments--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-short-videos--short_video_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-short-videos--short_video_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>short_video_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="short_video_id"                data-endpoint="DELETEapi-short-videos--short_video_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the short video. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-short-videos--short_video_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the comment. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -34142,532 +32385,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="content-GETapi-livestreams--livestream_id--comments">List livestream comments</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-livestreams--livestream_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/livestreams/16/comments" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/livestreams/16/comments"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/livestreams/16/comments';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-livestreams--livestream_id--comments">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 1,
-            &quot;comment&quot;: &quot;Watching now!&quot;
-        }
-    ],
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-livestreams--livestream_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-livestreams--livestream_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-livestreams--livestream_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-livestreams--livestream_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-livestreams--livestream_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-livestreams--livestream_id--comments" data-method="GET"
-      data-path="api/livestreams/{livestream_id}/comments"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-livestreams--livestream_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-livestreams--livestream_id--comments"
-                    onclick="tryItOut('GETapi-livestreams--livestream_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-livestreams--livestream_id--comments"
-                    onclick="cancelTryOut('GETapi-livestreams--livestream_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-livestreams--livestream_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/livestreams/{livestream_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="GETapi-livestreams--livestream_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="content-POSTapi-livestreams--livestream_id--comments">Post livestream comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-livestreams--livestream_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/livestreams/16/comments" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"comment\": \"Watching now!\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/livestreams/16/comments"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "comment": "Watching now!"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/livestreams/16/comments';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'comment' =&gt; 'Watching now!',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-livestreams--livestream_id--comments">
-            <blockquote>
-            <p>Example response (201):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;comment&quot;: &quot;Watching now!&quot;
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-livestreams--livestream_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-livestreams--livestream_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-livestreams--livestream_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-livestreams--livestream_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-livestreams--livestream_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-livestreams--livestream_id--comments" data-method="POST"
-      data-path="api/livestreams/{livestream_id}/comments"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-livestreams--livestream_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-livestreams--livestream_id--comments"
-                    onclick="tryItOut('POSTapi-livestreams--livestream_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-livestreams--livestream_id--comments"
-                    onclick="cancelTryOut('POSTapi-livestreams--livestream_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-livestreams--livestream_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/livestreams/{livestream_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-livestreams--livestream_id--comments"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="comment"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
-               value="Watching now!"
-               data-component="body">
-    <br>
-<p>Example: <code>Watching now!</code></p>
-        </div>
-        </form>
-
-                    <h2 id="content-DELETEapi-livestreams--livestream_id--comments--comment_id-">Delete livestream comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-livestreams--livestream_id--comments--comment_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/livestreams/16/comments/16" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/livestreams/16/comments/16"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/livestreams/16/comments/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-livestreams--livestream_id--comments--comment_id-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Comment deleted.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-livestreams--livestream_id--comments--comment_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-livestreams--livestream_id--comments--comment_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-livestreams--livestream_id--comments--comment_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-livestreams--livestream_id--comments--comment_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-livestreams--livestream_id--comments--comment_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-livestreams--livestream_id--comments--comment_id-" data-method="DELETE"
-      data-path="api/livestreams/{livestream_id}/comments/{comment_id}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-livestreams--livestream_id--comments--comment_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-livestreams--livestream_id--comments--comment_id-"
-                    onclick="tryItOut('DELETEapi-livestreams--livestream_id--comments--comment_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-livestreams--livestream_id--comments--comment_id-"
-                    onclick="cancelTryOut('DELETEapi-livestreams--livestream_id--comments--comment_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-livestreams--livestream_id--comments--comment_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/livestreams/{livestream_id}/comments/{comment_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-livestreams--livestream_id--comments--comment_id-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>comment_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="comment_id"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the comment. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -35147,6 +32864,740 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-GETapi-livestreams--livestream_id--comments">List livestream comments</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-livestreams--livestream_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/livestreams/16/comments" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/livestreams/16/comments"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/livestreams/16/comments';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-livestreams--livestream_id--comments">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;comment&quot;: &quot;Watching now!&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-livestreams--livestream_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-livestreams--livestream_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-livestreams--livestream_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-livestreams--livestream_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-livestreams--livestream_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-livestreams--livestream_id--comments" data-method="GET"
+      data-path="api/livestreams/{livestream_id}/comments"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-livestreams--livestream_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-livestreams--livestream_id--comments"
+                    onclick="tryItOut('GETapi-livestreams--livestream_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-livestreams--livestream_id--comments"
+                    onclick="cancelTryOut('GETapi-livestreams--livestream_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-livestreams--livestream_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/livestreams/{livestream_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="GETapi-livestreams--livestream_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-POSTapi-livestreams--livestream_id--comments">Post livestream comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-livestreams--livestream_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/livestreams/16/comments" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"comment\": \"Watching now!\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/livestreams/16/comments"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "comment": "Watching now!"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/livestreams/16/comments';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'comment' =&gt; 'Watching now!',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-livestreams--livestream_id--comments">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;comment&quot;: &quot;Watching now!&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-livestreams--livestream_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-livestreams--livestream_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-livestreams--livestream_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-livestreams--livestream_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-livestreams--livestream_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-livestreams--livestream_id--comments" data-method="POST"
+      data-path="api/livestreams/{livestream_id}/comments"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-livestreams--livestream_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-livestreams--livestream_id--comments"
+                    onclick="tryItOut('POSTapi-livestreams--livestream_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-livestreams--livestream_id--comments"
+                    onclick="cancelTryOut('POSTapi-livestreams--livestream_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-livestreams--livestream_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/livestreams/{livestream_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-livestreams--livestream_id--comments"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="comment"                data-endpoint="POSTapi-livestreams--livestream_id--comments"
+               value="Watching now!"
+               data-component="body">
+    <br>
+<p>Example: <code>Watching now!</code></p>
+        </div>
+        </form>
+
+                    <h2 id="content-PUTapi-livestreams--livestream_id--comments--id-">Update livestream comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-livestreams--livestream_id--comments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://fleepness-app.test/api/livestreams/16/comments/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"comment\": \"Updated message\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/livestreams/16/comments/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "comment": "Updated message"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/livestreams/16/comments/16';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'comment' =&gt; 'Updated message',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-livestreams--livestream_id--comments--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;comment&quot;: &quot;Updated message&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-livestreams--livestream_id--comments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-livestreams--livestream_id--comments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-livestreams--livestream_id--comments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-livestreams--livestream_id--comments--id-" data-method="PUT"
+      data-path="api/livestreams/{livestream_id}/comments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-livestreams--livestream_id--comments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-livestreams--livestream_id--comments--id-"
+                    onclick="tryItOut('PUTapi-livestreams--livestream_id--comments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-livestreams--livestream_id--comments--id-"
+                    onclick="cancelTryOut('PUTapi-livestreams--livestream_id--comments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-livestreams--livestream_id--comments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/livestreams/{livestream_id}/comments/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/livestreams/{livestream_id}/comments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-livestreams--livestream_id--comments--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="PUTapi-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the comment. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="comment"                data-endpoint="PUTapi-livestreams--livestream_id--comments--id-"
+               value="Updated message"
+               data-component="body">
+    <br>
+<p>Example: <code>Updated message</code></p>
+        </div>
+        </form>
+
+                    <h2 id="content-DELETEapi-livestreams--livestream_id--comments--id-">Delete livestream comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-livestreams--livestream_id--comments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/livestreams/16/comments/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/livestreams/16/comments/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/livestreams/16/comments/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-livestreams--livestream_id--comments--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Comment deleted.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-livestreams--livestream_id--comments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-livestreams--livestream_id--comments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-livestreams--livestream_id--comments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-livestreams--livestream_id--comments--id-" data-method="DELETE"
+      data-path="api/livestreams/{livestream_id}/comments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-livestreams--livestream_id--comments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-livestreams--livestream_id--comments--id-"
+                    onclick="tryItOut('DELETEapi-livestreams--livestream_id--comments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-livestreams--livestream_id--comments--id-"
+                    onclick="cancelTryOut('DELETEapi-livestreams--livestream_id--comments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-livestreams--livestream_id--comments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/livestreams/{livestream_id}/comments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-livestreams--livestream_id--comments--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the comment. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -36717,532 +35168,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="content-GETapi-v1-short-videos--shortVideo_id--comments">List short video comments</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-short-videos--shortVideo_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/short-videos/16/comments" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/comments"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-short-videos--shortVideo_id--comments">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 1,
-            &quot;comment&quot;: &quot;Great video!&quot;
-        }
-    ],
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-short-videos--shortVideo_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-short-videos--shortVideo_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-short-videos--shortVideo_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-short-videos--shortVideo_id--comments" data-method="GET"
-      data-path="api/v1/short-videos/{shortVideo_id}/comments"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-short-videos--shortVideo_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-short-videos--shortVideo_id--comments"
-                    onclick="tryItOut('GETapi-v1-short-videos--shortVideo_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-short-videos--shortVideo_id--comments"
-                    onclick="cancelTryOut('GETapi-v1-short-videos--shortVideo_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-short-videos--shortVideo_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/short-videos/{shortVideo_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>shortVideo_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="shortVideo_id"                data-endpoint="GETapi-v1-short-videos--shortVideo_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the shortVideo. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="content-POSTapi-v1-short-videos--shortVideo_id--comments">Post short video comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-short-videos--shortVideo_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/short-videos/16/comments" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"comment\": \"Great video!\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/comments"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "comment": "Great video!"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'comment' =&gt; 'Great video!',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-short-videos--shortVideo_id--comments">
-            <blockquote>
-            <p>Example response (201):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;comment&quot;: &quot;Great video!&quot;
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-v1-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-short-videos--shortVideo_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-short-videos--shortVideo_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-short-videos--shortVideo_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-short-videos--shortVideo_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-short-videos--shortVideo_id--comments" data-method="POST"
-      data-path="api/v1/short-videos/{shortVideo_id}/comments"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-short-videos--shortVideo_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-short-videos--shortVideo_id--comments"
-                    onclick="tryItOut('POSTapi-v1-short-videos--shortVideo_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-short-videos--shortVideo_id--comments"
-                    onclick="cancelTryOut('POSTapi-v1-short-videos--shortVideo_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-short-videos--shortVideo_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/short-videos/{shortVideo_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-short-videos--shortVideo_id--comments"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-short-videos--shortVideo_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>shortVideo_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="shortVideo_id"                data-endpoint="POSTapi-v1-short-videos--shortVideo_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the shortVideo. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="comment"                data-endpoint="POSTapi-v1-short-videos--shortVideo_id--comments"
-               value="Great video!"
-               data-component="body">
-    <br>
-<p>Example: <code>Great video!</code></p>
-        </div>
-        </form>
-
-                    <h2 id="content-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-">Delete short video comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/short-videos/16/comments/16" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/comments/16"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Comment deleted.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-" data-method="DELETE"
-      data-path="api/v1/short-videos/{shortVideo_id}/comments/{comment_id}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-                    onclick="tryItOut('DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-                    onclick="cancelTryOut('DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/short-videos/{shortVideo_id}/comments/{comment_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>shortVideo_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="shortVideo_id"                data-endpoint="DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the shortVideo. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>comment_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="comment_id"                data-endpoint="DELETEapi-v1-short-videos--shortVideo_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the comment. Example: <code>16</code></p>
-            </div>
-                    </form>
-
                     <h2 id="content-POSTapi-v1-short-videos--shortVideo_id--like">Like short video</h2>
 
 <p>
@@ -37570,6 +35495,532 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the shortVideo. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-GETapi-v1-short-videos--short_video_id--comments">List short video comments</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-short-videos--short_video_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/v1/short-videos/16/comments" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/short-videos/16/comments"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-short-videos--short_video_id--comments">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;comment&quot;: &quot;Great video!&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-short-videos--short_video_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-short-videos--short_video_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-short-videos--short_video_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-short-videos--short_video_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-short-videos--short_video_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-short-videos--short_video_id--comments" data-method="GET"
+      data-path="api/v1/short-videos/{short_video_id}/comments"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-short-videos--short_video_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-short-videos--short_video_id--comments"
+                    onclick="tryItOut('GETapi-v1-short-videos--short_video_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-short-videos--short_video_id--comments"
+                    onclick="cancelTryOut('GETapi-v1-short-videos--short_video_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-short-videos--short_video_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/short-videos/{short_video_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>short_video_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="short_video_id"                data-endpoint="GETapi-v1-short-videos--short_video_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the short video. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-POSTapi-v1-short-videos--short_video_id--comments">Post short video comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-short-videos--short_video_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/v1/short-videos/16/comments" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"comment\": \"Great video!\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/short-videos/16/comments"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "comment": "Great video!"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'comment' =&gt; 'Great video!',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-short-videos--short_video_id--comments">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;comment&quot;: &quot;Great video!&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-short-videos--short_video_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-short-videos--short_video_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-short-videos--short_video_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-short-videos--short_video_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-short-videos--short_video_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-short-videos--short_video_id--comments" data-method="POST"
+      data-path="api/v1/short-videos/{short_video_id}/comments"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-short-videos--short_video_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-short-videos--short_video_id--comments"
+                    onclick="tryItOut('POSTapi-v1-short-videos--short_video_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-short-videos--short_video_id--comments"
+                    onclick="cancelTryOut('POSTapi-v1-short-videos--short_video_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-short-videos--short_video_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/short-videos/{short_video_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-short-videos--short_video_id--comments"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-short-videos--short_video_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>short_video_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="short_video_id"                data-endpoint="POSTapi-v1-short-videos--short_video_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the short video. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="comment"                data-endpoint="POSTapi-v1-short-videos--short_video_id--comments"
+               value="Great video!"
+               data-component="body">
+    <br>
+<p>Example: <code>Great video!</code></p>
+        </div>
+        </form>
+
+                    <h2 id="content-DELETEapi-v1-short-videos--short_video_id--comments--id-">Delete short video comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-short-videos--short_video_id--comments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/v1/short-videos/16/comments/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/short-videos/16/comments/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-short-videos--short_video_id--comments--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Comment deleted.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-v1-short-videos--short_video_id--comments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-short-videos--short_video_id--comments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-short-videos--short_video_id--comments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-short-videos--short_video_id--comments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-short-videos--short_video_id--comments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-short-videos--short_video_id--comments--id-" data-method="DELETE"
+      data-path="api/v1/short-videos/{short_video_id}/comments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-short-videos--short_video_id--comments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-short-videos--short_video_id--comments--id-"
+                    onclick="tryItOut('DELETEapi-v1-short-videos--short_video_id--comments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-short-videos--short_video_id--comments--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-short-videos--short_video_id--comments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-short-videos--short_video_id--comments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/short-videos/{short_video_id}/comments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-short-videos--short_video_id--comments--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-short-videos--short_video_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-short-videos--short_video_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>short_video_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="short_video_id"                data-endpoint="DELETEapi-v1-short-videos--short_video_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the short video. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-short-videos--short_video_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the comment. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -38021,532 +36472,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="content-GETapi-v1-livestreams--livestream_id--comments">List livestream comments</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-livestreams--livestream_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/livestreams/16/comments" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/comments"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-livestreams--livestream_id--comments">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 1,
-            &quot;comment&quot;: &quot;Watching now!&quot;
-        }
-    ],
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-livestreams--livestream_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-livestreams--livestream_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-livestreams--livestream_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-livestreams--livestream_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-livestreams--livestream_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-livestreams--livestream_id--comments" data-method="GET"
-      data-path="api/v1/livestreams/{livestream_id}/comments"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-livestreams--livestream_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-livestreams--livestream_id--comments"
-                    onclick="tryItOut('GETapi-v1-livestreams--livestream_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-livestreams--livestream_id--comments"
-                    onclick="cancelTryOut('GETapi-v1-livestreams--livestream_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-livestreams--livestream_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/livestreams/{livestream_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="GETapi-v1-livestreams--livestream_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="content-POSTapi-v1-livestreams--livestream_id--comments">Post livestream comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-livestreams--livestream_id--comments">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/livestreams/16/comments" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"comment\": \"Watching now!\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/comments"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "comment": "Watching now!"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'comment' =&gt; 'Watching now!',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-livestreams--livestream_id--comments">
-            <blockquote>
-            <p>Example response (201):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;comment&quot;: &quot;Watching now!&quot;
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTapi-v1-livestreams--livestream_id--comments" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-livestreams--livestream_id--comments"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-livestreams--livestream_id--comments"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-livestreams--livestream_id--comments" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-livestreams--livestream_id--comments">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-livestreams--livestream_id--comments" data-method="POST"
-      data-path="api/v1/livestreams/{livestream_id}/comments"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-livestreams--livestream_id--comments', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-livestreams--livestream_id--comments"
-                    onclick="tryItOut('POSTapi-v1-livestreams--livestream_id--comments');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-livestreams--livestream_id--comments"
-                    onclick="cancelTryOut('POSTapi-v1-livestreams--livestream_id--comments');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-livestreams--livestream_id--comments"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/livestreams/{livestream_id}/comments</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="comment"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
-               value="Watching now!"
-               data-component="body">
-    <br>
-<p>Example: <code>Watching now!</code></p>
-        </div>
-        </form>
-
-                    <h2 id="content-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-">Delete livestream comment</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/livestreams/16/comments/16" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/comments/16"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Comment deleted.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-" data-method="DELETE"
-      data-path="api/v1/livestreams/{livestream_id}/comments/{comment_id}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-livestreams--livestream_id--comments--comment_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-                    onclick="tryItOut('DELETEapi-v1-livestreams--livestream_id--comments--comment_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-                    onclick="cancelTryOut('DELETEapi-v1-livestreams--livestream_id--comments--comment_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/livestreams/{livestream_id}/comments/{comment_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="livestream_id"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the livestream. Example: <code>16</code></p>
-            </div>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>comment_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="comment_id"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--comment_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the comment. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -39026,6 +36951,740 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-GETapi-v1-livestreams--livestream_id--comments">List livestream comments</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-livestreams--livestream_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/v1/livestreams/16/comments" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/livestreams/16/comments"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-livestreams--livestream_id--comments">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;comment&quot;: &quot;Watching now!&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-livestreams--livestream_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-livestreams--livestream_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-livestreams--livestream_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-livestreams--livestream_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-livestreams--livestream_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-livestreams--livestream_id--comments" data-method="GET"
+      data-path="api/v1/livestreams/{livestream_id}/comments"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-livestreams--livestream_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-livestreams--livestream_id--comments"
+                    onclick="tryItOut('GETapi-v1-livestreams--livestream_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-livestreams--livestream_id--comments"
+                    onclick="cancelTryOut('GETapi-v1-livestreams--livestream_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-livestreams--livestream_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/livestreams/{livestream_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="GETapi-v1-livestreams--livestream_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-POSTapi-v1-livestreams--livestream_id--comments">Post livestream comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-livestreams--livestream_id--comments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/v1/livestreams/16/comments" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"comment\": \"Watching now!\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/livestreams/16/comments"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "comment": "Watching now!"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'comment' =&gt; 'Watching now!',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-livestreams--livestream_id--comments">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;comment&quot;: &quot;Watching now!&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-livestreams--livestream_id--comments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-livestreams--livestream_id--comments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-livestreams--livestream_id--comments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-livestreams--livestream_id--comments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-livestreams--livestream_id--comments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-livestreams--livestream_id--comments" data-method="POST"
+      data-path="api/v1/livestreams/{livestream_id}/comments"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-livestreams--livestream_id--comments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-livestreams--livestream_id--comments"
+                    onclick="tryItOut('POSTapi-v1-livestreams--livestream_id--comments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-livestreams--livestream_id--comments"
+                    onclick="cancelTryOut('POSTapi-v1-livestreams--livestream_id--comments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-livestreams--livestream_id--comments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/livestreams/{livestream_id}/comments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="comment"                data-endpoint="POSTapi-v1-livestreams--livestream_id--comments"
+               value="Watching now!"
+               data-component="body">
+    <br>
+<p>Example: <code>Watching now!</code></p>
+        </div>
+        </form>
+
+                    <h2 id="content-PUTapi-v1-livestreams--livestream_id--comments--id-">Update livestream comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-livestreams--livestream_id--comments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://fleepness-app.test/api/v1/livestreams/16/comments/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"comment\": \"Updated message\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/livestreams/16/comments/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "comment": "Updated message"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments/16';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'comment' =&gt; 'Updated message',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-livestreams--livestream_id--comments--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;comment&quot;: &quot;Updated message&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-v1-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-livestreams--livestream_id--comments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-livestreams--livestream_id--comments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-livestreams--livestream_id--comments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-livestreams--livestream_id--comments--id-" data-method="PUT"
+      data-path="api/v1/livestreams/{livestream_id}/comments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-livestreams--livestream_id--comments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-livestreams--livestream_id--comments--id-"
+                    onclick="tryItOut('PUTapi-v1-livestreams--livestream_id--comments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-livestreams--livestream_id--comments--id-"
+                    onclick="cancelTryOut('PUTapi-v1-livestreams--livestream_id--comments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-livestreams--livestream_id--comments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/livestreams/{livestream_id}/comments/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/livestreams/{livestream_id}/comments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-livestreams--livestream_id--comments--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="PUTapi-v1-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-v1-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the comment. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>comment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="comment"                data-endpoint="PUTapi-v1-livestreams--livestream_id--comments--id-"
+               value="Updated message"
+               data-component="body">
+    <br>
+<p>Example: <code>Updated message</code></p>
+        </div>
+        </form>
+
+                    <h2 id="content-DELETEapi-v1-livestreams--livestream_id--comments--id-">Delete livestream comment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-livestreams--livestream_id--comments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/v1/livestreams/16/comments/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/livestreams/16/comments/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-livestreams--livestream_id--comments--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Comment deleted.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-v1-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-livestreams--livestream_id--comments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-livestreams--livestream_id--comments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-livestreams--livestream_id--comments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-livestreams--livestream_id--comments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-livestreams--livestream_id--comments--id-" data-method="DELETE"
+      data-path="api/v1/livestreams/{livestream_id}/comments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-livestreams--livestream_id--comments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-livestreams--livestream_id--comments--id-"
+                    onclick="tryItOut('DELETEapi-v1-livestreams--livestream_id--comments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-livestreams--livestream_id--comments--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-livestreams--livestream_id--comments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-livestreams--livestream_id--comments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/livestreams/{livestream_id}/comments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-livestreams--livestream_id--comments--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the comment. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -41259,11 +39918,1203 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                <h1 id="migration">Migration</h1>
+
+    <p>Migration helpers for clients moving from legacy aliases to the canonical versioned API.</p>
+
+                                <h2 id="migration-GETapi-v1-deprecations-legacy-endpoints">List legacy endpoint deprecations</h2>
+
+<p>
+</p>
+
+<p>Returns the machine-readable mapping from legacy compatibility aliases to their preferred <code>/api/v1</code> replacements.</p>
+
+<span id="example-requests-GETapi-v1-deprecations-legacy-endpoints">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/v1/deprecations/legacy-endpoints" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/deprecations/legacy-endpoints"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/deprecations/legacy-endpoints';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-deprecations-legacy-endpoints">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Legacy endpoint deprecations retrieved.&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;key&quot;: &quot;me.role&quot;,
+            &quot;legacy_path&quot;: &quot;/api/me/role&quot;,
+            &quot;methods&quot;: [
+                &quot;GET&quot;
+            ],
+            &quot;replacements&quot;: [
+                &quot;/api/v1/me/summaries&quot;,
+                &quot;/api/v1/me/vendors&quot;
+            ]
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-deprecations-legacy-endpoints" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-deprecations-legacy-endpoints"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-deprecations-legacy-endpoints"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-deprecations-legacy-endpoints" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-deprecations-legacy-endpoints">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-deprecations-legacy-endpoints" data-method="GET"
+      data-path="api/v1/deprecations/legacy-endpoints"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-deprecations-legacy-endpoints', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-deprecations-legacy-endpoints"
+                    onclick="tryItOut('GETapi-v1-deprecations-legacy-endpoints');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-deprecations-legacy-endpoints"
+                    onclick="cancelTryOut('GETapi-v1-deprecations-legacy-endpoints');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-deprecations-legacy-endpoints"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/deprecations/legacy-endpoints</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-deprecations-legacy-endpoints"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-deprecations-legacy-endpoints"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                 <h1 id="misc">Misc</h1>
 
     
 
-                                <h2 id="misc-GETapi-notifications">Legacy notifications listing endpoint used by the mobile client.</h2>
+                                <h2 id="misc-DELETEapi-me-products--product_id--images--mediaId-">Delete product image</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-me-products--product_id--images--mediaId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/me/products/16/images/architecto" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/products/16/images/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/products/16/images/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-me-products--product_id--images--mediaId-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Image deleted.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-me-products--product_id--images--mediaId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-me-products--product_id--images--mediaId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-me-products--product_id--images--mediaId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-me-products--product_id--images--mediaId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-me-products--product_id--images--mediaId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-me-products--product_id--images--mediaId-" data-method="DELETE"
+      data-path="api/me/products/{product_id}/images/{mediaId}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-me-products--product_id--images--mediaId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-me-products--product_id--images--mediaId-"
+                    onclick="tryItOut('DELETEapi-me-products--product_id--images--mediaId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-me-products--product_id--images--mediaId-"
+                    onclick="cancelTryOut('DELETEapi-me-products--product_id--images--mediaId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-me-products--product_id--images--mediaId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/me/products/{product_id}/images/{mediaId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="product_id"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the product. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>mediaId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="mediaId"                data-endpoint="DELETEapi-me-products--product_id--images--mediaId-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-POSTapi-me-size-templates--size_template_id--items">POST api/me/size-templates/{size_template_id}/items</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-me-size-templates--size_template_id--items">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/me/size-templates/16/items" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/size-templates/16/items"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/size-templates/16/items';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-me-size-templates--size_template_id--items">
+</span>
+<span id="execution-results-POSTapi-me-size-templates--size_template_id--items" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-me-size-templates--size_template_id--items"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-me-size-templates--size_template_id--items"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-me-size-templates--size_template_id--items" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-me-size-templates--size_template_id--items">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-me-size-templates--size_template_id--items" data-method="POST"
+      data-path="api/me/size-templates/{size_template_id}/items"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-me-size-templates--size_template_id--items', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-me-size-templates--size_template_id--items"
+                    onclick="tryItOut('POSTapi-me-size-templates--size_template_id--items');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-me-size-templates--size_template_id--items"
+                    onclick="cancelTryOut('POSTapi-me-size-templates--size_template_id--items');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-me-size-templates--size_template_id--items"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/me/size-templates/{size_template_id}/items</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-me-size-templates--size_template_id--items"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-me-size-templates--size_template_id--items"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-me-size-templates--size_template_id--items"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>size_template_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="size_template_id"                data-endpoint="POSTapi-me-size-templates--size_template_id--items"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the size template. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">PUT api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://fleepness-app.test/api/me/size-templates/16/items/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/size-templates/16/items/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "PUT",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/size-templates/16/items/16';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+</span>
+<span id="execution-results-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-" data-method="PUT"
+      data-path="api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="tryItOut('PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="cancelTryOut('PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>size_template_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="size_template_id"                data-endpoint="PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the size template. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="sizeTemplateItem_id"                data-endpoint="PUTapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">DELETE api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/me/size-templates/16/items/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/size-templates/16/items/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/size-templates/16/items/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+</span>
+<span id="execution-results-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-" data-method="DELETE"
+      data-path="api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="tryItOut('DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="cancelTryOut('DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>size_template_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="size_template_id"                data-endpoint="DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the size template. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="sizeTemplateItem_id"                data-endpoint="DELETEapi-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-POSTapi-me-livestreams--livestream_id--products">Attach product to livestream</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-me-livestreams--livestream_id--products">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/me/livestreams/16/products" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"product_id\": 5
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/livestreams/16/products"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_id": 5
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/livestreams/16/products';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'product_id' =&gt; 5,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-me-livestreams--livestream_id--products">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Product attached.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-me-livestreams--livestream_id--products" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-me-livestreams--livestream_id--products"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-me-livestreams--livestream_id--products"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-me-livestreams--livestream_id--products" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-me-livestreams--livestream_id--products">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-me-livestreams--livestream_id--products" data-method="POST"
+      data-path="api/me/livestreams/{livestream_id}/products"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-me-livestreams--livestream_id--products', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-me-livestreams--livestream_id--products"
+                    onclick="tryItOut('POSTapi-me-livestreams--livestream_id--products');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-me-livestreams--livestream_id--products"
+                    onclick="cancelTryOut('POSTapi-me-livestreams--livestream_id--products');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-me-livestreams--livestream_id--products"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/me/livestreams/{livestream_id}/products</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-me-livestreams--livestream_id--products"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="product_id"                data-endpoint="POSTapi-me-livestreams--livestream_id--products"
+               value="5"
+               data-component="body">
+    <br>
+<p>Example: <code>5</code></p>
+        </div>
+        </form>
+
+                    <h2 id="misc-DELETEapi-me-livestreams--livestream_id--products--id-">Detach product from livestream</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-me-livestreams--livestream_id--products--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/me/livestreams/16/products/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/livestreams/16/products/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/livestreams/16/products/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-me-livestreams--livestream_id--products--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Product detached.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-me-livestreams--livestream_id--products--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-me-livestreams--livestream_id--products--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-me-livestreams--livestream_id--products--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-me-livestreams--livestream_id--products--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-me-livestreams--livestream_id--products--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-me-livestreams--livestream_id--products--id-" data-method="DELETE"
+      data-path="api/me/livestreams/{livestream_id}/products/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-me-livestreams--livestream_id--products--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-me-livestreams--livestream_id--products--id-"
+                    onclick="tryItOut('DELETEapi-me-livestreams--livestream_id--products--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-me-livestreams--livestream_id--products--id-"
+                    onclick="cancelTryOut('DELETEapi-me-livestreams--livestream_id--products--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-me-livestreams--livestream_id--products--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/me/livestreams/{livestream_id}/products/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-me-livestreams--livestream_id--products--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-me-livestreams--livestream_id--products--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the product. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-GETapi-notifications">Legacy notifications listing endpoint used by the mobile client.</h2>
 
 <p>
 </p>
@@ -41656,6 +41507,1045 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the notification. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-DELETEapi-v1-me-products--product_id--images--mediaId-">Delete product image</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-me-products--product_id--images--mediaId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/v1/me/products/16/images/architecto" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/me/products/16/images/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/me/products/16/images/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-me-products--product_id--images--mediaId-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Image deleted.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-v1-me-products--product_id--images--mediaId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-me-products--product_id--images--mediaId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-me-products--product_id--images--mediaId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-me-products--product_id--images--mediaId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-me-products--product_id--images--mediaId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-me-products--product_id--images--mediaId-" data-method="DELETE"
+      data-path="api/v1/me/products/{product_id}/images/{mediaId}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-me-products--product_id--images--mediaId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-me-products--product_id--images--mediaId-"
+                    onclick="tryItOut('DELETEapi-v1-me-products--product_id--images--mediaId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-me-products--product_id--images--mediaId-"
+                    onclick="cancelTryOut('DELETEapi-v1-me-products--product_id--images--mediaId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-me-products--product_id--images--mediaId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/me/products/{product_id}/images/{mediaId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="product_id"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the product. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>mediaId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="mediaId"                data-endpoint="DELETEapi-v1-me-products--product_id--images--mediaId-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-POSTapi-v1-me-size-templates--size_template_id--items">POST api/v1/me/size-templates/{size_template_id}/items</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-me-size-templates--size_template_id--items">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/v1/me/size-templates/16/items" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/me/size-templates/16/items"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-me-size-templates--size_template_id--items">
+</span>
+<span id="execution-results-POSTapi-v1-me-size-templates--size_template_id--items" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-me-size-templates--size_template_id--items"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-me-size-templates--size_template_id--items"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-me-size-templates--size_template_id--items" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-me-size-templates--size_template_id--items">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-me-size-templates--size_template_id--items" data-method="POST"
+      data-path="api/v1/me/size-templates/{size_template_id}/items"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-me-size-templates--size_template_id--items', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-me-size-templates--size_template_id--items"
+                    onclick="tryItOut('POSTapi-v1-me-size-templates--size_template_id--items');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-me-size-templates--size_template_id--items"
+                    onclick="cancelTryOut('POSTapi-v1-me-size-templates--size_template_id--items');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-me-size-templates--size_template_id--items"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/me/size-templates/{size_template_id}/items</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-me-size-templates--size_template_id--items"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-me-size-templates--size_template_id--items"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-me-size-templates--size_template_id--items"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>size_template_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="size_template_id"                data-endpoint="POSTapi-v1-me-size-templates--size_template_id--items"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the size template. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">PUT api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "PUT",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items/16';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+</span>
+<span id="execution-results-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-" data-method="PUT"
+      data-path="api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="tryItOut('PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="cancelTryOut('PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>size_template_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="size_template_id"                data-endpoint="PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the size template. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="sizeTemplateItem_id"                data-endpoint="PUTapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">DELETE api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+</span>
+<span id="execution-results-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-" data-method="DELETE"
+      data-path="api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="tryItOut('DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    onclick="cancelTryOut('DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/me/size-templates/{size_template_id}/items/{sizeTemplateItem_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>size_template_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="size_template_id"                data-endpoint="DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the size template. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sizeTemplateItem_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="sizeTemplateItem_id"                data-endpoint="DELETEapi-v1-me-size-templates--size_template_id--items--sizeTemplateItem_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the sizeTemplateItem. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="misc-POSTapi-v1-me-livestreams--livestream_id--products">Attach product to livestream</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-me-livestreams--livestream_id--products">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/v1/me/livestreams/16/products" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"product_id\": 5
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/me/livestreams/16/products"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_id": 5
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/me/livestreams/16/products';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'product_id' =&gt; 5,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-me-livestreams--livestream_id--products">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Product attached.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-me-livestreams--livestream_id--products" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-me-livestreams--livestream_id--products"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-me-livestreams--livestream_id--products"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-me-livestreams--livestream_id--products" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-me-livestreams--livestream_id--products">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-me-livestreams--livestream_id--products" data-method="POST"
+      data-path="api/v1/me/livestreams/{livestream_id}/products"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-me-livestreams--livestream_id--products', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-me-livestreams--livestream_id--products"
+                    onclick="tryItOut('POSTapi-v1-me-livestreams--livestream_id--products');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-me-livestreams--livestream_id--products"
+                    onclick="cancelTryOut('POSTapi-v1-me-livestreams--livestream_id--products');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-me-livestreams--livestream_id--products"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/me/livestreams/{livestream_id}/products</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="product_id"                data-endpoint="POSTapi-v1-me-livestreams--livestream_id--products"
+               value="5"
+               data-component="body">
+    <br>
+<p>Example: <code>5</code></p>
+        </div>
+        </form>
+
+                    <h2 id="misc-DELETEapi-v1-me-livestreams--livestream_id--products--id-">Detach product from livestream</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-me-livestreams--livestream_id--products--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://fleepness-app.test/api/v1/me/livestreams/16/products/16" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/me/livestreams/16/products/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/me/livestreams/16/products/16';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-me-livestreams--livestream_id--products--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Product detached.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-v1-me-livestreams--livestream_id--products--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-me-livestreams--livestream_id--products--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-me-livestreams--livestream_id--products--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-me-livestreams--livestream_id--products--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-me-livestreams--livestream_id--products--id-" data-method="DELETE"
+      data-path="api/v1/me/livestreams/{livestream_id}/products/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-me-livestreams--livestream_id--products--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+                    onclick="tryItOut('DELETEapi-v1-me-livestreams--livestream_id--products--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-me-livestreams--livestream_id--products--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/me/livestreams/{livestream_id}/products/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-me-livestreams--livestream_id--products--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the product. Example: <code>16</code></p>
             </div>
                     </form>
 

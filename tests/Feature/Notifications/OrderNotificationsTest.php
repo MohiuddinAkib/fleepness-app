@@ -85,6 +85,17 @@ it('VendorOrderStatusChanged has correct database payload', function (): void {
     $notification = new VendorOrderStatusChanged($vendorOrder);
     $payload = $notification->toArray($customer);
 
-    expect($payload['type'])->toBe('vendor_order_status_changed')
+    expect($notification->broadcastAs())->toBe('customer_order_status_changed')
+        ->and($payload['type'])->toBe('customer_order_status_changed')
         ->and($payload['status'])->toBe(VendorOrderStatus::Delivered->value);
+});
+
+it('OrderReceivedByVendor uses the canonical event name', function (): void {
+    $vendor = VendorProfile::factory()->approved()->create();
+    $vendorOrder = VendorOrder::factory()->create(['vendor_profile_id' => $vendor->getKey()]);
+
+    $notification = new OrderReceivedByVendor($vendorOrder);
+
+    expect($notification->broadcastAs())->toBe('new_order_for_vendor')
+        ->and($notification->toArray($vendor->user)['type'])->toBe('new_order_for_vendor');
 });

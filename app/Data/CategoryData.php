@@ -7,8 +7,10 @@ namespace App\Data;
 use App\Models\Category;
 use Spatie\LaravelData\Data;
 use App\Enums\CategoryStatus;
+use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 
 #[MapOutputName(SnakeCaseMapper::class)]
 class CategoryData extends Data
@@ -21,6 +23,14 @@ class CategoryData extends Data
         public readonly ?string $profileImageUrl,
         public readonly ?string $coverImageUrl,
         public readonly CategoryStatus $status,
+        /** @var array{id: int, name: string, slug: string}|null */
+        public readonly ?array $parent,
+        #[DataCollectionOf(CategorySummaryData::class)]
+        public readonly DataCollection $children,
+        /**
+         * Legacy compatibility alias for clients still expecting a flattened parent reference.
+         * Remove this after consumers migrate to the nested `parent` object.
+         */
         public readonly ?int $parentId,
     ) {}
 
@@ -34,6 +44,14 @@ class CategoryData extends Data
             profileImageUrl: $category->getFirstMediaUrl('profile_image') ?: null,
             coverImageUrl: $category->getFirstMediaUrl('cover_image') ?: null,
             status: $category->status,
+            parent: $category->relationLoaded('parent') && null !== $category->parent
+                ? CategorySummaryData::fromModel($category->parent)->toArray()
+                : null,
+            children: $category->relationLoaded('children')
+                ? new DataCollection(CategorySummaryData::class, $category->children->map(
+                    fn (Category $child) => CategorySummaryData::fromModel($child)
+                ))
+                : new DataCollection(CategorySummaryData::class, []),
             parentId: $category->parent_id,
         );
     }

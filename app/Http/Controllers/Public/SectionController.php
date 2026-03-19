@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Models\Slider;
 use App\Models\Section;
+use App\Data\SliderData;
 use App\Data\SectionData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -25,8 +26,8 @@ class SectionController extends Controller
     public function index(): JsonResponse|Responsable
     {
         $sections = Section::query()
-            ->where('is_visible', true)
-            ->with('items')
+            ->visible()
+            ->with(['category', 'items.tag'])
             ->orderBy('sort_order')
             ->get();
 
@@ -39,16 +40,11 @@ class SectionController extends Controller
     public function sliders(): JsonResponse|Responsable
     {
         $sliders = Slider::query()
-            ->where('is_active', true)
+            ->active()
+            ->with(['category', 'tag'])
             ->orderBy('sort_order')
             ->get();
 
-        return response()->json([
-            'data' => $sliders->map(fn (Slider $s) => [
-                'id' => $s->getKey(),
-                'image_url' => $s->getFirstMediaUrl('image') ?: null,
-                'url' => $s->url,
-            ])->values()->all(),
-        ]);
+        return SliderData::collect($sliders, DataCollection::class);
     }
 }

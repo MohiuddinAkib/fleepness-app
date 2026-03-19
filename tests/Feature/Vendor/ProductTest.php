@@ -25,6 +25,20 @@ it('lists vendor own products', function (): void {
     $response->assertOk()->assertJsonCount(3, 'data');
 });
 
+it('filters vendor own products by search query', function (): void {
+    $user = User::factory()->create();
+    $vendor = VendorProfile::factory()->for($user)->approved()->create();
+    Product::factory()->for($vendor, 'vendorProfile')->create(['name' => 'Flash Deal Tee', 'sku' => 'FLASH-001']);
+    Product::factory()->for($vendor, 'vendorProfile')->create(['name' => 'Winter Jacket', 'sku' => 'JACKET-001']);
+    $token = $user->createToken('test')->plainTextToken;
+
+    $response = $this->withToken($token)->getJson('/api/me/products?q=flash');
+
+    $response->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.name', 'Flash Deal Tee');
+});
+
 it('creates a product', function (): void {
     $user = User::factory()->create();
     VendorProfile::factory()->for($user)->approved()->create();

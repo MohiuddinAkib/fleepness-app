@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductReview;
+use Illuminate\Http\UploadedFile;
 
 it('lists active approved products', function (): void {
     Product::factory()->count(4)->create();
@@ -38,10 +39,19 @@ it('searches products by name', function (): void {
 
 it('shows a single approved product', function (): void {
     $product = Product::factory()->create(['name' => 'Test Product']);
+    $product
+        ->addMedia(UploadedFile::fake()->image('hero-image.jpg'))
+        ->toMediaCollection('images');
 
     $response = $this->getJson("/api/products/{$product->getKey()}");
 
-    $response->assertOk()->assertJsonPath('data.name', 'Test Product');
+    $response->assertOk()
+        ->assertJsonPath('data.name', 'Test Product')
+        ->assertJsonPath('data.code', $product->sku)
+        ->assertJsonPath('data.long_description', $product->description)
+        ->assertJsonPath('data.order_count', 0)
+        ->assertJsonPath('data.images.0.id', $product->getMedia('images')->first()?->getKey())
+        ->assertJsonPath('data.images.0.path', $product->getFirstMediaUrl('images'));
 });
 
 it('returns 404 for inactive product', function (): void {

@@ -8,7 +8,7 @@ use BackedEnum;
 use Filament\Tables\Table;
 use App\Models\VendorOrder;
 use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\VendorOrders\Pages\EditVendorOrder;
 use App\Filament\Resources\VendorOrders\Pages\ListVendorOrders;
@@ -36,13 +36,6 @@ class VendorOrderResource extends Resource
     public static function table(Table $table): Table
     {
         return VendorOrdersTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

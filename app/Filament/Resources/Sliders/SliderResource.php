@@ -8,7 +8,7 @@ use BackedEnum;
 use App\Models\Slider;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\Sliders\Pages\EditSlider;
 use App\Filament\Resources\Sliders\Pages\ListSliders;
@@ -34,13 +34,6 @@ class SliderResource extends Resource
     public static function table(Table $table): Table
     {
         return SlidersTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

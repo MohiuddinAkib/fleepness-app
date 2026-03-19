@@ -5,20 +5,16 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Public;
 
 use App\Models\User;
-use App\Data\CommentData;
 use App\Data\ProductData;
 use App\Models\Livestream;
 use Illuminate\Support\Str;
 use App\Data\LivestreamData;
-use App\Models\LivestreamComment;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use Spatie\LaravelData\DataCollection;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
-use App\Data\Livestream\StoreCommentData;
-use Knuckles\Scribe\Attributes\BodyParam;
 use App\Data\Dto\GenerateSubscriberTokenData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
@@ -28,6 +24,7 @@ use App\Facades\Livestream as LivestreamFacade;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
+use App\Notifications\LivestreamLikeCountChangedNotification;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Content', 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.')]
@@ -56,65 +53,24 @@ class LivestreamController extends Controller
         return LivestreamData::fromModel($livestream);
     }
 
-    #[Endpoint('List livestream comments')]
-    #[Response('{"data":[{"id":1,"comment":"Watching now!"}],"meta":{"current_page":1}}', 200)]
-    #[Unauthenticated]
-    public function comments(Livestream $livestream): JsonResponse|Responsable
-    {
-        $comments = $livestream->comments()
-            ->with('user')
-            ->latest()
-            ->paginate();
-
-        return CommentData::collect(
-            $comments->through(fn (LivestreamComment $c) => CommentData::fromLivestreamComment($c)),
-            PaginatedDataCollection::class
-        );
-    }
-
-    #[Authenticated]
-    #[BodyParam('comment', 'string', required: true, example: 'Watching now!')]
-    #[Endpoint('Post livestream comment')]
-    #[Response('{"data":{"id":1,"comment":"Watching now!"}}', 201)]
-    public function storeComment(
-        StoreCommentData $data,
-        Livestream $livestream,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        $comment = $livestream->comments()->create([
-            'user_id' => $user->getKey(),
-            'comment' => $data->comment,
-        ]);
-
-        $comment->load('user');
-
-        return CommentData::fromLivestreamComment($comment);
-    }
-
-    #[Authenticated]
-    #[Endpoint('Delete livestream comment')]
-    #[Response('{"message":"Comment deleted."}', 200)]
-    public function destroyComment(
-        Livestream $livestream,
-        LivestreamComment $comment,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        abort_unless($comment->livestream()->is($livestream), HttpResponse::HTTP_NOT_FOUND);
-        abort_unless($comment->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
-
-        $comment->delete();
-
-        return response()->json(['message' => 'Comment deleted.']);
-    }
-
     #[Authenticated]
     #[Endpoint('Like livestream')]
     #[Response('{"message":"Liked."}', 200)]
     public function like(Livestream $livestream, #[CurrentUser] User $user): JsonResponse|Responsable
     {
-        $livestream->likes()->firstOrCreate(['user_id' => $user->getKey()]);
+        $existingLike = $livestream->likes()->where('user_id', $user->getKey())->first();
 
-        return response()->json(['message' => 'Liked.']);
+        if (null === $existingLike) {
+            $livestream->likes()->create(['user_id' => $user->getKey()]);
+            $message = 'Liked.';
+        } else {
+            $existingLike->delete();
+            $message = 'Unliked.';
+        }
+
+        $livestream->notify(new LivestreamLikeCountChangedNotification($livestream));
+
+        return response()->json(['message' => $message]);
     }
 
     #[Authenticated]

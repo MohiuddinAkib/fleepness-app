@@ -8,7 +8,7 @@ use BackedEnum;
 use Filament\Tables\Table;
 use App\Models\ShopCategory;
 use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\ShopCategories\Pages\EditShopCategory;
 use App\Filament\Resources\ShopCategories\Pages\CreateShopCategory;
@@ -34,13 +34,6 @@ class ShopCategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return ShopCategoriesTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

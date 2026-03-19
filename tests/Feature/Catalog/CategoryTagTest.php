@@ -24,11 +24,19 @@ it('only returns root categories', function (): void {
 });
 
 it('shows a single category', function (): void {
-    $category = Category::factory()->create(['name' => 'Electronics']);
+    $parent = Category::factory()->create(['name' => 'Parent Category']);
+    $category = Category::factory()->withParent($parent->getKey())->create(['name' => 'Electronics']);
+    Category::factory()->withParent($category->getKey())->create(['name' => 'Phones']);
 
     $response = $this->getJson("/api/categories/{$category->getKey()}");
+    $childrenPayload = data_get($response->json(), 'data.children.data', data_get($response->json(), 'data.children', []));
 
-    $response->assertOk()->assertJsonPath('data.name', 'Electronics');
+    $response->assertOk()
+        ->assertJsonPath('data.name', 'Electronics')
+        ->assertJsonPath('data.parent.id', $parent->getKey())
+        ->assertJsonPath('data.parent.name', 'Parent Category');
+
+    expect(collect($childrenPayload)->first()['name'] ?? null)->toBe('Phones');
 });
 
 it('lists tags', function (): void {

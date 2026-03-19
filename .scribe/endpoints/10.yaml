@@ -22,8 +22,20 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      q:
+        custom: []
+        name: q
+        description: ''
+        required: false
+        example: sku-001
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      q: sku-001
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -515,71 +527,6 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - DELETE
-    uri: 'api/me/products/{product_id}/images/{mediaId}'
-    metadata:
-      custom: []
-      groupName: Products
-      groupDescription: 'Vendor product management. Requires an approved vendor profile.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Delete product image'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      mediaId:
-        custom: []
-        name: mediaId
-        description: ''
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-      mediaId: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message": "Image deleted."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
       - GET
     uri: api/v1/me/products
     metadata:
@@ -598,8 +545,20 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      q:
+        custom: []
+        name: q
+        description: ''
+        required: false
+        example: sku-001
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      q: sku-001
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -1078,71 +1037,6 @@ endpoints:
         custom: []
         status: 200
         content: '{"data": {"status": "inactive"}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/me/products/{product_id}/images/{mediaId}'
-    metadata:
-      custom: []
-      groupName: Products
-      groupDescription: 'Vendor product management. Requires an approved vendor profile.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Delete product image'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      mediaId:
-        custom: []
-        name: mediaId
-        description: ''
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-      mediaId: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message": "Image deleted."}'
         headers: []
         description: ''
     responseFields: []

@@ -12,6 +12,10 @@ use App\Enums\LivestreamStatus;
 use App\Models\LivestreamComment;
 use App\Services\LivestreamService;
 
+beforeEach(function (): void {
+    config()->set('broadcasting.default', 'log');
+});
+
 // Public browsing
 it('lists livestreams publicly', function (): void {
     Livestream::factory()->count(3)->create();
@@ -26,7 +30,10 @@ it('shows a livestream publicly', function (): void {
 
     $this->getJson("/api/livestreams/{$livestream->getKey()}")
         ->assertOk()
-        ->assertJsonPath('data.id', $livestream->getKey());
+        ->assertJsonPath('data.id', $livestream->getKey())
+        ->assertJsonPath('data.room_name', $livestream->room_name)
+        ->assertJsonPath('data.recordings', [])
+        ->assertJsonPath('data.thumbnails', []);
 });
 
 it('lists comments on a livestream', function (): void {
@@ -54,6 +61,38 @@ it('posts a comment on a livestream', function (): void {
         ->postJson("/api/livestreams/{$livestream->getKey()}/comments", ['comment' => 'Going live!'])
         ->assertCreated()
         ->assertJsonPath('data.comment', 'Going live!');
+});
+
+it('updates own comment on a livestream', function (): void {
+    $user = User::factory()->create();
+    $token = $user->createToken('test')->plainTextToken;
+    $livestream = Livestream::factory()->create();
+    $comment = LivestreamComment::factory()->create([
+        'livestream_id' => $livestream->getKey(),
+        'user_id' => $user->getKey(),
+        'comment' => 'Old comment',
+    ]);
+
+    $this->withToken($token)
+        ->putJson("/api/livestreams/{$livestream->getKey()}/comments/{$comment->getKey()}", [
+            'comment' => 'Updated comment',
+        ])
+        ->assertOk()
+        ->assertJsonPath('data.comment', 'Updated comment');
+
+    expect($comment->fresh()->comment)->toBe('Updated comment');
+});
+
+it('cannot update another users comment on a livestream', function (): void {
+    $user = User::factory()->create();
+    $token = $user->createToken('test')->plainTextToken;
+    $comment = LivestreamComment::factory()->create();
+
+    $this->withToken($token)
+        ->putJson("/api/livestreams/{$comment->livestream_id}/comments/{$comment->getKey()}", [
+            'comment' => 'Updated comment',
+        ])
+        ->assertForbidden();
 });
 
 it('cannot delete another users comment on livestream', function (): void {

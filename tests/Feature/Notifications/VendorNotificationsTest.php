@@ -49,7 +49,9 @@ it('VendorStatusUpdated broadcast payload contains status and message', function
 
     $payload = $notification->toBroadcast($user);
 
-    expect($payload['status'])->toBe(VendorStatus::Approved->value)
+    expect($notification->broadcastAs())->toBe('vendor_application_status_updated')
+        ->and($notification->toArray($user)['type'])->toBe('vendor_application_status_updated')
+        ->and($payload['status'])->toBe(VendorStatus::Approved->value)
         ->and($payload['message'])->toContain('approved');
 });
 
@@ -113,6 +115,8 @@ it('WithdrawalApproved broadcast payload contains reference and amount', functio
     $notification = new WithdrawalApproved($transaction);
     $payload = $notification->toBroadcast($user);
 
-    expect($payload['reference'])->toBe($transaction->reference)
+    expect($notification->broadcastAs())->toBe('withdrawal_request_approved')
+        ->and($notification->toArray($user)['type'])->toBe('withdrawal_request_approved')
+        ->and($payload['reference'])->toBe($transaction->reference)
         ->and($payload['amount'])->toBe('500.00');
 });

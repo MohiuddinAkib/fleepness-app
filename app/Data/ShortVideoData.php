@@ -17,9 +17,12 @@ class ShortVideoData extends Data
         public readonly string $title,
         public readonly ?string $description,
         public readonly string $videoUrl,
+        public readonly string $video,
         public readonly ?string $thumbnailUrl,
         public readonly int $likesCount,
         public readonly ?VendorProfileData $vendorProfile,
+        /** @var list<array<string, mixed>> */
+        public readonly array $products,
         public readonly string $createdAt,
     ) {}
 
@@ -30,11 +33,15 @@ class ShortVideoData extends Data
             title: $shortVideo->title,
             description: $shortVideo->description,
             videoUrl: $shortVideo->getFirstMediaUrl('video'),
+            video: $shortVideo->getFirstMediaUrl('video'),
             thumbnailUrl: $shortVideo->getFirstMediaUrl('thumbnail') ?: null,
             likesCount: (int) ($shortVideo->likes_count ?? 0),
             vendorProfile: $shortVideo->relationLoaded('vendorProfile')
                 ? VendorProfileData::fromModel($shortVideo->vendorProfile)
                 : null,
+            products: $shortVideo->relationLoaded('products')
+                ? $shortVideo->products->map(fn ($product) => ProductData::fromModel($product)->toArray())->values()->all()
+                : [],
             createdAt: $shortVideo->created_at->toISOString(),
         );
     }

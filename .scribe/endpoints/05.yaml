@@ -54,7 +54,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'List vendors'
-      description: ''
+      description: 'Browse approved vendors. This endpoint also replaces the old `/similarvendors/{vendor}` flow by accepting `similar_to_vendor_id`, and replaces vendor discovery filtering that previously lived on ad-hoc staging routes.'
       authenticated: false
       deprecated: false
     headers:
@@ -66,9 +66,9 @@ endpoints:
       search:
         custom: []
         name: search
-        description: ''
+        description: 'Filter vendors by shop name.'
         required: false
-        example: architecto
+        example: flash
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -77,17 +77,29 @@ endpoints:
       shop_category_id:
         custom: []
         name: shop_category_id
-        description: ''
+        description: 'Limit the vendor list to a specific shop category.'
         required: false
-        example: 16
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      similar_to_vendor_id:
+        custom: []
+        name: similar_to_vendor_id
+        description: 'Modern replacement for the old `/similarvendors/{vendor}` endpoint. Pass a vendor id to return other approved vendors from the same shop category.'
+        required: false
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanQueryParameters:
-      search: architecto
-      shop_category_id: 16
+      search: flash
+      shop_category_id: 2
+      similar_to_vendor_id: 12
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -164,7 +176,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'List vendor products'
-      description: ''
+      description: 'Browse a vendor storefront. This modern endpoint replaces the old vendor-specific staging routes for product search, price-range filtering, and price-category filtering.'
       authenticated: false
       deprecated: false
     headers:
@@ -184,8 +196,56 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      q:
+        custom: []
+        name: q
+        description: 'Search within the selected vendor storefront. This is the replacement for the old vendor product search route.'
+        required: false
+        example: 'flash tee'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      min_price:
+        custom: []
+        name: min_price
+        description: 'Minimum effective product price. Use together with `max_price` as the replacement for the old in-price-range endpoint.'
+        required: false
+        example: 200
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      max_price:
+        custom: []
+        name: max_price
+        description: 'Maximum effective product price. Use together with `min_price` as the replacement for the old in-price-range endpoint.'
+        required: false
+        example: 500
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      price_category:
+        custom: []
+        name: price_category
+        description: 'Named price-band replacement for the old in-price-category endpoint. Supported values: `low`, `medium`, `premium`.'
+        required: false
+        example: low
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      q: 'flash tee'
+      min_price: 200
+      max_price: 500
+      price_category: low
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -243,55 +303,6 @@ endpoints:
         custom: []
         status: 200
         content: '{"data": [{"id": 1, "title": "New Collection Drop"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/vendors/{vendorProfile_id}/reviews'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List vendor reviews'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "rating": 5, "comment": "Great vendor!"}]}'
         headers: []
         description: ''
     responseFields: []
@@ -408,12 +419,61 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - GET
+    uri: 'api/vendors/{vendorProfile_id}/reviews'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Vendor reviews exposed as a dedicated nested resource.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List vendor reviews'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": [{"id": 1, "rating": 5, "comment": "Great vendor!"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - POST
     uri: 'api/vendors/{vendorProfile_id}/reviews'
     metadata:
       custom: []
       groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      groupDescription: 'Vendor reviews exposed as a dedicated nested resource.'
       subgroup: ''
       subgroupDescription: ''
       title: 'Write vendor review'
@@ -486,11 +546,11 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/vendors/{vendorProfile_id}/reviews/{review_id}'
+    uri: 'api/vendors/{vendorProfile_id}/reviews/{id}'
     metadata:
       custom: []
       groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      groupDescription: 'Vendor reviews exposed as a dedicated nested resource.'
       subgroup: ''
       subgroupDescription: ''
       title: 'Delete own vendor review'
@@ -513,9 +573,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      review_id:
+      id:
         custom: []
-        name: review_id
+        name: id
         description: 'The ID of the review.'
         required: true
         example: 16
@@ -526,7 +586,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       vendorProfile_id: 16
-      review_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -682,7 +742,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'List vendors'
-      description: ''
+      description: 'Browse approved vendors. This endpoint also replaces the old `/similarvendors/{vendor}` flow by accepting `similar_to_vendor_id`, and replaces vendor discovery filtering that previously lived on ad-hoc staging routes.'
       authenticated: false
       deprecated: false
     headers:
@@ -694,9 +754,9 @@ endpoints:
       search:
         custom: []
         name: search
-        description: ''
+        description: 'Filter vendors by shop name.'
         required: false
-        example: architecto
+        example: flash
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -705,17 +765,29 @@ endpoints:
       shop_category_id:
         custom: []
         name: shop_category_id
-        description: ''
+        description: 'Limit the vendor list to a specific shop category.'
         required: false
-        example: 16
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      similar_to_vendor_id:
+        custom: []
+        name: similar_to_vendor_id
+        description: 'Modern replacement for the old `/similarvendors/{vendor}` endpoint. Pass a vendor id to return other approved vendors from the same shop category.'
+        required: false
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanQueryParameters:
-      search: architecto
-      shop_category_id: 16
+      search: flash
+      shop_category_id: 2
+      similar_to_vendor_id: 12
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -792,7 +864,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'List vendor products'
-      description: ''
+      description: 'Browse a vendor storefront. This modern endpoint replaces the old vendor-specific staging routes for product search, price-range filtering, and price-category filtering.'
       authenticated: false
       deprecated: false
     headers:
@@ -812,8 +884,56 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      q:
+        custom: []
+        name: q
+        description: 'Search within the selected vendor storefront. This is the replacement for the old vendor product search route.'
+        required: false
+        example: 'flash tee'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      min_price:
+        custom: []
+        name: min_price
+        description: 'Minimum effective product price. Use together with `max_price` as the replacement for the old in-price-range endpoint.'
+        required: false
+        example: 200
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      max_price:
+        custom: []
+        name: max_price
+        description: 'Maximum effective product price. Use together with `min_price` as the replacement for the old in-price-range endpoint.'
+        required: false
+        example: 500
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      price_category:
+        custom: []
+        name: price_category
+        description: 'Named price-band replacement for the old in-price-category endpoint. Supported values: `low`, `medium`, `premium`.'
+        required: false
+        example: low
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      q: 'flash tee'
+      min_price: 200
+      max_price: 500
+      price_category: low
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -871,55 +991,6 @@ endpoints:
         custom: []
         status: 200
         content: '{"data": [{"id": 1, "title": "New Collection Drop"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/vendors/{vendorProfile_id}/reviews'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List vendor reviews'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "rating": 5, "comment": "Great vendor!"}]}'
         headers: []
         description: ''
     responseFields: []
@@ -1036,12 +1107,61 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - GET
+    uri: 'api/v1/vendors/{vendorProfile_id}/reviews'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Vendor reviews exposed as a dedicated nested resource.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List vendor reviews'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": [{"id": 1, "rating": 5, "comment": "Great vendor!"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - POST
     uri: 'api/v1/vendors/{vendorProfile_id}/reviews'
     metadata:
       custom: []
       groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      groupDescription: 'Vendor reviews exposed as a dedicated nested resource.'
       subgroup: ''
       subgroupDescription: ''
       title: 'Write vendor review'
@@ -1114,11 +1234,11 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/vendors/{vendorProfile_id}/reviews/{review_id}'
+    uri: 'api/v1/vendors/{vendorProfile_id}/reviews/{id}'
     metadata:
       custom: []
       groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      groupDescription: 'Vendor reviews exposed as a dedicated nested resource.'
       subgroup: ''
       subgroupDescription: ''
       title: 'Delete own vendor review'
@@ -1141,9 +1261,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      review_id:
+      id:
         custom: []
-        name: review_id
+        name: id
         description: 'The ID of the review.'
         required: true
         example: 16
@@ -1154,7 +1274,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       vendorProfile_id: 16
-      review_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

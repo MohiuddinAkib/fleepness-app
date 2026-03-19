@@ -48,4 +48,12 @@ enum SectionType: string implements HasColor, HasIcon, HasLabel
             self::Banner => 'heroicon-o-photo',
         };
     }
+
+    public function showsProducts(): bool
+    {
+        return match ($this) {
+            self::ScrollableProduct, self::SpotlightDeals, self::LightingDeals, self::Search => true,
+            self::Banner => false,
+        };
+    }
 }

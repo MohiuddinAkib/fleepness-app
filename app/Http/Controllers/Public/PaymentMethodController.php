@@ -24,7 +24,7 @@ class PaymentMethodController extends Controller
     public function index(): JsonResponse|Responsable
     {
         $methods = PaymentMethod::query()
-            ->where('is_active', true)
+            ->active()
             ->orderBy('name')
             ->get();
 

@@ -8,7 +8,7 @@ use BackedEnum;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
 use App\Models\VendorProfile;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\VendorProfiles\Pages\EditVendorProfile;
 use App\Filament\Resources\VendorProfiles\Pages\ListVendorProfiles;
@@ -36,13 +36,6 @@ class VendorProfileResource extends Resource
     public static function table(Table $table): Table
     {
         return VendorProfilesTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

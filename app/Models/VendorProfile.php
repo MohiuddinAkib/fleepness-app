@@ -8,6 +8,7 @@ use App\Enums\VendorStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Concerns\LogsModelActivity;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Database\Factories\VendorProfileFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class VendorProfile extends Model implements HasMedia
 {
     /** @use HasFactory<VendorProfileFactory> */
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, LogsModelActivity;
 
     /** @var list<string> */
     protected $fillable = [

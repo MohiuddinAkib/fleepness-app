@@ -8,7 +8,7 @@ use BackedEnum;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
 use App\Models\DeliveryOption;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\DeliveryOptions\Pages\EditDeliveryOption;
 use App\Filament\Resources\DeliveryOptions\Pages\ListDeliveryOptions;
@@ -34,13 +34,6 @@ class DeliveryOptionResource extends Resource
     public static function table(Table $table): Table
     {
         return DeliveryOptionsTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

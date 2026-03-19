@@ -6,12 +6,13 @@ namespace App\Models;
 
 use Database\Factories\FeeFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Concerns\LogsModelActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Fee extends Model
 {
     /** @use HasFactory<FeeFactory> */
-    use HasFactory;
+    use HasFactory, LogsModelActivity;
 
     /** @var list<string> */
     protected $fillable = [

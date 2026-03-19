@@ -1,159 +1,27 @@
-name: Catalog
-description: 'Public product browsing, search, filtering and reviews.'
+name: Transactions
+description: 'View wallet transactions and request withdrawals.'
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/products
+    uri: api/me/transactions
     metadata:
       custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
+      groupName: Transactions
+      groupDescription: 'View wallet transactions and request withdrawals.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'List products'
-      description: 'Browse all active approved products. Supports filtering by category, tag, vendor, price range, and full-text search.'
-      authenticated: false
+      title: 'List transactions'
+      description: ''
+      authenticated: true
       deprecated: false
     headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      search:
-        custom: []
-        name: search
-        description: ''
-        required: false
-        example: t-shirt
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      category_id:
-        custom: []
-        name: category_id
-        description: ''
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      tag_id:
-        custom: []
-        name: tag_id
-        description: ''
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      vendor_id:
-        custom: []
-        name: vendor_id
-        description: ''
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      min_price:
-        custom: []
-        name: min_price
-        description: ''
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      max_price:
-        custom: []
-        name: max_price
-        description: ''
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      per_page:
-        custom: []
-        name: per_page
-        description: ''
-        required: false
-        example: 15
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      search: t-shirt
-      category_id: 16
-      tag_id: 16
-      vendor_id: 16
-      min_price: 4326.41688
-      max_price: 4326.41688
-      per_page: 15
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/products/{product_id}'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get product'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -163,109 +31,14 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data": {"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00", "vendor_profile": {}}}'
+        content: '{"data":[{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}],"meta":{"current_page":1}}'
         headers: []
         description: ''
     responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/products/{product_id}/similar'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get similar products'
-      description: 'Returns products from the same category or vendor.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 2, "name": "Red T-Shirt"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/products/{product_id}/reviews'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List product reviews'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "rating": 5, "review": "Great quality!"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
@@ -273,14 +46,14 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: 'api/products/{product_id}/reviews'
+    uri: api/me/withdrawals
     metadata:
       custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
+      groupName: Transactions
+      groupDescription: 'View wallet transactions and request withdrawals.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Write a product review'
+      title: 'Create withdrawal request'
       description: ''
       authenticated: true
       deprecated: false
@@ -288,54 +61,54 @@ endpoints:
       Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      rating:
+      payment_method_id:
         custom: []
-        name: rating
+        name: payment_method_id
         description: ''
         required: true
-        example: 5
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      review:
+      amount:
         custom: []
-        name: review
+        name: amount
+        description: ''
+        required: true
+        example: 500
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      note:
+        custom: []
+        name: note
         description: ''
         required: false
-        example: 'Great quality!'
+        example: 'Weekly payout request'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      rating: 5
-      review: 'Great quality!'
+      payment_method_id: 1
+      amount: 500
+      note: 'Weekly payout request'
     fileParameters: []
     responses:
       -
         custom: []
         status: 201
-        content: '{"data": {"id": 1, "rating": 5}}'
+        content: '{"data":{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}}'
         headers: []
         description: ''
     responseFields: []
@@ -349,15 +122,15 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - DELETE
-    uri: 'api/products/{product_id}/reviews/{review_id}'
+      - GET
+    uri: api/v1/me/transactions
     metadata:
       custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
+      groupName: Transactions
+      groupDescription: 'View wallet transactions and request withdrawals.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete own product review'
+      title: 'List transactions'
       description: ''
       authenticated: true
       deprecated: false
@@ -365,32 +138,8 @@ endpoints:
       Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      review_id:
-        custom: []
-        name: review_id
-        description: 'The ID of the review.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-      review_id: 16
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -400,7 +149,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"message": "Review deleted."}'
+        content: '{"data":[{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}],"meta":{"current_page":1}}'
         headers: []
         description: ''
     responseFields: []
@@ -408,495 +157,6 @@ endpoints:
       - headers
       - Authorization
       - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/categories
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List categories'
-      description: 'Returns the full category tree.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Clothing", "children": []}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/categories/{category_id}'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get category'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      category_id:
-        custom: []
-        name: category_id
-        description: 'The ID of the category.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      category_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": {"id": 1, "name": "Clothing"}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/categories/{category_id}/products'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List products in category'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      category_id:
-        custom: []
-        name: category_id
-        description: 'The ID of the category.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      category_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/tags
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List all tags'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "sale", "slug": "sale"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/tags/{tag_id}/products'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List products by tag'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      tag_id:
-        custom: []
-        name: tag_id
-        description: 'The ID of the tag.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      tag_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/v1/products
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List products'
-      description: 'Browse all active approved products. Supports filtering by category, tag, vendor, price range, and full-text search.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters:
-      search:
-        custom: []
-        name: search
-        description: ''
-        required: false
-        example: t-shirt
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      category_id:
-        custom: []
-        name: category_id
-        description: ''
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      tag_id:
-        custom: []
-        name: tag_id
-        description: ''
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      vendor_id:
-        custom: []
-        name: vendor_id
-        description: ''
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      min_price:
-        custom: []
-        name: min_price
-        description: ''
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      max_price:
-        custom: []
-        name: max_price
-        description: ''
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      per_page:
-        custom: []
-        name: per_page
-        description: ''
-        required: false
-        example: 15
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      search: t-shirt
-      category_id: 16
-      tag_id: 16
-      vendor_id: 16
-      min_price: 4326.41688
-      max_price: 4326.41688
-      per_page: 15
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/products/{product_id}'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get product'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": {"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00", "vendor_profile": {}}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/products/{product_id}/similar'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get similar products'
-      description: 'Returns products from the same category or vendor.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 2, "name": "Red T-Shirt"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/products/{product_id}/reviews'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List product reviews'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "rating": 5, "review": "Great quality!"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
     controller: null
     method: null
     route: null
@@ -904,14 +164,14 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: 'api/v1/products/{product_id}/reviews'
+    uri: api/v1/me/withdrawals
     metadata:
       custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
+      groupName: Transactions
+      groupDescription: 'View wallet transactions and request withdrawals.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Write a product review'
+      title: 'Create withdrawal request'
       description: ''
       authenticated: true
       deprecated: false
@@ -919,54 +179,54 @@ endpoints:
       Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      rating:
+      payment_method_id:
         custom: []
-        name: rating
+        name: payment_method_id
         description: ''
         required: true
-        example: 5
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      review:
+      amount:
         custom: []
-        name: review
+        name: amount
+        description: ''
+        required: true
+        example: 500
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      note:
+        custom: []
+        name: note
         description: ''
         required: false
-        example: 'Great quality!'
+        example: 'Weekly payout request'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      rating: 5
-      review: 'Great quality!'
+      payment_method_id: 1
+      amount: 500
+      note: 'Weekly payout request'
     fileParameters: []
     responses:
       -
         custom: []
         status: 201
-        content: '{"data": {"id": 1, "rating": 5}}'
+        content: '{"data":{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}}'
         headers: []
         description: ''
     responseFields: []
@@ -974,292 +234,6 @@ endpoints:
       - headers
       - Authorization
       - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/products/{product_id}/reviews/{review_id}'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: 'Public product browsing, search, filtering and reviews.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Delete own product review'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      product_id:
-        custom: []
-        name: product_id
-        description: 'The ID of the product.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      review_id:
-        custom: []
-        name: review_id
-        description: 'The ID of the review.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      product_id: 16
-      review_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message": "Review deleted."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/v1/categories
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List categories'
-      description: 'Returns the full category tree.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Clothing", "children": []}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/categories/{category_id}'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get category'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      category_id:
-        custom: []
-        name: category_id
-        description: 'The ID of the category.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      category_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": {"id": 1, "name": "Clothing"}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/categories/{category_id}/products'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List products in category'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      category_id:
-        custom: []
-        name: category_id
-        description: 'The ID of the category.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      category_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/v1/tags
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List all tags'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "sale", "slug": "sale"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/tags/{tag_id}/products'
-    metadata:
-      custom: []
-      groupName: Catalog
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List products by tag'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      tag_id:
-        custom: []
-        name: tag_id
-        description: 'The ID of the tag.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      tag_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
     controller: null
     method: null
     route: null

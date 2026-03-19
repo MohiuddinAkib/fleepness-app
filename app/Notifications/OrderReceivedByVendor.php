@@ -32,7 +32,7 @@ class OrderReceivedByVendor extends Notification implements ShouldBroadcast, Sho
 
     public function broadcastAs(): string
     {
-        return 'order_received';
+        return 'new_order_for_vendor';
     }
 
     /** @return array<string, mixed> */
@@ -51,7 +51,7 @@ class OrderReceivedByVendor extends Notification implements ShouldBroadcast, Sho
                 "Order #{$this->vendorOrder->order_number} is waiting for your confirmation."
             )
         )->withData([
-            'type' => 'order_received',
+            'type' => 'new_order_for_vendor',
             'vendor_order_id' => (string) $this->vendorOrder->getKey(),
         ]);
     }
@@ -66,7 +66,7 @@ class OrderReceivedByVendor extends Notification implements ShouldBroadcast, Sho
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'order_received',
+            'type' => 'new_order_for_vendor',
             'vendor_order_id' => $this->vendorOrder->getKey(),
             'order_number' => $this->vendorOrder->order_number,
         ];

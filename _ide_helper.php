@@ -33586,6 +33586,7 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
     class Vite extends \Illuminate\Support\Facades\Vite {}
     class Firebase extends \Kreait\Laravel\Firebase\Facades\Firebase {}
+    class Horizon extends \Laravel\Horizon\Horizon {}
     class Octane extends \Laravel\Octane\Facades\Octane {}
     class Socialite extends \Laravel\Socialite\Facades\Socialite {}
     class Livewire extends \Livewire\Livewire {}

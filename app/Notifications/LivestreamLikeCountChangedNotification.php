@@ -36,13 +36,13 @@ class LivestreamLikeCountChangedNotification extends Notification implements Sho
     public function toBroadcast(object $notifiable): array
     {
         return [
-            'likes_count' => $this->livestream->likes_count,
+            'likes_count' => $this->livestream->likes()->count(),
         ];
     }
 
     public function broadcastAs(): string
     {
-        return 'livestream_like_count_changed';
+        return 'livestream_like_count_updated';
     }
 
     #[\Override]

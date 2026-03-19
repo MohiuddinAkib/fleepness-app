@@ -82,4 +82,9 @@ enum VendorOrderStatus: string implements HasColor, HasIcon, HasLabel
     {
         return self::Rejected === $this;
     }
+
+    public function shouldBroadcastCustomerUpdate(): bool
+    {
+        return ! $this->isPending();
+    }
 }

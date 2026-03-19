@@ -7,7 +7,6 @@ namespace App\Notifications;
 use App\Models\VendorOrder;
 use App\Data\VendorOrderData;
 use Illuminate\Bus\Queueable;
-use App\Enums\VendorOrderStatus;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
@@ -30,7 +29,7 @@ class VendorOrderStatusChanged extends Notification implements ShouldBroadcast, 
 
     public function broadcastAs(): string
     {
-        return 'vendor_order_status_changed';
+        return 'customer_order_status_changed';
     }
 
     /** @return array<string, mixed> */
@@ -45,7 +44,7 @@ class VendorOrderStatusChanged extends Notification implements ShouldBroadcast, 
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'vendor_order_status_changed',
+            'type' => 'customer_order_status_changed',
             'vendor_order_id' => $this->vendorOrder->getKey(),
             'order_number' => $this->vendorOrder->order_number,
             'status' => $this->vendorOrder->status->value,
@@ -54,6 +53,6 @@ class VendorOrderStatusChanged extends Notification implements ShouldBroadcast, 
 
     public function shouldSend(object $notifiable, string $channel): bool
     {
-        return VendorOrderStatus::Pending !== $this->vendorOrder->status;
+        return $this->vendorOrder->status->shouldBroadcastCustomerUpdate();
     }
 }
