@@ -24,7 +24,6 @@ use App\Facades\Livestream as LivestreamFacade;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
-use App\Notifications\LivestreamLikeCountChangedNotification;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Content', 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.')]
@@ -67,8 +66,6 @@ class LivestreamController extends Controller
             $existingLike->delete();
             $message = 'Unliked.';
         }
-
-        $livestream->notify(new LivestreamLikeCountChangedNotification($livestream));
 
         return response()->json(['message' => $message]);
     }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Models\User;
 use App\Models\Livestream;
+use App\Models\LivestreamLike;
 use App\Models\LivestreamComment;
-use App\Notifications\LivestreamLikeCountChangedNotification;
 
 beforeEach(function (): void {
     config()->set('broadcasting.default', 'log');
@@ -37,23 +37,20 @@ it('broadcasts livestream comment model events with the canonical room event con
         ]);
 });
 
-it('dispatches a livestream like count notification when a livestream is liked', function (): void {
-    Notification::fake();
-
+it('broadcasts like count updates via the LivestreamLike model event contract', function (): void {
     $user = User::factory()->create();
-    $livestream = Livestream::factory()->create();
-    $token = $user->createToken('test')->plainTextToken;
+    $livestream = Livestream::factory()->started()->create();
+    $like = LivestreamLike::factory()->create([
+        'livestream_id' => $livestream->getKey(),
+        'user_id' => $user->getKey(),
+    ]);
 
-    $this->withToken($token)
-        ->postJson("/api/livestreams/{$livestream->getKey()}/like")
-        ->assertOk()
-        ->assertJsonPath('message', 'Liked.');
-
-    Notification::assertSentTo(
-        $livestream->fresh(),
-        LivestreamLikeCountChangedNotification::class,
-        fn (LivestreamLikeCountChangedNotification $notification): bool => 'livestream_like_count_updated' === $notification->broadcastAs()
-    );
+    expect($like->broadcastAs('created'))->toBe('livestream_like_count_updated')
+        ->and($like->broadcastAs('deleted'))->toBe('livestream_like_count_updated')
+        ->and($like->broadcastAs('updated'))->toBeNull()
+        ->and($like->broadcastOn('created'))->toHaveCount(1)
+        ->and($like->broadcastOn('updated'))->toHaveCount(0)
+        ->and($like->broadcastWith('created'))->toHaveKey('likes_count');
 });
 
 it('broadcasts livestream model events with the canonical feed event names', function (): void {
