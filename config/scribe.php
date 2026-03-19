@@ -42,6 +42,8 @@ return [
             - Use it as the source of truth for request payloads, authentication requirements, and example responses
 
             ### Environment Notes
+            - `/api/v1/*` is the canonical versioned API surface for new integrations
+            - Unversioned `/api/*` routes currently remain available for backward compatibility while clients migrate
             - Public browsing endpoints can be called without authentication
             - Protected `/api/me/*`, `/api/cart/*`, `/api/orders`, and engagement endpoints require Sanctum bearer authentication
             - Social login endpoints redirect to third-party providers and are best exercised in a browser or mobile deep-link flow

@@ -8,15 +8,15 @@ it('generates and serves API documentation artifacts', function (): void {
     expect(file_exists(storage_path('app/private/scribe/collection.json')))->toBeTrue();
     expect(file_exists(storage_path('app/private/scribe/openapi.yaml')))->toBeTrue();
     expect(file_get_contents(storage_path('app/private/scribe/openapi.yaml')))
-        ->toContain('/api/me/vendors/followers')
-        ->toContain('/api/me/summaries')
-        ->toContain('/api/me/notifications')
-        ->toContain('/api/me/short-videos/saved')
-        ->toContain('/api/me/livestreams/liked')
-        ->toContain('/api/me/followings')
-        ->toContain('/api/me/vendors')
-        ->toContain('/api/me/balances')
-        ->toContain('/api/vendor-applications/status');
+        ->toContain('/api/v1/me/vendors/followers')
+        ->toContain('/api/v1/me/summaries')
+        ->toContain('/api/v1/me/notifications')
+        ->toContain('/api/v1/me/short-videos/saved')
+        ->toContain('/api/v1/me/livestreams/liked')
+        ->toContain('/api/v1/me/followings')
+        ->toContain('/api/v1/me/vendors')
+        ->toContain('/api/v1/me/balances')
+        ->toContain('/api/v1/vendor-applications/status');
 
     $this->get('/docs')->assertOk();
     $this->get('/docs.postman')->assertOk();

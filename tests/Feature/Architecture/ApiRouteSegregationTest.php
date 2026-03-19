@@ -37,4 +37,13 @@ it('keeps buyer and vendor API routes registered after splitting route files', f
 
     expect(ltrim($routes->match(Request::create('/api/me/balances', 'GET'))->getActionName(), '\\'))
         ->toBe(VendorProfileController::class.'@balance');
+
+    expect(ltrim($routes->match(Request::create('/api/v1/me/followings', 'GET'))->getActionName(), '\\'))
+        ->toBe(FollowController::class.'@followings');
+
+    expect(ltrim($routes->match(Request::create('/api/v1/me/vendors', 'GET'))->getActionName(), '\\'))
+        ->toBe(VendorProfileController::class.'@show');
+
+    expect(ltrim($routes->match(Request::create('/api/v1/me/balances', 'GET'))->getActionName(), '\\'))
+        ->toBe(VendorProfileController::class.'@balance');
 });
