@@ -45,6 +45,7 @@ Route::prefix('auth')->group(function (): void {
 
 require __DIR__.'/api/buyer.php';
 require __DIR__.'/api/vendor.php';
+require __DIR__.'/api/legacy.php';
 
 Route::prefix('products')->group(function (): void {
     Route::get('/', [ProductController::class, 'index']);
@@ -131,14 +132,6 @@ Route::prefix('short-videos')->group(function (): void {
     });
 });
 
-// Legacy alias retained for the current mobile client.
-// Preferred modern direction: use `/api/short-videos` as the canonical collection and migrate any
-// saved-content view to a future me-scoped endpoint instead of extending the historical `/api/shorts/*` routes.
-Route::middleware(['auth:sanctum'])->get('shorts/saved', [
-    ShortVideoController::class,
-    'saved',
-])->middleware('legacy-endpoint:shorts.saved');
-
 Route::prefix('livestreams')->group(function (): void {
     Route::get('/', [LivestreamController::class, 'index']);
     Route::get('{livestream}', [LivestreamController::class, 'show']);
@@ -167,20 +160,6 @@ Route::prefix('livestreams')->group(function (): void {
         'subscriberToken',
     ]);
 });
-
-// Legacy `/api/lives/*` aliases retained for the current mobile client.
-// Preferred modern direction: use `/api/livestreams` as the canonical collection/resource and lean on
-// realtime updates for counters instead of polling these historical endpoints.
-Route::middleware(['auth:sanctum'])
-    ->prefix('lives')
-    ->group(function (): void {
-        Route::get('liked', [LivestreamController::class, 'liked'])->middleware('legacy-endpoint:lives.liked');
-        Route::get('saved', [LivestreamController::class, 'saved'])->middleware('legacy-endpoint:lives.saved');
-        Route::get('{livestream}/likes-count', [
-            LivestreamController::class,
-            'likesCount',
-        ])->middleware('legacy-endpoint:lives.likes-count');
-    });
 
 Route::get('sections', [SectionController::class, 'index']);
 Route::get('sliders', [SectionController::class, 'sliders']);

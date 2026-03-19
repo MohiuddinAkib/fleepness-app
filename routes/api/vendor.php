@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompatibilityController;
 use App\Http\Controllers\Me\TransactionController;
 use App\Http\Controllers\Me\VendorOrderController;
 use App\Http\Controllers\Me\SizeTemplateController;
@@ -122,11 +121,6 @@ Route::middleware(['auth:sanctum'])
         Route::get('transactions', [TransactionController::class, 'index']);
         Route::post('withdrawals', [TransactionController::class, 'store']);
     });
-
-Route::middleware(['auth:sanctum', 'legacy-endpoint:user.balance-stats'])->get('user/balance-stats', [
-    CompatibilityController::class,
-    'balanceStats',
-]);
 
 Route::middleware(['auth:sanctum'])
     ->prefix('vendor-application')
