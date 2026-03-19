@@ -50,9 +50,17 @@ class ProductResource extends Resource
         ];
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $vendorProfileId = auth()->user()?->vendorProfile?->getKey();
+
+        return parent::getEloquentQuery()
+            ->where('vendor_profile_id', $vendorProfileId);
+    }
+
     public static function getRecordRouteBindingEloquentQuery(): Builder
     {
-        return parent::getRecordRouteBindingEloquentQuery()
+        return self::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);

@@ -10,6 +10,7 @@ use App\Models\VendorOrder;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Vendor\Resources\VendorOrders\Pages\EditVendorOrder;
 use App\Filament\Vendor\Resources\VendorOrders\Pages\ListVendorOrders;
 use App\Filament\Vendor\Resources\VendorOrders\Pages\CreateVendorOrder;
@@ -46,5 +47,13 @@ class VendorOrderResource extends Resource
             'create' => CreateVendorOrder::route('/create'),
             'edit' => EditVendorOrder::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $vendorProfileId = auth()->user()?->vendorProfile?->getKey();
+
+        return parent::getEloquentQuery()
+            ->where('vendor_profile_id', $vendorProfileId);
     }
 }

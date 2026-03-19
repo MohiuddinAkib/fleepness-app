@@ -6,11 +6,8 @@ namespace App\Models;
 
 use Filament\Panel;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Collection;
 use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Filament\Models\Contracts\HasTenants;
 use Illuminate\Notifications\Notification;
 use App\Notifications\LoginOtpNotification;
 use Filament\Models\Contracts\FilamentUser;
@@ -23,7 +20,7 @@ use App\Support\Notification\Contracts\SupportsFcmChannel;
 use App\Support\Notification\Contracts\FcmNotifiableByDevice;
 use App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice;
 
-class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, FcmNotifiableByDevice, FilamentUser, HasTenants
+class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, FcmNotifiableByDevice, FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
@@ -54,17 +51,6 @@ class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, Fc
         }
 
         return (bool) $this->is_admin;
-    }
-
-    /** @return Collection<int, Model> */
-    public function getTenants(Panel $panel): Collection
-    {
-        return Collection::wrap($this->vendorProfile)->filter();
-    }
-
-    public function canAccessTenant(Model $tenant): bool
-    {
-        return $this->vendorProfile()->is($tenant);
     }
 
     // -------------------------------------------------------------------------
