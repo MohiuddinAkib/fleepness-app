@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,6 +42,11 @@ class Category extends Model implements HasMedia
     {
         $this->addMediaCollection('profile_image')->singleFile();
         $this->addMediaCollection('cover_image')->singleFile();
+    }
+
+    public function isActive(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isActive());
     }
 
     /** @return BelongsTo<Category, $this> */

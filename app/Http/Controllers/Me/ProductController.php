@@ -123,7 +123,7 @@ class ProductController extends Controller
         abort_unless($product->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 
         $product->update([
-            'status' => ProductStatus::Active === $product->status
+            'status' => $product->is_active
                 ? ProductStatus::Inactive
                 : ProductStatus::Active,
         ]);

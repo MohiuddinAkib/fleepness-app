@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Database\Factories\LivestreamFactory;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,6 +53,21 @@ class Livestream extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('thumbnail')->singleFile();
+    }
+
+    public function isStarted(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isStarted());
+    }
+
+    public function isScheduled(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isScheduled());
+    }
+
+    public function isFinished(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isFinished());
     }
 
     /** @return BelongsTo<VendorProfile, $this> */

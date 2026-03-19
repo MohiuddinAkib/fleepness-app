@@ -9,6 +9,7 @@ use App\Enums\TransactionType;
 use App\Enums\TransactionStatus;
 use Illuminate\Database\Eloquent\Model;
 use Database\Factories\TransactionFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -43,6 +44,21 @@ class Transaction extends Model
         static::creating(function (Transaction $transaction): void {
             $transaction->reference ??= (string) Str::ulid();
         });
+    }
+
+    public function isPending(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isPending());
+    }
+
+    public function isApproved(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isApproved());
+    }
+
+    public function isWithdrawal(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->type->isWithdrawal());
     }
 
     /** @return BelongsTo<User, $this> */

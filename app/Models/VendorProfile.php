@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Database\Factories\VendorProfileFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,6 +49,21 @@ class VendorProfile extends Model implements HasMedia
     {
         $this->addMediaCollection('banner_image')->singleFile();
         $this->addMediaCollection('cover_image')->singleFile();
+    }
+
+    public function isApproved(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isApproved());
+    }
+
+    public function isPending(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isPending());
+    }
+
+    public function isRejected(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isRejected());
     }
 
     /** @return BelongsTo<User, $this> */

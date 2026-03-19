@@ -48,7 +48,7 @@ class VendorOrderController extends Controller
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
         abort_unless($vendorOrder->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-        abort_unless(VendorOrderStatus::Pending === $vendorOrder->status, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be accepted.');
+        abort_unless($vendorOrder->is_pending, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be accepted.');
 
         $vendorOrder->update(['status' => VendorOrderStatus::Packaging]);
 
@@ -63,7 +63,7 @@ class VendorOrderController extends Controller
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
         abort_unless($vendorOrder->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-        abort_unless(VendorOrderStatus::Pending === $vendorOrder->status, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be rejected.');
+        abort_unless($vendorOrder->is_pending, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be rejected.');
 
         $vendorOrder->update(['status' => VendorOrderStatus::Rejected]);
 

@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\VendorOrderStatus;
 use Illuminate\Database\Eloquent\Model;
 use Database\Factories\VendorOrderFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,6 +51,11 @@ class VendorOrder extends Model
             'packaging_started_at' => 'datetime',
             'expected_delivery_at' => 'datetime',
         ];
+    }
+
+    public function isPending(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->status->isPending());
     }
 
     /** @return BelongsTo<Order, $this> */

@@ -44,10 +44,7 @@ class ProductController extends Controller
 
     public function show(Product $product): JsonResponse
     {
-        abort_unless(
-            ProductStatus::Active === $product->status && $product->is_approved,
-            HttpResponse::HTTP_NOT_FOUND
-        );
+        abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $product->load(['category', 'media', 'variants', 'tags', 'vendorProfile']);
 
@@ -58,10 +55,7 @@ class ProductController extends Controller
 
     public function reviews(Product $product): JsonResponse
     {
-        abort_unless(
-            ProductStatus::Active === $product->status && $product->is_approved,
-            HttpResponse::HTTP_NOT_FOUND
-        );
+        abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $reviews = $product->reviews()->with('user')->paginate();
 
@@ -70,10 +64,7 @@ class ProductController extends Controller
 
     public function storeReview(Request $request, Product $product, #[CurrentUser] User $user): JsonResponse
     {
-        abort_unless(
-            ProductStatus::Active === $product->status && $product->is_approved,
-            HttpResponse::HTTP_NOT_FOUND
-        );
+        abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $validated = $request->validate([
             'rating' => ['required', 'integer', 'between:1,5'],

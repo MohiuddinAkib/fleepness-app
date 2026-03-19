@@ -33,7 +33,7 @@ class VendorController extends Controller
 
     public function show(VendorProfile $vendorProfile): JsonResponse
     {
-        abort_unless(VendorStatus::Approved === $vendorProfile->status, HttpResponse::HTTP_NOT_FOUND);
+        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         return Response::json([
             'data' => VendorProfileData::fromModel($vendorProfile),
@@ -42,7 +42,7 @@ class VendorController extends Controller
 
     public function follow(VendorProfile $vendorProfile, #[CurrentUser] User $user): JsonResponse
     {
-        abort_unless(VendorStatus::Approved === $vendorProfile->status, HttpResponse::HTTP_NOT_FOUND);
+        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $user->following()->syncWithoutDetaching([$vendorProfile->getKey()]);
 
@@ -58,7 +58,7 @@ class VendorController extends Controller
 
     public function reviews(VendorProfile $vendorProfile): JsonResponse
     {
-        abort_unless(VendorStatus::Approved === $vendorProfile->status, HttpResponse::HTTP_NOT_FOUND);
+        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $reviews = $vendorProfile->reviews()->with('user')->paginate();
 
@@ -70,7 +70,7 @@ class VendorController extends Controller
         VendorProfile $vendorProfile,
         #[CurrentUser] User $user,
     ): JsonResponse {
-        abort_unless(VendorStatus::Approved === $vendorProfile->status, HttpResponse::HTTP_NOT_FOUND);
+        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $existing = $vendorProfile->reviews()->where('user_id', $user->getKey())->first();
 
@@ -105,7 +105,7 @@ class VendorController extends Controller
 
     public function products(VendorProfile $vendorProfile): JsonResponse
     {
-        abort_unless(VendorStatus::Approved === $vendorProfile->status, HttpResponse::HTTP_NOT_FOUND);
+        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $products = $vendorProfile->products()
             ->where('status', ProductStatus::Active)
@@ -118,7 +118,7 @@ class VendorController extends Controller
 
     public function shortVideos(VendorProfile $vendorProfile): JsonResponse
     {
-        abort_unless(VendorStatus::Approved === $vendorProfile->status, HttpResponse::HTTP_NOT_FOUND);
+        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $videos = $vendorProfile->shortVideos()
             ->with(['media'])
