@@ -7,6 +7,7 @@ namespace App\Models;
 use Filament\Panel;
 use Laravel\Sanctum\HasApiTokens;
 use Database\Factories\UserFactory;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use App\Notifications\LoginOtpNotification;
@@ -23,7 +24,7 @@ use App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice;
 class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, FcmNotifiableByDevice, FilamentUser
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /** @var list<string> */
     protected $hidden = [
@@ -50,7 +51,7 @@ class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, Fc
             return null !== $this->vendorProfile;
         }
 
-        return (bool) $this->is_admin;
+        return $this->hasRole('admin');
     }
 
     // -------------------------------------------------------------------------
