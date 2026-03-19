@@ -114,7 +114,7 @@ class ProductController extends Controller
             ->where('status', ProductStatus::Active)
             ->where('is_approved', true)
             ->where('category_id', $product->category_id)
-            ->where($product->getKeyName(), '!=', $product->getKey())
+            ->except($product)
             ->with(['media', 'category', 'vendorProfile'])
             ->limit(10)
             ->get();
