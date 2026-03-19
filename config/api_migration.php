@@ -1,0 +1,64 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'legacy_endpoints' => [
+        'me.role' => [
+            'path' => '/api/me/role',
+            'replacements' => ['/api/me', '/api/me/vendor'],
+        ],
+        'seller.status' => [
+            'path' => '/api/seller/status',
+            'replacements' => ['/api/vendor-application/status', '/api/me/vendor'],
+        ],
+        'notifications.index' => [
+            'path' => '/api/notifications',
+            'replacements' => ['/api/me/notifications'],
+        ],
+        'notifications.mark-all-as-read' => [
+            'path' => '/api/notifications/mark-as-read',
+            'replacements' => ['/api/me/notifications/read'],
+        ],
+        'notifications.mark-as-read' => [
+            'path' => '/api/notifications/{notification}/mark-as-read',
+            'replacements' => ['/api/me/notifications/{notification}/read'],
+        ],
+        'addresses.default' => [
+            'path' => '/api/addresses/default',
+            'replacements' => ['/api/me/addresses'],
+        ],
+        'addresses.set-default' => [
+            'path' => '/api/addresses/{address}/set-default',
+            'replacements' => ['/api/me/addresses/{address}/default'],
+        ],
+        'following.index' => [
+            'path' => '/api/following',
+            'replacements' => ['/api/me/following'],
+        ],
+        'followers.index' => [
+            'path' => '/api/followers',
+            'replacements' => ['/api/vendors/{vendorProfile}/follow'],
+        ],
+        'user.balance-stats' => [
+            'path' => '/api/user/balance-stats',
+            'replacements' => ['/api/me/balance'],
+        ],
+        'shorts.saved' => [
+            'path' => '/api/shorts/saved',
+            'replacements' => ['/api/short-videos'],
+        ],
+        'lives.liked' => [
+            'path' => '/api/lives/liked',
+            'replacements' => ['/api/livestreams'],
+        ],
+        'lives.saved' => [
+            'path' => '/api/lives/saved',
+            'replacements' => ['/api/livestreams'],
+        ],
+        'lives.likes-count' => [
+            'path' => '/api/lives/{livestream}/likes-count',
+            'replacements' => ['/api/livestreams/{livestream}'],
+        ],
+    ],
+];

@@ -137,7 +137,7 @@ Route::prefix('short-videos')->group(function (): void {
 Route::middleware(['auth:sanctum'])->get('shorts/saved', [
     ShortVideoController::class,
     'saved',
-]);
+])->middleware('legacy-endpoint:shorts.saved');
 
 Route::prefix('livestreams')->group(function (): void {
     Route::get('/', [LivestreamController::class, 'index']);
@@ -174,12 +174,12 @@ Route::prefix('livestreams')->group(function (): void {
 Route::middleware(['auth:sanctum'])
     ->prefix('lives')
     ->group(function (): void {
-        Route::get('liked', [LivestreamController::class, 'liked']);
-        Route::get('saved', [LivestreamController::class, 'saved']);
+        Route::get('liked', [LivestreamController::class, 'liked'])->middleware('legacy-endpoint:lives.liked');
+        Route::get('saved', [LivestreamController::class, 'saved'])->middleware('legacy-endpoint:lives.saved');
         Route::get('{livestream}/likes-count', [
             LivestreamController::class,
             'likesCount',
-        ]);
+        ])->middleware('legacy-endpoint:lives.likes-count');
     });
 
 Route::get('sections', [SectionController::class, 'index']);

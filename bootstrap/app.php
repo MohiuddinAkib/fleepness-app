@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\RoleMiddleware;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Middleware\AnnotateLegacyEndpoint;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'role' => RoleMiddleware::class,
+            'legacy-endpoint' => AnnotateLegacyEndpoint::class,
         ]);
 
         $middleware->statefulApi()->throttleApi();

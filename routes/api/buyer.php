@@ -44,19 +44,19 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     // - `/api/notifications*` -> move to future `/api/me/notifications*` endpoints
     // - `/api/addresses/default` -> `/api/me/addresses` and `is_default`
     // - `/api/followers` and `/api/following` -> keep follow state around vendor resources and future me-scoped endpoints
-    Route::get('me/role', [CompatibilityController::class, 'role']);
-    Route::get('seller/status', [CompatibilityController::class, 'sellerStatus']);
-    Route::get('notifications', [NotificationController::class, 'index']);
-    Route::post('notifications/mark-as-read', [NotificationController::class, 'markAllAsRead']);
-    Route::post('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead']);
+    Route::get('me/role', [CompatibilityController::class, 'role'])->middleware('legacy-endpoint:me.role');
+    Route::get('seller/status', [CompatibilityController::class, 'sellerStatus'])->middleware('legacy-endpoint:seller.status');
+    Route::get('notifications', [NotificationController::class, 'index'])->middleware('legacy-endpoint:notifications.index');
+    Route::post('notifications/mark-as-read', [NotificationController::class, 'markAllAsRead'])->middleware('legacy-endpoint:notifications.mark-all-as-read');
+    Route::post('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->middleware('legacy-endpoint:notifications.mark-as-read');
 
     Route::prefix('addresses')->group(function (): void {
-        Route::get('default', [AddressController::class, 'default']);
-        Route::post('{address}/set-default', [AddressController::class, 'setDefault']);
+        Route::get('default', [AddressController::class, 'default'])->middleware('legacy-endpoint:addresses.default');
+        Route::post('{address}/set-default', [AddressController::class, 'setDefault'])->middleware('legacy-endpoint:addresses.set-default');
     });
 
-    Route::get('following', [FollowController::class, 'following']);
-    Route::get('followers', [FollowController::class, 'followers']);
+    Route::get('following', [FollowController::class, 'following'])->middleware('legacy-endpoint:following.index');
+    Route::get('followers', [FollowController::class, 'followers'])->middleware('legacy-endpoint:followers.index');
 });
 
 Route::middleware(['auth:sanctum'])

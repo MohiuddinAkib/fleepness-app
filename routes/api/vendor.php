@@ -123,7 +123,7 @@ Route::middleware(['auth:sanctum'])
         Route::post('withdrawals', [TransactionController::class, 'store']);
     });
 
-Route::middleware(['auth:sanctum'])->get('user/balance-stats', [
+Route::middleware(['auth:sanctum', 'legacy-endpoint:user.balance-stats'])->get('user/balance-stats', [
     CompatibilityController::class,
     'balanceStats',
 ]);
