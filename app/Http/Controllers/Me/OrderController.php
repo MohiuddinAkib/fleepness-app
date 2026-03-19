@@ -17,13 +17,22 @@ use Illuminate\Http\JsonResponse;
 use App\Data\Order\PlaceOrderData;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Knuckles\Scribe\Attributes\Group;
+use Knuckles\Scribe\Attributes\Endpoint;
+use Knuckles\Scribe\Attributes\Response;
+use Knuckles\Scribe\Attributes\BodyParam;
 use Illuminate\Contracts\Support\Responsable;
+use Knuckles\Scribe\Attributes\Authenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
+#[Group('Orders', 'Customer order history and placement.')]
 class OrderController extends Controller
 {
+    #[Authenticated]
+    #[Endpoint('List own orders', 'Returns a paginated list of all orders placed by the authenticated user.')]
+    #[Response('{"data":[{"id":1,"order_number":"ORD-001","grand_total":"250.00","is_completed":false}],"meta":{"current_page":1}}', 200)]
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $orders = Order::query()
@@ -35,6 +44,9 @@ class OrderController extends Controller
         return OrderData::collect($orders, PaginatedDataCollection::class);
     }
 
+    #[Authenticated]
+    #[Endpoint('Get order details')]
+    #[Response('{"data":{"id":1,"order_number":"ORD-001","grand_total":"250.00","vendor_orders":[]}}', 200)]
     public function show(Order $order, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($order->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -44,6 +56,10 @@ class OrderController extends Controller
         return OrderData::fromModel($order);
     }
 
+    #[BodyParam('delivery_option_id', 'integer', required: true, example: 1)]
+    #[BodyParam('address_id', 'integer', required: false, example: 1)]
+    #[Endpoint('Place order', 'Places an order from the selected cart items. Creates separate vendor orders for each vendor. Cart items with is_selected=true are used.')]
+    #[Response('{"message":"Order placed.","data":{"id":1,"order_number":"ORD-001","grand_total":"250.00"}}', 201)]
     public function store(PlaceOrderData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $selectedItems = CartItem::query()

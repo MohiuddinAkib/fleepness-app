@@ -10,14 +10,23 @@ use App\Data\VendorProfileData;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Knuckles\Scribe\Attributes\Group;
 use App\Data\Me\VendorApplicationData;
 use App\Data\Me\UpdateVendorProfileData;
+use Knuckles\Scribe\Attributes\Endpoint;
+use Knuckles\Scribe\Attributes\Response;
+use Knuckles\Scribe\Attributes\BodyParam;
 use Illuminate\Contracts\Support\Responsable;
+use Knuckles\Scribe\Attributes\Authenticated;
 use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
+#[Group('Vendor Profile', 'Manage your vendor/seller profile, apply to become a vendor, and check application status.')]
 class VendorProfileController extends Controller
 {
+    #[Authenticated]
+    #[Endpoint('Get vendor profile', 'Returns the authenticated user\'s vendor profile. Returns 404 if not a vendor.')]
+    #[Response('{"data": {"id": 1, "shop_name": "My Shop", "status": "approved", "balance": "150.00"}}', 200)]
     public function show(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -27,6 +36,12 @@ class VendorProfileController extends Controller
         return VendorProfileData::fromModel($vendorProfile);
     }
 
+    #[Authenticated]
+    #[BodyParam('shop_name', 'string', required: false, example: 'My Cool Shop')]
+    #[BodyParam('description', 'string', required: false, example: null)]
+    #[BodyParam('pickup_location', 'string', required: false, example: null)]
+    #[Endpoint('Update vendor profile')]
+    #[Response('{"data": {"id": 1, "shop_name": "My Cool Shop"}}', 200)]
     public function update(UpdateVendorProfileData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -58,6 +73,9 @@ class VendorProfileController extends Controller
         return VendorProfileData::fromModel($vendorProfile->fresh())->additional(['message' => 'Vendor profile updated.']);
     }
 
+    #[Authenticated]
+    #[Endpoint('Get vendor balance', 'Returns balance, total sales, withdrawn amount and pending withdrawal for the vendor.')]
+    #[Response('{"data": {"balance": "150.00", "total_sales": "1200.00", "withdrawn_amount": "500.00"}}', 200)]
     public function balance(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -73,6 +91,11 @@ class VendorProfileController extends Controller
         ]);
     }
 
+    #[Authenticated]
+    #[BodyParam('shop_name', 'string', required: true, example: 'Flash Store')]
+    #[BodyParam('shop_category_id', 'integer', required: false, example: null)]
+    #[Endpoint('Apply to become a vendor')]
+    #[Response('{"message": "Application submitted.", "data": {"status": "pending"}}', 201)]
     public function apply(VendorApplicationData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_if(null !== $user->vendorProfile, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Already applied as a vendor.');
@@ -87,6 +110,9 @@ class VendorProfileController extends Controller
         return VendorProfileData::fromModel($vendorProfile)->additional(['message' => 'Vendor application submitted.']);
     }
 
+    #[Authenticated]
+    #[Endpoint('Check vendor application status')]
+    #[Response('{"data": {"status": "pending"}}', 200)]
     public function applicationStatus(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;

@@ -10,13 +10,21 @@ use App\Data\VendorOrderData;
 use App\Enums\VendorOrderStatus;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Knuckles\Scribe\Attributes\Group;
+use Knuckles\Scribe\Attributes\Endpoint;
+use Knuckles\Scribe\Attributes\Response;
 use Illuminate\Contracts\Support\Responsable;
+use Knuckles\Scribe\Attributes\Authenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
+#[Group('Vendor Orders', 'Vendor order management — accept, reject and track orders assigned to the vendor.')]
 class VendorOrderController extends Controller
 {
+    #[Authenticated]
+    #[Endpoint('List vendor orders')]
+    #[Response('{"data":[{"id":1,"order_number":"VORD-001","status":"pending"}],"meta":{"current_page":1}}', 200)]
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -31,6 +39,9 @@ class VendorOrderController extends Controller
         return VendorOrderData::collect($orders, PaginatedDataCollection::class);
     }
 
+    #[Authenticated]
+    #[Endpoint('Get vendor order details')]
+    #[Response('{"data":{"id":1,"order_number":"VORD-001","status":"pending","items":[]}}', 200)]
     public function show(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -42,6 +53,9 @@ class VendorOrderController extends Controller
         return VendorOrderData::fromModel($vendorOrder);
     }
 
+    #[Authenticated]
+    #[Endpoint('Accept vendor order')]
+    #[Response('{"message":"Order accepted.","data":{"status":"packaging"}}', 200)]
     public function accept(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -57,6 +71,9 @@ class VendorOrderController extends Controller
         ]);
     }
 
+    #[Authenticated]
+    #[Endpoint('Reject vendor order')]
+    #[Response('{"message":"Order rejected.","data":{"status":"rejected"}}', 200)]
     public function reject(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;

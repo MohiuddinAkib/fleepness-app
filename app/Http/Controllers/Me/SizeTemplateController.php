@@ -11,15 +11,24 @@ use App\Models\SizeTemplateItem;
 use Illuminate\Http\JsonResponse;
 use App\Data\SizeTemplateItemData;
 use App\Http\Controllers\Controller;
+use Knuckles\Scribe\Attributes\Group;
 use Spatie\LaravelData\DataCollection;
+use Knuckles\Scribe\Attributes\Endpoint;
+use Knuckles\Scribe\Attributes\Response;
+use Knuckles\Scribe\Attributes\BodyParam;
 use Illuminate\Contracts\Support\Responsable;
+use Knuckles\Scribe\Attributes\Authenticated;
 use App\Data\SizeTemplate\StoreSizeTemplateData;
 use Illuminate\Container\Attributes\CurrentUser;
 use App\Data\SizeTemplate\StoreSizeTemplateItemData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
+#[Group('Size Templates', 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).')]
 class SizeTemplateController extends Controller
 {
+    #[Authenticated]
+    #[Endpoint('List size templates')]
+    #[Response('{"data": [{"id": 1, "name": "Shirt Sizes", "items": [{"label": "M", "value": "38-40 inches"}]}]}', 200)]
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -33,6 +42,10 @@ class SizeTemplateController extends Controller
         return SizeTemplateData::collect($templates, DataCollection::class);
     }
 
+    #[Authenticated]
+    #[BodyParam('name', 'string', required: true, example: 'Shirt Sizes')]
+    #[Endpoint('Create size template')]
+    #[Response('{"data": {"id": 1, "name": "Shirt Sizes"}}', 201)]
     public function store(
         StoreSizeTemplateData $data,
         #[CurrentUser] User $user,

@@ -11,14 +11,23 @@ use App\Enums\ProductStatus;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Knuckles\Scribe\Attributes\Group;
 use App\Data\Product\StoreProductData;
+use Knuckles\Scribe\Attributes\Endpoint;
+use Knuckles\Scribe\Attributes\Response;
+use Knuckles\Scribe\Attributes\BodyParam;
 use Illuminate\Contracts\Support\Responsable;
+use Knuckles\Scribe\Attributes\Authenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
+#[Group('Products', 'Vendor product management. Requires an approved vendor profile.')]
 class ProductController extends Controller
 {
+    #[Authenticated]
+    #[Endpoint('List own products', 'Returns a paginated list of products belonging to the authenticated vendor.')]
+    #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00", "status": "active"}], "meta": {"current_page": 1}}', 200)]
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -33,6 +42,18 @@ class ProductController extends Controller
         return ProductData::collect($products, PaginatedDataCollection::class);
     }
 
+    #[Authenticated]
+    #[BodyParam('name', 'string', required: true, example: 'Blue T-Shirt')]
+    #[BodyParam('category_id', 'integer', required: false)]
+    #[BodyParam('selling_price', 'number', required: true, example: 25.00)]
+    #[BodyParam('discount_price', 'number', required: false)]
+    #[BodyParam('quantity', 'integer', required: true, example: 100)]
+    #[BodyParam('description', 'string', required: false)]
+    #[BodyParam('short_description', 'string', required: false)]
+    #[BodyParam('sku', 'string', required: false, example: 'SKU-001')]
+    #[BodyParam('size_template_id', 'integer', required: false)]
+    #[Endpoint('Create product')]
+    #[Response('{"data": {"id": 1, "name": "Blue T-Shirt", "status": "active"}}', 201)]
     public function store(
         StoreProductData $data,
         #[CurrentUser] User $user,
@@ -60,6 +81,9 @@ class ProductController extends Controller
         return ProductData::fromModel($product);
     }
 
+    #[Authenticated]
+    #[Endpoint('Get own product')]
+    #[Response('{"data": {"id": 1, "name": "Blue T-Shirt"}}', 200)]
     public function show(
         Product $product,
         #[CurrentUser] User $user,
@@ -73,6 +97,18 @@ class ProductController extends Controller
         return ProductData::fromModel($product);
     }
 
+    #[Authenticated]
+    #[BodyParam('name', 'string', required: false)]
+    #[BodyParam('category_id', 'integer', required: false)]
+    #[BodyParam('selling_price', 'number', required: false)]
+    #[BodyParam('discount_price', 'number', required: false)]
+    #[BodyParam('quantity', 'integer', required: false)]
+    #[BodyParam('description', 'string', required: false)]
+    #[BodyParam('short_description', 'string', required: false)]
+    #[BodyParam('sku', 'string', required: false)]
+    #[BodyParam('size_template_id', 'integer', required: false)]
+    #[Endpoint('Update product')]
+    #[Response('{"data": {"id": 1, "name": "Updated T-Shirt"}}', 200)]
     public function update(
         StoreProductData $data,
         Product $product,
@@ -99,6 +135,9 @@ class ProductController extends Controller
         return ProductData::fromModel($product);
     }
 
+    #[Authenticated]
+    #[Endpoint('Delete product')]
+    #[Response('{"message": "Product deleted."}', 200)]
     public function destroy(
         Product $product,
         #[CurrentUser] User $user,
@@ -112,6 +151,9 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product deleted.']);
     }
 
+    #[Authenticated]
+    #[Endpoint('Toggle product status', 'Toggles the product between active and inactive status.')]
+    #[Response('{"data": {"id": 1, "status": "inactive"}}', 200)]
     public function toggleStatus(
         Product $product,
         #[CurrentUser] User $user,
@@ -129,6 +171,9 @@ class ProductController extends Controller
         return response()->json(['data' => ['status' => $product->fresh()->status]]);
     }
 
+    #[Authenticated]
+    #[Endpoint('Delete product image')]
+    #[Response('{"message": "Image deleted."}', 200)]
     public function destroyImage(
         Product $product,
         int $mediaId,

@@ -1,0 +1,549 @@
+name: Vendors
+description: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/me/following
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List followed vendors'
+      description: 'Returns a paginated list of vendor profiles that the authenticated user follows.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": [{"id": 1, "shop_name": "Flash Store"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/vendors
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List vendors'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        custom: []
+        name: search
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      shop_category_id:
+        custom: []
+        name: shop_category_id
+        description: ''
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      search: architecto
+      shop_category_id: 16
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": [{"id": 1, "shop_name": "Flash Store", "status": "approved"}], "meta": {"current_page": 1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/vendors/{vendorProfile_id}'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get vendor profile'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": {"id": 1, "shop_name": "Flash Store", "description": "Best deals", "order_count": 120}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/vendors/{vendorProfile_id}/products'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List vendor products'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/vendors/{vendorProfile_id}/short-videos'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List vendor short videos'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": [{"id": 1, "title": "New Collection Drop"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/vendors/{vendorProfile_id}/reviews'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List vendor reviews'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": [{"id": 1, "rating": 5, "comment": "Great vendor!"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/vendors/{vendorProfile_id}/follow'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Follow vendor'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message": "Following."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/vendors/{vendorProfile_id}/follow'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Unfollow vendor'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message": "Unfollowed."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/vendors/{vendorProfile_id}/reviews'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Write vendor review'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      rating:
+        custom: []
+        name: rating
+        description: ''
+        required: true
+        example: 4
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      comment:
+        custom: []
+        name: comment
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      rating: 4
+      comment: architecto
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data": {"id": 1, "rating": 4}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/vendors/{vendorProfile_id}/reviews/{review_id}'
+    metadata:
+      custom: []
+      groupName: Vendors
+      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete own vendor review'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      vendorProfile_id:
+        custom: []
+        name: vendorProfile_id
+        description: 'The ID of the vendorProfile.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      review_id:
+        custom: []
+        name: review_id
+        description: 'The ID of the review.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      vendorProfile_id: 16
+      review_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message": "Review deleted."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
