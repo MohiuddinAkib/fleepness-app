@@ -33594,6 +33594,11 @@ namespace  {
 }
 
 
+namespace . {
+    /**
+     * @mixin .\     */
+    class Facades extends .\ {}
+}
 
 namespace {
     
