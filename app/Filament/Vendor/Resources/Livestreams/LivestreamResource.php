@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Vendor\Resources\Livestreams\Pages\EditLivestream;
 use App\Filament\Vendor\Resources\Livestreams\Pages\ListLivestreams;
 use App\Filament\Vendor\Resources\Livestreams\Pages\CreateLivestream;
@@ -46,5 +47,13 @@ class LivestreamResource extends Resource
             'create' => CreateLivestream::route('/create'),
             'edit' => EditLivestream::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $vendorProfileId = auth()->user()?->vendorProfile?->getKey();
+
+        return parent::getEloquentQuery()
+            ->where('vendor_profile_id', $vendorProfileId);
     }
 }

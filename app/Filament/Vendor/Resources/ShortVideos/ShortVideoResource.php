@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Vendor\Resources\ShortVideos\Pages\EditShortVideo;
 use App\Filament\Vendor\Resources\ShortVideos\Pages\ListShortVideos;
 use App\Filament\Vendor\Resources\ShortVideos\Pages\CreateShortVideo;
@@ -46,5 +47,13 @@ class ShortVideoResource extends Resource
             'create' => CreateShortVideo::route('/create'),
             'edit' => EditShortVideo::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $vendorProfileId = auth()->user()?->vendorProfile?->getKey();
+
+        return parent::getEloquentQuery()
+            ->where('vendor_profile_id', $vendorProfileId);
     }
 }

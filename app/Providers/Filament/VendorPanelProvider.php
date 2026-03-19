@@ -6,7 +6,6 @@ namespace App\Providers\Filament;
 
 use Filament\Panel;
 use Filament\PanelProvider;
-use App\Models\VendorProfile;
 use Filament\Pages\Dashboard;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
@@ -32,8 +31,6 @@ class VendorPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Violet,
             ])
-            ->tenant(VendorProfile::class, ownershipRelationship: 'vendorProfile')
-            ->tenantMenu(false)
             ->discoverResources(in: app_path('Filament/Vendor/Resources'), for: 'App\Filament\Vendor\Resources')
             ->discoverPages(in: app_path('Filament/Vendor/Pages'), for: 'App\Filament\Vendor\Pages')
             ->pages([
