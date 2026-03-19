@@ -33,6 +33,7 @@ class LivestreamController extends Controller
     #[Endpoint('List livestreams')]
     #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<LivestreamData> */
     public function index(Request $request): JsonResponse|Responsable
     {
         $livestreams = Livestream::query()
@@ -50,6 +51,7 @@ class LivestreamController extends Controller
     #[Endpoint('Get livestream')]
     #[Response('{"data":{"id":1,"title":"Friday Live Sale","products":[]}}', 200)]
     #[Unauthenticated]
+    /** @return LivestreamData */
     public function show(Livestream $livestream): JsonResponse|Responsable
     {
         $livestream->load(['media', 'vendorProfile', 'products']);
@@ -60,6 +62,7 @@ class LivestreamController extends Controller
     #[Authenticated]
     #[Endpoint('Like livestream')]
     #[Response('{"message":"Liked."}', 200)]
+    /** @return JsonResponse<array{message: string}> */
     public function like(Livestream $livestream, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $existingLike = $livestream->likes()->where('user_id', $user->getKey())->first();
@@ -78,6 +81,7 @@ class LivestreamController extends Controller
     #[Authenticated]
     #[Endpoint('Save livestream')]
     #[Response('{"message":"Saved."}', 200)]
+    /** @return JsonResponse<array{message: string}> */
     public function save(Livestream $livestream, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $livestream->saves()->firstOrCreate(['user_id' => $user->getKey()]);
@@ -88,6 +92,7 @@ class LivestreamController extends Controller
     #[Endpoint('List livestream products')]
     #[Response('{"data":[{"id":15,"name":"Blue T-Shirt"}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<ProductData> */
     public function products(Livestream $livestream): JsonResponse|Responsable
     {
         $products = $livestream->products()->with(['media', 'vendorProfile', 'category'])->get();
@@ -107,6 +112,7 @@ class LivestreamController extends Controller
      *
      * Retained only for backward compatibility with the mobile client.
      */
+    /** @return PaginatedDataCollection<LivestreamData> */
     public function liked(
         #[CurrentUser] User $user,
         ListLikedLivestreamsAction $listLikedLivestreams,
@@ -126,6 +132,7 @@ class LivestreamController extends Controller
      * - use `/api/me/livestreams/saved` for the authenticated saved collection
      * - keep `/api/livestreams` as the canonical public content collection
      */
+    /** @return PaginatedDataCollection<LivestreamData> */
     public function saved(
         #[CurrentUser] User $user,
         ListSavedLivestreamsAction $listSavedLivestreams,
@@ -145,6 +152,7 @@ class LivestreamController extends Controller
      * - consume `/api/livestreams/{livestream}` for the canonical resource
      * - subscribe to real-time broadcast updates for like counters where possible
      */
+    /** @return JsonResponse<array{likes_count: int}> */
     public function likesCount(Livestream $livestream): JsonResponse|Responsable
     {
         return response()->json([
@@ -155,6 +163,7 @@ class LivestreamController extends Controller
     #[Endpoint('Generate livestream subscriber token', 'Returns a LiveKit subscriber token for an authenticated user or a guest viewer.')]
     #[Response('{"token":"eyJhbGciOi..."}', 200)]
     #[Unauthenticated]
+    /** @return JsonResponse<array{token: string}> */
     public function subscriberToken(
         Livestream $livestream,
         #[CurrentUser] ?User $user,

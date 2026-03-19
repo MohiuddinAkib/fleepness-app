@@ -36,6 +36,7 @@ class VendorController extends Controller
     #[QueryParam('similar_to_vendor_id', 'integer', required: false, description: 'Modern replacement for the old `/similarvendors/{vendor}` endpoint. Pass a vendor id to return other approved vendors from the same shop category.', example: 12)]
     #[Response('{"data": [{"id": 1, "shop_name": "Flash Store", "status": "approved"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<VendorProfileData> */
     public function index(ListVendorsData $data): JsonResponse|Responsable
     {
         $vendors = VendorProfile::query()
@@ -71,6 +72,7 @@ class VendorController extends Controller
     #[Endpoint('Get vendor profile')]
     #[Response('{"data": {"id": 1, "shop_name": "Flash Store", "description": "Best deals", "order_count": 120}}', 200)]
     #[Unauthenticated]
+    /** @return VendorProfileData */
     public function show(VendorProfile $vendorProfile): JsonResponse|Responsable
     {
         abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
@@ -81,6 +83,7 @@ class VendorController extends Controller
     #[Authenticated]
     #[Endpoint('Follow vendor')]
     #[Response('{"message": "Following."}', 200)]
+    /** @return JsonResponse<array{message: string}> */
     public function follow(VendorProfile $vendorProfile, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
@@ -93,6 +96,7 @@ class VendorController extends Controller
     #[Authenticated]
     #[Endpoint('Unfollow vendor')]
     #[Response('{"message": "Unfollowed."}', 200)]
+    /** @return JsonResponse<array{message: string}> */
     public function unfollow(VendorProfile $vendorProfile, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $user->following()->detach($vendorProfile->getKey());
@@ -110,6 +114,7 @@ class VendorController extends Controller
     #[QueryParam('price_category', 'string', required: false, description: 'Named price-band replacement for the old in-price-category endpoint. Supported values: `low`, `medium`, `premium`.', example: 'low')]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<ProductData> */
     public function products(
         VendorProfile $vendorProfile,
         ListVendorProductsData $data,
@@ -150,6 +155,7 @@ class VendorController extends Controller
     #[Endpoint('List vendor short videos')]
     #[Response('{"data": [{"id": 1, "title": "New Collection Drop"}]}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<ShortVideoData> */
     public function shortVideos(VendorProfile $vendorProfile): JsonResponse|Responsable
     {
         abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);

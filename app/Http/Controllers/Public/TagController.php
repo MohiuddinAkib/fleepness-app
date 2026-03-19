@@ -23,6 +23,7 @@ class TagController extends Controller
     #[Endpoint('List all tags')]
     #[Response('{"data": [{"id": 1, "name": "sale", "slug": "sale"}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<TagData> */
     public function index(): JsonResponse|Responsable
     {
         $tags = Tag::query()->orderBy('name')->get();
@@ -33,6 +34,7 @@ class TagController extends Controller
     #[Endpoint('Get tag')]
     #[Response('{"data": {"id": 1, "name": "sale", "slug": "sale"}}', 200)]
     #[Unauthenticated]
+    /** @return TagData */
     public function show(Tag $tag): JsonResponse|Responsable
     {
         return TagData::fromModel($tag);
@@ -41,6 +43,7 @@ class TagController extends Controller
     #[Endpoint('List products by tag')]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<ProductData> */
     public function products(Tag $tag): JsonResponse|Responsable
     {
         $products = $tag->products()

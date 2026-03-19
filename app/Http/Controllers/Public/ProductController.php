@@ -32,6 +32,7 @@ class ProductController extends Controller
     #[QueryParam('per_page', 'integer', required: false, example: 15)]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<ProductData> */
     public function index(Request $request): JsonResponse|Responsable
     {
         $query = Product::query()
@@ -58,6 +59,7 @@ class ProductController extends Controller
     #[Endpoint('Get product')]
     #[Response('{"data": {"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00", "vendor_profile": {}}}', 200)]
     #[Unauthenticated]
+    /** @return ProductData */
     public function show(Product $product): JsonResponse|Responsable
     {
         abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
@@ -70,6 +72,7 @@ class ProductController extends Controller
     #[Endpoint('Get similar products', 'Returns products from the same category or vendor.')]
     #[Response('{"data": [{"id": 2, "name": "Red T-Shirt"}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<ProductData> */
     public function similar(Product $product): JsonResponse|Responsable
     {
         $similar = Product::query()

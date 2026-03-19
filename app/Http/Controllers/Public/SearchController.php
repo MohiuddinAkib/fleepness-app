@@ -24,6 +24,7 @@ class SearchController extends Controller
     #[QueryParam('q', 'string', required: true, example: 'flash sale')]
     #[Response('{"data":{"products":[{"id":15,"name":"Flash Deal Tee"}],"vendors":[{"id":4,"shop_name":"Flash Store"}]}}', 200)]
     #[Unauthenticated]
+    /** @return SearchResultsData */
     public function index(Request $request): JsonResponse|Responsable
     {
         $query = (string) $request->string('q');

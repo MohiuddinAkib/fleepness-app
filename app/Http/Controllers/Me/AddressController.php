@@ -26,6 +26,7 @@ class AddressController extends Controller
     #[Authenticated]
     #[Endpoint('List addresses')]
     #[Response('{"data": [{"id": 1, "label": "Home", "formatted_address": "123 Main St", "is_default": true}]}', 200)]
+    /** @return DataCollection<AddressData> */
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $addresses = $user->addresses()->get();
@@ -44,6 +45,7 @@ class AddressController extends Controller
     #[BodyParam('is_default', 'boolean', required: false, example: false)]
     #[Endpoint('Add address')]
     #[Response('{"data": {"id": 2, "label": "Home", "is_default": false}}', 201)]
+    /** @return AddressData */
     public function store(StoreAddressData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $address = $user->addresses()->create([
@@ -73,6 +75,7 @@ class AddressController extends Controller
     #[BodyParam('is_default', 'boolean', required: false, example: false)]
     #[Endpoint('Update address')]
     #[Response('{"data": {"id": 1, "label": "Work"}}', 200)]
+    /** @return AddressData */
     public function update(StoreAddressData $data, Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -95,6 +98,7 @@ class AddressController extends Controller
     #[Authenticated]
     #[Endpoint('Delete address')]
     #[Response('{"message": "Address deleted."}', 200)]
+    /** @return JsonResponse<array{message: string}> */
     public function destroy(Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -107,6 +111,7 @@ class AddressController extends Controller
     #[Authenticated]
     #[Endpoint('Set default address', 'Marks the specified address as the default delivery address.')]
     #[Response('{"message": "Default address updated."}', 200)]
+    /** @return JsonResponse<array{message: string, data: AddressData}> */
     public function setDefault(Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -129,6 +134,7 @@ class AddressController extends Controller
      *
      * This method remains only to keep the older React Native client working during migration.
      */
+    /** @return JsonResponse<array{default_address: AddressData|null, data: AddressData|null}> */
     public function default(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $address = $user->defaultAddress()->first();

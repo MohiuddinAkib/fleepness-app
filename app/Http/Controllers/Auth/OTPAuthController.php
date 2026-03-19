@@ -28,6 +28,7 @@ class OTPAuthController extends Controller
     #[Endpoint('Register', 'Register a new user and send an OTP to the provided phone number.')]
     #[Response(['message' => 'OTP sent to your phone number.'], 200, 'OTP sent successfully.')]
     #[Unauthenticated]
+    /** @return JsonResponse<array{message: string, user: UserData, otp?: string}> */
     public function register(RegisterData $data): JsonResponse|Responsable
     {
         $user = User::create([
@@ -56,6 +57,7 @@ class OTPAuthController extends Controller
     #[Endpoint('Verify OTP', 'Verify the OTP sent to the phone number and receive an authentication token.')]
     #[Response(['message' => 'Phone number verified.', 'data' => ['id' => 1, 'name' => 'John Doe', 'phone_number' => '+8801712345678'], 'token' => '1|abc123...'], 200, 'OTP verified, token issued.')]
     #[Unauthenticated]
+    /** @return JsonResponse<array{message: string, token: string, user: UserData}> */
     public function verifyOtp(VerifyOtpData $data): JsonResponse|Responsable
     {
         $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
@@ -84,6 +86,7 @@ class OTPAuthController extends Controller
     #[Endpoint('Resend OTP', 'Resend the OTP to the specified phone number.')]
     #[Response(['message' => 'OTP resent.'], 200, 'OTP resent successfully.')]
     #[Unauthenticated]
+    /** @return JsonResponse<array{message: string, otp?: string}> */
     public function resendOtp(SendOtpData $data): JsonResponse|Responsable
     {
         $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
@@ -105,6 +108,7 @@ class OTPAuthController extends Controller
     #[Endpoint('Login', 'Send an OTP to the phone number to initiate login.')]
     #[Response(['message' => 'OTP sent to your phone number.'], 200, 'OTP sent successfully.')]
     #[Unauthenticated]
+    /** @return JsonResponse<array{message: string, otp?: string}> */
     public function login(SendOtpData $data): JsonResponse|Responsable
     {
         $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();

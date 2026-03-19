@@ -26,6 +26,7 @@ class PaymentAccountController extends Controller
     #[Authenticated]
     #[Endpoint('List payment accounts')]
     #[Response('{"data": [{"id": 1, "account_number": "01712345678", "is_primary": true}]}', 200)]
+    /** @return DataCollection<PaymentAccountData> */
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $accounts = $user->paymentAccounts()->with('paymentMethod')->get();
@@ -39,6 +40,7 @@ class PaymentAccountController extends Controller
     #[BodyParam('is_primary', 'boolean', required: false, example: false)]
     #[Endpoint('Add payment account')]
     #[Response('{"data": {"id": 2, "account_number": "01712345678"}}', 201)]
+    /** @return PaymentAccountData */
     public function store(StorePaymentAccountData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $account = $user->paymentAccounts()->create([
@@ -55,6 +57,7 @@ class PaymentAccountController extends Controller
     #[Authenticated]
     #[Endpoint('Remove payment account')]
     #[Response('{"message": "Payment account removed."}', 200)]
+    /** @return JsonResponse<array{message: string}> */
     public function destroy(UserPaymentAccount $paymentAccount, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($paymentAccount->user()->is($user), HttpResponse::HTTP_FORBIDDEN);

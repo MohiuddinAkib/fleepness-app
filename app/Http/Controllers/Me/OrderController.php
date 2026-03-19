@@ -35,6 +35,7 @@ class OrderController extends Controller
     #[Authenticated]
     #[Endpoint('List own orders', 'Returns a paginated list of all orders placed by the authenticated user.')]
     #[Response('{"data":[{"id":1,"order_number":"ORD-001","grand_total":"250.00","is_completed":false}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<OrderData> */
     public function index(Request $request, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $orders = Order::query()
@@ -53,6 +54,7 @@ class OrderController extends Controller
     #[Authenticated]
     #[Endpoint('Get order details')]
     #[Response('{"data":{"id":1,"order_number":"ORD-001","grand_total":"250.00","vendor_orders":[]}}', 200)]
+    /** @return OrderData */
     public function show(Order $order, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($order->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -66,6 +68,7 @@ class OrderController extends Controller
     #[BodyParam('address_id', 'integer', required: false, example: 1)]
     #[Endpoint('Place order', 'Places an order from the selected cart items. Creates separate vendor orders for each vendor. Cart items with is_selected=true are used.')]
     #[Response('{"message":"Order placed.","data":{"id":1,"order_number":"ORD-001","grand_total":"250.00"}}', 201)]
+    /** @return OrderData */
     public function store(PlaceOrderData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $selectedItems = CartItem::query()

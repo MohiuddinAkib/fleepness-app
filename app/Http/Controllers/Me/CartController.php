@@ -31,6 +31,7 @@ class CartController extends Controller
     #[Authenticated]
     #[Endpoint('List cart items')]
     #[Response('{"data":[{"id":1,"quantity":2,"is_selected":true,"product":{"id":15,"name":"Blue T-Shirt"}}]}', 200)]
+    /** @return DataCollection<CartItemData> */
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $items = CartItem::query()
@@ -47,6 +48,7 @@ class CartController extends Controller
     #[BodyParam('quantity', 'integer', required: true, example: 2)]
     #[Endpoint('Add item to cart')]
     #[Response('{"message":"Item added to cart.","data":{"id":1,"quantity":2,"is_selected":true}}', 201)]
+    /** @return CartItemData */
     public function store(AddToCartData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $cartItem = CartItem::query()->updateOrCreate(
@@ -71,6 +73,7 @@ class CartController extends Controller
     #[BodyParam('is_selected', 'boolean', required: false, example: true)]
     #[Endpoint('Update cart item')]
     #[Response('{"message":"Cart item updated.","data":{"id":1,"quantity":3,"is_selected":true}}', 200)]
+    /** @return CartItemData */
     public function update(UpdateCartItemData $data, CartItem $cartItem, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($cartItem->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -97,6 +100,7 @@ class CartController extends Controller
     #[Authenticated]
     #[Endpoint('Remove cart item')]
     #[Response('{"message":"Item removed from cart."}', 200)]
+    /** @return JsonResponse<array{message: string}> */
     public function destroy(CartItem $cartItem, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($cartItem->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -109,6 +113,28 @@ class CartController extends Controller
     #[Authenticated]
     #[Endpoint('Get cart summary')]
     #[Response('{"data":{"item_count":2,"product_total":"250.00"}}', 200)]
+    /**
+     * @return JsonResponse<array{
+     *     item_count: int,
+     *     item_total: string,
+     *     product_total: string,
+     *     delivery_fee: string,
+     *     platform_fee: string,
+     *     vat_fee: string,
+     *     commission_fee: string,
+     *     grand_total: string,
+     *     data: array{
+     *         item_count: int,
+     *         item_total: string,
+     *         product_total: string,
+     *         delivery_fee: string,
+     *         platform_fee: string,
+     *         vat_fee: string,
+     *         commission_fee: string,
+     *         grand_total: string
+     *     }
+     * }>
+     */
     public function summary(Request $request, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $items = CartItem::query()

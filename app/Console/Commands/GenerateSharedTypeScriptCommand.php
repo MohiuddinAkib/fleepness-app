@@ -120,7 +120,9 @@ TS,
 
             $this->files->put(
                 $file->getPathname(),
-                $this->mergeDuplicateControllerDeclarations($content),
+                $this->normalizeGeneratedControllerTypes(
+                    $this->mergeDuplicateControllerDeclarations($content),
+                ),
             );
         }
     }
@@ -148,6 +150,18 @@ TS,
         );
 
         $this->files->put($path, $content);
+    }
+
+    private function normalizeGeneratedControllerTypes(string $content): string
+    {
+        $content = preg_replace('/\bundefined<([^>]+)>/', 'Array<$1>', $content) ?? $content;
+        $content = preg_replace(
+            '/Spatie\.LaravelData\.(PaginatedDataCollection|CursorPaginatedDataCollection)<([^,>]+)>/',
+            'Spatie.LaravelData.$1<number, $2>',
+            $content,
+        ) ?? $content;
+
+        return $content;
     }
 
     private function mergeDuplicateControllerDeclarations(string $content): string

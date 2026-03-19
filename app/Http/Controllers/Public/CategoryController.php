@@ -23,6 +23,7 @@ class CategoryController extends Controller
     #[Endpoint('List categories', 'Returns the full category tree.')]
     #[Response('{"data": [{"id": 1, "name": "Clothing", "children": []}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<CategoryData> */
     public function index(): JsonResponse|Responsable
     {
         $categories = Category::query()
@@ -38,6 +39,7 @@ class CategoryController extends Controller
     #[Endpoint('Get category')]
     #[Response('{"data": {"id": 1, "name": "Clothing"}}', 200)]
     #[Unauthenticated]
+    /** @return CategoryData */
     public function show(Category $category): JsonResponse|Responsable
     {
         return CategoryData::fromModel($category->load(['parent', 'children.children']));
@@ -46,6 +48,7 @@ class CategoryController extends Controller
     #[Endpoint('List products in category')]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<ProductData> */
     public function products(Category $category): JsonResponse|Responsable
     {
         $products = $category->products()
