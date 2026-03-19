@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Models\User;
 use App\Data\CommentData;
+use App\Data\ProductData;
 use App\Models\Livestream;
 use App\Data\LivestreamData;
 use App\Attributes\CurrentUser;
@@ -92,5 +93,14 @@ class LivestreamController extends Controller
         $livestream->saves()->firstOrCreate(['user_id' => $user->getKey()]);
 
         return Response::json(['message' => 'Saved.']);
+    }
+
+    public function products(Livestream $livestream): JsonResponse
+    {
+        $products = $livestream->products()->with(['media', 'vendorProfile', 'category'])->get();
+
+        return Response::json([
+            'data' => ProductData::collect($products),
+        ]);
     }
 }

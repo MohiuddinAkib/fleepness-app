@@ -107,4 +107,20 @@ class ProductController extends Controller
 
         return Response::json(['message' => 'Review deleted.']);
     }
+
+    public function similar(Product $product): JsonResponse
+    {
+        $similar = Product::query()
+            ->where('status', ProductStatus::Active)
+            ->where('is_approved', true)
+            ->where('category_id', $product->category_id)
+            ->where($product->getKeyName(), '!=', $product->getKey())
+            ->with(['media', 'category', 'vendorProfile'])
+            ->limit(10)
+            ->get();
+
+        return Response::json([
+            'data' => ProductData::collect($similar),
+        ]);
+    }
 }

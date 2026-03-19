@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Models\User;
 use App\Data\CommentData;
+use App\Data\ProductData;
 use App\Models\ShortVideo;
 use App\Data\ShortVideoData;
 use App\Attributes\CurrentUser;
@@ -93,5 +94,14 @@ class ShortVideoController extends Controller
         $shortVideo->saves()->firstOrCreate(['user_id' => $user->getKey()]);
 
         return Response::json(['message' => 'Saved.']);
+    }
+
+    public function products(ShortVideo $shortVideo): JsonResponse
+    {
+        $products = $shortVideo->products()->with(['media', 'vendorProfile', 'category'])->get();
+
+        return Response::json([
+            'data' => ProductData::collect($products),
+        ]);
     }
 }

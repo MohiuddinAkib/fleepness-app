@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 12.55.0.
+ * Generated for Laravel 12.55.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -27843,8 +27843,8 @@ namespace Illuminate\Http\Client {
      */
     class Factory {
         /**
-         * @param callable(\App\Support\Http\LazyHttpClientPool):(Generator<array-key,(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|iterable<(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|list<(callable():\GuzzleHttp\Promise\PromiseInterface)|\GuzzleHttp\Promise\PromiseInterface>|void) $callback
-         * @return array<array-key,\Illuminate\Http\Client\Response>
+         * @param callable(LazyHttpClientPool):(Generator<array-key,(callable():PromiseInterface)|PromiseInterface>|iterable<(callable():PromiseInterface)|PromiseInterface>|list<(callable():PromiseInterface)|PromiseInterface>|void) $callback
+         * @return array<array-key,Response>
          * @see \App\Providers\HttpClientServiceProvider::boot()
          * @static
          */
@@ -27934,8 +27934,8 @@ namespace Illuminate\Http\Client {
          * Specify the number of times the request should be attempted.
          *
          * @param array<int,int>|int $times
-         * @param (\Closure(int $attempts,\Illuminate\Http\Client\Request $request,?\Illuminate\Http\Client\Response $response):int)|int|null $sleepMilliseconds
-         * @param (\Closure(int $attempts,\Illuminate\Http\Client\Request $request,?\Illuminate\Http\Client\Response $response,?Exception $exception):bool)|null $when
+         * @param (\Closure(int $attempts,Request $request,?Response $response):int)|int|null $sleepMilliseconds
+         * @param (\Closure(int $attempts,Request $request,?Response $response,?Exception $exception):bool)|null $when
          * @see \App\Providers\HttpClientServiceProvider::boot()
          * @return \Illuminate\Http\Client\PendingRequest
          * @static
@@ -28051,7 +28051,7 @@ namespace Illuminate\Http\Client {
          * Register a named before-sending callback, optionally positioning it before or after another one.
          *
          * @param string $name Callback name to add or replace
-         * @param \Closure(\Illuminate\Http\Client\Request,array,PendingRequest):(\Illuminate\Http\Client\Request|RequestInterface) $fn
+         * @param \Closure(Request,array,PendingRequest):(Request|RequestInterface) $fn
          * @param bool $unique If true, skip adding if it already exists
          * @param string|null $before Insert before this named callback
          * @param string|null $after Insert after this named callback

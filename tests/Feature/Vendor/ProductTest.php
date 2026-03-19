@@ -11,7 +11,7 @@ it('requires vendor profile to list products', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson('/api/vendor/products')->assertForbidden();
+    $this->withToken($token)->getJson('/api/me/products')->assertForbidden();
 });
 
 it('lists vendor own products', function (): void {
@@ -20,7 +20,7 @@ it('lists vendor own products', function (): void {
     Product::factory()->count(3)->for($vendor, 'vendorProfile')->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/vendor/products');
+    $response = $this->withToken($token)->getJson('/api/me/products');
 
     $response->assertOk()->assertJsonCount(3, 'data');
 });
@@ -30,7 +30,7 @@ it('creates a product', function (): void {
     VendorProfile::factory()->for($user)->approved()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->postJson('/api/vendor/products', [
+    $response = $this->withToken($token)->postJson('/api/me/products', [
         'name' => 'Cool T-Shirt',
         'quantity' => 50,
         'selling_price' => 500,
@@ -48,7 +48,7 @@ it('returns 422 for missing required fields', function (): void {
     VendorProfile::factory()->for($user)->approved()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson('/api/vendor/products', [])->assertUnprocessable();
+    $this->withToken($token)->postJson('/api/me/products', [])->assertUnprocessable();
 });
 
 it('shows own product', function (): void {
@@ -57,7 +57,7 @@ it('shows own product', function (): void {
     $product = Product::factory()->for($vendor, 'vendorProfile')->create(['name' => 'My Product']);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson("/api/vendor/products/{$product->getKey()}")
+    $this->withToken($token)->getJson("/api/me/products/{$product->getKey()}")
         ->assertOk()
         ->assertJsonPath('data.name', 'My Product');
 });
@@ -68,7 +68,7 @@ it('cannot see another vendor\'s product', function (): void {
     $otherProduct = Product::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson("/api/vendor/products/{$otherProduct->getKey()}")
+    $this->withToken($token)->getJson("/api/me/products/{$otherProduct->getKey()}")
         ->assertForbidden();
 });
 
@@ -78,7 +78,7 @@ it('updates a product', function (): void {
     $product = Product::factory()->for($vendor, 'vendorProfile')->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->patchJson("/api/vendor/products/{$product->getKey()}", [
+    $this->withToken($token)->patchJson("/api/me/products/{$product->getKey()}", [
         'name' => 'Updated Name',
         'quantity' => 99,
     ])->assertOk()->assertJsonPath('data.name', 'Updated Name');
@@ -92,7 +92,7 @@ it('deletes a product', function (): void {
     $product = Product::factory()->for($vendor, 'vendorProfile')->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->deleteJson("/api/vendor/products/{$product->getKey()}")->assertOk();
+    $this->withToken($token)->deleteJson("/api/me/products/{$product->getKey()}")->assertOk();
 
     expect(Product::withTrashed()->find($product->getKey())->trashed())->toBeTrue();
 });
@@ -103,7 +103,7 @@ it('toggles product status', function (): void {
     $product = Product::factory()->for($vendor, 'vendorProfile')->create(['status' => ProductStatus::Active]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson("/api/vendor/products/{$product->getKey()}/toggle-status")
+    $this->withToken($token)->postJson("/api/me/products/{$product->getKey()}/toggle-status")
         ->assertOk();
 
     expect($product->fresh()->status)->toBe(ProductStatus::Inactive);

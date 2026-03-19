@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Me;
 
 use App\Models\User;
+use App\Models\Product;
 use App\Models\Livestream;
 use Illuminate\Support\Str;
 use App\Data\LivestreamData;
+use Illuminate\Http\Request;
 use App\Attributes\CurrentUser;
 use App\Enums\LivestreamStatus;
 use Spatie\LaravelData\Optional;
@@ -85,5 +87,35 @@ class LivestreamController extends Controller
         $livestream->delete();
 
         return Response::json(['message' => 'Livestream deleted.']);
+    }
+
+    public function attachProduct(
+        Request $request,
+        Livestream $livestream,
+        #[CurrentUser] User $user,
+    ): JsonResponse {
+        $vendorProfile = $user->vendorProfile;
+        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
+        abort_unless($livestream->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
+
+        $validated = $request->validate(['product_id' => ['required', 'integer', 'exists:products,id']]);
+
+        $livestream->products()->syncWithoutDetaching([$validated['product_id']]);
+
+        return Response::json(['message' => 'Product attached.']);
+    }
+
+    public function detachProduct(
+        Livestream $livestream,
+        Product $product,
+        #[CurrentUser] User $user,
+    ): JsonResponse {
+        $vendorProfile = $user->vendorProfile;
+        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
+        abort_unless($livestream->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
+
+        $livestream->products()->detach($product->getKey());
+
+        return Response::json(['message' => 'Product detached.']);
     }
 }

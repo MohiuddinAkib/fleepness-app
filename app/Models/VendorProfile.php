@@ -68,6 +68,12 @@ class VendorProfile extends Model implements HasMedia
         return $this->hasMany(Product::class);
     }
 
+    /** @return HasMany<ShortVideo, $this> */
+    public function shortVideos(): HasMany
+    {
+        return $this->hasMany(ShortVideo::class);
+    }
+
     /** @return HasMany<VendorFollower, $this> */
     public function followers(): HasMany
     {

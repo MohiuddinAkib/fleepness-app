@@ -11,31 +11,38 @@ use App\Http\Controllers\Me\ProfileController;
 use App\Http\Controllers\Public\TagController;
 use App\Http\Controllers\Auth\OTPAuthController;
 use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\Public\SearchController;
 use App\Http\Controllers\Public\VendorController;
+use App\Http\Controllers\Me\TransactionController;
 use App\Http\Controllers\Me\VendorOrderController;
 use App\Http\Controllers\Public\ProductController;
 use App\Http\Controllers\Public\SectionController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\Me\SizeTemplateController;
 use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Auth\DeviceTokenController;
 use App\Http\Controllers\Me\VendorProfileController;
 use App\Http\Controllers\Me\PaymentAccountController;
 use App\Http\Controllers\Public\LivestreamController;
 use App\Http\Controllers\Public\ShortVideoController;
+use App\Http\Controllers\Public\ShopCategoryController;
+use App\Http\Controllers\Public\PaymentMethodController;
 use App\Http\Controllers\Public\DeliveryOptionController;
+use App\Http\Controllers\Me\ProductController as MeProductController;
 use App\Http\Controllers\Me\LivestreamController as MeLivestreamController;
 use App\Http\Controllers\Me\ShortVideoController as MeShortVideoController;
-use App\Http\Controllers\Vendor\ProductController as VendorProductController;
 
-// Auth
+// ─── Auth ────────────────────────────────────────────────────────────────────
 Route::prefix('auth')->group(function (): void {
     Route::post('register', [OTPAuthController::class, 'register']);
     Route::post('verify-otp', [OTPAuthController::class, 'verifyOtp']);
     Route::post('resend-otp', [OTPAuthController::class, 'resendOtp']);
     Route::post('login', [OTPAuthController::class, 'login']);
 
-    Route::get('social/{provider}', [SocialAuthController::class, 'redirect']);
-    Route::get('social/{provider}/callback', [SocialAuthController::class, 'callback']);
+    Route::prefix('social')->group(function (): void {
+        Route::get('{provider}', [SocialAuthController::class, 'redirect']);
+        Route::get('{provider}/callback', [SocialAuthController::class, 'callback']);
+    });
 
     Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
         Route::post('logout', [SessionController::class, 'destroy']);
@@ -44,124 +51,186 @@ Route::prefix('auth')->group(function (): void {
     });
 });
 
-// Authenticated routes
-Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
-    // Own profile
-    Route::get('me', [ProfileController::class, 'show']);
-    Route::patch('me', [ProfileController::class, 'update']);
+// ─── Me (authenticated) ───────────────────────────────────────────────────────
+Route::middleware(['auth:sanctum', 'bind.user'])->prefix('me')->group(function (): void {
+    // Profile
+    Route::get('/', [ProfileController::class, 'show']);
+    Route::patch('/', [ProfileController::class, 'update']);
 
-    // Own vendor profile
-    Route::get('me/vendor', [VendorProfileController::class, 'show']);
-    Route::patch('me/vendor', [VendorProfileController::class, 'update']);
-    Route::get('me/balance', [VendorProfileController::class, 'balance']);
+    // Vendor profile
+    Route::prefix('vendor')->group(function (): void {
+        Route::get('/', [VendorProfileController::class, 'show']);
+        Route::patch('/', [VendorProfileController::class, 'update']);
+    });
+    Route::get('balance', [VendorProfileController::class, 'balance']);
 
     // Addresses
-    Route::get('me/addresses', [AddressController::class, 'index']);
-    Route::post('me/addresses', [AddressController::class, 'store']);
-    Route::patch('me/addresses/{address}', [AddressController::class, 'update']);
-    Route::delete('me/addresses/{address}', [AddressController::class, 'destroy']);
-    Route::post('me/addresses/{address}/default', [AddressController::class, 'setDefault']);
+    Route::prefix('addresses')->group(function (): void {
+        Route::get('/', [AddressController::class, 'index']);
+        Route::post('/', [AddressController::class, 'store']);
+        Route::patch('{address}', [AddressController::class, 'update']);
+        Route::delete('{address}', [AddressController::class, 'destroy']);
+        Route::post('{address}/default', [AddressController::class, 'setDefault']);
+    });
 
     // Payment accounts
-    Route::get('me/payment-accounts', [PaymentAccountController::class, 'index']);
-    Route::post('me/payment-accounts', [PaymentAccountController::class, 'store']);
-    Route::delete('me/payment-accounts/{paymentAccount}', [PaymentAccountController::class, 'destroy']);
+    Route::prefix('payment-accounts')->group(function (): void {
+        Route::get('/', [PaymentAccountController::class, 'index']);
+        Route::post('/', [PaymentAccountController::class, 'store']);
+        Route::delete('{paymentAccount}', [PaymentAccountController::class, 'destroy']);
+    });
 
-    // Following
-    Route::get('me/following', [FollowController::class, 'following']);
+    // Products (vendor CRUD)
+    Route::prefix('products')->group(function (): void {
+        Route::get('/', [MeProductController::class, 'index']);
+        Route::post('/', [MeProductController::class, 'store']);
+        Route::get('{product}', [MeProductController::class, 'show']);
+        Route::patch('{product}', [MeProductController::class, 'update']);
+        Route::delete('{product}', [MeProductController::class, 'destroy']);
+        Route::post('{product}/toggle-status', [MeProductController::class, 'toggleStatus']);
+        Route::delete('{product}/images/{mediaId}', [MeProductController::class, 'destroyImage']);
+    });
 
-    // Vendor application
-    Route::post('vendor-application', [VendorProfileController::class, 'apply']);
-    Route::get('vendor-application/status', [VendorProfileController::class, 'applicationStatus']);
+    // Size templates
+    Route::prefix('size-templates')->group(function (): void {
+        Route::get('/', [SizeTemplateController::class, 'index']);
+        Route::post('/', [SizeTemplateController::class, 'store']);
+        Route::delete('{sizeTemplate}', [SizeTemplateController::class, 'destroy']);
+        Route::post('{sizeTemplate}/items', [SizeTemplateController::class, 'storeItem']);
+        Route::patch('{sizeTemplate}/items/{sizeTemplateItem}', [SizeTemplateController::class, 'updateItem']);
+        Route::delete('{sizeTemplate}/items/{sizeTemplateItem}', [SizeTemplateController::class, 'destroyItem']);
+    });
 
-    // Vendor product management
-    Route::get('vendor/products', [VendorProductController::class, 'index']);
-    Route::post('vendor/products', [VendorProductController::class, 'store']);
-    Route::get('vendor/products/{product}', [VendorProductController::class, 'show']);
-    Route::patch('vendor/products/{product}', [VendorProductController::class, 'update']);
-    Route::delete('vendor/products/{product}', [VendorProductController::class, 'destroy']);
-    Route::post('vendor/products/{product}/toggle-status', [VendorProductController::class, 'toggleStatus']);
+    // Livestreams (vendor CRUD)
+    Route::prefix('livestreams')->group(function (): void {
+        Route::get('/', [MeLivestreamController::class, 'index']);
+        Route::post('/', [MeLivestreamController::class, 'store']);
+        Route::patch('{livestream}', [MeLivestreamController::class, 'update']);
+        Route::delete('{livestream}', [MeLivestreamController::class, 'destroy']);
+        Route::post('{livestream}/products', [MeLivestreamController::class, 'attachProduct']);
+        Route::delete('{livestream}/products/{product}', [MeLivestreamController::class, 'detachProduct']);
+    });
 
-    // Vendor follow/unfollow (auth required)
-    Route::post('vendors/{vendorProfile}/follow', [VendorController::class, 'follow']);
-    Route::delete('vendors/{vendorProfile}/follow', [VendorController::class, 'unfollow']);
+    // Short videos (vendor CRUD)
+    Route::prefix('short-videos')->group(function (): void {
+        Route::get('/', [MeShortVideoController::class, 'index']);
+        Route::post('/', [MeShortVideoController::class, 'store']);
+        Route::patch('{shortVideo}', [MeShortVideoController::class, 'update']);
+        Route::delete('{shortVideo}', [MeShortVideoController::class, 'destroy']);
+    });
 
-    // Vendor reviews (auth required)
-    Route::post('vendors/{vendorProfile}/reviews', [VendorController::class, 'storeReview']);
-    Route::delete('vendors/{vendorProfile}/reviews/{review}', [VendorController::class, 'destroyReview']);
-
-    // Product reviews (auth required)
-    Route::post('products/{product}/reviews', [ProductController::class, 'storeReview']);
-    Route::delete('products/{product}/reviews/{review}', [ProductController::class, 'destroyReview']);
-
-    // Cart
-    Route::get('cart', [CartController::class, 'index']);
-    Route::post('cart/items', [CartController::class, 'store']);
-    Route::patch('cart/items/{cartItem}', [CartController::class, 'update']);
-    Route::delete('cart/items/{cartItem}', [CartController::class, 'destroy']);
-    Route::get('cart/summary', [CartController::class, 'summary']);
-
-    // Customer orders
-    Route::post('orders', [OrderController::class, 'store']);
-    Route::get('me/orders', [OrderController::class, 'index']);
-    Route::get('me/orders/{order}', [OrderController::class, 'show']);
+    // Orders (customer)
+    Route::prefix('orders')->group(function (): void {
+        Route::get('/', [OrderController::class, 'index']);
+        Route::get('{order}', [OrderController::class, 'show']);
+    });
 
     // Vendor orders
-    Route::get('me/vendor-orders', [VendorOrderController::class, 'index']);
-    Route::get('me/vendor-orders/{vendorOrder}', [VendorOrderController::class, 'show']);
-    Route::patch('me/vendor-orders/{vendorOrder}/accept', [VendorOrderController::class, 'accept']);
-    Route::patch('me/vendor-orders/{vendorOrder}/reject', [VendorOrderController::class, 'reject']);
+    Route::prefix('vendor-orders')->group(function (): void {
+        Route::get('/', [VendorOrderController::class, 'index']);
+        Route::get('{vendorOrder}', [VendorOrderController::class, 'show']);
+        Route::patch('{vendorOrder}/accept', [VendorOrderController::class, 'accept']);
+        Route::patch('{vendorOrder}/reject', [VendorOrderController::class, 'reject']);
+    });
 
-    // Short videos (vendor CRUD + engagement)
-    Route::get('me/short-videos', [MeShortVideoController::class, 'index']);
-    Route::post('me/short-videos', [MeShortVideoController::class, 'store']);
-    Route::patch('me/short-videos/{shortVideo}', [MeShortVideoController::class, 'update']);
-    Route::delete('me/short-videos/{shortVideo}', [MeShortVideoController::class, 'destroy']);
+    // Transactions & withdrawals
+    Route::get('transactions', [TransactionController::class, 'index']);
+    Route::post('withdrawals', [TransactionController::class, 'store']);
 
-    // Short video engagement (auth required)
-    Route::post('short-videos/{shortVideo}/comments', [ShortVideoController::class, 'storeComment']);
-    Route::delete('short-videos/{shortVideo}/comments/{comment}', [ShortVideoController::class, 'destroyComment']);
-    Route::post('short-videos/{shortVideo}/like', [ShortVideoController::class, 'like']);
-    Route::post('short-videos/{shortVideo}/save', [ShortVideoController::class, 'save']);
-
-    // Livestreams (vendor CRUD + engagement)
-    Route::get('me/livestreams', [MeLivestreamController::class, 'index']);
-    Route::post('me/livestreams', [MeLivestreamController::class, 'store']);
-    Route::patch('me/livestreams/{livestream}', [MeLivestreamController::class, 'update']);
-    Route::delete('me/livestreams/{livestream}', [MeLivestreamController::class, 'destroy']);
-
-    // Livestream engagement (auth required)
-    Route::post('livestreams/{livestream}/comments', [LivestreamController::class, 'storeComment']);
-    Route::delete('livestreams/{livestream}/comments/{comment}', [LivestreamController::class, 'destroyComment']);
-    Route::post('livestreams/{livestream}/like', [LivestreamController::class, 'like']);
-    Route::post('livestreams/{livestream}/save', [LivestreamController::class, 'save']);
+    // Following
+    Route::get('following', [FollowController::class, 'following']);
 });
 
-// Public routes
-Route::get('vendors', [VendorController::class, 'index']);
-Route::get('vendors/{vendorProfile}', [VendorController::class, 'show']);
-Route::get('vendors/{vendorProfile}/reviews', [VendorController::class, 'reviews']);
+// ─── Vendor application ───────────────────────────────────────────────────────
+Route::middleware(['auth:sanctum', 'bind.user'])->prefix('vendor-application')->group(function (): void {
+    Route::post('/', [VendorProfileController::class, 'apply']);
+    Route::get('status', [VendorProfileController::class, 'applicationStatus']);
+});
 
-Route::get('products', [ProductController::class, 'index']);
-Route::get('products/{product}', [ProductController::class, 'show']);
-Route::get('products/{product}/reviews', [ProductController::class, 'reviews']);
+// ─── Cart ─────────────────────────────────────────────────────────────────────
+Route::middleware(['auth:sanctum', 'bind.user'])->prefix('cart')->group(function (): void {
+    Route::get('/', [CartController::class, 'index']);
+    Route::get('summary', [CartController::class, 'summary']);
+    Route::post('items', [CartController::class, 'store']);
+    Route::patch('items/{cartItem}', [CartController::class, 'update']);
+    Route::delete('items/{cartItem}', [CartController::class, 'destroy']);
+});
 
-Route::get('categories', [CategoryController::class, 'index']);
-Route::get('categories/{category}', [CategoryController::class, 'show']);
+// ─── Orders ───────────────────────────────────────────────────────────────────
+Route::middleware(['auth:sanctum', 'bind.user'])->post('orders', [OrderController::class, 'store']);
 
-Route::get('tags', [TagController::class, 'index']);
+// ─── Public: Products ─────────────────────────────────────────────────────────
+Route::prefix('products')->group(function (): void {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('{product}', [ProductController::class, 'show']);
+    Route::get('{product}/similar', [ProductController::class, 'similar']);
+    Route::get('{product}/reviews', [ProductController::class, 'reviews']);
+    Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
+        Route::post('{product}/reviews', [ProductController::class, 'storeReview']);
+        Route::delete('{product}/reviews/{review}', [ProductController::class, 'destroyReview']);
+    });
+});
 
+// ─── Public: Categories ───────────────────────────────────────────────────────
+Route::prefix('categories')->group(function (): void {
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::get('{category}', [CategoryController::class, 'show']);
+    Route::get('{category}/products', [CategoryController::class, 'products']);
+});
+
+// ─── Public: Tags ─────────────────────────────────────────────────────────────
+Route::prefix('tags')->group(function (): void {
+    Route::get('/', [TagController::class, 'index']);
+    Route::get('{tag}/products', [TagController::class, 'products']);
+});
+
+// ─── Public: Vendors ──────────────────────────────────────────────────────────
+Route::prefix('vendors')->group(function (): void {
+    Route::get('/', [VendorController::class, 'index']);
+    Route::get('{vendorProfile}', [VendorController::class, 'show']);
+    Route::get('{vendorProfile}/products', [VendorController::class, 'products']);
+    Route::get('{vendorProfile}/short-videos', [VendorController::class, 'shortVideos']);
+    Route::get('{vendorProfile}/reviews', [VendorController::class, 'reviews']);
+    Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
+        Route::post('{vendorProfile}/follow', [VendorController::class, 'follow']);
+        Route::delete('{vendorProfile}/follow', [VendorController::class, 'unfollow']);
+        Route::post('{vendorProfile}/reviews', [VendorController::class, 'storeReview']);
+        Route::delete('{vendorProfile}/reviews/{review}', [VendorController::class, 'destroyReview']);
+    });
+});
+
+// ─── Public: Short videos ─────────────────────────────────────────────────────
+Route::prefix('short-videos')->group(function (): void {
+    Route::get('/', [ShortVideoController::class, 'index']);
+    Route::get('{shortVideo}', [ShortVideoController::class, 'show']);
+    Route::get('{shortVideo}/products', [ShortVideoController::class, 'products']);
+    Route::get('{shortVideo}/comments', [ShortVideoController::class, 'comments']);
+    Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
+        Route::post('{shortVideo}/comments', [ShortVideoController::class, 'storeComment']);
+        Route::delete('{shortVideo}/comments/{comment}', [ShortVideoController::class, 'destroyComment']);
+        Route::post('{shortVideo}/like', [ShortVideoController::class, 'like']);
+        Route::post('{shortVideo}/save', [ShortVideoController::class, 'save']);
+    });
+});
+
+// ─── Public: Livestreams ──────────────────────────────────────────────────────
+Route::prefix('livestreams')->group(function (): void {
+    Route::get('/', [LivestreamController::class, 'index']);
+    Route::get('{livestream}', [LivestreamController::class, 'show']);
+    Route::get('{livestream}/products', [LivestreamController::class, 'products']);
+    Route::get('{livestream}/comments', [LivestreamController::class, 'comments']);
+    Route::middleware(['auth:sanctum', 'bind.user'])->group(function (): void {
+        Route::post('{livestream}/comments', [LivestreamController::class, 'storeComment']);
+        Route::delete('{livestream}/comments/{comment}', [LivestreamController::class, 'destroyComment']);
+        Route::post('{livestream}/like', [LivestreamController::class, 'like']);
+        Route::post('{livestream}/save', [LivestreamController::class, 'save']);
+    });
+});
+
+// ─── Public: Misc ─────────────────────────────────────────────────────────────
 Route::get('sections', [SectionController::class, 'index']);
 Route::get('sliders', [SectionController::class, 'sliders']);
-
 Route::get('delivery-options', [DeliveryOptionController::class, 'index']);
-
-// Short videos (public)
-Route::get('short-videos', [ShortVideoController::class, 'index']);
-Route::get('short-videos/{shortVideo}', [ShortVideoController::class, 'show']);
-Route::get('short-videos/{shortVideo}/comments', [ShortVideoController::class, 'comments']);
-
-// Livestreams (public)
-Route::get('livestreams', [LivestreamController::class, 'index']);
-Route::get('livestreams/{livestream}', [LivestreamController::class, 'show']);
-Route::get('livestreams/{livestream}/comments', [LivestreamController::class, 'comments']);
+Route::get('shop-categories', [ShopCategoryController::class, 'index']);
+Route::get('payment-methods', [PaymentMethodController::class, 'index']);
+Route::get('search', [SearchController::class, 'index']);
