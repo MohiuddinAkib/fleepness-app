@@ -20,12 +20,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\SellerOrderResource;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Contracts\Database\Query\Builder;
 
 class OrderController extends Controller
 {
-    public function store(StoreOrderData $data, #[CurrentUser()] User $user): JsonResponse
+    public function store(StoreOrderData $data, #[CurrentUser()] User $user): JsonResponse|Responsable
     {
         $fee = Fee::query()->first();
 
@@ -152,7 +153,7 @@ class OrderController extends Controller
         }
     }
 
-    public function sellerOrders(#[CurrentUser()] User $seller, Request $request): JsonResponse
+    public function sellerOrders(#[CurrentUser()] User $seller, Request $request): JsonResponse|Responsable
     {
         $query = SellerOrder::with([
             'items.product.images',
@@ -188,7 +189,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function MyOrders(Request $request, #[CurrentUser()] User $user): JsonResponse
+    public function MyOrders(Request $request, #[CurrentUser()] User $user): JsonResponse|Responsable
     {
         $status = $request->enum('status', SellerOrderStatus::class);
 
@@ -216,7 +217,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function MyStoreOrders(Request $request, #[CurrentUser()] User $seller): JsonResponse
+    public function MyStoreOrders(Request $request, #[CurrentUser()] User $seller): JsonResponse|Responsable
     {
         $search = $request->query('search');
         $status = $request->enum('status', SellerOrderStatus::class);
@@ -239,7 +240,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function searchOrderById(Request $request, #[CurrentUser()] User $user): JsonResponse
+    public function searchOrderById(Request $request, #[CurrentUser()] User $user): JsonResponse|Responsable
     {
         $search = $request->query('order_code');
 
@@ -264,7 +265,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function sellerOrderDetail(SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse
+    public function sellerOrderDetail(SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse|Responsable
     {
         abort_unless($order->seller()->is($seller), Response::HTTP_NOT_FOUND, 'Seller order not found.');
 
@@ -280,7 +281,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function myOrderDetail(Order $order, #[CurrentUser()] User $user): JsonResponse
+    public function myOrderDetail(Order $order, #[CurrentUser()] User $user): JsonResponse|Responsable
     {
         abort_unless($order->user()->is($user), Response::HTTP_NOT_FOUND, 'Order not found.');
 
@@ -296,7 +297,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function acceptSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse
+    public function acceptSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse|Responsable
     {
         abort_unless($order->seller()->is($seller), Response::HTTP_NOT_FOUND, 'Seller order not found.');
 
@@ -319,7 +320,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function rejectSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse
+    public function rejectSellerOrder(Request $request, SellerOrder $order, #[CurrentUser()] User $seller): JsonResponse|Responsable
     {
         abort_unless($order->seller()->is($seller), Response::HTTP_NOT_FOUND, 'Seller order not found.');
 

@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Container\Attributes\CurrentUser;
 
@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended('/admin/dashboard');
     }
 
-    public function storeapi(Request $request): JsonResponse
+    public function storeapi(Request $request): JsonResponse|Responsable
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -58,7 +58,7 @@ class AuthenticatedSessionController extends Controller
         ]);
     }
 
-    public function apiSendOtp(Request $request): JsonResponse
+    public function apiSendOtp(Request $request): JsonResponse|Responsable
     {
         $validator = Validator::make($request->all(), [
             'phone' => ['required', 'digits:11'],
@@ -168,7 +168,7 @@ class AuthenticatedSessionController extends Controller
         ], 200);
     }
 
-    public function storeDeviceToken(Request $request, #[CurrentUser] User $user): JsonResponse
+    public function storeDeviceToken(Request $request, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $validator = Validator::make($request->all(), [
             'device_token' => 'required|string',
@@ -182,7 +182,7 @@ class AuthenticatedSessionController extends Controller
             'token' => $deviceToken,
         ]);
 
-        return Response::json([
+        return response()->json([
             'message' => 'Device token stored successfully',
         ]);
     }

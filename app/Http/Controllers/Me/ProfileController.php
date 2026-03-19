@@ -6,23 +6,21 @@ namespace App\Http\Controllers\Me;
 
 use App\Models\User;
 use App\Data\UserData;
-use App\Attributes\CurrentUser;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Data\Me\UpdateProfileData;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Container\Attributes\CurrentUser;
 
 class ProfileController extends Controller
 {
-    public function show(#[CurrentUser] User $user): JsonResponse
+    public function show(#[CurrentUser] User $user): JsonResponse|Responsable
     {
-        return Response::json([
-            'data' => UserData::fromModel($user),
-        ]);
+        return UserData::fromModel($user);
     }
 
-    public function update(UpdateProfileData $data, #[CurrentUser] User $user): JsonResponse
+    public function update(UpdateProfileData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $updates = [];
 
@@ -38,9 +36,6 @@ class ProfileController extends Controller
             $user->update($updates);
         }
 
-        return Response::json([
-            'message' => 'Profile updated.',
-            'data' => UserData::fromModel($user->fresh()),
-        ]);
+        return UserData::fromModel($user->fresh())->additional(['message' => 'Profile updated.']);
     }
 }

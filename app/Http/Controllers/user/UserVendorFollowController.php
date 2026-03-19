@@ -9,10 +9,11 @@ use App\Models\Follower;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Support\Responsable;
 
 class UserVendorFollowController extends Controller
 {
-    public function follow(User $vendor): JsonResponse
+    public function follow(User $vendor): JsonResponse|Responsable
     {
         $userId = auth()->id();
 
@@ -36,7 +37,7 @@ class UserVendorFollowController extends Controller
         ], 201);
     }
 
-    public function unfollow(User $vendor): JsonResponse
+    public function unfollow(User $vendor): JsonResponse|Responsable
     {
         $userId = auth()->id();
 

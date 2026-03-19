@@ -15,11 +15,12 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CartItemResource;
 use App\Data\Dto\AddOrUpdateCartItemData;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Container\Attributes\CurrentUser;
 
 class CartController extends Controller
 {
-    public function addOrUpdate(AddOrUpdateCartItemData $data, #[CurrentUser] User $user): JsonResponse
+    public function addOrUpdate(AddOrUpdateCartItemData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $product = Product::findOrFail($data->productId);
 
@@ -56,7 +57,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $cartItems = CartItem::with(['product.images', 'size'])
             ->where('user_id', $user->getKey())
@@ -67,7 +68,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function destroy(CartItem $cartItem, #[CurrentUser] User $user): JsonResponse
+    public function destroy(CartItem $cartItem, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($cartItem->user_id === $user->getKey(), 403, 'Unauthorized');
 
@@ -76,7 +77,7 @@ class CartController extends Controller
         return response()->json(['message' => 'Item removed from cart']);
     }
 
-    public function summary(Request $request, #[CurrentUser] User $user): JsonResponse
+    public function summary(Request $request, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $deliveryModelId = $request->query('delivery_model_id', 1);
         $deliveryModel = DeliveryModel::find($deliveryModelId) ?? DeliveryModel::find(1);

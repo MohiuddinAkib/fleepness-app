@@ -9,11 +9,12 @@ use App\Models\Section;
 use App\Data\SectionData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
 
 class SectionController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): JsonResponse|Responsable
     {
         $sections = Section::query()
             ->where('is_visible', true)
@@ -21,19 +22,17 @@ class SectionController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        return Response::json([
-            'data' => SectionData::collect($sections),
-        ]);
+        return SectionData::collect($sections, DataCollection::class);
     }
 
-    public function sliders(): JsonResponse
+    public function sliders(): JsonResponse|Responsable
     {
         $sliders = Slider::query()
             ->where('is_active', true)
             ->orderBy('sort_order')
             ->get();
 
-        return Response::json([
+        return response()->json([
             'data' => $sliders->map(fn (Slider $s) => [
                 'id' => $s->getKey(),
                 'image_url' => $s->getFirstMediaUrl('image') ?: null,

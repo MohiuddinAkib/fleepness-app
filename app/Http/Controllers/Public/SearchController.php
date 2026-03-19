@@ -11,16 +11,17 @@ use App\Models\VendorProfile;
 use App\Data\VendorProfileData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
 
 class SearchController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): JsonResponse|Responsable
     {
         $query = (string) $request->string('q');
 
         if ('' === $query) {
-            return Response::json([
+            return response()->json([
                 'data' => ['products' => [], 'vendors' => []],
             ]);
         }
@@ -39,10 +40,10 @@ class SearchController extends Controller
             ->limit(15)
             ->get();
 
-        return Response::json([
+        return response()->json([
             'data' => [
-                'products' => ProductData::collect($products),
-                'vendors' => VendorProfileData::collect($vendors),
+                'products' => ProductData::collect($products, DataCollection::class),
+                'vendors' => VendorProfileData::collect($vendors, DataCollection::class),
             ],
         ]);
     }

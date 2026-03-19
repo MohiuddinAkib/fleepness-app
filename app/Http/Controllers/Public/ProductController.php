@@ -9,16 +9,18 @@ use App\Models\Product;
 use App\Data\ProductData;
 use Illuminate\Http\Request;
 use App\Models\ProductReview;
-use App\Attributes\CurrentUser;
 use App\Data\ProductReviewData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
+use Spatie\LaravelData\PaginatedDataCollection;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class ProductController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): JsonResponse|Responsable
     {
         $query = Product::query()
             ->active()
@@ -38,30 +40,28 @@ class ProductController extends Controller
             $query->whereHas('tags', fn ($q) => $q->where('tags.id', $request->integer('tag_id')));
         }
 
-        return Response::json(ProductData::collect($query->paginate()));
+        return ProductData::collect($query->paginate(), PaginatedDataCollection::class);
     }
 
-    public function show(Product $product): JsonResponse
+    public function show(Product $product): JsonResponse|Responsable
     {
         abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $product->load(['category', 'media', 'variants', 'tags', 'vendorProfile']);
 
-        return Response::json([
-            'data' => ProductData::fromModel($product),
-        ]);
+        return ProductData::fromModel($product);
     }
 
-    public function reviews(Product $product): JsonResponse
+    public function reviews(Product $product): JsonResponse|Responsable
     {
         abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $reviews = $product->reviews()->with('user')->paginate();
 
-        return Response::json(ProductReviewData::collect($reviews));
+        return ProductReviewData::collect($reviews, PaginatedDataCollection::class);
     }
 
-    public function storeReview(Request $request, Product $product, #[CurrentUser] User $user): JsonResponse
+    public function storeReview(Request $request, Product $product, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
@@ -82,23 +82,20 @@ class ProductController extends Controller
 
         $review->load('user');
 
-        return Response::json([
-            'message' => 'Review submitted.',
-            'data' => ProductReviewData::fromModel($review),
-        ], HttpResponse::HTTP_CREATED);
+        return ProductReviewData::fromModel($review)->additional(['message' => 'Review submitted.']);
     }
 
-    public function destroyReview(Product $product, ProductReview $review, #[CurrentUser] User $user): JsonResponse
+    public function destroyReview(Product $product, ProductReview $review, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($review->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
         abort_unless($review->product()->is($product), HttpResponse::HTTP_NOT_FOUND);
 
         $review->delete();
 
-        return Response::json(['message' => 'Review deleted.']);
+        return response()->json(['message' => 'Review deleted.']);
     }
 
-    public function similar(Product $product): JsonResponse
+    public function similar(Product $product): JsonResponse|Responsable
     {
         $similar = Product::query()
             ->active()
@@ -109,8 +106,6 @@ class ProductController extends Controller
             ->limit(10)
             ->get();
 
-        return Response::json([
-            'data' => ProductData::collect($similar),
-        ]);
+        return ProductData::collect($similar, DataCollection::class);
     }
 }

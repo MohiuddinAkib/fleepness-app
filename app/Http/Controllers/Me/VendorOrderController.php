@@ -7,16 +7,17 @@ namespace App\Http\Controllers\Me;
 use App\Models\User;
 use App\Models\VendorOrder;
 use App\Data\VendorOrderData;
-use App\Attributes\CurrentUser;
 use App\Enums\VendorOrderStatus;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Contracts\Support\Responsable;
+use Spatie\LaravelData\PaginatedDataCollection;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class VendorOrderController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
@@ -27,10 +28,10 @@ class VendorOrderController extends Controller
             ->latest()
             ->paginate();
 
-        return Response::json(VendorOrderData::collect($orders));
+        return VendorOrderData::collect($orders, PaginatedDataCollection::class);
     }
 
-    public function show(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse
+    public function show(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
@@ -38,12 +39,10 @@ class VendorOrderController extends Controller
 
         $vendorOrder->load(['items.product', 'vendorProfile']);
 
-        return Response::json([
-            'data' => VendorOrderData::fromModel($vendorOrder),
-        ]);
+        return VendorOrderData::fromModel($vendorOrder);
     }
 
-    public function accept(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse
+    public function accept(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
@@ -52,13 +51,13 @@ class VendorOrderController extends Controller
 
         $vendorOrder->update(['status' => VendorOrderStatus::Packaging]);
 
-        return Response::json([
+        return response()->json([
             'message' => 'Order accepted.',
             'data' => ['status' => $vendorOrder->fresh()->status],
         ]);
     }
 
-    public function reject(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse
+    public function reject(VendorOrder $vendorOrder, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
@@ -67,7 +66,7 @@ class VendorOrderController extends Controller
 
         $vendorOrder->update(['status' => VendorOrderStatus::Rejected]);
 
-        return Response::json([
+        return response()->json([
             'message' => 'Order rejected.',
             'data' => ['status' => $vendorOrder->fresh()->status],
         ]);

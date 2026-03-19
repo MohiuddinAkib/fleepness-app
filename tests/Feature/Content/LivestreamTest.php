@@ -7,7 +7,9 @@ use App\Models\Livestream;
 use App\Models\VendorProfile;
 use App\Models\LivestreamLike;
 use App\Models\LivestreamSave;
+use App\Enums\LivestreamStatus;
 use App\Models\LivestreamComment;
+use App\Services\LivestreamService;
 
 // Public browsing
 it('lists livestreams publicly', function (): void {
@@ -109,17 +111,20 @@ it('requires auth to create a livestream', function (): void {
         ->assertUnauthorized();
 });
 
-it('vendor creates a livestream', function (): void {
+it('vendor creates a livestream and receives publisher token', function (): void {
+    $this->mock(LivestreamService::class)
+        ->shouldReceive('generatePublisherToken')->once()->andReturn('fake-publisher-token');
+
     $user = User::factory()->create();
     VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->postJson('/api/me/livestreams', [
-            'title' => 'Flash Sale Stream',
-        ])
+        ->postJson('/api/me/livestreams', ['title' => 'Flash Sale Stream'])
         ->assertCreated()
-        ->assertJsonPath('data.title', 'Flash Sale Stream');
+        ->assertJsonPath('data.title', 'Flash Sale Stream')
+        ->assertJsonPath('data.status', LivestreamStatus::Started->value)
+        ->assertJsonPath('token', 'fake-publisher-token');
 });
 
 it('non-vendor cannot create livestream', function (): void {
@@ -141,6 +146,65 @@ it('vendor updates own livestream', function (): void {
         ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['title' => 'Updated Stream'])
         ->assertOk()
         ->assertJsonPath('data.title', 'Updated Stream');
+});
+
+it('vendor starts a scheduled livestream via update', function (): void {
+    $this->mock(LivestreamService::class)
+        ->shouldReceive('generatePublisherToken')->once()->andReturn('start-token');
+
+    $user = User::factory()->create();
+    $vendor = VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
+    $livestream = Livestream::factory()->create(['vendor_profile_id' => $vendor->getKey()]);
+    $token = $user->createToken('test')->plainTextToken;
+
+    $this->withToken($token)
+        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['status' => 'started'])
+        ->assertOk()
+        ->assertJsonPath('data.status', LivestreamStatus::Started->value)
+        ->assertJsonPath('token', 'start-token');
+
+    expect($livestream->fresh()->started_at)->not->toBeNull();
+});
+
+it('vendor cannot start an already started livestream', function (): void {
+    $user = User::factory()->create();
+    $vendor = VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
+    $livestream = Livestream::factory()->started()->create(['vendor_profile_id' => $vendor->getKey()]);
+    $token = $user->createToken('test')->plainTextToken;
+
+    $this->withToken($token)
+        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['status' => 'started'])
+        ->assertUnprocessable();
+});
+
+it('vendor ends a started livestream via update', function (): void {
+    $this->mock(LivestreamService::class)
+        ->shouldReceive('stopRecording')->never();
+
+    $user = User::factory()->create();
+    $vendor = VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
+    $livestream = Livestream::factory()->started()->create(['vendor_profile_id' => $vendor->getKey()]);
+    $token = $user->createToken('test')->plainTextToken;
+
+    $this->withToken($token)
+        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['status' => 'finished'])
+        ->assertOk()
+        ->assertJsonPath('data.status', LivestreamStatus::Finished->value);
+
+    $fresh = $livestream->fresh();
+    expect($fresh->ended_at)->not->toBeNull();
+    expect($fresh->total_duration)->toBeGreaterThanOrEqual(0);
+});
+
+it('vendor cannot update a finished livestream', function (): void {
+    $user = User::factory()->create();
+    $vendor = VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
+    $livestream = Livestream::factory()->finished()->create(['vendor_profile_id' => $vendor->getKey()]);
+    $token = $user->createToken('test')->plainTextToken;
+
+    $this->withToken($token)
+        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['title' => 'Too Late'])
+        ->assertUnprocessable();
 });
 
 it('vendor cannot update another vendors livestream', function (): void {

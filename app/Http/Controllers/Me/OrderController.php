@@ -12,18 +12,19 @@ use App\Models\CartItem;
 use App\Models\VendorOrder;
 use Illuminate\Support\Str;
 use App\Models\DeliveryOption;
-use App\Attributes\CurrentUser;
 use App\Enums\VendorOrderStatus;
 use Illuminate\Http\JsonResponse;
 use App\Data\Order\PlaceOrderData;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Contracts\Support\Responsable;
+use Spatie\LaravelData\PaginatedDataCollection;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class OrderController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $orders = Order::query()
             ->where('user_id', $user->getKey())
@@ -31,21 +32,19 @@ class OrderController extends Controller
             ->latest()
             ->paginate();
 
-        return Response::json(OrderData::collect($orders));
+        return OrderData::collect($orders, PaginatedDataCollection::class);
     }
 
-    public function show(Order $order, #[CurrentUser] User $user): JsonResponse
+    public function show(Order $order, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($order->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $order->load(['vendorOrders.items.product', 'deliveryOption']);
 
-        return Response::json([
-            'data' => OrderData::fromModel($order),
-        ]);
+        return OrderData::fromModel($order);
     }
 
-    public function store(PlaceOrderData $data, #[CurrentUser] User $user): JsonResponse
+    public function store(PlaceOrderData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $selectedItems = CartItem::query()
             ->where('user_id', $user->getKey())
@@ -140,9 +139,6 @@ class OrderController extends Controller
 
         $order->load(['vendorOrders.items.product']);
 
-        return Response::json([
-            'message' => 'Order placed successfully.',
-            'data' => OrderData::fromModel($order),
-        ], HttpResponse::HTTP_CREATED);
+        return OrderData::fromModel($order)->additional(['message' => 'Order placed successfully.']);
     }
 }

@@ -8,31 +8,31 @@ use App\Models\User;
 use App\Models\Transaction;
 use App\Data\TransactionData;
 use App\Enums\TransactionType;
-use App\Attributes\CurrentUser;
 use App\Enums\TransactionStatus;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
 use App\Data\Transaction\StoreWithdrawalData;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Illuminate\Contracts\Support\Responsable;
+use Spatie\LaravelData\PaginatedDataCollection;
+use Illuminate\Container\Attributes\CurrentUser;
 
 class TransactionController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $transactions = Transaction::query()
             ->where('user_id', $user->getKey())
             ->latest()
             ->paginate();
 
-        return Response::json(TransactionData::collect($transactions));
+        return TransactionData::collect($transactions, PaginatedDataCollection::class);
     }
 
     public function store(
         StoreWithdrawalData $data,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $transaction = Transaction::query()->create([
             'user_id' => $user->getKey(),
             'payment_method_id' => $data->paymentMethodId,
@@ -42,9 +42,6 @@ class TransactionController extends Controller
             'note' => $data->note instanceof Optional ? null : $data->note,
         ]);
 
-        return Response::json(
-            ['data' => TransactionData::fromModel($transaction)],
-            HttpResponse::HTTP_CREATED
-        );
+        return TransactionData::fromModel($transaction);
     }
 }

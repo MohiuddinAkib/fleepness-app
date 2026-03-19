@@ -13,10 +13,11 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Resources\ShortVideoResource;
 use App\Http\Resources\ShortCommentResource;
 use App\Http\Resources\ShortsProductResource;
+use Illuminate\Contracts\Support\Responsable;
 
 class ShortsInteractionController extends Controller
 {
-    public function allshorts(): JsonResponse
+    public function allshorts(): JsonResponse|Responsable
     {
         $videos = ShortVideo::with(['products.images'])
             ->latest()

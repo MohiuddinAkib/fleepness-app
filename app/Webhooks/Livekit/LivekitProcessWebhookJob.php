@@ -6,7 +6,7 @@ namespace App\Webhooks\Livekit;
 
 use App\Models\User;
 use App\Models\Livestream;
-use App\Constants\LivestreamStatuses;
+use App\Enums\LivestreamStatus;
 use Agence104\LiveKit\WebhookReceiver;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
@@ -22,107 +22,131 @@ class LivekitProcessWebhookJob extends ProcessWebhookJob
 
         $eventName = $event->getEvent();
 
-        switch ($eventName) {
-            case 'room_started':
-                logger()->info('room started', [$event->getRoom()->getMetadata()]);
-                break;
-            case 'room_finished':
-                logger()->info('room finished', [$event->getRoom()->getMetadata()]);
+        match ($eventName) {
+            'room_started' => $this->handleRoomStarted($event),
+            'room_finished' => $this->handleRoomFinished($event),
+            'participant_joined' => $this->handleParticipantJoined($event),
+            'egress_started' => $this->handleEgressStarted($event),
+            'egress_ended' => $this->handleEgressEnded($event),
+            default => null,
+        };
+    }
 
-                if ($event->hasRoom()) {
-                    $roomMetadata = Json::decode($event->getRoom()->getMetadata());
-                    $livestreamId = data_get($roomMetadata, 'livestream_identity');
-                    $livestream = Livestream::query()->find($livestreamId);
-                    if ($livestream) {
-                        $livestream->ended_at = now();
-                        $livestream->status = LivestreamStatuses::FINISHED;
-                        $livestream->save();
-                    }
-                }
-                break;
-            case 'participant_joined':
-                if ($event->hasRoom() && $event->hasParticipant()) {
-                    $roomMetadata = Json::decode($event->getRoom()->getMetadata());
-                    $livestreamId = data_get($roomMetadata, 'livestream_identity');
-                    $livestream = Livestream::query()->find($livestreamId);
-
-                    if ($event->getParticipant()->getPermission()->getCanPublish()) {
-                        return;
-                    }
-
-                    $participantUserId = $event->getParticipant()->getIdentity();
-                    $user = User::query()->find($participantUserId);
-
-                    if ($livestream) {
-                        if ($user) {
-                            $changes = $livestream->participants()->syncWithoutDetaching([$user->getKey()]);
-                            logger()->info('Participant joined', [$changes]);
-
-                            if (! empty($changes['attached'])) {
-                                $livestream->increment('total_participants');
-                            }
-                        } else {
-                            /** @var list<string> */
-                            $joinedParticipantUsers = cache()->get($livestream->getRoomName(), []);
-                            if (! in_array($participantUserId, $joinedParticipantUsers)) {
-                                $joinedParticipantUsers[] = $participantUserId;
-                                cache()->put($livestream->getRoomName(), $joinedParticipantUsers, now()->addHour());
-                                $livestream->increment('total_participants');
-                            }
-                        }
-                    }
-                }
-
-                break;
-            case 'participant_left':
-                $event->getParticipant()->getIdentity();
-                break;
-            case 'track_published':
-            case 'track_unpublished':
-            case 'egress_updated':
-            case 'ingress_started':
-            case 'ingress_ended':
-                break;
-            case 'egress_started':
-                if ($event->hasEgressInfo()) {
-                    // $roomMetadata = Json::decode($event->getRoom()->getMetadata());
-                    // $livestreamId = data_get($roomMetadata, 'livestream_identity');
-                    // $livestream = Livestream::find($livestreamId);
-
-                    // $eventEgressId = $event->getEgressInfo()->getEgressId();
-
-                    // if ($livestream && $livestream->egress_id !== $eventEgressId) {
-                    //     $livestream->update([
-                    //         'egress_id' => $eventEgressId,
-                    //     ]);
-                    // }
-                }
-                break;
-            case 'egress_ended':
-                logger()->info('egress ended', [$event->hasEgressInfo(), $event->hasRoom()]);
-                if ($event->hasEgressInfo()) {
-                    $eventEgressId = $event->getEgressInfo()->getEgressId();
-                    $livestream = Livestream::query()->firstWhere([
-                        'egress_id' => $eventEgressId,
-                    ]);
-
-                    if ($livestream) {
-                        $recodings = \App\Facades\Livestream::getRecordingsFor($livestream);
-
-                        $thumbnails = \App\Facades\Livestream::getThumbnailsFor($livestream);
-
-                        $shortVideos = \App\Facades\Livestream::getShortVideosFor($livestream);
-
-                        $livestream->update([
-                            'egress_data' => [
-                                'recordings' => $recodings,
-                                'thumbnails' => $thumbnails,
-                                'short_videos' => $shortVideos,
-                            ],
-                        ]);
-                    }
-                }
-                break;
+    private function getLivestreamFromRoomMetadata(mixed $event): ?Livestream
+    {
+        if (! $event->hasRoom()) {
+            return null;
         }
+
+        $roomMetadata = Json::decode($event->getRoom()->getMetadata());
+        $livestreamId = data_get($roomMetadata, 'livestream_identity');
+
+        return $livestreamId ? Livestream::query()->find($livestreamId) : null;
+    }
+
+    private function handleRoomStarted(mixed $event): void
+    {
+        $livestream = $this->getLivestreamFromRoomMetadata($event);
+
+        if ($livestream && ! $livestream->is_started) {
+            $livestream->update([
+                'status' => LivestreamStatus::Started,
+                'started_at' => now(),
+            ]);
+        }
+    }
+
+    private function handleRoomFinished(mixed $event): void
+    {
+        $livestream = $this->getLivestreamFromRoomMetadata($event);
+
+        if ($livestream) {
+            $totalDuration = $livestream->started_at
+                ? (int) now()->diffInSeconds($livestream->started_at)
+                : null;
+
+            $livestream->update([
+                'status' => LivestreamStatus::Finished,
+                'ended_at' => now(),
+                'total_duration' => $totalDuration,
+            ]);
+        }
+    }
+
+    private function handleParticipantJoined(mixed $event): void
+    {
+        if (! $event->hasRoom() || ! $event->hasParticipant()) {
+            return;
+        }
+
+        // Skip publishers (they can publish tracks)
+        if ($event->getParticipant()->getPermission()->getCanPublish()) {
+            return;
+        }
+
+        $livestream = $this->getLivestreamFromRoomMetadata($event);
+
+        if (! $livestream) {
+            return;
+        }
+
+        $participantUserId = $event->getParticipant()->getIdentity();
+        $user = User::query()->find($participantUserId);
+
+        if ($user) {
+            // Authenticated viewer — track via cache to avoid double-counting
+            $cacheKey = "livestream_viewer_{$livestream->getKey()}_{$user->getKey()}";
+            if (! cache()->has($cacheKey)) {
+                cache()->put($cacheKey, true, now()->addHours(24));
+                $livestream->increment('viewer_count');
+            }
+        } else {
+            // Guest viewer — track by identity string
+            $cacheKey = "livestream_viewer_{$livestream->getKey()}_{$participantUserId}";
+            if (! cache()->has($cacheKey)) {
+                cache()->put($cacheKey, true, now()->addHours(24));
+                $livestream->increment('viewer_count');
+            }
+        }
+    }
+
+    private function handleEgressStarted(mixed $event): void
+    {
+        if (! $event->hasEgressInfo() || ! $event->hasRoom()) {
+            return;
+        }
+
+        $livestream = $this->getLivestreamFromRoomMetadata($event);
+        $eventEgressId = $event->getEgressInfo()->getEgressId();
+
+        if ($livestream && $livestream->egress_id !== $eventEgressId) {
+            $livestream->update(['egress_id' => $eventEgressId]);
+        }
+    }
+
+    private function handleEgressEnded(mixed $event): void
+    {
+        if (! $event->hasEgressInfo()) {
+            return;
+        }
+
+        $eventEgressId = $event->getEgressInfo()->getEgressId();
+        $livestream = Livestream::query()->firstWhere('egress_id', $eventEgressId);
+
+        if (! $livestream) {
+            return;
+        }
+
+        $recordings = \App\Facades\Livestream::getRecordingsFor($livestream);
+        $thumbnails = \App\Facades\Livestream::getThumbnailsFor($livestream);
+        $shortVideos = \App\Facades\Livestream::getShortVideosFor($livestream);
+
+        $livestream->update([
+            'egress_metadata' => [
+                'recordings' => $recordings,
+                'thumbnails' => $thumbnails,
+                'short_videos' => $shortVideos,
+            ],
+        ]);
     }
 }

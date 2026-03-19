@@ -8,6 +8,7 @@ use App\Models\ShopCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Support\Responsable;
 
 class ShopCategoryController extends Controller
 {
@@ -67,13 +68,13 @@ class ShopCategoryController extends Controller
     }
 
     // Show a single category
-    public function show(ShopCategory $shopCategory): JsonResponse
+    public function show(ShopCategory $shopCategory): JsonResponse|Responsable
     {
         return response()->json($shopCategory);
     }
 
     // Update existing category
-    public function update(Request $request, ShopCategory $shopCategory): JsonResponse
+    public function update(Request $request, ShopCategory $shopCategory): JsonResponse|Responsable
     {
         $request->validate([
             'name' => 'required|max:255|unique:shop_categories,name,'.$shopCategory->getKey(),
@@ -115,7 +116,7 @@ class ShopCategoryController extends Controller
     }
 
     // Delete category
-    public function destroy(ShopCategory $shopCategory): JsonResponse
+    public function destroy(ShopCategory $shopCategory): JsonResponse|Responsable
     {
         $shopCategory->delete();
 

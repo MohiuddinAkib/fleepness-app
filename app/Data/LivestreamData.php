@@ -7,12 +7,15 @@ namespace App\Data;
 use App\Models\Livestream;
 use Spatie\LaravelData\Data;
 use App\Enums\LivestreamStatus;
+use Illuminate\Support\Traits\Conditionable;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 use Spatie\LaravelData\Attributes\MapOutputName;
 
 #[MapOutputName(SnakeCaseMapper::class)]
 class LivestreamData extends Data
 {
+    use Conditionable;
+
     public function __construct(
         public readonly int $id,
         public readonly string $title,

@@ -7,30 +7,29 @@ namespace App\Http\Controllers\Me;
 use App\Models\User;
 use App\Models\CartItem;
 use App\Data\CartItemData;
-use App\Attributes\CurrentUser;
 use App\Data\Cart\AddToCartData;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Data\Cart\UpdateCartItemData;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class CartController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $items = CartItem::query()
             ->where('user_id', $user->getKey())
             ->with(['product', 'variant'])
             ->get();
 
-        return Response::json([
-            'data' => CartItemData::collect($items),
-        ]);
+        return CartItemData::collect($items, DataCollection::class);
     }
 
-    public function store(AddToCartData $data, #[CurrentUser] User $user): JsonResponse
+    public function store(AddToCartData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $cartItem = CartItem::query()->updateOrCreate(
             [
@@ -46,13 +45,10 @@ class CartController extends Controller
 
         $cartItem->load(['product', 'variant']);
 
-        return Response::json([
-            'message' => 'Item added to cart.',
-            'data' => CartItemData::fromModel($cartItem),
-        ], HttpResponse::HTTP_CREATED);
+        return CartItemData::fromModel($cartItem)->additional(['message' => 'Item added to cart.']);
     }
 
-    public function update(UpdateCartItemData $data, CartItem $cartItem, #[CurrentUser] User $user): JsonResponse
+    public function update(UpdateCartItemData $data, CartItem $cartItem, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($cartItem->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
@@ -72,22 +68,19 @@ class CartController extends Controller
 
         $cartItem->load(['product', 'variant']);
 
-        return Response::json([
-            'message' => 'Cart item updated.',
-            'data' => CartItemData::fromModel($cartItem),
-        ]);
+        return CartItemData::fromModel($cartItem)->additional(['message' => 'Cart item updated.']);
     }
 
-    public function destroy(CartItem $cartItem, #[CurrentUser] User $user): JsonResponse
+    public function destroy(CartItem $cartItem, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($cartItem->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $cartItem->delete();
 
-        return Response::json(['message' => 'Item removed from cart.']);
+        return response()->json(['message' => 'Item removed from cart.']);
     }
 
-    public function summary(#[CurrentUser] User $user): JsonResponse
+    public function summary(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $items = CartItem::query()
             ->where('user_id', $user->getKey())
@@ -99,7 +92,7 @@ class CartController extends Controller
             fn (CartItem $item) => (float) $item->product->selling_price * $item->quantity
         );
 
-        return Response::json([
+        return response()->json([
             'data' => [
                 'item_count' => $items->count(),
                 'product_total' => number_format($productTotal, 2, '.', ''),

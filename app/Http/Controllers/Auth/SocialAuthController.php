@@ -9,8 +9,8 @@ use App\Data\UserData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Response;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Contracts\Support\Responsable;
 
 class SocialAuthController extends Controller
 {
@@ -19,7 +19,7 @@ class SocialAuthController extends Controller
         return Socialite::driver($provider)->stateless()->redirect();
     }
 
-    public function callback(string $provider): JsonResponse
+    public function callback(string $provider): JsonResponse|Responsable
     {
         $socialUser = Socialite::driver($provider)->stateless()->user();
 
@@ -35,7 +35,7 @@ class SocialAuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return Response::json([
+        return response()->json([
             'message' => 'Social login successful.',
             'token' => $token,
             'user' => UserData::fromModel($user),

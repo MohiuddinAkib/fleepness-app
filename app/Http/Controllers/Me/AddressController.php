@@ -7,25 +7,24 @@ namespace App\Http\Controllers\Me;
 use App\Models\User;
 use App\Models\Address;
 use App\Data\AddressData;
-use App\Attributes\CurrentUser;
 use App\Data\Me\StoreAddressData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class AddressController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $addresses = $user->addresses()->get();
 
-        return Response::json([
-            'data' => AddressData::collect($addresses),
-        ]);
+        return AddressData::collect($addresses, DataCollection::class);
     }
 
-    public function store(StoreAddressData $data, #[CurrentUser] User $user): JsonResponse
+    public function store(StoreAddressData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $address = $user->addresses()->create([
             'label' => $data->label,
@@ -40,13 +39,10 @@ class AddressController extends Controller
             'is_default' => false,
         ]);
 
-        return Response::json([
-            'message' => 'Address added.',
-            'data' => AddressData::fromModel($address),
-        ], HttpResponse::HTTP_CREATED);
+        return AddressData::fromModel($address)->additional(['message' => 'Address added.']);
     }
 
-    public function update(StoreAddressData $data, Address $address, #[CurrentUser] User $user): JsonResponse
+    public function update(StoreAddressData $data, Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
@@ -62,31 +58,25 @@ class AddressController extends Controller
             'longitude' => $data->longitude,
         ]);
 
-        return Response::json([
-            'message' => 'Address updated.',
-            'data' => AddressData::fromModel($address->fresh()),
-        ]);
+        return AddressData::fromModel($address->fresh())->additional(['message' => 'Address updated.']);
     }
 
-    public function destroy(Address $address, #[CurrentUser] User $user): JsonResponse
+    public function destroy(Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $address->delete();
 
-        return Response::json(['message' => 'Address removed.']);
+        return response()->json(['message' => 'Address removed.']);
     }
 
-    public function setDefault(Address $address, #[CurrentUser] User $user): JsonResponse
+    public function setDefault(Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $user->addresses()->update(['is_default' => false]);
         $address->update(['is_default' => true]);
 
-        return Response::json([
-            'message' => 'Default address updated.',
-            'data' => AddressData::fromModel($address->fresh()),
-        ]);
+        return response()->json(['message' => 'Default address updated.', 'data' => AddressData::fromModel($address->fresh())]);
     }
 }

@@ -9,113 +9,222 @@ use App\Models\Product;
 use App\Models\Livestream;
 use Illuminate\Support\Str;
 use App\Data\LivestreamData;
-use Illuminate\Http\Request;
-use App\Attributes\CurrentUser;
 use App\Enums\LivestreamStatus;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use App\Data\Livestream\AttachProductData;
+use App\Data\Dto\GeneratePublisherTokenData;
 use App\Data\Livestream\StoreLivestreamData;
+use App\Data\Livestream\UpdateLivestreamData;
+use Illuminate\Contracts\Support\Responsable;
+use App\Facades\Livestream as LivestreamFacade;
+use Spatie\LaravelData\PaginatedDataCollection;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class LivestreamController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $livestreams = Livestream::query()
-            ->where('vendor_profile_id', $user->vendorProfile?->getKey())
-            ->with(['media', 'vendorProfile'])
+            ->where("vendor_profile_id", $user->vendorProfile?->getKey())
+            ->with(["media", "vendorProfile"])
             ->latest()
             ->paginate();
 
-        return Response::json(LivestreamData::collect($livestreams));
+        return LivestreamData::collect(
+            $livestreams,
+            PaginatedDataCollection::class,
+        );
     }
 
     public function store(
         StoreLivestreamData $data,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
 
         $livestream = Livestream::query()->create([
-            'vendor_profile_id' => $vendorProfile->getKey(),
-            'title' => $data->title,
-            'description' => $data->description instanceof Optional ? null : $data->description,
-            'room_id' => Str::uuid()->toString(),
-            'status' => LivestreamStatus::Scheduled,
-            'scheduled_at' => $data->scheduledAt instanceof Optional ? null : $data->scheduledAt,
+            "vendor_profile_id" => $vendorProfile->getKey(),
+            "title" => $data->title,
+            "description" =>
+                $data->description instanceof Optional
+                    ? null
+                    : $data->description,
+            "room_id" => Str::uuid()->toString(),
+            "status" => LivestreamStatus::Started,
+            "started_at" => now(),
+            "scheduled_at" =>
+                $data->scheduledAt instanceof Optional
+                    ? null
+                    : $data->scheduledAt,
         ]);
 
-        $livestream->load(['media', 'vendorProfile']);
-
-        return Response::json(
-            ['data' => LivestreamData::fromModel($livestream)],
-            HttpResponse::HTTP_CREATED
+        $token = LivestreamFacade::generatePublisherToken(
+            new GeneratePublisherTokenData(
+                roomName: $livestream->getRoomName(),
+                identity: (string) $user->getKey(),
+                displayName: $user->name ?? "Vendor",
+                metadata: ["livestream_id" => $livestream->getKey()],
+            ),
         );
+
+        $livestream->load(["media", "vendorProfile"]);
+
+        return LivestreamData::fromModel($livestream)->additional([
+            "token" => $token,
+        ]);
     }
 
     public function update(
-        StoreLivestreamData $data,
+        UpdateLivestreamData $data,
         Livestream $livestream,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($livestream->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
+        abort_unless(
+            $livestream->vendorProfile()->is($vendorProfile),
+            HttpResponse::HTTP_FORBIDDEN,
+        );
+        abort_if(
+            $livestream->status->isFinished(),
+            HttpResponse::HTTP_UNPROCESSABLE_ENTITY,
+        );
 
-        $livestream->update(array_filter([
-            'title' => $data->title,
-            'description' => $data->description instanceof Optional ? $livestream->description : $data->description,
-            'scheduled_at' => $data->scheduledAt instanceof Optional ? $livestream->scheduled_at : $data->scheduledAt,
-        ]));
+        $updates = [];
+        $token = null;
 
-        $livestream->load(['media', 'vendorProfile']);
+        if (!$data->title instanceof Optional) {
+            $updates["title"] = $data->title;
+        }
 
-        return Response::json(['data' => LivestreamData::fromModel($livestream)]);
+        if (!$data->description instanceof Optional) {
+            $updates["description"] = $data->description;
+        }
+
+        if (!$data->scheduledAt instanceof Optional) {
+            $updates["scheduled_at"] = $data->scheduledAt;
+        }
+
+        if (!$data->status instanceof Optional) {
+            if ($data->status->isStarted()) {
+                abort_unless(
+                    $livestream->status->isScheduled(),
+                    HttpResponse::HTTP_UNPROCESSABLE_ENTITY,
+                );
+                $updates["status"] = LivestreamStatus::Started;
+                $updates["started_at"] = now();
+                $token = LivestreamFacade::generatePublisherToken(
+                    new GeneratePublisherTokenData(
+                        roomName: $livestream->getRoomName(),
+                        identity: (string) $user->getKey(),
+                        displayName: $user->name ?? "Vendor",
+                        metadata: ["livestream_id" => $livestream->getKey()],
+                    ),
+                );
+            } elseif ($data->status->isFinished()) {
+                $updates["status"] = LivestreamStatus::Finished;
+                $updates["ended_at"] = now();
+                if (null !== $livestream->started_at) {
+                    $updates[
+                        "total_duration"
+                    ] = (int) $livestream->started_at->diffInSeconds(now());
+                }
+                if (null !== $livestream->egress_id) {
+                    LivestreamFacade::stopRecording($livestream->egress_id);
+                }
+            }
+        }
+
+        $livestream->update($updates);
+        $livestream->load(["media", "vendorProfile"]);
+
+        return LivestreamData::fromModel($livestream)
+            ->when($token)
+            ->additional(["token" => $token]);
     }
 
     public function destroy(
         Livestream $livestream,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($livestream->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
+        abort_unless(
+            $livestream->vendorProfile()->is($vendorProfile),
+            HttpResponse::HTTP_FORBIDDEN,
+        );
+        abort_unless(
+            $livestream->status->isScheduled(),
+            HttpResponse::HTTP_UNPROCESSABLE_ENTITY,
+        );
 
         $livestream->delete();
 
-        return Response::json(['message' => 'Livestream deleted.']);
+        return response()->json(["message" => "Livestream deleted."]);
+    }
+
+    public function publisherToken(
+        Livestream $livestream,
+        #[CurrentUser] User $user,
+    ): JsonResponse|Responsable {
+        $vendorProfile = $user->vendorProfile;
+        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
+        abort_unless(
+            $livestream->vendorProfile()->is($vendorProfile),
+            HttpResponse::HTTP_FORBIDDEN,
+        );
+        abort_if(
+            $livestream->status->isFinished(),
+            HttpResponse::HTTP_UNPROCESSABLE_ENTITY,
+        );
+
+        $data = new GeneratePublisherTokenData(
+            roomName: $livestream->getRoomName(),
+            identity: (string) $user->getKey(),
+            displayName: $user->name ?? "Vendor",
+            metadata: ["livestream_identity" => $livestream->getKey()],
+        );
+
+        $token = LivestreamFacade::generatePublisherToken($data);
+
+        return response()->json(["token" => $token]);
     }
 
     public function attachProduct(
-        Request $request,
+        AttachProductData $data,
         Livestream $livestream,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($livestream->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
+        abort_unless(
+            $livestream->vendorProfile()->is($vendorProfile),
+            HttpResponse::HTTP_FORBIDDEN,
+        );
 
-        $validated = $request->validate(['product_id' => ['required', 'integer', 'exists:products,id']]);
+        $livestream->products()->syncWithoutDetaching([$data->productId]);
 
-        $livestream->products()->syncWithoutDetaching([$validated['product_id']]);
-
-        return Response::json(['message' => 'Product attached.']);
+        return response()->json(["message" => "Product attached."]);
     }
 
     public function detachProduct(
         Livestream $livestream,
         Product $product,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($livestream->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
+        abort_unless(
+            $livestream->vendorProfile()->is($vendorProfile),
+            HttpResponse::HTTP_FORBIDDEN,
+        );
 
         $livestream->products()->detach($product->getKey());
 
-        return Response::json(['message' => 'Product detached.']);
+        return response()->json(["message" => "Product detached."]);
     }
 }

@@ -12,12 +12,12 @@ use App\Data\Auth\RegisterData;
 use App\Data\Auth\VerifyOtpData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Contracts\Support\Responsable;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class OTPAuthController extends Controller
 {
-    public function register(RegisterData $data): JsonResponse
+    public function register(RegisterData $data): JsonResponse|Responsable
     {
         $user = User::create([
             'name' => $data->name,
@@ -37,34 +37,34 @@ class OTPAuthController extends Controller
             $payload['otp'] = $otp;
         }
 
-        return Response::json($payload, HttpResponse::HTTP_CREATED);
+        return response()->json($payload, HttpResponse::HTTP_CREATED);
     }
 
-    public function verifyOtp(VerifyOtpData $data): JsonResponse
+    public function verifyOtp(VerifyOtpData $data): JsonResponse|Responsable
     {
         $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
 
         $cachedOtp = $user->getCachedOtp();
 
         if (! $cachedOtp) {
-            return Response::json(['message' => 'OTP has expired.'], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
+            return response()->json(['message' => 'OTP has expired.'], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         if ((string) $cachedOtp !== $data->otp) {
-            return Response::json(['message' => 'Invalid OTP.'], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
+            return response()->json(['message' => 'Invalid OTP.'], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $user->forgetCachedOtp();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return Response::json([
+        return response()->json([
             'message' => 'OTP verified successfully.',
             'token' => $token,
             'user' => UserData::fromModel($user),
         ]);
     }
 
-    public function resendOtp(SendOtpData $data): JsonResponse
+    public function resendOtp(SendOtpData $data): JsonResponse|Responsable
     {
         $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
 
@@ -78,10 +78,10 @@ class OTPAuthController extends Controller
             $payload['otp'] = $otp;
         }
 
-        return Response::json($payload);
+        return response()->json($payload);
     }
 
-    public function login(SendOtpData $data): JsonResponse
+    public function login(SendOtpData $data): JsonResponse|Responsable
     {
         $user = User::where('phone_number', $data->phoneNumber)->firstOrFail();
 
@@ -95,6 +95,6 @@ class OTPAuthController extends Controller
             $payload['otp'] = $otp;
         }
 
-        return Response::json($payload);
+        return response()->json($payload);
     }
 }

@@ -9,10 +9,11 @@ use App\Models\VendorReview;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Support\Responsable;
 
 class UserVendorReviewController extends Controller
 {
-    public function store(Request $request, User $vendor): JsonResponse
+    public function store(Request $request, User $vendor): JsonResponse|Responsable
     {
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
@@ -32,7 +33,7 @@ class UserVendorReviewController extends Controller
         ], 201);
     }
 
-    public function index(User $vendor): JsonResponse
+    public function index(User $vendor): JsonResponse|Responsable
     {
         $reviews = VendorReview::where('vendor_id', $vendor->getKey())->get();
 
@@ -42,7 +43,7 @@ class UserVendorReviewController extends Controller
         ]);
     }
 
-    public function destroy(VendorReview $review): JsonResponse
+    public function destroy(VendorReview $review): JsonResponse|Responsable
     {
         abort_unless($review->user_id === auth()->id(), 403, 'Unauthorized');
 

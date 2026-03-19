@@ -8,19 +8,18 @@ use App\Models\PaymentMethod;
 use App\Data\PaymentMethodData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
 
 class PaymentMethodController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): JsonResponse|Responsable
     {
         $methods = PaymentMethod::query()
             ->where('is_active', true)
             ->orderBy('name')
             ->get();
 
-        return Response::json([
-            'data' => PaymentMethodData::collect($methods),
-        ]);
+        return PaymentMethodData::collect($methods, DataCollection::class);
     }
 }

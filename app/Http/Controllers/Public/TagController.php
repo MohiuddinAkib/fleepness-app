@@ -9,20 +9,20 @@ use App\Data\TagData;
 use App\Data\ProductData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class TagController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): JsonResponse|Responsable
     {
         $tags = Tag::query()->orderBy('name')->get();
 
-        return Response::json([
-            'data' => TagData::collect($tags),
-        ]);
+        return TagData::collect($tags, DataCollection::class);
     }
 
-    public function products(Tag $tag): JsonResponse
+    public function products(Tag $tag): JsonResponse|Responsable
     {
         $products = $tag->products()
             ->active()
@@ -30,6 +30,6 @@ class TagController extends Controller
             ->with(['media', 'vendorProfile', 'category'])
             ->paginate();
 
-        return Response::json(ProductData::collect($products));
+        return ProductData::collect($products, PaginatedDataCollection::class);
     }
 }

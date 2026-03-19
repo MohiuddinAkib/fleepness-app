@@ -8,18 +8,20 @@ use App\Models\User;
 use App\Models\Product;
 use App\Data\ProductData;
 use App\Enums\ProductStatus;
-use App\Attributes\CurrentUser;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Data\Vendor\StoreProductData;
 use App\Data\Vendor\UpdateProductData;
+use Spatie\LaravelData\DataCollection;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class ProductController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
 
@@ -29,10 +31,10 @@ class ProductController extends Controller
             ->with(['category', 'media', 'variants', 'tags'])
             ->paginate();
 
-        return Response::json(ProductData::collect($products));
+        return Response::json(ProductData::collect($products, DataCollection::class));
     }
 
-    public function store(StoreProductData $data, #[CurrentUser] User $user): JsonResponse
+    public function store(StoreProductData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
 
@@ -59,7 +61,7 @@ class ProductController extends Controller
         ], HttpResponse::HTTP_CREATED);
     }
 
-    public function show(Product $product, #[CurrentUser] User $user): JsonResponse
+    public function show(Product $product, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($product->vendorProfile()->is($user->vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 
@@ -70,7 +72,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(UpdateProductData $data, Product $product, #[CurrentUser] User $user): JsonResponse
+    public function update(UpdateProductData $data, Product $product, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($product->vendorProfile()->is($user->vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 
@@ -116,7 +118,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function destroy(Product $product, #[CurrentUser] User $user): JsonResponse
+    public function destroy(Product $product, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($product->vendorProfile()->is($user->vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 
@@ -125,7 +127,7 @@ class ProductController extends Controller
         return Response::json(['message' => 'Product deleted.']);
     }
 
-    public function toggleStatus(Product $product, #[CurrentUser] User $user): JsonResponse
+    public function toggleStatus(Product $product, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($product->vendorProfile()->is($user->vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 

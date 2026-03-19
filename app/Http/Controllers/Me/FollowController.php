@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Me;
 
 use App\Models\User;
-use App\Attributes\CurrentUser;
 use App\Data\VendorProfileData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Container\Attributes\CurrentUser;
 
 class FollowController extends Controller
 {
-    public function following(#[CurrentUser] User $user): JsonResponse
+    public function following(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfiles = $user->following()->get();
 
-        return Response::json([
-            'data' => VendorProfileData::collect($vendorProfiles),
-        ]);
+        return VendorProfileData::collect($vendorProfiles, DataCollection::class);
     }
 }

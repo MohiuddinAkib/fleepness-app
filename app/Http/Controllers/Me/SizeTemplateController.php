@@ -7,19 +7,20 @@ namespace App\Http\Controllers\Me;
 use App\Models\User;
 use App\Models\SizeTemplate;
 use App\Data\SizeTemplateData;
-use App\Attributes\CurrentUser;
 use App\Models\SizeTemplateItem;
 use Illuminate\Http\JsonResponse;
 use App\Data\SizeTemplateItemData;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
 use App\Data\SizeTemplate\StoreSizeTemplateData;
+use Illuminate\Container\Attributes\CurrentUser;
 use App\Data\SizeTemplate\StoreSizeTemplateItemData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class SizeTemplateController extends Controller
 {
-    public function index(#[CurrentUser] User $user): JsonResponse
+    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
@@ -29,15 +30,13 @@ class SizeTemplateController extends Controller
             ->with('items')
             ->get();
 
-        return Response::json([
-            'data' => SizeTemplateData::collect($templates),
-        ]);
+        return SizeTemplateData::collect($templates, DataCollection::class);
     }
 
     public function store(
         StoreSizeTemplateData $data,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
 
@@ -48,30 +47,27 @@ class SizeTemplateController extends Controller
 
         $template->load('items');
 
-        return Response::json(
-            ['data' => SizeTemplateData::fromModel($template)],
-            HttpResponse::HTTP_CREATED
-        );
+        return SizeTemplateData::fromModel($template);
     }
 
     public function destroy(
         SizeTemplate $sizeTemplate,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
         abort_unless($sizeTemplate->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 
         $sizeTemplate->delete();
 
-        return Response::json(['message' => 'Size template deleted.']);
+        return response()->json(['message' => 'Size template deleted.']);
     }
 
     public function storeItem(
         StoreSizeTemplateItemData $data,
         SizeTemplate $sizeTemplate,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
         abort_unless($sizeTemplate->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
@@ -81,10 +77,7 @@ class SizeTemplateController extends Controller
             'value' => $data->value,
         ]);
 
-        return Response::json(
-            ['data' => SizeTemplateItemData::fromModel($item)],
-            HttpResponse::HTTP_CREATED
-        );
+        return SizeTemplateItemData::fromModel($item);
     }
 
     public function updateItem(
@@ -92,7 +85,7 @@ class SizeTemplateController extends Controller
         SizeTemplate $sizeTemplate,
         SizeTemplateItem $sizeTemplateItem,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
         abort_unless($sizeTemplate->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
@@ -103,14 +96,14 @@ class SizeTemplateController extends Controller
             'value' => $data->value,
         ]);
 
-        return Response::json(['data' => SizeTemplateItemData::fromModel($sizeTemplateItem)]);
+        return SizeTemplateItemData::fromModel($sizeTemplateItem);
     }
 
     public function destroyItem(
         SizeTemplate $sizeTemplate,
         SizeTemplateItem $sizeTemplateItem,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
         abort_unless($sizeTemplate->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
@@ -118,6 +111,6 @@ class SizeTemplateController extends Controller
 
         $sizeTemplateItem->delete();
 
-        return Response::json(['message' => 'Item deleted.']);
+        return response()->json(['message' => 'Item deleted.']);
     }
 }

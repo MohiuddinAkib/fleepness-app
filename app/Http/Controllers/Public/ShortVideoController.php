@@ -9,52 +9,53 @@ use App\Data\CommentData;
 use App\Data\ProductData;
 use App\Models\ShortVideo;
 use App\Data\ShortVideoData;
-use App\Attributes\CurrentUser;
 use App\Models\ShortVideoComment;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
 use App\Data\ShortVideo\StoreCommentData;
+use Illuminate\Contracts\Support\Responsable;
+use Spatie\LaravelData\PaginatedDataCollection;
+use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class ShortVideoController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): JsonResponse|Responsable
     {
         $videos = ShortVideo::query()
             ->with(['media', 'vendorProfile'])
             ->latest()
             ->paginate();
 
-        return Response::json(ShortVideoData::collect($videos));
+        return ShortVideoData::collect($videos, PaginatedDataCollection::class);
     }
 
-    public function show(ShortVideo $shortVideo): JsonResponse
+    public function show(ShortVideo $shortVideo): JsonResponse|Responsable
     {
         $shortVideo->load(['media', 'vendorProfile', 'products']);
 
-        return Response::json([
-            'data' => ShortVideoData::fromModel($shortVideo),
-        ]);
+        return ShortVideoData::fromModel($shortVideo);
     }
 
-    public function comments(ShortVideo $shortVideo): JsonResponse
+    public function comments(ShortVideo $shortVideo): JsonResponse|Responsable
     {
         $comments = $shortVideo->comments()
             ->with('user')
             ->latest()
             ->paginate();
 
-        return Response::json(CommentData::collect(
-            $comments->through(fn (ShortVideoComment $c) => CommentData::fromShortVideoComment($c))
-        ));
+        return CommentData::collect(
+            $comments->through(fn (ShortVideoComment $c) => CommentData::fromShortVideoComment($c)),
+            PaginatedDataCollection::class
+        );
     }
 
     public function storeComment(
         StoreCommentData $data,
         ShortVideo $shortVideo,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         $comment = $shortVideo->comments()->create([
             'user_id' => $user->getKey(),
             'comment' => $data->comment,
@@ -62,46 +63,41 @@ class ShortVideoController extends Controller
 
         $comment->load('user');
 
-        return Response::json(
-            ['data' => CommentData::fromShortVideoComment($comment)],
-            HttpResponse::HTTP_CREATED
-        );
+        return CommentData::fromShortVideoComment($comment);
     }
 
     public function destroyComment(
         ShortVideo $shortVideo,
         ShortVideoComment $comment,
         #[CurrentUser] User $user,
-    ): JsonResponse {
+    ): JsonResponse|Responsable {
         abort_unless($comment->shortVideo()->is($shortVideo), HttpResponse::HTTP_NOT_FOUND);
         abort_unless($comment->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $comment->delete();
 
-        return Response::json(['message' => 'Comment deleted.']);
+        return response()->json(['message' => 'Comment deleted.']);
     }
 
-    public function like(ShortVideo $shortVideo, #[CurrentUser] User $user): JsonResponse
+    public function like(ShortVideo $shortVideo, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $shortVideo->likes()->firstOrCreate(['user_id' => $user->getKey()]);
         $shortVideo->increment('likes_count');
 
-        return Response::json(['message' => 'Liked.']);
+        return response()->json(['message' => 'Liked.']);
     }
 
-    public function save(ShortVideo $shortVideo, #[CurrentUser] User $user): JsonResponse
+    public function save(ShortVideo $shortVideo, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $shortVideo->saves()->firstOrCreate(['user_id' => $user->getKey()]);
 
-        return Response::json(['message' => 'Saved.']);
+        return response()->json(['message' => 'Saved.']);
     }
 
-    public function products(ShortVideo $shortVideo): JsonResponse
+    public function products(ShortVideo $shortVideo): JsonResponse|Responsable
     {
         $products = $shortVideo->products()->with(['media', 'vendorProfile', 'category'])->get();
 
-        return Response::json([
-            'data' => ProductData::collect($products),
-        ]);
+        return ProductData::collect($products, DataCollection::class);
     }
 }

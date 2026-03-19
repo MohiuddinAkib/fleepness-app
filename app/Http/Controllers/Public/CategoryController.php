@@ -9,11 +9,13 @@ use App\Data\ProductData;
 use App\Data\CategoryData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class CategoryController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): JsonResponse|Responsable
     {
         $categories = Category::query()
             ->active()
@@ -22,19 +24,15 @@ class CategoryController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        return Response::json([
-            'data' => CategoryData::collect($categories),
-        ]);
+        return CategoryData::collect($categories, DataCollection::class);
     }
 
-    public function show(Category $category): JsonResponse
+    public function show(Category $category): JsonResponse|Responsable
     {
-        return Response::json([
-            'data' => CategoryData::fromModel($category->load('children')),
-        ]);
+        return CategoryData::fromModel($category->load('children'));
     }
 
-    public function products(Category $category): JsonResponse
+    public function products(Category $category): JsonResponse|Responsable
     {
         $products = $category->products()
             ->active()
@@ -42,6 +40,6 @@ class CategoryController extends Controller
             ->with(['media', 'vendorProfile'])
             ->paginate();
 
-        return Response::json(ProductData::collect($products));
+        return ProductData::collect($products, PaginatedDataCollection::class);
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\SizeTemplateItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Support\Responsable;
 
 class SizeTemplateController extends Controller
 {
@@ -30,7 +31,7 @@ class SizeTemplateController extends Controller
         ], 201);
     }
 
-    public function storeItem(Request $request, SizeTemplate $sizeTemplate): JsonResponse
+    public function storeItem(Request $request, SizeTemplate $sizeTemplate): JsonResponse|Responsable
     {
         abort_unless($sizeTemplate->seller_id === auth()->id(), 403, 'Unauthorized');
 
@@ -56,7 +57,7 @@ class SizeTemplateController extends Controller
         ], 201);
     }
 
-    public function updateItem(Request $request, SizeTemplate $sizeTemplate, SizeTemplateItem $sizeTemplateItem): JsonResponse
+    public function updateItem(Request $request, SizeTemplate $sizeTemplate, SizeTemplateItem $sizeTemplateItem): JsonResponse|Responsable
     {
         abort_unless($sizeTemplate->seller_id === auth()->id(), 403, 'Unauthorized');
         abort_unless($sizeTemplateItem->template_id === $sizeTemplate->getKey(), 404, 'Size item not found');
@@ -82,7 +83,7 @@ class SizeTemplateController extends Controller
         ]);
     }
 
-    public function destroyItem(SizeTemplate $sizeTemplate, SizeTemplateItem $sizeTemplateItem): JsonResponse
+    public function destroyItem(SizeTemplate $sizeTemplate, SizeTemplateItem $sizeTemplateItem): JsonResponse|Responsable
     {
         abort_unless($sizeTemplate->seller_id === auth()->id(), 403, 'Unauthorized');
         abort_unless($sizeTemplateItem->template_id === $sizeTemplate->getKey(), 404, 'Size item not found');
@@ -94,7 +95,7 @@ class SizeTemplateController extends Controller
         ]);
     }
 
-    public function index(): JsonResponse
+    public function index(): JsonResponse|Responsable
     {
         $templates = SizeTemplate::with('items')
             ->where('seller_id', auth()->id())
@@ -103,7 +104,7 @@ class SizeTemplateController extends Controller
         return response()->json($templates);
     }
 
-    public function destroy(SizeTemplate $sizeTemplate): JsonResponse
+    public function destroy(SizeTemplate $sizeTemplate): JsonResponse|Responsable
     {
         abort_unless($sizeTemplate->seller_id === auth()->id(), 403, 'Unauthorized');
 

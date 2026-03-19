@@ -8,16 +8,15 @@ use App\Models\ShopCategory;
 use App\Data\ShopCategoryData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Spatie\LaravelData\DataCollection;
+use Illuminate\Contracts\Support\Responsable;
 
 class ShopCategoryController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): JsonResponse|Responsable
     {
         $categories = ShopCategory::query()->orderBy('name')->get();
 
-        return Response::json([
-            'data' => ShopCategoryData::collect($categories),
-        ]);
+        return ShopCategoryData::collect($categories, DataCollection::class);
     }
 }
