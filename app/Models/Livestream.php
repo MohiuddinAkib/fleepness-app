@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Database\Factories\LivestreamFactory;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Facades\Livestream as LivestreamFacade;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -103,5 +104,26 @@ class Livestream extends Model implements HasMedia
     public function getRoomName(): string
     {
         return sprintf('livestream_%s', $this->getKey());
+    }
+
+    public function getRecordingOutputPath(): string
+    {
+        return sprintf('livestreams/%s/%s', $this->getRoomName(), now()->timestamp);
+    }
+
+    public function startRecording(): void
+    {
+        $egress = LivestreamFacade::startRecording($this->getRoomName(), $this->getRecordingOutputPath());
+
+        $this->update(['egress_id' => $egress->getEgressId()]);
+    }
+
+    public function stopRecording(): void
+    {
+        if (null === $this->egress_id) {
+            return;
+        }
+
+        LivestreamFacade::stopRecording($this->egress_id);
     }
 }

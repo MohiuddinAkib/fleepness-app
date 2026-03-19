@@ -69,12 +69,7 @@ class LivestreamController extends Controller
             ),
         );
 
-        $egress = LivestreamFacade::startRecording(
-            $livestream->getRoomName(),
-            sprintf('livestreams/%s/%s', $livestream->getRoomName(), now()->timestamp),
-        );
-
-        $livestream->update(['egress_id' => $egress->getEgressId()]);
+        $livestream->startRecording();
         $livestream->load(['media', 'vendorProfile']);
 
         return LivestreamData::fromModel($livestream)->additional(['token' => $token]);
@@ -127,26 +122,24 @@ class LivestreamController extends Controller
                         metadata: ['livestream_id' => $livestream->getKey()],
                     ),
                 );
-                $egress = LivestreamFacade::startRecording(
-                    $livestream->getRoomName(),
-                    sprintf('livestreams/%s/%s', $livestream->getRoomName(), now()->timestamp),
-                );
-                $updates['egress_id'] = $egress->getEgressId();
             } elseif ($data->status->isFinished()) {
                 $updates['status'] = LivestreamStatus::Finished;
                 $updates['ended_at'] = now();
                 if (null !== $livestream->started_at) {
-                    $updates[
-                        'total_duration'
-                    ] = (int) $livestream->started_at->diffInSeconds(now());
-                }
-                if (null !== $livestream->egress_id) {
-                    LivestreamFacade::stopRecording($livestream->egress_id);
+                    $updates['total_duration'] = (int) $livestream->started_at->diffInSeconds(now());
                 }
             }
         }
 
         $livestream->update($updates);
+
+        if (! $data->status instanceof Optional && $data->status->isStarted()) {
+            $livestream->startRecording();
+        }
+
+        if (! $data->status instanceof Optional && $data->status->isFinished()) {
+            $livestream->stopRecording();
+        }
         $livestream->load(['media', 'vendorProfile']);
 
         return LivestreamData::fromModel($livestream)
