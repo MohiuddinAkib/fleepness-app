@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use Livekit\EgressInfo;
 use App\Models\Livestream;
 use App\Models\VendorProfile;
 use App\Models\LivestreamLike;
@@ -112,8 +113,10 @@ it('requires auth to create a livestream', function (): void {
 });
 
 it('vendor creates a livestream and receives publisher token', function (): void {
+    $fakeEgress = tap(new EgressInfo)->setEgressId('egress-123');
     $this->mock(LivestreamService::class)
-        ->shouldReceive('generatePublisherToken')->once()->andReturn('fake-publisher-token');
+        ->shouldReceive('generatePublisherToken')->once()->andReturn('fake-publisher-token')
+        ->shouldReceive('startRecording')->once()->andReturn($fakeEgress);
 
     $user = User::factory()->create();
     VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
@@ -149,8 +152,10 @@ it('vendor updates own livestream', function (): void {
 });
 
 it('vendor starts a scheduled livestream via update', function (): void {
+    $fakeEgress = tap(new EgressInfo)->setEgressId('egress-456');
     $this->mock(LivestreamService::class)
-        ->shouldReceive('generatePublisherToken')->once()->andReturn('start-token');
+        ->shouldReceive('generatePublisherToken')->once()->andReturn('start-token')
+        ->shouldReceive('startRecording')->once()->andReturn($fakeEgress);
 
     $user = User::factory()->create();
     $vendor = VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);

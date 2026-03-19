@@ -28,8 +28,8 @@ class LivestreamController extends Controller
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $livestreams = Livestream::query()
-            ->where("vendor_profile_id", $user->vendorProfile?->getKey())
-            ->with(["media", "vendorProfile"])
+            ->where('vendor_profile_id', $user->vendorProfile?->getKey())
+            ->with(['media', 'vendorProfile'])
             ->latest()
             ->paginate();
 
@@ -47,17 +47,15 @@ class LivestreamController extends Controller
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
 
         $livestream = Livestream::query()->create([
-            "vendor_profile_id" => $vendorProfile->getKey(),
-            "title" => $data->title,
-            "description" =>
-                $data->description instanceof Optional
+            'vendor_profile_id' => $vendorProfile->getKey(),
+            'title' => $data->title,
+            'description' => $data->description instanceof Optional
                     ? null
                     : $data->description,
-            "room_id" => Str::uuid()->toString(),
-            "status" => LivestreamStatus::Started,
-            "started_at" => now(),
-            "scheduled_at" =>
-                $data->scheduledAt instanceof Optional
+            'room_id' => Str::uuid()->toString(),
+            'status' => LivestreamStatus::Started,
+            'started_at' => now(),
+            'scheduled_at' => $data->scheduledAt instanceof Optional
                     ? null
                     : $data->scheduledAt,
         ]);
@@ -66,16 +64,20 @@ class LivestreamController extends Controller
             new GeneratePublisherTokenData(
                 roomName: $livestream->getRoomName(),
                 identity: (string) $user->getKey(),
-                displayName: $user->name ?? "Vendor",
-                metadata: ["livestream_id" => $livestream->getKey()],
+                displayName: $user->name ?? 'Vendor',
+                metadata: ['livestream_id' => $livestream->getKey()],
             ),
         );
 
-        $livestream->load(["media", "vendorProfile"]);
+        $egress = LivestreamFacade::startRecording(
+            $livestream->getRoomName(),
+            sprintf('livestreams/%s/%s', $livestream->getRoomName(), now()->timestamp),
+        );
 
-        return LivestreamData::fromModel($livestream)->additional([
-            "token" => $token,
-        ]);
+        $livestream->update(['egress_id' => $egress->getEgressId()]);
+        $livestream->load(['media', 'vendorProfile']);
+
+        return LivestreamData::fromModel($livestream)->additional(['token' => $token]);
     }
 
     public function update(
@@ -97,40 +99,45 @@ class LivestreamController extends Controller
         $updates = [];
         $token = null;
 
-        if (!$data->title instanceof Optional) {
-            $updates["title"] = $data->title;
+        if (! $data->title instanceof Optional) {
+            $updates['title'] = $data->title;
         }
 
-        if (!$data->description instanceof Optional) {
-            $updates["description"] = $data->description;
+        if (! $data->description instanceof Optional) {
+            $updates['description'] = $data->description;
         }
 
-        if (!$data->scheduledAt instanceof Optional) {
-            $updates["scheduled_at"] = $data->scheduledAt;
+        if (! $data->scheduledAt instanceof Optional) {
+            $updates['scheduled_at'] = $data->scheduledAt;
         }
 
-        if (!$data->status instanceof Optional) {
+        if (! $data->status instanceof Optional) {
             if ($data->status->isStarted()) {
                 abort_unless(
                     $livestream->status->isScheduled(),
                     HttpResponse::HTTP_UNPROCESSABLE_ENTITY,
                 );
-                $updates["status"] = LivestreamStatus::Started;
-                $updates["started_at"] = now();
+                $updates['status'] = LivestreamStatus::Started;
+                $updates['started_at'] = now();
                 $token = LivestreamFacade::generatePublisherToken(
                     new GeneratePublisherTokenData(
                         roomName: $livestream->getRoomName(),
                         identity: (string) $user->getKey(),
-                        displayName: $user->name ?? "Vendor",
-                        metadata: ["livestream_id" => $livestream->getKey()],
+                        displayName: $user->name ?? 'Vendor',
+                        metadata: ['livestream_id' => $livestream->getKey()],
                     ),
                 );
+                $egress = LivestreamFacade::startRecording(
+                    $livestream->getRoomName(),
+                    sprintf('livestreams/%s/%s', $livestream->getRoomName(), now()->timestamp),
+                );
+                $updates['egress_id'] = $egress->getEgressId();
             } elseif ($data->status->isFinished()) {
-                $updates["status"] = LivestreamStatus::Finished;
-                $updates["ended_at"] = now();
+                $updates['status'] = LivestreamStatus::Finished;
+                $updates['ended_at'] = now();
                 if (null !== $livestream->started_at) {
                     $updates[
-                        "total_duration"
+                        'total_duration'
                     ] = (int) $livestream->started_at->diffInSeconds(now());
                 }
                 if (null !== $livestream->egress_id) {
@@ -140,11 +147,11 @@ class LivestreamController extends Controller
         }
 
         $livestream->update($updates);
-        $livestream->load(["media", "vendorProfile"]);
+        $livestream->load(['media', 'vendorProfile']);
 
         return LivestreamData::fromModel($livestream)
             ->when($token)
-            ->additional(["token" => $token]);
+            ->additional(['token' => $token]);
     }
 
     public function destroy(
@@ -164,7 +171,7 @@ class LivestreamController extends Controller
 
         $livestream->delete();
 
-        return response()->json(["message" => "Livestream deleted."]);
+        return response()->json(['message' => 'Livestream deleted.']);
     }
 
     public function publisherToken(
@@ -185,13 +192,13 @@ class LivestreamController extends Controller
         $data = new GeneratePublisherTokenData(
             roomName: $livestream->getRoomName(),
             identity: (string) $user->getKey(),
-            displayName: $user->name ?? "Vendor",
-            metadata: ["livestream_identity" => $livestream->getKey()],
+            displayName: $user->name ?? 'Vendor',
+            metadata: ['livestream_identity' => $livestream->getKey()],
         );
 
         $token = LivestreamFacade::generatePublisherToken($data);
 
-        return response()->json(["token" => $token]);
+        return response()->json(['token' => $token]);
     }
 
     public function attachProduct(
@@ -208,7 +215,7 @@ class LivestreamController extends Controller
 
         $livestream->products()->syncWithoutDetaching([$data->productId]);
 
-        return response()->json(["message" => "Product attached."]);
+        return response()->json(['message' => 'Product attached.']);
     }
 
     public function detachProduct(
@@ -225,6 +232,6 @@ class LivestreamController extends Controller
 
         $livestream->products()->detach($product->getKey());
 
-        return response()->json(["message" => "Product detached."]);
+        return response()->json(['message' => 'Product detached.']);
     }
 }

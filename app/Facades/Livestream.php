@@ -12,6 +12,8 @@ use App\Data\Dto\GenerateSubscriberTokenData;
 /**
  * @method static string generatePublisherToken(GeneratePublisherTokenData $data)
  * @method static string generateSubscriberToken(GenerateSubscriberTokenData $data)
+ * @method static \Livekit\EgressInfo startRecording(string $roomName, string $outputPath)
+ * @method static \Livekit\EgressInfo stopRecording(string $egressId)
  *
  * @see LivestreamService
  *

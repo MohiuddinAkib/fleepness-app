@@ -28,6 +28,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\AddressFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Address newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Address newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Address query()
@@ -66,12 +67,13 @@ namespace App\Models{
  * @property int $product_id
  * @property int|null $product_variant_id
  * @property int $quantity
- * @property int $is_selected
+ * @property bool $is_selected
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Product $product
- * @property-read \App\Models\ProductSize|null $size
+ * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\User $user
+ * @property-read \App\Models\ProductVariant|null $variant
+ * @method static \Database\Factories\CartItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CartItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CartItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CartItem query()
@@ -89,8 +91,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property-read string|null $profile_img
- * @property-read string|null $cover_img
  * @property int $id
  * @property int|null $parent_id
  * @property string $name
@@ -99,18 +99,23 @@ namespace App\Models{
  * @property string|null $store_title
  * @property string|null $profile_image_path
  * @property string|null $cover_image_path
- * @property string $status
+ * @property \App\Enums\CategoryStatus $status
  * @property int $sort_order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Category> $children
  * @property-read int|null $children_count
  * @property-read bool|null $children_exists
- * @property-read \App\Models\Category|null $grandParent
+ * @property-read bool $is_active
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
  * @property-read \App\Models\Category|null $parent
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Slider> $sliders
- * @property-read int|null $sliders_count
- * @property-read bool|null $sliders_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read bool|null $products_exists
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category active()
+ * @method static \Database\Factories\CategoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category query()
@@ -126,9 +131,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereStoreTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category withGrandParentId()
  */
-	class Category extends \Eloquent {}
+	class Category extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
@@ -143,12 +147,39 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property int $estimated_minutes
+ * @property numeric $fee
+ * @property bool $is_active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\DeliveryOptionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereEstimatedMinutes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption whereUpdatedAt($value)
+ */
+	class DeliveryOption extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property int $user_id
  * @property string $token
  * @property string|null $platform
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\DeviceTokenFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeviceToken newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeviceToken newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeviceToken query()
@@ -170,6 +201,7 @@ namespace App\Models{
  * @property numeric $commission
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\FeeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Fee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Fee newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Fee query()
@@ -196,20 +228,16 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property-read string $room_name
- * @property-read list<array{filenamePrefix:string,imageCount:int,startedAt:int,endedAt:int}>|null $thumbnails
- * @property-read list<array{filename:string,startedAt:int,endedAt:int,duration:int,size:int,location:string}>|null $recordings
- * @property-read list<array{playlistName:string,livePlaylistName:string,duration:int,size:int,playlistLocation:string,livePlaylistLocation:string,segmentCount:int,startedAt:int,endedAt:int}>|null $short_videos
  * @property int $id
  * @property int $vendor_profile_id
  * @property string $title
  * @property string|null $description
  * @property string $room_id
  * @property string|null $egress_id
- * @property string|null $egress_metadata
- * @property \App\Constants\LivestreamStatuses $status
+ * @property array<array-key, mixed>|null $egress_metadata
+ * @property \App\Enums\LivestreamStatus $status
  * @property int $viewer_count
- * @property string|null $scheduled_at
+ * @property \Illuminate\Support\Carbon|null $scheduled_at
  * @property \Illuminate\Support\Carbon|null $started_at
  * @property \Illuminate\Support\Carbon|null $ended_at
  * @property int|null $total_duration
@@ -218,29 +246,23 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamComment> $comments
  * @property-read int|null $comments_count
  * @property-read bool|null $comments_exists
+ * @property-read bool $is_finished
+ * @property-read bool $is_scheduled
+ * @property-read bool $is_started
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamLike> $likes
  * @property-read int|null $likes_count
  * @property-read bool|null $likes_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamProduct> $livestreamProducts
- * @property-read int|null $livestream_products_count
- * @property-read bool|null $livestream_products_exists
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read bool|null $media_exists
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
- * @property-read int|null $notifications_count
- * @property-read bool|null $notifications_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $participants
- * @property-read int|null $participants_count
- * @property-read bool|null $participants_exists
- * @property-read \App\Models\LivestreamProduct|null $pivot
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read bool|null $products_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamSave> $saves
  * @property-read int|null $saves_count
  * @property-read bool|null $saves_exists
- * @property-read \App\Models\User|null $vendor
+ * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Database\Factories\LivestreamFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Livestream newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Livestream newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Livestream query()
@@ -260,7 +282,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Livestream whereVendorProfileId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Livestream whereViewerCount($value)
  */
-	class Livestream extends \Eloquent implements \App\Support\Notification\Contracts\FcmNotifiableByTopic, \Spatie\MediaLibrary\HasMedia {}
+	class Livestream extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
@@ -273,6 +295,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Livestream $livestream
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\LivestreamCommentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamComment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamComment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamComment query()
@@ -295,6 +318,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Livestream $livestream
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\LivestreamLikeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamLike newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamLike newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamLike query()
@@ -332,6 +356,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Livestream $livestream
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\LivestreamSaveFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamSave newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamSave newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\LivestreamSave query()
@@ -371,27 +396,28 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property float|null $platform_fee
- * @property float|null $delivery_fee
  * @property int $id
  * @property int $user_id
  * @property int|null $delivery_option_id
  * @property string $order_number
- * @property int $is_multi_vendor
+ * @property bool $is_multi_vendor
  * @property int $vendor_count
  * @property numeric $product_total
- * @property float $vat
- * @property float $commission
- * @property float $grand_total
- * @property float $balance
- * @property int $is_completed
+ * @property numeric $delivery_fee
+ * @property numeric $platform_fee
+ * @property numeric $vat
+ * @property numeric $commission
+ * @property numeric $grand_total
+ * @property numeric $balance
+ * @property bool $is_completed
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\DeliveryModel|null $deliveryModel
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SellerOrder> $sellerOrders
- * @property-read int|null $seller_orders_count
- * @property-read bool|null $seller_orders_exists
+ * @property-read \App\Models\DeliveryOption|null $deliveryOption
  * @property-read \App\Models\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorOrder> $vendorOrders
+ * @property-read int|null $vendor_orders_count
+ * @property-read bool|null $vendor_orders_exists
+ * @method static \Database\Factories\OrderFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Order query()
@@ -420,9 +446,13 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string|null $icon_path
- * @property int $is_active
+ * @property bool $is_active
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPaymentAccount> $userPaymentAccounts
+ * @property-read int|null $user_payment_accounts_count
+ * @property-read bool|null $user_payment_accounts_exists
+ * @method static \Database\Factories\PaymentMethodFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\PaymentMethod newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\PaymentMethod newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\PaymentMethod query()
@@ -438,8 +468,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property string $image
- * @property list<int> $tags
  * @property int $id
  * @property int $vendor_profile_id
  * @property int|null $category_id
@@ -449,38 +477,37 @@ namespace App\Models{
  * @property string|null $sku
  * @property int $quantity
  * @property int $order_count
- * @property float $selling_price
- * @property float|null $discount_price
+ * @property numeric $selling_price
+ * @property numeric|null $discount_price
  * @property string|null $short_description
  * @property string|null $description
- * @property string $status
- * @property int $is_approved
- * @property string|null $deleted_at
+ * @property \App\Enums\ProductStatus $status
+ * @property bool $is_approved
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category|null $category
- * @property-read \App\Models\ProductImage|null $firstImage
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductImage> $images
- * @property-read int|null $images_count
- * @property-read bool|null $images_exists
- * @property-read \App\Models\ProductImage|null $imagesProduct
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Livestream> $livestreams
- * @property-read int|null $livestreams_count
- * @property-read bool|null $livestreams_exists
+ * @property-read bool $is_active
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductReview> $reviews
  * @property-read int|null $reviews_count
  * @property-read bool|null $reviews_exists
  * @property-read \App\Models\SizeTemplate|null $sizeTemplate
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductSize> $sizes
- * @property-read int|null $sizes_count
- * @property-read bool|null $sizes_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Stock> $stocks
- * @property-read int|null $stocks_count
- * @property-read bool|null $stocks_exists
- * @property-read \App\Models\Category|null $tag
- * @property-read \App\Models\User|null $user
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
+ * @property-read int|null $tags_count
+ * @property-read bool|null $tags_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductVariant> $variants
+ * @property-read int|null $variants_count
+ * @property-read bool|null $variants_exists
+ * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product approved()
+ * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product whereCreatedAt($value)
@@ -500,32 +527,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product whereVendorProfileId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product withTag()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product withTagId()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Product withoutTrashed()
  */
-	class Product extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
- * @property int $product_id
- * @property string $path
- * @property int $sort_order
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Product $product
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage wherePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductImage whereUpdatedAt($value)
- */
-	class ProductImage extends \Eloquent {}
+	class Product extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
@@ -537,8 +542,9 @@ namespace App\Models{
  * @property string|null $review
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Product $product
+ * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\ProductReviewFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductReview newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductReview newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductReview query()
@@ -566,25 +572,52 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property int $product_id
+ * @property string $name
+ * @property numeric $price
+ * @property int $stock
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product|null $product
+ * @method static \Database\Factories\ProductVariantFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant whereStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant whereUpdatedAt($value)
+ */
+	class ProductVariant extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property int|null $category_id
  * @property string $name
  * @property string|null $title
- * @property string $type
+ * @property \App\Enums\SectionType $type
  * @property string|null $description
  * @property string|null $placement_type
  * @property string|null $background_image_path
  * @property string|null $banner_image_path
  * @property int $sort_order
  * @property int $category_sort_order
- * @property int $is_visible
+ * @property bool $is_visible
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read mixed $background_image
- * @property-read mixed $banner_image
  * @property-read \App\Models\Category|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SectionItem> $items
  * @property-read int|null $items_count
  * @property-read bool|null $items_exists
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
+ * @method static \Database\Factories\SectionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section query()
@@ -603,12 +636,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereUpdatedAt($value)
  */
-	class Section extends \Eloquent {}
+	class Section extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
 /**
- * @property-read ?string $image
  * @property int $id
  * @property int $section_id
  * @property int|null $tag_id
@@ -616,11 +648,15 @@ namespace App\Models{
  * @property string|null $title
  * @property string|null $description
  * @property int $sort_order
- * @property int $is_visible
+ * @property bool $is_visible
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
  * @property-read \App\Models\Section $section
- * @property-read \App\Models\Category|null $tag
+ * @property-read \App\Models\Tag|null $tag
+ * @method static \Database\Factories\SectionItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem query()
@@ -635,7 +671,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereUpdatedAt($value)
  */
-	class SectionItem extends \Eloquent {}
+	class SectionItem extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
@@ -691,9 +727,10 @@ namespace App\Models{
  * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
- * @property-read int|null $users_count
- * @property-read bool|null $users_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorProfile> $vendorProfiles
+ * @property-read int|null $vendor_profiles_count
+ * @property-read bool|null $vendor_profiles_exists
+ * @method static \Database\Factories\ShopCategoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShopCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShopCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShopCategory query()
@@ -718,18 +755,22 @@ namespace App\Models{
  * @property-read int|null $likes_count
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortsComment> $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortVideoComment> $comments
  * @property-read int|null $comments_count
  * @property-read bool|null $comments_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortsLike> $likes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortVideoLike> $likes
  * @property-read bool|null $likes_exists
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read bool|null $products_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortsSave> $saves
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortVideoSave> $saves
  * @property-read int|null $saves_count
  * @property-read bool|null $saves_exists
- * @property-read mixed $video
+ * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Database\Factories\ShortVideoFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo query()
@@ -743,7 +784,75 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereVendorProfileId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereVideoPath($value)
  */
-	class ShortVideo extends \Eloquent {}
+	class ShortVideo extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $short_video_id
+ * @property int $user_id
+ * @property string $comment
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ShortVideo $shortVideo
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\ShortVideoCommentFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment whereShortVideoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoComment whereUserId($value)
+ */
+	class ShortVideoComment extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $short_video_id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ShortVideo $shortVideo
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\ShortVideoLikeFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike whereShortVideoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoLike whereUserId($value)
+ */
+	class ShortVideoLike extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $short_video_id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ShortVideo $shortVideo
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\ShortVideoSaveFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave whereShortVideoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideoSave whereUserId($value)
+ */
+	class ShortVideoSave extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -800,6 +909,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SizeTemplateItem> $items
  * @property-read int|null $items_count
  * @property-read bool|null $items_exists
+ * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Database\Factories\SizeTemplateFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SizeTemplate newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SizeTemplate newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SizeTemplate query()
@@ -820,7 +931,8 @@ namespace App\Models{
  * @property string $value
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\SizeTemplate|null $template
+ * @property-read \App\Models\SizeTemplate $sizeTemplate
+ * @method static \Database\Factories\SizeTemplateItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SizeTemplateItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SizeTemplateItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SizeTemplateItem query()
@@ -841,13 +953,16 @@ namespace App\Models{
  * @property int|null $tag_id
  * @property string $image_path
  * @property string|null $url
- * @property int $is_active
+ * @property bool $is_active
  * @property int $sort_order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category|null $category
- * @property-read mixed $photo
- * @property-read \App\Models\Category|null $tag
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
+ * @property-read \App\Models\Tag|null $tag
+ * @method static \Database\Factories\SliderFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider query()
@@ -861,7 +976,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereUrl($value)
  */
-	class Slider extends \Eloquent {}
+	class Slider extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
@@ -876,17 +991,44 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read bool|null $products_exists
+ * @method static \Database\Factories\TagFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Tag whereUpdatedAt($value)
+ */
+	class Tag extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property int $user_id
  * @property int|null $payment_method_id
  * @property string $reference
  * @property numeric $amount
- * @property string $type
- * @property string $status
+ * @property \App\Enums\TransactionType $type
+ * @property \App\Enums\TransactionStatus $status
  * @property string|null $note
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read bool $is_approved
+ * @property-read bool $is_pending
+ * @property-read bool $is_withdrawal
  * @property-read \App\Models\PaymentMethod|null $paymentMethod
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\TransactionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Transaction newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Transaction newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Transaction query()
@@ -917,41 +1059,32 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \App\Enums\SellerStatus $status
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Address> $addresses
  * @property-read int|null $addresses_count
  * @property-read bool|null $addresses_exists
- * @property-read mixed $banner_image
- * @property-read mixed $cover_image
  * @property-read \App\Models\Address|null $defaultAddress
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\DeviceToken> $deviceTokens
  * @property-read int|null $device_tokens_count
  * @property-read bool|null $device_tokens_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamLike> $likedLivestreams
- * @property-read int|null $liked_livestreams_count
- * @property-read bool|null $liked_livestreams_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Livestream> $livestreams
- * @property-read int|null $livestreams_count
- * @property-read bool|null $livestreams_exists
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read bool|null $media_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorProfile> $following
+ * @property-read int|null $following_count
+ * @property-read bool|null $following_exists
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read bool|null $notifications_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPayment> $payments
- * @property-read int|null $payments_count
- * @property-read bool|null $payments_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorReview> $reviews
- * @property-read int|null $reviews_count
- * @property-read bool|null $reviews_exists
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamSave> $savedLivestreams
- * @property-read int|null $saved_livestreams_count
- * @property-read bool|null $saved_livestreams_exists
- * @property-read \App\Models\ShopCategory|null $shopCategory
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read int|null $orders_count
+ * @property-read bool|null $orders_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPaymentAccount> $paymentAccounts
+ * @property-read int|null $payment_accounts_count
+ * @property-read bool|null $payment_accounts_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read bool|null $tokens_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Transaction> $transactions
+ * @property-read int|null $transactions_count
+ * @property-read bool|null $transactions_exists
+ * @property-read \App\Models\VendorProfile|null $vendorProfile
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User newQuery()
@@ -968,7 +1101,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereUpdatedAt($value)
  */
-	class User extends \Eloquent implements \App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice, \App\Support\Notification\Contracts\FcmNotifiableByDevice {}
+	class User extends \Eloquent implements \App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice, \App\Support\Notification\Contracts\FcmNotifiableByDevice, \Filament\Models\Contracts\FilamentUser {}
 }
 
 namespace App\Models{
@@ -985,6 +1118,201 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property int $user_id
+ * @property int $payment_method_id
+ * @property string $account_number
+ * @property bool $is_primary
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\PaymentMethod $paymentMethod
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\UserPaymentAccountFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount whereAccountNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount whereIsPrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount wherePaymentMethodId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPaymentAccount whereUserId($value)
+ */
+	class UserPaymentAccount extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $vendor_profile_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Database\Factories\VendorFollowerFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorFollower whereVendorProfileId($value)
+ */
+	class VendorFollower extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $order_id
+ * @property int $vendor_profile_id
+ * @property int $customer_id
+ * @property string $order_number
+ * @property \App\Enums\VendorOrderStatus $status
+ * @property string|null $status_note
+ * @property numeric $product_total
+ * @property numeric $commission
+ * @property numeric $vat
+ * @property numeric $delivery_fee
+ * @property numeric $balance
+ * @property bool $is_rider_assigned
+ * @property bool $is_delayed
+ * @property \Illuminate\Support\Carbon|null $packaging_started_at
+ * @property \Illuminate\Support\Carbon|null $expected_delivery_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $customer
+ * @property-read bool $is_pending
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorOrderItem> $items
+ * @property-read int|null $items_count
+ * @property-read bool|null $items_exists
+ * @property-read \App\Models\Order $order
+ * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Database\Factories\VendorOrderFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereCommission($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereCustomerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereDeliveryFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereExpectedDeliveryAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereIsDelayed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereIsRiderAssigned($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereOrderNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder wherePackagingStartedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereProductTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereStatusNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereVat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder whereVendorProfileId($value)
+ */
+	class VendorOrder extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $vendor_order_id
+ * @property int $product_id
+ * @property int|null $product_variant_id
+ * @property int $quantity
+ * @property numeric $unit_price
+ * @property numeric $total_price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\ProductVariant|null $variant
+ * @property-read \App\Models\VendorOrder $vendorOrder
+ * @method static \Database\Factories\VendorOrderItemFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereProductVariantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereTotalPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereUnitPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrderItem whereVendorOrderId($value)
+ */
+	class VendorOrderItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int|null $shop_category_id
+ * @property string $shop_name
+ * @property string|null $description
+ * @property string|null $banner_image_path
+ * @property string|null $cover_image_path
+ * @property string|null $pickup_location
+ * @property numeric $balance
+ * @property numeric $total_sales
+ * @property numeric $withdrawn_amount
+ * @property int $order_count
+ * @property \App\Enums\VendorStatus $status
+ * @property string|null $status_note
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorFollower> $followers
+ * @property-read int|null $followers_count
+ * @property-read bool|null $followers_exists
+ * @property-read bool $is_approved
+ * @property-read bool $is_pending
+ * @property-read bool $is_rejected
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read bool|null $products_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorReview> $reviews
+ * @property-read int|null $reviews_count
+ * @property-read bool|null $reviews_exists
+ * @property-read \App\Models\ShopCategory|null $shopCategory
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortVideo> $shortVideos
+ * @property-read int|null $short_videos_count
+ * @property-read bool|null $short_videos_exists
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile approved()
+ * @method static \Database\Factories\VendorProfileFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereBannerImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereCoverImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereOrderCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile wherePickupLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereShopCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereShopName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereStatusNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereTotalSales($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereWithdrawnAmount($value)
+ */
+	class VendorProfile extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property int $vendor_profile_id
  * @property int $user_id
  * @property int $rating
@@ -992,7 +1320,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
- * @property-read \App\Models\User|null $vendor
+ * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Database\Factories\VendorReviewFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorReview newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorReview newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorReview query()
