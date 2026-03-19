@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum VendorOrderStatus: string
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+
+enum VendorOrderStatus: string implements HasColor, HasIcon, HasLabel
 {
     case Pending = 'pending';
     case Packaging = 'packaging';
@@ -12,6 +16,42 @@ enum VendorOrderStatus: string
     case Delivered = 'delivered';
     case Delayed = 'delayed';
     case Rejected = 'rejected';
+
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::Pending => 'Pending',
+            self::Packaging => 'Packaging',
+            self::OnTheWay => 'On the Way',
+            self::Delivered => 'Delivered',
+            self::Delayed => 'Delayed',
+            self::Rejected => 'Rejected',
+        };
+    }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::Pending => 'warning',
+            self::Packaging => 'info',
+            self::OnTheWay => 'primary',
+            self::Delivered => 'success',
+            self::Delayed => 'warning',
+            self::Rejected => 'danger',
+        };
+    }
+
+    public function getIcon(): string
+    {
+        return match ($this) {
+            self::Pending => 'heroicon-o-clock',
+            self::Packaging => 'heroicon-o-archive-box',
+            self::OnTheWay => 'heroicon-o-truck',
+            self::Delivered => 'heroicon-o-check-circle',
+            self::Delayed => 'heroicon-o-exclamation-triangle',
+            self::Rejected => 'heroicon-o-x-circle',
+        };
+    }
 
     public function isPending(): bool
     {
