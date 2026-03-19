@@ -136,15 +136,14 @@ class LivestreamController extends Controller
     }
 
     #[Authenticated]
-    #[Endpoint('List liked livestreams', 'Legacy compatibility alias for `/api/lives/liked`. Prefer the canonical `/api/livestreams` collection plus client-side liked-state handling in new consumers until a dedicated modern me-scoped collection exists.')]
+    #[Endpoint('List liked livestreams', 'Legacy compatibility alias for `/api/lives/liked`. Prefer `/api/me/livestreams/liked` in new consumers.')]
     #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}]}', 200)]
     /**
      * Legacy alias for the historical `/api/lives/liked` route.
      *
      * Preferred modern path:
-     * - use `/api/livestreams` as the canonical content collection
-     * - keep liked-state derived from the current interaction model until a modern me-scoped
-     *   liked-livestream collection is introduced
+     * - use `/api/me/livestreams/liked` for the authenticated liked collection
+     * - keep `/api/livestreams` as the canonical public content collection
      *
      * Retained only for backward compatibility with the mobile client.
      */
@@ -160,14 +159,14 @@ class LivestreamController extends Controller
     }
 
     #[Authenticated]
-    #[Endpoint('List saved livestreams', 'Legacy compatibility alias for `/api/lives/saved`. Prefer the canonical `/api/livestreams` collection plus saved-state handling in new clients until a dedicated modern me-scoped collection exists.')]
+    #[Endpoint('List saved livestreams', 'Legacy compatibility alias for `/api/lives/saved`. Prefer `/api/me/livestreams/saved` in new clients.')]
     #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}]}', 200)]
     /**
      * Legacy alias for the historical `/api/lives/saved` route.
      *
      * Preferred modern path:
-     * - use `/api/livestreams` as the canonical content collection
-     * - migrate saved-content views to a future me-scoped endpoint instead of growing the `/api/lives/*` alias family
+     * - use `/api/me/livestreams/saved` for the authenticated saved collection
+     * - keep `/api/livestreams` as the canonical public content collection
      */
     public function saved(#[CurrentUser] User $user): JsonResponse|Responsable
     {

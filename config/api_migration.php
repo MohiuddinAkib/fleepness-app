@@ -46,15 +46,15 @@ return [
         ],
         'shorts.saved' => [
             'path' => '/api/shorts/saved',
-            'replacements' => ['/api/short-videos'],
+            'replacements' => ['/api/me/short-videos/saved'],
         ],
         'lives.liked' => [
             'path' => '/api/lives/liked',
-            'replacements' => ['/api/livestreams'],
+            'replacements' => ['/api/me/livestreams/liked'],
         ],
         'lives.saved' => [
             'path' => '/api/lives/saved',
-            'replacements' => ['/api/livestreams'],
+            'replacements' => ['/api/me/livestreams/saved'],
         ],
         'lives.likes-count' => [
             'path' => '/api/lives/{livestream}/likes-count',

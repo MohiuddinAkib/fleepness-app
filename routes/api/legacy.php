@@ -15,7 +15,7 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     // Preferred modern replacements:
     // - `/api/me/role` -> `/api/me` and `/api/me/vendor`
     // - `/api/seller/status` -> `/api/vendor-application/status` or `/api/me/vendor`
-    // - `/api/notifications*` -> move to future `/api/me/notifications*` endpoints
+    // - `/api/notifications*` -> `/api/me/notifications*`
     // - `/api/addresses/default` -> `/api/me/addresses` and `is_default`
     // - `/api/followers` and `/api/following` -> keep follow state around vendor resources and future me-scoped endpoints
     // - `/api/user/balance-stats` -> `/api/me/balance`
@@ -35,13 +35,13 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::get('user/balance-stats', [CompatibilityController::class, 'balanceStats'])->middleware('legacy-endpoint:user.balance-stats');
 
     // Legacy alias retained for the current mobile client.
-    // Preferred modern direction: use `/api/short-videos` as the canonical collection and migrate any
-    // saved-content view to a future me-scoped endpoint instead of extending the historical `/api/shorts/*` routes.
+    // Preferred modern direction: use `/api/me/short-videos/saved` for the authenticated saved collection
+    // and `/api/short-videos` for the canonical public browsing collection.
     Route::get('shorts/saved', [ShortVideoController::class, 'saved'])->middleware('legacy-endpoint:shorts.saved');
 
     // Legacy `/api/lives/*` aliases retained for the current mobile client.
-    // Preferred modern direction: use `/api/livestreams` as the canonical collection/resource and lean on
-    // realtime updates for counters instead of polling these historical endpoints.
+    // Preferred modern direction: use `/api/me/livestreams/{liked,saved}` for authenticated collections,
+    // `/api/livestreams` for the canonical public collection, and realtime updates for counters.
     Route::prefix('lives')->group(function (): void {
         Route::get('liked', [LivestreamController::class, 'liked'])->middleware('legacy-endpoint:lives.liked');
         Route::get('saved', [LivestreamController::class, 'saved'])->middleware('legacy-endpoint:lives.saved');

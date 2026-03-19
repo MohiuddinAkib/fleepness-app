@@ -146,6 +146,27 @@ it('returns saved shorts on the legacy endpoint', function (): void {
         ->assertJsonPath('data.0.id', $savedVideo->getKey());
 });
 
+it('returns saved shorts on the canonical me endpoint', function (): void {
+    $user = User::factory()->create();
+    $token = $user->createToken('test')->plainTextToken;
+    $savedVideo = ShortVideo::factory()->create();
+    $otherVideo = ShortVideo::factory()->create();
+
+    ShortVideoSave::factory()->create([
+        'user_id' => $user->getKey(),
+        'short_video_id' => $savedVideo->getKey(),
+    ]);
+    ShortVideoSave::factory()->create([
+        'user_id' => User::factory()->create()->getKey(),
+        'short_video_id' => $otherVideo->getKey(),
+    ]);
+
+    $this->withToken($token)->getJson('/api/me/short-videos/saved')
+        ->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $savedVideo->getKey());
+});
+
 // Vendor CRUD
 it('requires auth to create a short video', function (): void {
     $this->postJson('/api/me/short-videos', ['title' => 'My Video'])

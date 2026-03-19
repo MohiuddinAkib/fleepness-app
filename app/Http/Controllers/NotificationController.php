@@ -15,7 +15,9 @@ use Illuminate\Notifications\DatabaseNotification;
  * Legacy notification controller kept for response-shape compatibility.
  *
  * Preferred modern direction:
- * - keep notification reads grouped under authenticated "me" style endpoints when the client is migrated
+ * - use `/api/me/notifications`
+ * - use `/api/me/notifications/read`
+ * - use `/api/me/notifications/{notification}/read`
  * - use the structured broadcast/database notification payloads already emitted by the notification classes
  *
  * The React Native client still expects `/api/notifications` and the mark-as-read aliases below, so these
@@ -27,8 +29,8 @@ class NotificationController extends Controller
     /**
      * Legacy notifications listing endpoint used by the mobile client.
      *
-     * Prefer a future `/api/me/notifications` style endpoint for new consumers so authenticated resources
-     * stay grouped consistently with the rest of the API.
+     * Prefer `/api/me/notifications` for new consumers so authenticated resources stay grouped
+     * consistently with the rest of the API.
      */
     public function index(Request $request, #[CurrentUser] User $user)
     {
@@ -52,8 +54,8 @@ class NotificationController extends Controller
     /**
      * Legacy alias for marking a single notification as read.
      *
-     * Retained for `/api/notifications/{notification}/mark-as-read`. New consumers should prefer any
-     * future me-scoped notification routes once the mobile client has migrated.
+     * Retained for `/api/notifications/{notification}/mark-as-read`. New consumers should prefer
+     * `/api/me/notifications/{notification}/read`.
      */
     public function markAsRead(DatabaseNotification $notification, #[CurrentUser] User $user)
     {
@@ -66,6 +68,8 @@ class NotificationController extends Controller
 
     /**
      * Legacy bulk mark-as-read alias kept for the current mobile client contract.
+     *
+     * New consumers should prefer `/api/me/notifications/read`.
      */
     public function markAllAsRead(#[CurrentUser] User $user)
     {
