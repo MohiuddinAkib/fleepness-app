@@ -6,9 +6,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Models\User;
 use App\Data\ProductData;
-use App\Enums\VendorStatus;
 use App\Data\ShortVideoData;
-use App\Enums\ProductStatus;
 use App\Models\VendorReview;
 use App\Models\VendorProfile;
 use App\Data\VendorReviewData;
@@ -25,7 +23,7 @@ class VendorController extends Controller
     public function index(): JsonResponse
     {
         $vendors = VendorProfile::query()
-            ->where('status', VendorStatus::Approved)
+            ->approved()
             ->paginate();
 
         return Response::json(VendorProfileData::collect($vendors));
@@ -108,8 +106,8 @@ class VendorController extends Controller
         abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $products = $vendorProfile->products()
-            ->where('status', ProductStatus::Active)
-            ->where('is_approved', true)
+            ->active()
+            ->approved()
             ->with(['media', 'category'])
             ->paginate();
 

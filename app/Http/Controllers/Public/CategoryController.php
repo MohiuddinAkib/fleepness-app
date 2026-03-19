@@ -7,8 +7,6 @@ namespace App\Http\Controllers\Public;
 use App\Models\Category;
 use App\Data\ProductData;
 use App\Data\CategoryData;
-use App\Enums\ProductStatus;
-use App\Enums\CategoryStatus;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -18,7 +16,7 @@ class CategoryController extends Controller
     public function index(): JsonResponse
     {
         $categories = Category::query()
-            ->where('status', CategoryStatus::Active)
+            ->active()
             ->whereNull('parent_id')
             ->with('children')
             ->orderBy('sort_order')
@@ -39,8 +37,8 @@ class CategoryController extends Controller
     public function products(Category $category): JsonResponse
     {
         $products = $category->products()
-            ->where('status', ProductStatus::Active)
-            ->where('is_approved', true)
+            ->active()
+            ->approved()
             ->with(['media', 'vendorProfile'])
             ->paginate();
 

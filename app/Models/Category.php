@@ -8,8 +8,10 @@ use App\Enums\CategoryStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,6 +49,12 @@ class Category extends Model implements HasMedia
     public function isActive(): Attribute
     {
         return Attribute::get(fn (): bool => $this->status->isActive());
+    }
+
+    #[Scope]
+    public function active(Builder $query): void
+    {
+        $query->where('status', CategoryStatus::Active);
     }
 
     /** @return BelongsTo<Category, $this> */

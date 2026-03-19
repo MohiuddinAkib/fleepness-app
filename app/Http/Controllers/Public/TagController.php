@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Public;
 use App\Models\Tag;
 use App\Data\TagData;
 use App\Data\ProductData;
-use App\Enums\ProductStatus;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -26,8 +25,8 @@ class TagController extends Controller
     public function products(Tag $tag): JsonResponse
     {
         $products = $tag->products()
-            ->where('status', ProductStatus::Active)
-            ->where('is_approved', true)
+            ->active()
+            ->approved()
             ->with(['media', 'vendorProfile', 'category'])
             ->paginate();
 

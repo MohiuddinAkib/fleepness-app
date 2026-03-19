@@ -7,9 +7,11 @@ namespace App\Models;
 use App\Enums\VendorStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Database\Factories\VendorProfileFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,6 +56,12 @@ class VendorProfile extends Model implements HasMedia
     public function isApproved(): Attribute
     {
         return Attribute::get(fn (): bool => $this->status->isApproved());
+    }
+
+    #[Scope]
+    public function approved(Builder $query): void
+    {
+        $query->where('status', VendorStatus::Approved);
     }
 
     public function isPending(): Attribute

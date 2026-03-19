@@ -6,8 +6,6 @@ namespace App\Http\Controllers\Public;
 
 use App\Models\Product;
 use App\Data\ProductData;
-use App\Enums\VendorStatus;
-use App\Enums\ProductStatus;
 use Illuminate\Http\Request;
 use App\Models\VendorProfile;
 use App\Data\VendorProfileData;
@@ -28,15 +26,15 @@ class SearchController extends Controller
         }
 
         $products = Product::query()
-            ->where('status', ProductStatus::Active)
-            ->where('is_approved', true)
+            ->active()
+            ->approved()
             ->where('name', 'like', "%{$query}%")
             ->with(['media', 'category', 'vendorProfile'])
             ->limit(15)
             ->get();
 
         $vendors = VendorProfile::query()
-            ->where('status', VendorStatus::Approved)
+            ->approved()
             ->where('shop_name', 'like', "%{$query}%")
             ->limit(15)
             ->get();

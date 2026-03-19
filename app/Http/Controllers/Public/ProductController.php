@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Public;
 use App\Models\User;
 use App\Models\Product;
 use App\Data\ProductData;
-use App\Enums\ProductStatus;
 use Illuminate\Http\Request;
 use App\Models\ProductReview;
 use App\Attributes\CurrentUser;
@@ -22,8 +21,8 @@ class ProductController extends Controller
     public function index(Request $request): JsonResponse
     {
         $query = Product::query()
-            ->where('status', ProductStatus::Active)
-            ->where('is_approved', true)
+            ->active()
+            ->approved()
             ->with(['media', 'category', 'vendorProfile']);
 
         if ($request->filled('category_id')) {
@@ -102,8 +101,8 @@ class ProductController extends Controller
     public function similar(Product $product): JsonResponse
     {
         $similar = Product::query()
-            ->where('status', ProductStatus::Active)
-            ->where('is_approved', true)
+            ->active()
+            ->approved()
             ->where('category_id', $product->category_id)
             ->except($product)
             ->with(['media', 'category', 'vendorProfile'])

@@ -9,9 +9,11 @@ use App\Enums\ProductStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -68,6 +70,18 @@ class Product extends Model implements HasMedia
     public function isActive(): Attribute
     {
         return Attribute::get(fn (): bool => $this->status->isActive());
+    }
+
+    #[Scope]
+    public function active(Builder $query): void
+    {
+        $query->where('status', ProductStatus::Active);
+    }
+
+    #[Scope]
+    public function approved(Builder $query): void
+    {
+        $query->where('is_approved', true);
     }
 
     /** @return BelongsTo<VendorProfile, $this> */
