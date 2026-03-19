@@ -13,7 +13,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-use App\Notifications\VendorOrderStatusChanged;
+use App\Actions\Admin\MarkVendorOrderDeliveredAction;
 
 class VendorOrdersTable
 {
@@ -32,14 +32,8 @@ class VendorOrdersTable
                     ->searchable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (VendorOrderStatus $state): string => match ($state) {
-                        VendorOrderStatus::Pending => 'warning',
-                        VendorOrderStatus::Packaging => 'info',
-                        VendorOrderStatus::OnTheWay => 'primary',
-                        VendorOrderStatus::Delivered => 'success',
-                        VendorOrderStatus::Rejected => 'danger',
-                        VendorOrderStatus::Delayed => 'gray',
-                    })
+                    ->icon(fn (VendorOrderStatus $state): string => $state->getIcon())
+                    ->color(fn (VendorOrderStatus $state): string => $state->getColor())
                     ->sortable(),
                 TextColumn::make('product_total')
                     ->money('BDT')
@@ -62,10 +56,7 @@ class VendorOrdersTable
                     ->color('success')
                     ->requiresConfirmation()
                     ->visible(fn (VendorOrder $record): bool => VendorOrderStatus::OnTheWay === $record->status)
-                    ->action(function (VendorOrder $record): void {
-                        $record->update(['status' => VendorOrderStatus::Delivered]);
-                        $record->customer->notify(new VendorOrderStatusChanged($record));
-                    }),
+                    ->action(fn (VendorOrder $record, MarkVendorOrderDeliveredAction $action) => $action->execute($record)),
                 EditAction::make(),
             ])
             ->toolbarActions([

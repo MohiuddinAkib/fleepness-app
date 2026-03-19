@@ -14,7 +14,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-use App\Notifications\VendorStatusUpdated;
+use App\Actions\Admin\UpdateVendorApplicationStatusAction;
 
 class VendorProfilesTable
 {
@@ -33,11 +33,8 @@ class VendorProfilesTable
                     ->default('—'),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (VendorStatus $state): array|string => match ($state) {
-                        VendorStatus::Approved => 'success',
-                        VendorStatus::Rejected => 'danger',
-                        VendorStatus::Pending => 'warning',
-                    })
+                    ->icon(fn (VendorStatus $state): string => $state->getIcon())
+                    ->color(fn (VendorStatus $state): string => $state->getColor())
                     ->sortable(),
                 TextColumn::make('balance')
                     ->money('BDT')
@@ -61,22 +58,14 @@ class VendorProfilesTable
                     ->color(Color::Green)
                     ->requiresConfirmation()
                     ->visible(fn (VendorProfile $record): bool => VendorStatus::Pending === $record->status)
-                    ->action(function (VendorProfile $record): void {
-                        $record->update(['status' => VendorStatus::Approved]);
-                        $record->load('user');
-                        $record->user->notify(VendorStatusUpdated::approved());
-                    }),
+                    ->action(fn (VendorProfile $record, UpdateVendorApplicationStatusAction $action) => $action->execute($record, VendorStatus::Approved)),
                 Action::make('reject')
                     ->label('Reject')
                     ->icon('heroicon-o-x-circle')
                     ->color(Color::Red)
                     ->requiresConfirmation()
                     ->visible(fn (VendorProfile $record): bool => VendorStatus::Pending === $record->status)
-                    ->action(function (VendorProfile $record): void {
-                        $record->update(['status' => VendorStatus::Rejected]);
-                        $record->load('user');
-                        $record->user->notify(VendorStatusUpdated::rejected());
-                    }),
+                    ->action(fn (VendorProfile $record, UpdateVendorApplicationStatusAction $action) => $action->execute($record, VendorStatus::Rejected)),
                 EditAction::make(),
             ])
             ->toolbarActions([

@@ -165,8 +165,17 @@ class ShortVideoController extends Controller
     }
 
     #[Authenticated]
-    #[Endpoint('List saved short videos')]
+    #[Endpoint('List saved short videos', 'Legacy compatibility alias for `/api/shorts/saved`. Prefer the canonical `/api/short-videos` collection plus saved-state handling in new clients until a dedicated modern me-scoped collection exists.')]
     #[Response('{"data":[{"id":1,"title":"New Collection Drop"}]}', 200)]
+    /**
+     * Legacy alias for the historical `/api/shorts/saved` route.
+     *
+     * Preferred modern path:
+     * - use `/api/short-videos` as the canonical collection
+     * - migrate saved-content views to a future me-scoped short-video endpoint instead of extending the `/api/shorts/*` alias surface
+     *
+     * Kept only so the current React Native client continues to function during migration.
+     */
     public function saved(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $videos = ShortVideo::query()

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\OrderItem;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Date;
 
 class AdminProductController extends Controller
 {
@@ -68,7 +68,7 @@ class AdminProductController extends Controller
             return redirect()->route('admin.products.index')->with('success', 'You can not delete this Product . Because Under this product First delete Order.');
         }
 
-        $product->deleted_at = Carbon::now();
+        $product->deleted_at = Date::now();
         $product->admin_approval = 'suspended';
         $product->save();
 

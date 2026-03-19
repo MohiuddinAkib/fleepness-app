@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Vendor;
 
-use Carbon\Carbon;
 use App\Models\Stock;
 use App\Models\MainOrder;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Date;
 
 class VendorOrderController extends Controller
 {
@@ -37,7 +37,7 @@ class VendorOrderController extends Controller
     {
         MainOrder::findOrFail($order_id)->update([
             'status' => 'cancel',
-            'cancel_date' => Carbon::now()->format('d F Y'),
+            'cancel_date' => Date::now()->format('d F Y'),
         ]);
         $order = MainOrder::where('id', $order_id)->first();
         $orderItem = OrderItem::where('main_order_id', $order_id)->get();
@@ -58,7 +58,7 @@ class VendorOrderController extends Controller
 
     public function PendingToConfirm($order_id)
     {
-        MainOrder::findOrFail($order_id)->update(['status' => 'confirm', 'confirmed_date' => Carbon::now()->format('d F Y')]);
+        MainOrder::findOrFail($order_id)->update(['status' => 'confirm', 'confirmed_date' => Date::now()->format('d F Y')]);
 
         $notification = [
             'message' => 'Order Confirm Successfully',
@@ -136,7 +136,7 @@ class VendorOrderController extends Controller
 
     public function ConfirmToProcess($order_id)
     {
-        MainOrder::findOrFail($order_id)->update(['status' => 'processing', 'processing_date' => Carbon::now()->format('d F Y')]);
+        MainOrder::findOrFail($order_id)->update(['status' => 'processing', 'processing_date' => Date::now()->format('d F Y')]);
 
         $notification = [
             'message' => 'Order Processing Successfully',
@@ -149,7 +149,7 @@ class VendorOrderController extends Controller
     public function ProcessToDelivered($order_id)
     {
 
-        MainOrder::findOrFail($order_id)->update(['status' => 'deliverd', 'delivered_date' => Carbon::now()]);
+        MainOrder::findOrFail($order_id)->update(['status' => 'deliverd', 'delivered_date' => Date::now()]);
 
         $notification = [
             'message' => 'Order Deliverd Successfully',

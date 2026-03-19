@@ -37,6 +37,13 @@ Route::middleware(['auth:sanctum'])
     });
 
 Route::middleware(['auth:sanctum'])->group(function (): void {
+    // Legacy aliases kept for the current React Native client.
+    // Preferred modern replacements:
+    // - `/api/me/role` -> `/api/me` and `/api/me/vendor`
+    // - `/api/seller/status` -> `/api/vendor-application/status` or `/api/me/vendor`
+    // - `/api/notifications*` -> move to future `/api/me/notifications*` endpoints
+    // - `/api/addresses/default` -> `/api/me/addresses` and `is_default`
+    // - `/api/followers` and `/api/following` -> keep follow state around vendor resources and future me-scoped endpoints
     Route::get('me/role', [CompatibilityController::class, 'role']);
     Route::get('seller/status', [CompatibilityController::class, 'sellerStatus']);
     Route::get('notifications', [NotificationController::class, 'index']);

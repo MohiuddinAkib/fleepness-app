@@ -31,8 +31,17 @@ class FollowController extends Controller
     }
 
     #[Authenticated]
-    #[Endpoint('List vendor followers', 'Returns a list of users following the authenticated vendor.')]
+    #[Endpoint('List vendor followers', 'Legacy compatibility alias for `/api/followers`. Prefer vendor-centric profile endpoints or dedicated me-scoped follower endpoints in new clients.')]
     #[Response('{"data":[{"id":1,"name":"Jane Doe"}]}', 200)]
+    /**
+     * Legacy alias for `/api/followers`.
+     *
+     * Preferred modern direction:
+     * - keep follow state grouped around `/api/vendors/{vendorProfile}/follow`
+     * - expose any future follower-management screens under a me-scoped vendor namespace
+     *
+     * The current mobile client still consumes this historical top-level route, so it stays available.
+     */
     public function followers(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;

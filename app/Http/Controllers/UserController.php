@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\User;
 use App\Enums\SellerStatus;
 use App\Models\SellerOrder;
@@ -13,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Services\SMSService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use App\Notifications\SmsNotification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -70,9 +70,9 @@ class UserController extends Controller
             ->where('status', 'delivered')
             ->get();
 
-        $today = Carbon::today();
-        $startOfWeek = Carbon::now()->startOfWeek();
-        $startOfMonth = Carbon::now()->startOfMonth();
+        $today = Date::today();
+        $startOfWeek = Date::now()->startOfWeek();
+        $startOfMonth = Date::now()->startOfMonth();
 
         $dailyBalance = $sellerOrders->where('created_at', '>=', $today)->sum('balance');
         $weeklyBalance = $sellerOrders->where('created_at', '>=', $startOfWeek)->sum('balance');

@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use Throwable;
 use Stringable;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Uri;
 use League\Uri\UriTemplate;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Sentry\Laravel\Integration;
 use League\Uri\Uri as LeagueUri;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Foundation\Application;
 use Illuminate\Log\Context\Repository;
 use Illuminate\Database\Eloquent\Model;
@@ -73,6 +75,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Date::use(CarbonImmutable::class);
+
         Model::unguard();
         Model::shouldBeStrict();
         Model::automaticallyEagerLoadRelationships();

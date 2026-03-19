@@ -118,8 +118,17 @@ class AddressController extends Controller
     }
 
     #[Authenticated]
-    #[Endpoint('Get default address')]
+    #[Endpoint('Get default address', 'Legacy compatibility alias for `/api/addresses/default`. Prefer `/api/me/addresses` plus the `is_default` flag, or `/api/me/addresses/{address}/default` for updates in new clients.')]
     #[Response('{"default_address":{"id":1,"label":"Home","is_default":true}}', 200)]
+    /**
+     * Legacy alias for the historical `/api/addresses/default` contract.
+     *
+     * Preferred modern path:
+     * - read `/api/me/addresses` and pick the item with `is_default = true`
+     * - update via `/api/me/addresses/{address}/default`
+     *
+     * This method remains only to keep the older React Native client working during migration.
+     */
     public function default(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $address = $user->defaultAddress()->first();

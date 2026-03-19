@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Data\Dto;
 
-use Carbon\Carbon;
 use App\Models\User;
+use DateTimeInterface;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\UploadedFile;
@@ -21,7 +21,7 @@ class UpdateLivestremData extends Data
     public function __construct(
         public Optional|string $title,
         #[AfterOrEqual('today')]
-        public null|Carbon|Optional $scheduledTime,
+        public null|DateTimeInterface|Optional $scheduledTime,
         public Optional|UploadedFile $thumbnailPicture, // Now using UploadedFile for media handling
         #[Enum(LivestreamStatuses::class)]
         public LivestreamStatuses|Optional $status,

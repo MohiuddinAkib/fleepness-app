@@ -17,6 +17,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
+use App\Actions\Admin\ApproveProductAction;
 use Filament\Actions\ForceDeleteBulkAction;
 
 class ProductsTable
@@ -73,14 +74,14 @@ class ProductsTable
                     ->color(Color::Green)
                     ->requiresConfirmation()
                     ->visible(fn (Product $record): bool => ! $record->is_approved)
-                    ->action(fn (Product $record) => $record->update(['is_approved' => true])),
+                    ->action(fn (Product $record, ApproveProductAction $action) => $action->execute($record, true)),
                 Action::make('revoke')
                     ->label('Revoke')
                     ->icon('heroicon-o-x-circle')
                     ->color(Color::Red)
                     ->requiresConfirmation()
                     ->visible(fn (Product $record): bool => (bool) $record->is_approved)
-                    ->action(fn (Product $record) => $record->update(['is_approved' => false])),
+                    ->action(fn (Product $record, ApproveProductAction $action) => $action->execute($record, false)),
                 EditAction::make(),
             ])
             ->toolbarActions([

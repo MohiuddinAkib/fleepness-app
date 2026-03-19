@@ -131,6 +131,9 @@ Route::prefix('short-videos')->group(function (): void {
     });
 });
 
+// Legacy alias retained for the current mobile client.
+// Preferred modern direction: use `/api/short-videos` as the canonical collection and migrate any
+// saved-content view to a future me-scoped endpoint instead of extending the historical `/api/shorts/*` routes.
 Route::middleware(['auth:sanctum'])->get('shorts/saved', [
     ShortVideoController::class,
     'saved',
@@ -165,6 +168,9 @@ Route::prefix('livestreams')->group(function (): void {
     ]);
 });
 
+// Legacy `/api/lives/*` aliases retained for the current mobile client.
+// Preferred modern direction: use `/api/livestreams` as the canonical collection/resource and lean on
+// realtime updates for counters instead of polling these historical endpoints.
 Route::middleware(['auth:sanctum'])
     ->prefix('lives')
     ->group(function (): void {
