@@ -21,6 +21,7 @@ use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Notifications\OrderReceivedByVendor;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -65,7 +66,7 @@ class OrderController extends Controller
         $selectedItems = CartItem::query()
             ->where('user_id', $user->getKey())
             ->where('is_selected', true)
-            ->with(['product.vendorProfile'])
+            ->with(['product.vendorProfile.user'])
             ->get();
 
         abort_if($selectedItems->isEmpty(), HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Cart is empty.');
@@ -74,10 +75,7 @@ class OrderController extends Controller
 
         $deliveryOption = DeliveryOption::query()->findOrFail($data->deliveryOptionId);
 
-        // Calculate totals
-        $productTotal = $selectedItems->sum(
-            fn (CartItem $item) => (float) $item->product->selling_price * $item->quantity
-        );
+        $productTotal = $selectedItems->sum(fn (CartItem $item): float => $this->resolveUnitPrice($item) * $item->quantity);
         $deliveryFee = (float) $deliveryOption->fee;
         $vatRate = $fee ? (float) $fee->vat / 100 : 0;
         $commissionRate = $fee ? (float) $fee->commission / 100 : 0;
@@ -110,9 +108,7 @@ class OrderController extends Controller
             ]);
 
             foreach ($byVendor as $vendorProfileId => $items) {
-                $vendorProductTotal = $items->sum(
-                    fn (CartItem $item) => (float) $item->product->selling_price * $item->quantity
-                );
+                $vendorProductTotal = $items->sum(fn (CartItem $item): float => $this->resolveUnitPrice($item) * $item->quantity);
                 $vendorCommission = round($vendorProductTotal * (isset($commissionAmount) ? $commissionAmount / max($productTotal, 1) : 0), 2);
 
                 /** @var VendorOrder $vendorOrder */
@@ -130,7 +126,7 @@ class OrderController extends Controller
                 ]);
 
                 foreach ($items as $item) {
-                    $unitPrice = (float) $item->product->selling_price;
+                    $unitPrice = $this->resolveUnitPrice($item);
                     $vendorOrder->items()->create([
                         'product_id' => $item->product->getKey(),
                         'product_variant_id' => $item->product_variant_id,
@@ -142,6 +138,10 @@ class OrderController extends Controller
                     // Decrement stock
                     $item->product->decrement('quantity', $item->quantity);
                 }
+
+                $items->first()?->product?->vendorProfile?->user?->notify(
+                    new OrderReceivedByVendor($vendorOrder->loadMissing('items.product', 'vendorProfile.user'))
+                );
             }
 
             // Remove selected cart items
@@ -156,5 +156,10 @@ class OrderController extends Controller
         $order->load(['vendorOrders.items.product']);
 
         return OrderData::fromModel($order)->additional(['message' => 'Order placed successfully.']);
+    }
+
+    private function resolveUnitPrice(CartItem $item): float
+    {
+        return (float) ($item->product->discount_price ?? $item->product->selling_price);
     }
 }

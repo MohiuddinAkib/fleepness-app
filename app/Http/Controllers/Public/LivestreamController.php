@@ -135,6 +135,44 @@ class LivestreamController extends Controller
         return ProductData::collect($products, DataCollection::class);
     }
 
+    #[Authenticated]
+    #[Endpoint('List liked livestreams')]
+    #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}]}', 200)]
+    public function liked(#[CurrentUser] User $user): JsonResponse|Responsable
+    {
+        $livestreams = Livestream::query()
+            ->whereHas('likes', fn ($query) => $query->where('user_id', $user->getKey()))
+            ->with(['media', 'vendorProfile'])
+            ->latest()
+            ->paginate();
+
+        return LivestreamData::collect($livestreams, PaginatedDataCollection::class);
+    }
+
+    #[Authenticated]
+    #[Endpoint('List saved livestreams')]
+    #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}]}', 200)]
+    public function saved(#[CurrentUser] User $user): JsonResponse|Responsable
+    {
+        $livestreams = Livestream::query()
+            ->whereHas('saves', fn ($query) => $query->where('user_id', $user->getKey()))
+            ->with(['media', 'vendorProfile'])
+            ->latest()
+            ->paginate();
+
+        return LivestreamData::collect($livestreams, PaginatedDataCollection::class);
+    }
+
+    #[Authenticated]
+    #[Endpoint('Get livestream likes count')]
+    #[Response('{"likes_count":1}', 200)]
+    public function likesCount(Livestream $livestream): JsonResponse|Responsable
+    {
+        return response()->json([
+            'likes_count' => $livestream->likes()->count(),
+        ]);
+    }
+
     #[Endpoint('Generate livestream subscriber token', 'Returns a LiveKit subscriber token for an authenticated user or a guest viewer.')]
     #[Response('{"token":"eyJhbGciOi..."}', 200)]
     #[Unauthenticated]

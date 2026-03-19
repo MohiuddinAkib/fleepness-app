@@ -116,4 +116,17 @@ class AddressController extends Controller
 
         return response()->json(['message' => 'Default address updated.', 'data' => AddressData::fromModel($address->fresh())]);
     }
+
+    #[Authenticated]
+    #[Endpoint('Get default address')]
+    #[Response('{"default_address":{"id":1,"label":"Home","is_default":true}}', 200)]
+    public function default(#[CurrentUser] User $user): JsonResponse|Responsable
+    {
+        $address = $user->defaultAddress()->first();
+
+        return response()->json([
+            'default_address' => null === $address ? null : AddressData::fromModel($address),
+            'data' => null === $address ? null : AddressData::fromModel($address),
+        ]);
+    }
 }

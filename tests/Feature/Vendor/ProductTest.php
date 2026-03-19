@@ -103,7 +103,7 @@ it('toggles product status', function (): void {
     $product = Product::factory()->for($vendor, 'vendorProfile')->create(['status' => ProductStatus::Active]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson("/api/me/products/{$product->getKey()}/toggle-status")
+    $this->withToken($token)->patchJson("/api/me/products/{$product->getKey()}/status")
         ->assertOk();
 
     expect($product->fresh()->status)->toBe(ProductStatus::Inactive);

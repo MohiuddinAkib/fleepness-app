@@ -10,10 +10,10 @@ use App\Enums\ProductStatus;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Support\Colors\Color;
+use App\Enums\ProductApprovalStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
@@ -44,14 +44,15 @@ class ProductsTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (ProductStatus $state): string => match ($state) {
-                        ProductStatus::Active => 'success',
-                        ProductStatus::Inactive => 'gray',
-                    })
+                    ->icon(fn (ProductStatus $state): string => $state->getIcon())
+                    ->color(fn (ProductStatus $state): string => $state->getColor())
                     ->sortable(),
-                IconColumn::make('is_approved')
-                    ->boolean()
-                    ->label('Approved'),
+                TextColumn::make('is_approved')
+                    ->label('Approval')
+                    ->badge()
+                    ->formatStateUsing(fn (bool $state): string => ProductApprovalStatus::fromBoolean($state)->getLabel())
+                    ->icon(fn (bool $state): string => ProductApprovalStatus::fromBoolean($state)->getIcon())
+                    ->color(fn (bool $state): string => ProductApprovalStatus::fromBoolean($state)->getColor()),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -62,10 +63,7 @@ class ProductsTable
                     ->options(ProductStatus::class),
                 SelectFilter::make('is_approved')
                     ->label('Approval')
-                    ->options([
-                        '1' => 'Approved',
-                        '0' => 'Pending',
-                    ]),
+                    ->options(ProductApprovalStatus::class),
                 TrashedFilter::make(),
             ])
             ->recordActions([

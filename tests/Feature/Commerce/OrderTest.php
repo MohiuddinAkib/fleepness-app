@@ -11,16 +11,22 @@ use App\Models\VendorOrder;
 use App\Models\VendorProfile;
 use App\Models\DeliveryOption;
 use App\Enums\VendorOrderStatus;
+use App\Notifications\OrderReceivedByVendor;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\VendorOrderStatusChanged;
 
 it('requires auth to place order', function (): void {
     $this->postJson('/api/orders')->assertUnauthorized();
 });
 
 it('places an order from selected cart items', function (): void {
+    Notification::fake();
+
     $user = User::factory()->create();
     $vendor = VendorProfile::factory()->approved()->create();
     $product = Product::factory()->for($vendor, 'vendorProfile')->create([
         'selling_price' => 500,
+        'discount_price' => 400,
         'quantity' => 10,
     ]);
     CartItem::factory()->create([
@@ -38,12 +44,19 @@ it('places an order from selected cart items', function (): void {
     ]);
 
     $response->assertCreated()
-        ->assertJsonPath('data.grand_total', '1050.00');
+        ->assertJsonPath('data.product_total', '800.00')
+        ->assertJsonPath('data.grand_total', '850.00');
 
     expect(Order::count())->toBe(1);
     expect(VendorOrder::count())->toBe(1);
     expect($product->fresh()->quantity)->toBe(8);
     expect(CartItem::where('user_id', $user->getKey())->count())->toBe(0);
+
+    Notification::assertSentTo(
+        $vendor->user,
+        OrderReceivedByVendor::class,
+        fn (OrderReceivedByVendor $notification): bool => '800.00' === $notification->vendorOrder->product_total
+    );
 });
 
 it('rejects order when cart is empty', function (): void {
@@ -57,6 +70,8 @@ it('rejects order when cart is empty', function (): void {
 });
 
 it('creates vendor orders grouped by vendor', function (): void {
+    Notification::fake();
+
     $user = User::factory()->create();
     $vendor1 = VendorProfile::factory()->approved()->create();
     $vendor2 = VendorProfile::factory()->approved()->create();
@@ -120,10 +135,14 @@ it('lists vendor orders', function (): void {
 });
 
 it('vendor can accept pending order', function (): void {
+    Notification::fake();
+
     $user = User::factory()->create();
     $vendor = VendorProfile::factory()->for($user)->approved()->create();
+    $customer = User::factory()->create();
     $vendorOrder = VendorOrder::factory()->create([
         'vendor_profile_id' => $vendor->getKey(),
+        'customer_id' => $customer->getKey(),
         'status' => VendorOrderStatus::Pending,
     ]);
     $token = $user->createToken('test')->plainTextToken;
@@ -132,13 +151,19 @@ it('vendor can accept pending order', function (): void {
         ->assertOk();
 
     expect($vendorOrder->fresh()->status)->toBe(VendorOrderStatus::Packaging);
+
+    Notification::assertSentTo($customer, VendorOrderStatusChanged::class);
 });
 
 it('vendor can reject pending order', function (): void {
+    Notification::fake();
+
     $user = User::factory()->create();
     $vendor = VendorProfile::factory()->for($user)->approved()->create();
+    $customer = User::factory()->create();
     $vendorOrder = VendorOrder::factory()->create([
         'vendor_profile_id' => $vendor->getKey(),
+        'customer_id' => $customer->getKey(),
         'status' => VendorOrderStatus::Pending,
     ]);
     $token = $user->createToken('test')->plainTextToken;
@@ -147,6 +172,8 @@ it('vendor can reject pending order', function (): void {
         ->assertOk();
 
     expect($vendorOrder->fresh()->status)->toBe(VendorOrderStatus::Rejected);
+
+    Notification::assertSentTo($customer, VendorOrderStatusChanged::class);
 });
 
 it('cannot accept an already-accepted order', function (): void {

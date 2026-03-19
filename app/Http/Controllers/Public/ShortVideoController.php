@@ -9,6 +9,8 @@ use App\Data\CommentData;
 use App\Data\ProductData;
 use App\Models\ShortVideo;
 use App\Data\ShortVideoData;
+use App\Models\ShortVideoLike;
+use App\Models\ShortVideoSave;
 use App\Models\ShortVideoComment;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -107,10 +109,31 @@ class ShortVideoController extends Controller
     #[Response('{"message":"Liked."}', 200)]
     public function like(ShortVideo $shortVideo, #[CurrentUser] User $user): JsonResponse|Responsable
     {
-        $shortVideo->likes()->firstOrCreate(['user_id' => $user->getKey()]);
+        $like = $shortVideo->likes()
+            ->where('user_id', $user->getKey())
+            ->first();
+
+        if ($like instanceof ShortVideoLike) {
+            $like->delete();
+            $shortVideo->update([
+                'likes_count' => max(0, $shortVideo->likes_count - 1),
+            ]);
+
+            return response()->json([
+                'message' => 'Like removed.',
+                'liked' => false,
+                'like_count' => $shortVideo->fresh()->likes_count,
+            ]);
+        }
+
+        $shortVideo->likes()->create(['user_id' => $user->getKey()]);
         $shortVideo->increment('likes_count');
 
-        return response()->json(['message' => 'Liked.']);
+        return response()->json([
+            'message' => 'Short liked.',
+            'liked' => true,
+            'like_count' => $shortVideo->fresh()->likes_count,
+        ]);
     }
 
     #[Authenticated]
@@ -118,9 +141,41 @@ class ShortVideoController extends Controller
     #[Response('{"message":"Saved."}', 200)]
     public function save(ShortVideo $shortVideo, #[CurrentUser] User $user): JsonResponse|Responsable
     {
-        $shortVideo->saves()->firstOrCreate(['user_id' => $user->getKey()]);
+        $save = $shortVideo->saves()
+            ->where('user_id', $user->getKey())
+            ->first();
 
-        return response()->json(['message' => 'Saved.']);
+        if ($save instanceof ShortVideoSave) {
+            $save->delete();
+
+            return response()->json([
+                'message' => 'Save removed.',
+                'saved' => false,
+                'save_count' => $shortVideo->saves()->count(),
+            ]);
+        }
+
+        $shortVideo->saves()->create(['user_id' => $user->getKey()]);
+
+        return response()->json([
+            'message' => 'Short saved.',
+            'saved' => true,
+            'save_count' => $shortVideo->saves()->count(),
+        ]);
+    }
+
+    #[Authenticated]
+    #[Endpoint('List saved short videos')]
+    #[Response('{"data":[{"id":1,"title":"New Collection Drop"}]}', 200)]
+    public function saved(#[CurrentUser] User $user): JsonResponse|Responsable
+    {
+        $videos = ShortVideo::query()
+            ->whereHas('saves', fn ($query) => $query->where('user_id', $user->getKey()))
+            ->with(['media', 'vendorProfile'])
+            ->latest()
+            ->paginate();
+
+        return ShortVideoData::collect($videos, PaginatedDataCollection::class);
     }
 
     #[Endpoint('List short video products')]

@@ -15,6 +15,7 @@ use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
+use App\Notifications\VendorOrderStatusChanged;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
@@ -61,13 +62,15 @@ class VendorOrderController extends Controller
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
         abort_unless($vendorOrder->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($vendorOrder->is_pending, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be accepted.');
+        abort_unless($vendorOrder->isPending, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be accepted.');
 
         $vendorOrder->update(['status' => VendorOrderStatus::Packaging]);
+        $freshVendorOrder = $vendorOrder->fresh(['customer', 'items.product', 'vendorProfile']);
+        $freshVendorOrder->customer?->notify(new VendorOrderStatusChanged($freshVendorOrder));
 
         return response()->json([
             'message' => 'Order accepted.',
-            'data' => ['status' => $vendorOrder->fresh()->status],
+            'data' => ['status' => $freshVendorOrder->status],
         ]);
     }
 
@@ -79,13 +82,15 @@ class VendorOrderController extends Controller
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
         abort_unless($vendorOrder->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($vendorOrder->is_pending, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be rejected.');
+        abort_unless($vendorOrder->isPending, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Order cannot be rejected.');
 
         $vendorOrder->update(['status' => VendorOrderStatus::Rejected]);
+        $freshVendorOrder = $vendorOrder->fresh(['customer', 'items.product', 'vendorProfile']);
+        $freshVendorOrder->customer?->notify(new VendorOrderStatusChanged($freshVendorOrder));
 
         return response()->json([
             'message' => 'Order rejected.',
-            'data' => ['status' => $vendorOrder->fresh()->status],
+            'data' => ['status' => $freshVendorOrder->status],
         ]);
     }
 }

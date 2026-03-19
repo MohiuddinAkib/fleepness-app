@@ -86,10 +86,29 @@ it('likes a short video', function (): void {
 
     $this->withToken($token)
         ->postJson("/api/short-videos/{$video->getKey()}/like")
-        ->assertOk();
+        ->assertOk()
+        ->assertJsonPath('liked', true)
+        ->assertJsonPath('like_count', 1);
 
     expect(ShortVideoLike::where('short_video_id', $video->getKey())->count())->toBe(1);
     expect($video->fresh()->likes_count)->toBe(1);
+});
+
+it('toggles a short video like without inflating likes count', function (): void {
+    $user = User::factory()->create();
+    $token = $user->createToken('test')->plainTextToken;
+    $video = ShortVideo::factory()->create(['likes_count' => 0]);
+
+    $this->withToken($token)->postJson("/api/short-videos/{$video->getKey()}/like")->assertOk();
+
+    $this->withToken($token)
+        ->postJson("/api/short-videos/{$video->getKey()}/like")
+        ->assertOk()
+        ->assertJsonPath('liked', false)
+        ->assertJsonPath('like_count', 0);
+
+    expect(ShortVideoLike::where('short_video_id', $video->getKey())->count())->toBe(0);
+    expect($video->fresh()->likes_count)->toBe(0);
 });
 
 it('saves a short video', function (): void {
@@ -99,9 +118,32 @@ it('saves a short video', function (): void {
 
     $this->withToken($token)
         ->postJson("/api/short-videos/{$video->getKey()}/save")
-        ->assertOk();
+        ->assertOk()
+        ->assertJsonPath('saved', true)
+        ->assertJsonPath('save_count', 1);
 
     expect(ShortVideoSave::where('short_video_id', $video->getKey())->count())->toBe(1);
+});
+
+it('returns saved shorts on the legacy endpoint', function (): void {
+    $user = User::factory()->create();
+    $token = $user->createToken('test')->plainTextToken;
+    $savedVideo = ShortVideo::factory()->create();
+    $otherVideo = ShortVideo::factory()->create();
+
+    ShortVideoSave::factory()->create([
+        'user_id' => $user->getKey(),
+        'short_video_id' => $savedVideo->getKey(),
+    ]);
+    ShortVideoSave::factory()->create([
+        'user_id' => User::factory()->create()->getKey(),
+        'short_video_id' => $otherVideo->getKey(),
+    ]);
+
+    $this->withToken($token)->getJson('/api/shorts/saved')
+        ->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $savedVideo->getKey());
 });
 
 // Vendor CRUD

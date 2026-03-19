@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Models\Fee;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\CartItem;
+use App\Models\DeliveryOption;
 
 it('requires auth to access cart', function (): void {
     $this->getJson('/api/cart')->assertUnauthorized();
@@ -68,7 +70,17 @@ it('returns cart summary', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $product = Product::factory()->create(['selling_price' => 200]);
+    $product = Product::factory()->create([
+        'selling_price' => 200,
+        'discount_price' => 150,
+    ]);
+    $deliveryOption = DeliveryOption::factory()->create(['fee' => 30]);
+    Fee::factory()->create([
+        'vat' => '10.00',
+        'commission' => '5.00',
+        'platform_fee' => '20.00',
+    ]);
+
     CartItem::factory()->create([
         'user_id' => $user->getKey(),
         'product_id' => $product->getKey(),
@@ -76,8 +88,15 @@ it('returns cart summary', function (): void {
         'is_selected' => true,
     ]);
 
-    $this->withToken($token)->getJson('/api/cart/summary')
+    $this->withToken($token)->getJson("/api/cart/summary?delivery_option_id={$deliveryOption->getKey()}")
         ->assertOk()
         ->assertJsonPath('data.item_count', 1)
-        ->assertJsonPath('data.product_total', '400.00');
+        ->assertJsonPath('data.item_total', '300.00')
+        ->assertJsonPath('data.product_total', '300.00')
+        ->assertJsonPath('data.delivery_fee', '30.00')
+        ->assertJsonPath('data.platform_fee', '20.00')
+        ->assertJsonPath('data.vat_fee', '30.00')
+        ->assertJsonPath('data.commission_fee', '15.00')
+        ->assertJsonPath('data.grand_total', '395.00')
+        ->assertJsonPath('grand_total', '395.00');
 });

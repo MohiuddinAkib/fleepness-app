@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Closure;
 use Livekit\FileInfo;
-use Livekit\AudioCodec;
 use Livekit\EgressInfo;
 use Livekit\ImagesInfo;
-use Livekit\VideoCodec;
 use Livekit\ImageOutput;
 use Livekit\SegmentsInfo;
 use App\Models\Livestream;
@@ -22,7 +19,6 @@ use Agence104\LiveKit\AccessToken;
 use Illuminate\Support\Collection;
 use Agence104\LiveKit\EncodedOutputs;
 use Agence104\LiveKit\RoomCreateOptions;
-use Illuminate\Support\Facades\Pipeline;
 use Agence104\LiveKit\AccessTokenOptions;
 use Illuminate\Contracts\Filesystem\Cloud;
 use App\Data\Dto\GeneratePublisherTokenData;
@@ -44,87 +40,27 @@ class LivestreamService
 
     public function generatePublisherToken(GeneratePublisherTokenData $data): string
     {
-        return Pipeline::send($data)
-            ->through([
+        $this->ensureRoomExists($data->roomName, $data->metadata);
 
-                function (GeneratePublisherTokenData $data, Closure $next) {
-                    $roomCreateOpts = tap(
-                        resolve(RoomCreateOptions::class),
-                        fn (RoomCreateOptions $opts) => $opts
-                            ->setName($data->roomName)
-                            ->setMetadata(json_encode($data->metadata))
-                    );
-
-                    $this->roomService->createRoom($roomCreateOpts);
-
-                    return $next($data);
-                },
-                function (GeneratePublisherTokenData $data, Closure $next): string {
-                    $roomName = $data->roomName;
-
-                    $roomTokenOpts = tap(
-                        resolve(AccessTokenOptions::class),
-                        fn (AccessTokenOptions $opts) => $opts
-                            ->setIdentity($data->identity)
-                            ->setName($data->displayName)
-                    );
-
-                    $videoGrant = tap(
-                        resolve(VideoGrant::class),
-                        fn (VideoGrant $grant) => $grant
-                            ->setRoomName($roomName)
-                            ->setRoomJoin()
-                            ->setRoomAdmin()
-                            ->setCanPublish()
-                            ->setCanPublishData()
-                    );
-
-                    $roomTokenJwt = tap(
-                        resolve(AccessToken::class),
-                        fn (AccessToken $token) => $token
-                            ->init($roomTokenOpts)
-                            ->setGrant($videoGrant)
-                    )
-                        ->toJwt();
-
-                    // dd($roomTokenOpts);
-
-                    // $cacheTtl = Carbon::createFromTimestamp($roomTokenOpts->getTtl());
-
-                    return $roomTokenJwt;
-                },
-            ])
-            ->thenReturn();
+        return $this->buildAccessTokenJwt(
+            identity: $data->identity,
+            displayName: $data->displayName,
+            metadata: [],
+            grant: $this->makePublisherGrant($data->roomName),
+        );
     }
 
     public function generateSubscriberToken(GenerateSubscriberTokenData $data): string
     {
-        return Pipeline::send($data->roomName)
-            ->through([
-
-                function (string $roomName, Closure $next) use ($data): string {
-                    $roomToken = resolve(AccessToken::class);
-                    $roomTokenOpts = (new AccessTokenOptions)
-                        ->setIdentity($data->identity)
-                        ->setName($data->displayName)
-                        ->setMetadata(json_encode($data->metadata));
-
-                    $videoGrant = (new VideoGrant)
-                        ->setRoomName($roomName)
-                        ->setRoomJoin()
-                        ->setCanPublish(false)
-                        ->setCanPublishData(! $data->isPublic);
-
-                    $roomTokenJwt = $roomToken->init($roomTokenOpts)->setGrant($videoGrant)->toJwt();
-                    // $cacheTtl = Carbon::createFromTimestamp($roomTokenOpts->getTtl());
-
-                    return $roomTokenJwt;
-                },
-            ])
-            ->thenReturn();
+        return $this->buildAccessTokenJwt(
+            identity: $data->identity,
+            displayName: $data->displayName,
+            metadata: $data->metadata,
+            grant: $this->makeSubscriberGrant($data->roomName, $data->isPublic),
+        );
     }
 
-    public function startRecording(string $roomName, string $outputPath)
+    public function startRecording(string $roomName, string $outputPath): EgressInfo
     {
         $fileOutput = resolve(EncodedFileOutput::class)
             ->setFileType(EncodedFileType::MP4)
@@ -152,126 +88,224 @@ class LivestreamService
         );
     }
 
-    public function stopRecording(string $egressId)
+    public function stopRecording(string $egressId): EgressInfo
     {
         return $this->egressService->stopEgress($egressId);
     }
 
-    public function getRecordingsFor(Livestream $livestream)
+    /**
+     * @return list<array{
+     *     filename: string,
+     *     startedAt: int,
+     *     endedAt: int,
+     *     duration: int,
+     *     size: int,
+     *     location: string
+     * }>
+     */
+    public function getRecordingsFor(Livestream $livestream): array
     {
-        $listEgress = $this->egressService->listEgress($livestream->room_name, $livestream->egress_id);
-
-        /** @var Collection<int,EgressInfo> */
-        $egressInfoCollection = collect($listEgress->getItems());
-
-        return $egressInfoCollection
-            ->flatMap(function ($egressInfo) {
-                /** @var Collection<int,FileInfo> */
-                $fileInfoCollection = collect($egressInfo->getFileResults());
-
-                return $fileInfoCollection
-                    ->map(function ($fileInfo) {
-                        $filename = $fileInfo->getFilename();
-                        $startedAt = $fileInfo->getStartedAt();
-                        $endedAt = $fileInfo->getEndedAt();
-                        $duration = $fileInfo->getDuration();
-                        $size = $fileInfo->getSize();
-                        $location = $fileInfo->getLocation();
-                        // $location = $this->r2fileSytem->url($filename);
-
-                        return compact(
-                            'filename',
-                            'startedAt',
-                            'endedAt',
-                            'duration',
-                            'size',
-                            'location',
-                        );
-                    })
-                    ->all();
-            })
+        return $this->egressInfoCollection($livestream)
+            ->flatMap(
+                fn (EgressInfo $egressInfo): array => collect($egressInfo->getFileResults())
+                    ->map(fn (FileInfo $fileInfo): array => $this->formatRecording($fileInfo))
+                    ->all()
+            )
+            ->values()
             ->all();
     }
 
-    public function getThumbnailsFor(Livestream $livestream)
+    /**
+     * @return list<array{
+     *     filenamePrefix: string,
+     *     imageCount: int,
+     *     startedAt: int,
+     *     endedAt: int
+     * }>
+     */
+    public function getThumbnailsFor(Livestream $livestream): array
     {
-        $listEgress = $this->egressService->listEgress($livestream->room_name, $livestream->egress_id);
-
-        /** @var Collection<int,EgressInfo> */
-        $egressInfoCollection = collect($listEgress->getItems());
-
-        return $egressInfoCollection
-            ->flatMap(function ($egressInfo) {
-                /** @var Collection<int,ImagesInfo> */
-                $infoCollection = collect($egressInfo->getImageResults());
-
-                return $infoCollection
-                    ->map(function ($info) {
-                        $filenamePrefix = $info->getFilenamePrefix();
-                        $imageCount = $info->getImageCount();
-                        $startedAt = $info->getStartedAt();
-                        $endedAt = $info->getEndedAt();
-                        // $directoryName = str($filenamePrefix)->dirname();
-
-                        // $thumbnails = $this->r2fileSytem->files($directoryName);
-
-                        // $thumbnails = collect($thumbnails)
-                        //     ->map(fn ($thmnailPath) => $this->r2fileSytem->url($thmnailPath))
-                        //     ->all();
-
-                        return compact(
-                            'filenamePrefix',
-                            'imageCount',
-                            'startedAt',
-                            'endedAt',
-                            // 'thumbnails'
-                        );
-                    })
-                    ->all();
-            })
+        return $this->egressInfoCollection($livestream)
+            ->flatMap(
+                fn (EgressInfo $egressInfo): array => collect($egressInfo->getImageResults())
+                    ->map(fn (ImagesInfo $info): array => $this->formatThumbnail($info))
+                    ->all()
+            )
+            ->values()
             ->all();
     }
 
-    public function getShortVideosFor(Livestream $livestream)
+    /**
+     * @return list<array{
+     *     playlistName: string,
+     *     livePlaylistName: string,
+     *     duration: int,
+     *     size: int,
+     *     playlistLocation: string,
+     *     livePlaylistLocation: string,
+     *     segmentCount: int,
+     *     startedAt: int,
+     *     endedAt: int
+     * }>
+     */
+    public function getShortVideosFor(Livestream $livestream): array
     {
-        $listEgress = $this->egressService->listEgress($livestream->room_name, $livestream->egress_id);
-
-        /** @var Collection<int,EgressInfo> */
-        $egressInfoCollection = collect($listEgress->getItems());
-
-        return $egressInfoCollection
-            ->flatMap(function ($egressInfo) {
-                /** @var Collection<int,SegmentsInfo> */
-                $infoCollection = collect($egressInfo->getSegmentResults());
-
-                return $infoCollection
-                    ->map(function ($info) {
-                        $playlistName = $info->getPlaylistName();
-                        $livePlaylistName = $info->getLivePlaylistName();
-                        $duration = $info->getDuration();
-                        $size = $info->getSize();
-                        $playlistLocation = $info->getPlaylistLocation();
-                        $livePlaylistLocation = $info->getLivePlaylistLocation();
-                        $segmentCount = $info->getSegmentCount();
-                        $startedAt = $info->getStartedAt();
-                        $endedAt = $info->getEndedAt();
-
-                        // $playlistLocation = $this->r2fileSytem->url($playlistName);
-
-                        return compact(
-                            'playlistName',
-                            'livePlaylistName',
-                            'duration',
-                            'size',
-                            'playlistLocation',
-                            'livePlaylistLocation',
-                            'segmentCount',
-                            'startedAt',
-                            'endedAt',
-                        );
-                    })
-                    ->all();
-            })
+        return $this->egressInfoCollection($livestream)
+            ->flatMap(
+                fn (EgressInfo $egressInfo): array => collect($egressInfo->getSegmentResults())
+                    ->map(fn (SegmentsInfo $info): array => $this->formatShortVideo($info))
+                    ->all()
+            )
+            ->values()
             ->all();
+    }
+
+    private function ensureRoomExists(string $roomName, array $metadata): void
+    {
+        $roomCreateOptions = tap(
+            resolve(RoomCreateOptions::class),
+            fn (RoomCreateOptions $options) => $options
+                ->setName($roomName)
+                ->setMetadata(json_encode($metadata))
+        );
+
+        $this->roomService->createRoom($roomCreateOptions);
+    }
+
+    private function buildAccessTokenJwt(
+        string $identity,
+        string $displayName,
+        array $metadata,
+        VideoGrant $grant,
+    ): string {
+        $tokenOptions = $this->makeAccessTokenOptions(
+            identity: $identity,
+            displayName: $displayName,
+            metadata: $metadata,
+        );
+
+        return tap(
+            resolve(AccessToken::class),
+            fn (AccessToken $token) => $token
+                ->init($tokenOptions)
+                ->setGrant($grant)
+        )->toJwt();
+    }
+
+    private function makeAccessTokenOptions(
+        string $identity,
+        string $displayName,
+        array $metadata,
+    ): AccessTokenOptions {
+        return tap(
+            resolve(AccessTokenOptions::class),
+            fn (AccessTokenOptions $options) => $options
+                ->setIdentity($identity)
+                ->setName($displayName)
+                ->setMetadata(json_encode($metadata))
+        );
+    }
+
+    private function makePublisherGrant(string $roomName): VideoGrant
+    {
+        return tap(
+            resolve(VideoGrant::class),
+            fn (VideoGrant $grant) => $grant
+                ->setRoomName($roomName)
+                ->setRoomJoin()
+                ->setRoomAdmin()
+                ->setCanPublish()
+                ->setCanPublishData()
+        );
+    }
+
+    private function makeSubscriberGrant(string $roomName, bool $isPublic): VideoGrant
+    {
+        return tap(
+            resolve(VideoGrant::class),
+            fn (VideoGrant $grant) => $grant
+                ->setRoomName($roomName)
+                ->setRoomJoin()
+                ->setCanPublish(false)
+                ->setCanPublishData(! $isPublic)
+        );
+    }
+
+    /** @return Collection<int, EgressInfo> */
+    private function egressInfoCollection(Livestream $livestream): Collection
+    {
+        return collect(
+            $this->egressService
+                ->listEgress($livestream->room_name, $livestream->egress_id)
+                ->getItems()
+        );
+    }
+
+    /**
+     * @return array{
+     *     filename: string,
+     *     startedAt: int,
+     *     endedAt: int,
+     *     duration: int,
+     *     size: int,
+     *     location: string
+     * }
+     */
+    private function formatRecording(FileInfo $fileInfo): array
+    {
+        return [
+            'filename' => $fileInfo->getFilename(),
+            'startedAt' => $fileInfo->getStartedAt(),
+            'endedAt' => $fileInfo->getEndedAt(),
+            'duration' => $fileInfo->getDuration(),
+            'size' => $fileInfo->getSize(),
+            'location' => $fileInfo->getLocation(),
+        ];
+    }
+
+    /**
+     * @return array{
+     *     filenamePrefix: string,
+     *     imageCount: int,
+     *     startedAt: int,
+     *     endedAt: int
+     * }
+     */
+    private function formatThumbnail(ImagesInfo $info): array
+    {
+        return [
+            'filenamePrefix' => $info->getFilenamePrefix(),
+            'imageCount' => $info->getImageCount(),
+            'startedAt' => $info->getStartedAt(),
+            'endedAt' => $info->getEndedAt(),
+        ];
+    }
+
+    /**
+     * @return array{
+     *     playlistName: string,
+     *     livePlaylistName: string,
+     *     duration: int,
+     *     size: int,
+     *     playlistLocation: string,
+     *     livePlaylistLocation: string,
+     *     segmentCount: int,
+     *     startedAt: int,
+     *     endedAt: int
+     * }
+     */
+    private function formatShortVideo(SegmentsInfo $info): array
+    {
+        return [
+            'playlistName' => $info->getPlaylistName(),
+            'livePlaylistName' => $info->getLivePlaylistName(),
+            'duration' => $info->getDuration(),
+            'size' => $info->getSize(),
+            'playlistLocation' => $info->getPlaylistLocation(),
+            'livePlaylistLocation' => $info->getLivePlaylistLocation(),
+            'segmentCount' => $info->getSegmentCount(),
+            'startedAt' => $info->getStartedAt(),
+            'endedAt' => $info->getEndedAt(),
+        ];
     }
 }

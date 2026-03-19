@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Me;
 
 use App\Models\User;
+use App\Data\UserData;
 use App\Data\VendorProfileData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -27,5 +28,23 @@ class FollowController extends Controller
         $vendorProfiles = $user->following()->get();
 
         return VendorProfileData::collect($vendorProfiles, DataCollection::class);
+    }
+
+    #[Authenticated]
+    #[Endpoint('List vendor followers', 'Returns a list of users following the authenticated vendor.')]
+    #[Response('{"data":[{"id":1,"name":"Jane Doe"}]}', 200)]
+    public function followers(#[CurrentUser] User $user): JsonResponse|Responsable
+    {
+        $vendorProfile = $user->vendorProfile;
+        $followers = $vendorProfile?->followers()->with('user')->get() ?? collect();
+        $users = $followers
+            ->pluck('user')
+            ->filter()
+            ->values();
+
+        return response()->json([
+            'followers' => UserData::collect($users, DataCollection::class)->toArray(),
+            'data' => UserData::collect($users, DataCollection::class)->toArray(),
+        ]);
     }
 }

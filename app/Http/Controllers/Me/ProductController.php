@@ -152,26 +152,6 @@ class ProductController extends Controller
     }
 
     #[Authenticated]
-    #[Endpoint('Toggle product status', 'Toggles the product between active and inactive status.')]
-    #[Response('{"data": {"id": 1, "status": "inactive"}}', 200)]
-    public function toggleStatus(
-        Product $product,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        $vendorProfile = $user->vendorProfile;
-        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($product->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-
-        $product->update([
-            'status' => $product->is_active
-                ? ProductStatus::Inactive
-                : ProductStatus::Active,
-        ]);
-
-        return response()->json(['data' => ['status' => $product->fresh()->status]]);
-    }
-
-    #[Authenticated]
     #[Endpoint('Delete product image')]
     #[Response('{"message": "Image deleted."}', 200)]
     public function destroyImage(
