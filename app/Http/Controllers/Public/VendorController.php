@@ -7,18 +7,16 @@ namespace App\Http\Controllers\Public;
 use App\Models\User;
 use App\Data\ProductData;
 use App\Data\ShortVideoData;
-use App\Models\VendorReview;
 use App\Models\VendorProfile;
-use App\Data\VendorReviewData;
 use App\Data\VendorProfileData;
 use Illuminate\Http\JsonResponse;
+use App\Data\Public\ListVendorsData;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
-use Knuckles\Scribe\Attributes\BodyParam;
-use App\Data\Public\StoreVendorReviewData;
 use Knuckles\Scribe\Attributes\QueryParam;
+use App\Data\Public\ListVendorProductsData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Unauthenticated;
@@ -32,12 +30,36 @@ class VendorController extends Controller
     #[Endpoint('List vendors')]
     #[QueryParam('search', 'string', required: false)]
     #[QueryParam('shop_category_id', 'integer', required: false)]
+    #[QueryParam('similar_to_vendor_id', 'integer', required: false)]
     #[Response('{"data": [{"id": 1, "shop_name": "Flash Store", "status": "approved"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
-    public function index(): JsonResponse|Responsable
+    public function index(ListVendorsData $data): JsonResponse|Responsable
     {
         $vendors = VendorProfile::query()
             ->approved()
+            ->when(
+                filled($data->search),
+                fn ($query) => $query->whereLike('shop_name', '%'.$data->search.'%')
+            )
+            ->when(
+                null !== $data->shopCategoryId,
+                fn ($query) => $query->where('shop_category_id', $data->shopCategoryId)
+            )
+            ->when(
+                null !== $data->similarToVendorId,
+                function ($query) use ($data): void {
+                    $sourceVendor = VendorProfile::query()->find($data->similarToVendorId);
+
+                    if (! $sourceVendor instanceof VendorProfile) {
+                        $query->whereRaw('1 = 0');
+
+                        return;
+                    }
+
+                    $query->where('shop_category_id', $sourceVendor->shop_category_id)
+                        ->whereKeyNot($sourceVendor->getKey());
+                }
+            )
             ->paginate();
 
         return VendorProfileData::collect($vendors, PaginatedDataCollection::class);
@@ -75,72 +97,45 @@ class VendorController extends Controller
         return response()->json(['message' => 'Vendor unfollowed.']);
     }
 
-    #[Endpoint('List vendor reviews')]
-    #[Response('{"data": [{"id": 1, "rating": 5, "comment": "Great vendor!"}]}', 200)]
-    #[Unauthenticated]
-    public function reviews(VendorProfile $vendorProfile): JsonResponse|Responsable
-    {
-        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
-
-        $reviews = $vendorProfile->reviews()->with('user')->paginate();
-
-        return VendorReviewData::collect($reviews, PaginatedDataCollection::class);
-    }
-
-    #[Authenticated]
-    #[BodyParam('rating', 'integer', required: true, example: 4)]
-    #[BodyParam('comment', 'string', required: false)]
-    #[Endpoint('Write vendor review')]
-    #[Response('{"data": {"id": 1, "rating": 4}}', 201)]
-    public function storeReview(
-        StoreVendorReviewData $data,
-        VendorProfile $vendorProfile,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
-
-        $existing = $vendorProfile->reviews()->where('user_id', $user->getKey())->first();
-
-        abort_if(null !== $existing, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'You have already reviewed this vendor.');
-
-        $review = $vendorProfile->reviews()->create([
-            'user_id' => $user->getKey(),
-            'rating' => $data->rating,
-            'comment' => $data->comment,
-        ]);
-
-        $review->load('user');
-
-        return VendorReviewData::fromModel($review)->additional(['message' => 'Review submitted.']);
-    }
-
-    #[Authenticated]
-    #[Endpoint('Delete own vendor review')]
-    #[Response('{"message": "Review deleted."}', 200)]
-    public function destroyReview(
-        VendorProfile $vendorProfile,
-        VendorReview $review,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        abort_unless($review->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($review->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_NOT_FOUND);
-
-        $review->delete();
-
-        return response()->json(['message' => 'Review deleted.']);
-    }
-
     #[Endpoint('List vendor products')]
+    #[QueryParam('q', 'string', required: false)]
+    #[QueryParam('min_price', 'number', required: false)]
+    #[QueryParam('max_price', 'number', required: false)]
+    #[QueryParam('price_category', 'string', required: false, example: 'low')]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
-    public function products(VendorProfile $vendorProfile): JsonResponse|Responsable
-    {
+    public function products(
+        VendorProfile $vendorProfile,
+        ListVendorProductsData $data,
+    ): JsonResponse|Responsable {
         abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
+
+        [$minPrice, $maxPrice] = $this->resolvePriceRange($data);
 
         $products = $vendorProfile->products()
             ->active()
             ->approved()
             ->with(['media', 'category'])
+            ->when(
+                filled($data->q),
+                fn ($query) => $query->whereLike('name', '%'.$data->q.'%')
+            )
+            ->when(
+                null !== $minPrice || null !== $maxPrice,
+                function ($query) use ($minPrice, $maxPrice): void {
+                    $query->whereRaw(
+                        'CAST(COALESCE(discount_price, selling_price) AS REAL) >= ?',
+                        [$minPrice ?? 0]
+                    );
+
+                    if (null !== $maxPrice) {
+                        $query->whereRaw(
+                            'CAST(COALESCE(discount_price, selling_price) AS REAL) <= ?',
+                            [$maxPrice]
+                        );
+                    }
+                }
+            )
             ->paginate();
 
         return ProductData::collect($products, PaginatedDataCollection::class);
@@ -159,5 +154,22 @@ class VendorController extends Controller
             ->paginate();
 
         return ShortVideoData::collect($videos, PaginatedDataCollection::class);
+    }
+
+    /**
+     * @return array{0: float|null, 1: float|null}
+     */
+    private function resolvePriceRange(ListVendorProductsData $data): array
+    {
+        if (null !== $data->priceCategory) {
+            return match ($data->priceCategory) {
+                'low' => [1.0, 500.0],
+                'medium' => [501.0, 1000.0],
+                'premium' => [1001.0, null],
+                default => [null, null],
+            };
+        }
+
+        return [$data->minPrice, $data->maxPrice];
     }
 }

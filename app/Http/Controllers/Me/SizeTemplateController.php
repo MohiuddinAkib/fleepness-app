@@ -7,9 +7,7 @@ namespace App\Http\Controllers\Me;
 use App\Models\User;
 use App\Models\SizeTemplate;
 use App\Data\SizeTemplateData;
-use App\Models\SizeTemplateItem;
 use Illuminate\Http\JsonResponse;
-use App\Data\SizeTemplateItemData;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use Spatie\LaravelData\DataCollection;
@@ -20,7 +18,6 @@ use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use App\Data\SizeTemplate\StoreSizeTemplateData;
 use Illuminate\Container\Attributes\CurrentUser;
-use App\Data\SizeTemplate\StoreSizeTemplateItemData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Size Templates', 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).')]
@@ -74,56 +71,5 @@ class SizeTemplateController extends Controller
         $sizeTemplate->delete();
 
         return response()->json(['message' => 'Size template deleted.']);
-    }
-
-    public function storeItem(
-        StoreSizeTemplateItemData $data,
-        SizeTemplate $sizeTemplate,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        $vendorProfile = $user->vendorProfile;
-        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($sizeTemplate->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-
-        $item = $sizeTemplate->items()->create([
-            'label' => $data->label,
-            'value' => $data->value,
-        ]);
-
-        return SizeTemplateItemData::fromModel($item);
-    }
-
-    public function updateItem(
-        StoreSizeTemplateItemData $data,
-        SizeTemplate $sizeTemplate,
-        SizeTemplateItem $sizeTemplateItem,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        $vendorProfile = $user->vendorProfile;
-        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($sizeTemplate->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($sizeTemplateItem->sizeTemplate()->is($sizeTemplate), HttpResponse::HTTP_NOT_FOUND);
-
-        $sizeTemplateItem->update([
-            'label' => $data->label,
-            'value' => $data->value,
-        ]);
-
-        return SizeTemplateItemData::fromModel($sizeTemplateItem);
-    }
-
-    public function destroyItem(
-        SizeTemplate $sizeTemplate,
-        SizeTemplateItem $sizeTemplateItem,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        $vendorProfile = $user->vendorProfile;
-        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($sizeTemplate->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($sizeTemplateItem->sizeTemplate()->is($sizeTemplate), HttpResponse::HTTP_NOT_FOUND);
-
-        $sizeTemplateItem->delete();
-
-        return response()->json(['message' => 'Item deleted.']);
     }
 }

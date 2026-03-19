@@ -5,11 +5,14 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Me\TransactionController;
 use App\Http\Controllers\Me\VendorOrderController;
+use App\Http\Controllers\Me\ProductImageController;
 use App\Http\Controllers\Me\SizeTemplateController;
 use App\Http\Controllers\Me\ProductStatusController;
 use App\Http\Controllers\Me\VendorProfileController;
 use App\Http\Controllers\Me\PaymentAccountController;
 use App\Http\Controllers\Me\VendorFollowerController;
+use App\Http\Controllers\Me\SizeTemplateItemController;
+use App\Http\Controllers\Me\LivestreamProductController;
 use App\Http\Controllers\Me\ProductController as MeProductController;
 use App\Http\Controllers\Me\LivestreamController as MeLivestreamController;
 use App\Http\Controllers\Me\ShortVideoController as MeShortVideoController;
@@ -42,10 +45,7 @@ Route::middleware(['auth:sanctum'])
             Route::prefix('{product}')->group(function (): void {
                 Route::singleton('status', ProductStatusController::class)->only('update');
             });
-            Route::delete('{product}/images/{mediaId}', [
-                MeProductController::class,
-                'destroyImage',
-            ]);
+            Route::delete('{product}/images/{mediaId}', [ProductImageController::class, 'destroy']);
         });
 
         Route::prefix('size-templates')->group(function (): void {
@@ -55,19 +55,11 @@ Route::middleware(['auth:sanctum'])
                 SizeTemplateController::class,
                 'destroy',
             ]);
-            Route::post('{sizeTemplate}/items', [
-                SizeTemplateController::class,
-                'storeItem',
-            ]);
-            Route::patch('{sizeTemplate}/items/{sizeTemplateItem}', [
-                SizeTemplateController::class,
-                'updateItem',
-            ]);
-            Route::delete('{sizeTemplate}/items/{sizeTemplateItem}', [
-                SizeTemplateController::class,
-                'destroyItem',
-            ]);
         });
+
+        Route::apiResource('size-templates.items', SizeTemplateItemController::class)
+            ->only(['store', 'update', 'destroy'])
+            ->parameters(['items' => 'sizeTemplateItem']);
 
         Route::prefix('livestreams')->group(function (): void {
             Route::get('/', [MeLivestreamController::class, 'index']);
@@ -84,15 +76,10 @@ Route::middleware(['auth:sanctum'])
                 MeLivestreamController::class,
                 'publisherToken',
             ]);
-            Route::post('{livestream}/products', [
-                MeLivestreamController::class,
-                'attachProduct',
-            ]);
-            Route::delete('{livestream}/products/{product}', [
-                MeLivestreamController::class,
-                'detachProduct',
-            ]);
         });
+
+        Route::apiResource('livestreams.products', LivestreamProductController::class)
+            ->only(['store', 'destroy']);
 
         Route::prefix('short-videos')->group(function (): void {
             Route::get('/', [MeShortVideoController::class, 'index']);

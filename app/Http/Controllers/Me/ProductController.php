@@ -10,12 +10,14 @@ use App\Data\ProductData;
 use App\Enums\ProductStatus;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
+use App\Data\Me\ListOwnProductsData;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use App\Data\Product\StoreProductData;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use Knuckles\Scribe\Attributes\QueryParam;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -27,15 +29,26 @@ class ProductController extends Controller
 {
     #[Authenticated]
     #[Endpoint('List own products', 'Returns a paginated list of products belonging to the authenticated vendor.')]
+    #[QueryParam('q', 'string', required: false, example: 'sku-001')]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00", "status": "active"}], "meta": {"current_page": 1}}', 200)]
-    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
-    {
+    public function index(
+        ListOwnProductsData $data,
+        #[CurrentUser] User $user,
+    ): JsonResponse|Responsable {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
 
         $products = Product::query()
             ->where('vendor_profile_id', $vendorProfile->getKey())
             ->with(['media', 'category', 'tags'])
+            ->when(
+                filled($data->q),
+                fn ($query) => $query->where(function ($productQuery) use ($data): void {
+                    $productQuery
+                        ->whereLike('name', '%'.$data->q.'%')
+                        ->orWhereLike('sku', '%'.$data->q.'%');
+                })
+            )
             ->latest()
             ->paginate();
 
@@ -149,25 +162,5 @@ class ProductController extends Controller
         $product->delete();
 
         return response()->json(['message' => 'Product deleted.']);
-    }
-
-    #[Authenticated]
-    #[Endpoint('Delete product image')]
-    #[Response('{"message": "Image deleted."}', 200)]
-    public function destroyImage(
-        Product $product,
-        int $mediaId,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        $vendorProfile = $user->vendorProfile;
-        abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
-        abort_unless($product->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
-
-        $media = $product->getMedia('images')->firstWhere('id', $mediaId);
-        abort_if(null === $media, HttpResponse::HTTP_NOT_FOUND);
-
-        $media->delete();
-
-        return response()->json(['message' => 'Image deleted.']);
     }
 }

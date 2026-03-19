@@ -16,8 +16,12 @@ use App\Http\Controllers\Auth\DeviceTokenController;
 use App\Http\Controllers\Public\LivestreamController;
 use App\Http\Controllers\Public\ShortVideoController;
 use App\Http\Controllers\Public\ShopCategoryController;
+use App\Http\Controllers\Public\VendorReviewController;
 use App\Http\Controllers\Public\PaymentMethodController;
+use App\Http\Controllers\Public\ProductReviewController;
 use App\Http\Controllers\Public\DeliveryOptionController;
+use App\Http\Controllers\Public\LivestreamCommentController;
+use App\Http\Controllers\Public\ShortVideoCommentController;
 
 Route::prefix('auth')->group(function (): void {
     Route::post('register', [OTPAuthController::class, 'register']);
@@ -50,18 +54,12 @@ Route::prefix('products')->group(function (): void {
     Route::get('/', [ProductController::class, 'index']);
     Route::get('{product}', [ProductController::class, 'show']);
     Route::get('{product}/similar', [ProductController::class, 'similar']);
-    Route::get('{product}/reviews', [ProductController::class, 'reviews']);
-    Route::middleware(['auth:sanctum'])->group(function (): void {
-        Route::post('{product}/reviews', [
-            ProductController::class,
-            'storeReview',
-        ]);
-        Route::delete('{product}/reviews/{review}', [
-            ProductController::class,
-            'destroyReview',
-        ]);
-    });
 });
+
+Route::apiResource('products.reviews', ProductReviewController::class)
+    ->only(['index', 'store', 'destroy'])
+    ->parameters(['reviews' => 'review'])
+    ->middlewareFor(['store', 'destroy'], ['auth:sanctum']);
 
 Route::prefix('categories')->group(function (): void {
     Route::get('/', [CategoryController::class, 'index']);
@@ -85,7 +83,6 @@ Route::prefix('vendors')->group(function (): void {
         VendorController::class,
         'shortVideos',
     ]);
-    Route::get('{vendorProfile}/reviews', [VendorController::class, 'reviews']);
     Route::middleware(['auth:sanctum'])->group(function (): void {
         Route::post('{vendorProfile}/follow', [
             VendorController::class,
@@ -95,16 +92,13 @@ Route::prefix('vendors')->group(function (): void {
             VendorController::class,
             'unfollow',
         ]);
-        Route::post('{vendorProfile}/reviews', [
-            VendorController::class,
-            'storeReview',
-        ]);
-        Route::delete('{vendorProfile}/reviews/{review}', [
-            VendorController::class,
-            'destroyReview',
-        ]);
     });
 });
+
+Route::apiResource('vendors.reviews', VendorReviewController::class)
+    ->only(['index', 'store', 'destroy'])
+    ->parameters(['vendors' => 'vendorProfile', 'reviews' => 'review'])
+    ->middlewareFor(['store', 'destroy'], ['auth:sanctum']);
 
 Route::prefix('short-videos')->group(function (): void {
     Route::get('/', [ShortVideoController::class, 'index']);
@@ -113,23 +107,16 @@ Route::prefix('short-videos')->group(function (): void {
         ShortVideoController::class,
         'products',
     ]);
-    Route::get('{shortVideo}/comments', [
-        ShortVideoController::class,
-        'comments',
-    ]);
     Route::middleware(['auth:sanctum'])->group(function (): void {
-        Route::post('{shortVideo}/comments', [
-            ShortVideoController::class,
-            'storeComment',
-        ]);
-        Route::delete('{shortVideo}/comments/{comment}', [
-            ShortVideoController::class,
-            'destroyComment',
-        ]);
         Route::post('{shortVideo}/like', [ShortVideoController::class, 'like']);
         Route::post('{shortVideo}/save', [ShortVideoController::class, 'save']);
     });
 });
+
+Route::apiResource('short-videos.comments', ShortVideoCommentController::class)
+    ->only(['index', 'store', 'destroy'])
+    ->parameters(['comments' => 'comment'])
+    ->middlewareFor(['store', 'destroy'], ['auth:sanctum']);
 
 Route::prefix('livestreams')->group(function (): void {
     Route::get('/', [LivestreamController::class, 'index']);
@@ -138,19 +125,7 @@ Route::prefix('livestreams')->group(function (): void {
         LivestreamController::class,
         'products',
     ]);
-    Route::get('{livestream}/comments', [
-        LivestreamController::class,
-        'comments',
-    ]);
     Route::middleware(['auth:sanctum'])->group(function (): void {
-        Route::post('{livestream}/comments', [
-            LivestreamController::class,
-            'storeComment',
-        ]);
-        Route::delete('{livestream}/comments/{comment}', [
-            LivestreamController::class,
-            'destroyComment',
-        ]);
         Route::post('{livestream}/like', [LivestreamController::class, 'like']);
         Route::post('{livestream}/save', [LivestreamController::class, 'save']);
     });
@@ -159,6 +134,11 @@ Route::prefix('livestreams')->group(function (): void {
         'subscriberToken',
     ]);
 });
+
+Route::apiResource('livestreams.comments', LivestreamCommentController::class)
+    ->only(['index', 'store', 'update', 'destroy'])
+    ->parameters(['comments' => 'comment'])
+    ->middlewareFor(['store', 'update', 'destroy'], ['auth:sanctum']);
 
 Route::get('sections', [SectionController::class, 'index']);
 Route::get('sliders', [SectionController::class, 'sliders']);

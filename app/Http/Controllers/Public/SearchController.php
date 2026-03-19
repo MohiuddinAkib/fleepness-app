@@ -39,14 +39,14 @@ class SearchController extends Controller
         $products = Product::query()
             ->active()
             ->approved()
-            ->where('name', 'like', "%{$query}%")
+            ->whereLike('name', "%{$query}%")
             ->with(['media', 'category', 'vendorProfile'])
             ->limit(15)
             ->get();
 
         $vendors = VendorProfile::query()
             ->approved()
-            ->where('shop_name', 'like', "%{$query}%")
+            ->whereLike('shop_name', "%{$query}%")
             ->limit(15)
             ->get();
 

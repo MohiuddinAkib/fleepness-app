@@ -5,28 +5,23 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Public;
 
 use App\Models\User;
-use App\Data\CommentData;
 use App\Data\ProductData;
 use App\Models\ShortVideo;
 use App\Data\ShortVideoData;
 use App\Models\ShortVideoLike;
 use App\Models\ShortVideoSave;
-use App\Models\ShortVideoComment;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use Spatie\LaravelData\DataCollection;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
-use App\Data\ShortVideo\StoreCommentData;
-use Knuckles\Scribe\Attributes\BodyParam;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use App\Actions\Me\ListSavedShortVideosAction;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Content', 'Browse short videos and interact with comments, likes, and saves.')]
 class ShortVideoController extends Controller
@@ -52,57 +47,6 @@ class ShortVideoController extends Controller
         $shortVideo->load(['media', 'vendorProfile', 'products']);
 
         return ShortVideoData::fromModel($shortVideo);
-    }
-
-    #[Endpoint('List short video comments')]
-    #[Response('{"data":[{"id":1,"comment":"Great video!"}],"meta":{"current_page":1}}', 200)]
-    #[Unauthenticated]
-    public function comments(ShortVideo $shortVideo): JsonResponse|Responsable
-    {
-        $comments = $shortVideo->comments()
-            ->with('user')
-            ->latest()
-            ->paginate();
-
-        return CommentData::collect(
-            $comments->through(fn (ShortVideoComment $c) => CommentData::fromShortVideoComment($c)),
-            PaginatedDataCollection::class
-        );
-    }
-
-    #[Authenticated]
-    #[BodyParam('comment', 'string', required: true, example: 'Great video!')]
-    #[Endpoint('Post short video comment')]
-    #[Response('{"data":{"id":1,"comment":"Great video!"}}', 201)]
-    public function storeComment(
-        StoreCommentData $data,
-        ShortVideo $shortVideo,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        $comment = $shortVideo->comments()->create([
-            'user_id' => $user->getKey(),
-            'comment' => $data->comment,
-        ]);
-
-        $comment->load('user');
-
-        return CommentData::fromShortVideoComment($comment);
-    }
-
-    #[Authenticated]
-    #[Endpoint('Delete short video comment')]
-    #[Response('{"message":"Comment deleted."}', 200)]
-    public function destroyComment(
-        ShortVideo $shortVideo,
-        ShortVideoComment $comment,
-        #[CurrentUser] User $user,
-    ): JsonResponse|Responsable {
-        abort_unless($comment->shortVideo()->is($shortVideo), HttpResponse::HTTP_NOT_FOUND);
-        abort_unless($comment->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
-
-        $comment->delete();
-
-        return response()->json(['message' => 'Comment deleted.']);
     }
 
     #[Authenticated]
