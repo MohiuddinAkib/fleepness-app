@@ -46,3 +46,13 @@ it('lists tags', function (): void {
 
     $response->assertOk()->assertJsonCount(5, 'data');
 });
+
+it('shows a single tag', function (): void {
+    $tag = Tag::factory()->create(['name' => 'Flash Sale', 'slug' => 'flash-sale']);
+
+    $this->getJson("/api/tags/{$tag->getKey()}")
+        ->assertOk()
+        ->assertJsonPath('data.id', $tag->getKey())
+        ->assertJsonPath('data.name', 'Flash Sale')
+        ->assertJsonPath('data.slug', 'flash-sale');
+});

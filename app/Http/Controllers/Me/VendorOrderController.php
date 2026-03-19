@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Me;
 
 use App\Models\User;
 use App\Models\VendorOrder;
+use Illuminate\Http\Request;
 use App\Data\VendorOrderData;
 use App\Enums\VendorOrderStatus;
 use Illuminate\Http\JsonResponse;
@@ -26,13 +27,17 @@ class VendorOrderController extends Controller
     #[Authenticated]
     #[Endpoint('List vendor orders')]
     #[Response('{"data":[{"id":1,"order_number":"VORD-001","status":"pending"}],"meta":{"current_page":1}}', 200)]
-    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
+    public function index(Request $request, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN, 'Vendor profile required.');
 
         $orders = VendorOrder::query()
             ->where('vendor_profile_id', $vendorProfile->getKey())
+            ->when(
+                $request->filled('status'),
+                fn ($query) => $query->where('status', $request->string('status')->toString())
+            )
             ->with(['items.product'])
             ->latest()
             ->paginate();

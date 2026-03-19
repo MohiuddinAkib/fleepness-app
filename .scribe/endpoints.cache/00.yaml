@@ -40,8 +40,8 @@ endpoints:
       name:
         custom: []
         name: name
-        description: "The user's full name."
-        required: true
+        description: 'Optional display name for the new user.'
+        required: false
         example: 'John Doe'
         type: string
         enumValues: []
@@ -517,8 +517,8 @@ endpoints:
       name:
         custom: []
         name: name
-        description: "The user's full name."
-        required: true
+        description: 'Optional display name for the new user.'
+        required: false
         example: 'John Doe'
         type: string
         enumValues: []

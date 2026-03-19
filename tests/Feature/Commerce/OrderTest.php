@@ -104,6 +104,24 @@ it('lists own orders', function (): void {
         ->assertJsonCount(3, 'data');
 });
 
+it('filters own orders by order code', function (): void {
+    $user = User::factory()->create();
+    $matchingOrder = Order::factory()->create([
+        'user_id' => $user->getKey(),
+        'order_number' => 'MATCH-ORDER-001',
+    ]);
+    Order::factory()->create([
+        'user_id' => $user->getKey(),
+        'order_number' => 'OTHER-ORDER-002',
+    ]);
+    $token = $user->createToken('test')->plainTextToken;
+
+    $this->withToken($token)->getJson('/api/me/orders?order_code=MATCH')
+        ->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $matchingOrder->getKey());
+});
+
 it('shows own order', function (): void {
     $user = User::factory()->create();
     $order = Order::factory()->create(['user_id' => $user->getKey()]);
@@ -132,6 +150,25 @@ it('lists vendor orders', function (): void {
     $this->withToken($token)->getJson('/api/me/vendor-orders')
         ->assertOk()
         ->assertJsonCount(3, 'data');
+});
+
+it('filters vendor orders by status', function (): void {
+    $user = User::factory()->create();
+    $vendor = VendorProfile::factory()->for($user)->approved()->create();
+    $matchingOrder = VendorOrder::factory()->create([
+        'vendor_profile_id' => $vendor->getKey(),
+        'status' => VendorOrderStatus::Pending,
+    ]);
+    VendorOrder::factory()->create([
+        'vendor_profile_id' => $vendor->getKey(),
+        'status' => VendorOrderStatus::Packaging,
+    ]);
+    $token = $user->createToken('test')->plainTextToken;
+
+    $this->withToken($token)->getJson('/api/me/vendor-orders?status=pending')
+        ->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $matchingOrder->getKey());
 });
 
 it('vendor can accept pending order', function (): void {

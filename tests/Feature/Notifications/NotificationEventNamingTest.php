@@ -7,6 +7,7 @@ use App\Models\Livestream;
 use App\Models\Transaction;
 use App\Models\VendorOrder;
 use App\Models\VendorProfile;
+use App\Models\LivestreamLike;
 use App\Enums\TransactionStatus;
 use App\Enums\VendorOrderStatus;
 use App\Models\LivestreamComment;
@@ -14,7 +15,6 @@ use App\Notifications\WithdrawalApproved;
 use App\Notifications\VendorStatusUpdated;
 use App\Notifications\OrderReceivedByVendor;
 use App\Notifications\VendorOrderStatusChanged;
-use App\Notifications\LivestreamLikeCountChangedNotification;
 
 beforeEach(function (): void {
     config()->set('broadcasting.default', 'log');
@@ -32,8 +32,12 @@ it('uses the canonical event names for current notifications', function (): void
         'user_id' => $user->getKey(),
         'status' => TransactionStatus::Approved,
     ]);
-    $livestream = Livestream::factory()->create();
+    $livestream = Livestream::factory()->started()->create();
     $comment = LivestreamComment::factory()->create([
+        'livestream_id' => $livestream->getKey(),
+        'user_id' => $user->getKey(),
+    ]);
+    $like = LivestreamLike::factory()->create([
         'livestream_id' => $livestream->getKey(),
         'user_id' => $user->getKey(),
     ]);
@@ -43,5 +47,5 @@ it('uses the canonical event names for current notifications', function (): void
         ->and(VendorStatusUpdated::approved()->broadcastAs())->toBe('vendor_application_status_updated')
         ->and((new WithdrawalApproved($transaction))->broadcastAs())->toBe('withdrawal_request_approved')
         ->and($comment->broadcastAs('created'))->toBe('livestream_comment_created')
-        ->and((new LivestreamLikeCountChangedNotification($livestream))->broadcastAs())->toBe('livestream_like_count_updated');
+        ->and($like->broadcastAs('created'))->toBe('livestream_like_count_updated');
 });

@@ -44,6 +44,23 @@ describe('POST /api/auth/register', function (): void {
 
         $response->assertUnprocessable();
     });
+
+    it('registers a new user without a name', function (): void {
+        Notification::fake();
+
+        $response = $this->postJson('/api/auth/register', [
+            'phone_number' => '01712345679',
+        ]);
+
+        $response->assertCreated()
+            ->assertJsonPath('user.phone_number', '01712345679')
+            ->assertJsonPath('user.name', '01712345679');
+
+        $this->assertDatabaseHas('users', [
+            'phone_number' => '01712345679',
+            'name' => '01712345679',
+        ]);
+    });
 });
 
 describe('POST /api/auth/verify-otp', function (): void {

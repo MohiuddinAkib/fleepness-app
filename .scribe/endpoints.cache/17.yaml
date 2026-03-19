@@ -589,6 +589,55 @@ endpoints:
     custom: []
     httpMethods:
       - GET
+    uri: 'api/tags/{tag_id}'
+    metadata:
+      custom: []
+      groupName: Catalog
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get tag'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      tag_id:
+        custom: []
+        name: tag_id
+        description: 'The ID of the tag.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      tag_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": {"id": 1, "name": "sale", "slug": "sale"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
     uri: 'api/tags/{tag_id}/products'
     metadata:
       custom: []
@@ -1209,6 +1258,55 @@ endpoints:
         custom: []
         status: 200
         content: '{"data": [{"id": 1, "name": "sale", "slug": "sale"}]}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/tags/{tag_id}'
+    metadata:
+      custom: []
+      groupName: Catalog
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get tag'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      tag_id:
+        custom: []
+        name: tag_id
+        description: 'The ID of the tag.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      tag_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data": {"id": 1, "name": "sale", "slug": "sale"}}'
         headers: []
         description: ''
     responseFields: []

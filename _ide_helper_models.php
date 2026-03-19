@@ -25,8 +25,8 @@ namespace App\Models{
  * @property numeric|null $latitude
  * @property numeric|null $longitude
  * @property bool $is_default
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\AddressFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Address newModelQuery()
@@ -68,8 +68,8 @@ namespace App\Models{
  * @property int|null $product_variant_id
  * @property int $quantity
  * @property bool $is_selected
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\User $user
  * @property-read \App\Models\ProductVariant|null $variant
@@ -101,8 +101,11 @@ namespace App\Models{
  * @property string|null $cover_image_path
  * @property \App\Enums\CategoryStatus $status
  * @property int $sort_order
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Category> $children
  * @property-read int|null $children_count
  * @property-read bool|null $children_exists
@@ -152,8 +155,12 @@ namespace App\Models{
  * @property int $estimated_minutes
  * @property numeric $fee
  * @property bool $is_active
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption active()
  * @method static \Database\Factories\DeliveryOptionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeliveryOption newQuery()
@@ -176,8 +183,8 @@ namespace App\Models{
  * @property int $user_id
  * @property string $token
  * @property string|null $platform
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\DeviceTokenFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DeviceToken newModelQuery()
@@ -199,8 +206,11 @@ namespace App\Models{
  * @property numeric $vat
  * @property numeric $platform_fee
  * @property numeric $commission
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @method static \Database\Factories\FeeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Fee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Fee newQuery()
@@ -237,12 +247,12 @@ namespace App\Models{
  * @property array<array-key, mixed>|null $egress_metadata
  * @property \App\Enums\LivestreamStatus $status
  * @property int $viewer_count
- * @property \Illuminate\Support\Carbon|null $scheduled_at
- * @property \Illuminate\Support\Carbon|null $started_at
- * @property \Illuminate\Support\Carbon|null $ended_at
+ * @property \Carbon\CarbonImmutable|null $scheduled_at
+ * @property \Carbon\CarbonImmutable|null $started_at
+ * @property \Carbon\CarbonImmutable|null $ended_at
  * @property int|null $total_duration
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamComment> $comments
  * @property-read int|null $comments_count
  * @property-read bool|null $comments_exists
@@ -255,12 +265,19 @@ namespace App\Models{
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read bool|null $media_exists
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read bool|null $notifications_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read bool|null $products_exists
+ * @property-read string $recording_output_path
+ * @property-read array $recordings
+ * @property-read string $room_name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LivestreamSave> $saves
  * @property-read int|null $saves_count
  * @property-read bool|null $saves_exists
+ * @property-read array $thumbnails
  * @property-read \App\Models\VendorProfile $vendorProfile
  * @method static \Database\Factories\LivestreamFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Livestream newModelQuery()
@@ -291,8 +308,8 @@ namespace App\Models{
  * @property int $livestream_id
  * @property int $user_id
  * @property string $comment
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\Livestream $livestream
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\LivestreamCommentFactory factory($count = null, $state = [])
@@ -314,8 +331,8 @@ namespace App\Models{
  * @property int $id
  * @property int $livestream_id
  * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\Livestream $livestream
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\LivestreamLikeFactory factory($count = null, $state = [])
@@ -352,8 +369,8 @@ namespace App\Models{
  * @property int $id
  * @property int $livestream_id
  * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\Livestream $livestream
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\LivestreamSaveFactory factory($count = null, $state = [])
@@ -377,8 +394,8 @@ namespace App\Models{
  * @property int $notifiable_id
  * @property string $data
  * @property string|null $read_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Notification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Notification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Notification query()
@@ -410,8 +427,11 @@ namespace App\Models{
  * @property numeric $grand_total
  * @property numeric $balance
  * @property bool $is_completed
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \App\Models\DeliveryOption|null $deliveryOption
  * @property-read \App\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorOrder> $vendorOrders
@@ -447,11 +467,15 @@ namespace App\Models{
  * @property string $name
  * @property string|null $icon_path
  * @property bool $is_active
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPaymentAccount> $userPaymentAccounts
  * @property-read int|null $user_payment_accounts_count
  * @property-read bool|null $user_payment_accounts_exists
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\PaymentMethod active()
  * @method static \Database\Factories\PaymentMethodFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\PaymentMethod newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\PaymentMethod newQuery()
@@ -483,9 +507,12 @@ namespace App\Models{
  * @property string|null $description
  * @property \App\Enums\ProductStatus $status
  * @property bool $is_approved
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $deleted_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \App\Models\Category|null $category
  * @property-read bool $is_active
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
@@ -540,8 +567,8 @@ namespace App\Models{
  * @property int $product_id
  * @property int $rating
  * @property string|null $review
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\ProductReviewFactory factory($count = null, $state = [])
@@ -576,8 +603,8 @@ namespace App\Models{
  * @property string $name
  * @property numeric $price
  * @property int $stock
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\Product|null $product
  * @method static \Database\Factories\ProductVariantFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductVariant newModelQuery()
@@ -608,8 +635,11 @@ namespace App\Models{
  * @property int $sort_order
  * @property int $category_sort_order
  * @property bool $is_visible
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \App\Models\Category|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SectionItem> $items
  * @property-read int|null $items_count
@@ -621,6 +651,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section visible()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereBackgroundImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereBannerImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereCategoryId($value)
@@ -649,8 +680,8 @@ namespace App\Models{
  * @property string|null $description
  * @property int $sort_order
  * @property bool $is_visible
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read bool|null $media_exists
@@ -725,8 +756,11 @@ namespace App\Models{
  * @property string $name
  * @property string $slug
  * @property string|null $description
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorProfile> $vendorProfiles
  * @property-read int|null $vendor_profiles_count
  * @property-read bool|null $vendor_profiles_exists
@@ -753,8 +787,8 @@ namespace App\Models{
  * @property string $video_path
  * @property string|null $thumbnail_path
  * @property-read int|null $likes_count
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShortVideoComment> $comments
  * @property-read int|null $comments_count
  * @property-read bool|null $comments_exists
@@ -793,8 +827,8 @@ namespace App\Models{
  * @property int $short_video_id
  * @property int $user_id
  * @property string $comment
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\ShortVideo $shortVideo
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\ShortVideoCommentFactory factory($count = null, $state = [])
@@ -816,8 +850,8 @@ namespace App\Models{
  * @property int $id
  * @property int $short_video_id
  * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\ShortVideo $shortVideo
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\ShortVideoLikeFactory factory($count = null, $state = [])
@@ -838,8 +872,8 @@ namespace App\Models{
  * @property int $id
  * @property int $short_video_id
  * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\ShortVideo $shortVideo
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\ShortVideoSaveFactory factory($count = null, $state = [])
@@ -904,8 +938,8 @@ namespace App\Models{
  * @property int $id
  * @property int $vendor_profile_id
  * @property string $name
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SizeTemplateItem> $items
  * @property-read int|null $items_count
  * @property-read bool|null $items_exists
@@ -929,8 +963,8 @@ namespace App\Models{
  * @property int $size_template_id
  * @property string $label
  * @property string $value
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\SizeTemplate $sizeTemplate
  * @method static \Database\Factories\SizeTemplateItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SizeTemplateItem newModelQuery()
@@ -955,13 +989,17 @@ namespace App\Models{
  * @property string|null $url
  * @property bool $is_active
  * @property int $sort_order
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \App\Models\Category|null $category
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read bool|null $media_exists
  * @property-read \App\Models\Tag|null $tag
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider active()
  * @method static \Database\Factories\SliderFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider newQuery()
@@ -993,8 +1031,8 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $slug
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read bool|null $products_exists
@@ -1021,8 +1059,11 @@ namespace App\Models{
  * @property \App\Enums\TransactionType $type
  * @property \App\Enums\TransactionStatus $status
  * @property string|null $note
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read bool $is_approved
  * @property-read bool $is_pending
  * @property-read bool $is_withdrawal
@@ -1051,14 +1092,17 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string|null $email
- * @property string $phone_number
+ * @property string|null $phone_number
  * @property string|null $password
  * @property string|null $provider
  * @property string|null $provider_id
- * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property \Carbon\CarbonImmutable|null $email_verified_at
  * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Address> $addresses
  * @property-read int|null $addresses_count
  * @property-read bool|null $addresses_exists
@@ -1069,6 +1113,9 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorProfile> $following
  * @property-read int|null $following_count
  * @property-read bool|null $following_exists
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read bool|null $media_exists
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read bool|null $notifications_exists
@@ -1078,6 +1125,12 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPaymentAccount> $paymentAccounts
  * @property-read int|null $payment_accounts_count
  * @property-read bool|null $payment_accounts_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read bool|null $permissions_exists
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
+ * @property-read bool|null $roles_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read bool|null $tokens_exists
@@ -1088,7 +1141,9 @@ namespace App\Models{
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User permission($permissions, bool $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User role($roles, ?string $guard = null, bool $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereEmailVerifiedAt($value)
@@ -1100,8 +1155,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereProviderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User withoutRole($roles, ?string $guard = null)
  */
-	class User extends \Eloquent implements \App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice, \App\Support\Notification\Contracts\FcmNotifiableByDevice, \Filament\Models\Contracts\FilamentUser {}
+	class User extends \Eloquent implements \App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice, \App\Support\Notification\Contracts\FcmNotifiableByDevice, \Filament\Models\Contracts\FilamentUser, \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
@@ -1122,8 +1179,8 @@ namespace App\Models{
  * @property int $payment_method_id
  * @property string $account_number
  * @property bool $is_primary
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\PaymentMethod $paymentMethod
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\UserPaymentAccountFactory factory($count = null, $state = [])
@@ -1146,8 +1203,8 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property int $vendor_profile_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User $user
  * @property-read \App\Models\VendorProfile $vendorProfile
  * @method static \Database\Factories\VendorFollowerFactory factory($count = null, $state = [])
@@ -1179,10 +1236,13 @@ namespace App\Models{
  * @property numeric $balance
  * @property bool $is_rider_assigned
  * @property bool $is_delayed
- * @property \Illuminate\Support\Carbon|null $packaging_started_at
- * @property \Illuminate\Support\Carbon|null $expected_delivery_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $packaging_started_at
+ * @property \Carbon\CarbonImmutable|null $expected_delivery_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \App\Models\User $customer
  * @property-read bool $is_pending
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorOrderItem> $items
@@ -1190,6 +1250,7 @@ namespace App\Models{
  * @property-read bool|null $items_exists
  * @property-read \App\Models\Order $order
  * @property-read \App\Models\VendorProfile $vendorProfile
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder delayed()
  * @method static \Database\Factories\VendorOrderFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorOrder newQuery()
@@ -1225,8 +1286,8 @@ namespace App\Models{
  * @property int $quantity
  * @property numeric $unit_price
  * @property numeric $total_price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\ProductVariant|null $variant
  * @property-read \App\Models\VendorOrder $vendorOrder
@@ -1263,8 +1324,11 @@ namespace App\Models{
  * @property int $order_count
  * @property \App\Enums\VendorStatus $status
  * @property string|null $status_note
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read bool|null $activities_exists
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\VendorFollower> $followers
  * @property-read int|null $followers_count
  * @property-read bool|null $followers_exists
@@ -1317,8 +1381,8 @@ namespace App\Models{
  * @property int $user_id
  * @property int $rating
  * @property string|null $comment
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User $user
  * @property-read \App\Models\VendorProfile $vendorProfile
  * @method static \Database\Factories\VendorReviewFactory factory($count = null, $state = [])
@@ -1350,8 +1414,8 @@ namespace App\Webhooks\Livekit{
  * @property array<array-key, mixed>|null $headers
  * @property array<array-key, mixed>|null $payload
  * @property array<array-key, mixed>|null $exception
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Webhooks\Livekit\LivekitWebhookCall whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Webhooks\Livekit\LivekitWebhookCall whereException($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Webhooks\Livekit\LivekitWebhookCall whereHeaders($value)

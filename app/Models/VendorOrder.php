@@ -6,9 +6,11 @@ namespace App\Models;
 
 use App\Enums\VendorOrderStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Concerns\LogsModelActivity;
 use Database\Factories\VendorOrderFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,6 +54,20 @@ class VendorOrder extends Model
             'packaging_started_at' => 'datetime',
             'expected_delivery_at' => 'datetime',
         ];
+    }
+
+    /** @param Builder<VendorOrder> $query */
+    #[Scope]
+    public function delayed(Builder $query): void
+    {
+        $query
+            ->whereNotIn('status', [
+                VendorOrderStatus::Delivered,
+                VendorOrderStatus::Rejected,
+            ])
+            ->whereNotNull('expected_delivery_at')
+            ->where('expected_delivery_at', '<', now())
+            ->where('is_delayed', false);
     }
 
     public function isPending(): Attribute

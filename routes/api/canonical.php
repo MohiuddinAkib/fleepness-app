@@ -69,6 +69,7 @@ Route::prefix('categories')->group(function (): void {
 
 Route::prefix('tags')->group(function (): void {
     Route::get('/', [TagController::class, 'index']);
+    Route::get('{tag}', [TagController::class, 'show']);
     Route::get('{tag}/products', [TagController::class, 'products']);
 });
 

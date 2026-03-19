@@ -11,6 +11,7 @@ use App\Data\OrderData;
 use App\Models\CartItem;
 use App\Models\VendorOrder;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Models\DeliveryOption;
 use App\Enums\VendorOrderStatus;
 use Illuminate\Http\JsonResponse;
@@ -34,10 +35,14 @@ class OrderController extends Controller
     #[Authenticated]
     #[Endpoint('List own orders', 'Returns a paginated list of all orders placed by the authenticated user.')]
     #[Response('{"data":[{"id":1,"order_number":"ORD-001","grand_total":"250.00","is_completed":false}],"meta":{"current_page":1}}', 200)]
-    public function index(#[CurrentUser] User $user): JsonResponse|Responsable
+    public function index(Request $request, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $orders = Order::query()
             ->where('user_id', $user->getKey())
+            ->when(
+                $request->filled('order_code'),
+                fn ($query) => $query->whereLike('order_number', '%'.$request->string('order_code')->toString().'%')
+            )
             ->with(['vendorOrders.items.product'])
             ->latest()
             ->paginate();

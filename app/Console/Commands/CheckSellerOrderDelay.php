@@ -6,7 +6,6 @@ namespace App\Console\Commands;
 
 use App\Models\VendorOrder;
 use Illuminate\Console\Command;
-use App\Enums\VendorOrderStatus;
 
 class CheckSellerOrderDelay extends Command
 {
@@ -16,12 +15,7 @@ class CheckSellerOrderDelay extends Command
 
     public function handle(): int
     {
-        $count = VendorOrder::query()
-            ->whereNotIn('status', [VendorOrderStatus::Delivered, VendorOrderStatus::Rejected])
-            ->whereNotNull('expected_delivery_at')
-            ->where('expected_delivery_at', '<', now())
-            ->where('is_delayed', false)
-            ->update(['is_delayed' => true]);
+        $count = VendorOrder::delayed()->update(['is_delayed' => true]);
 
         $this->info("{$count} vendor orders marked as delayed.");
 

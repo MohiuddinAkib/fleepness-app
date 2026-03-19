@@ -548,6 +548,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="catalog-GETapi-tags">
                                 <a href="#catalog-GETapi-tags">List all tags</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="catalog-GETapi-tags--tag_id-">
+                                <a href="#catalog-GETapi-tags--tag_id-">Get tag</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="catalog-GETapi-tags--tag_id--products">
                                 <a href="#catalog-GETapi-tags--tag_id--products">List products by tag</a>
                             </li>
@@ -580,6 +583,9 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="catalog-GETapi-v1-tags">
                                 <a href="#catalog-GETapi-v1-tags">List all tags</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="catalog-GETapi-v1-tags--tag_id-">
+                                <a href="#catalog-GETapi-v1-tags--tag_id-">Get tag</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="catalog-GETapi-v1-tags--tag_id--products">
                                 <a href="#catalog-GETapi-v1-tags--tag_id--products">List products by tag</a>
@@ -959,7 +965,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: March 19, 2026</li>
+        <li>Last updated: March 20, 2026</li>
     </ul>
 </div>
 
@@ -1209,14 +1215,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-auth-register"
                value="John Doe"
                data-component="body">
     <br>
-<p>The user's full name. Example: <code>John Doe</code></p>
+<p>Optional display name for the new user. Example: <code>John Doe</code></p>
         </div>
         </form>
 
@@ -2693,14 +2699,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-v1-auth-register"
                value="John Doe"
                data-component="body">
     <br>
-<p>The user's full name. Example: <code>John Doe</code></p>
+<p>Optional display name for the new user. Example: <code>John Doe</code></p>
         </div>
         </form>
 
@@ -16336,8 +16342,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "title=Summer Collection"\
     --form "description=Eius et animi quos velit et."\
-    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpmovbm56m4thmeaZfeI9" \
-    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpdcekg60o42lq3to4DHJ" </code></pre></div>
+    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php4nkfqrp2edhf1z15v1I" \
+    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpi23lhhaak86kadUQwsC" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -16386,11 +16392,11 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'video',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpmovbm56m4thmeaZfeI9', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php4nkfqrp2edhf1z15v1I', 'r')
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpdcekg60o42lq3to4DHJ', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpi23lhhaak86kadUQwsC', 'r')
             ],
         ],
     ]
@@ -16532,7 +16538,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpmovbm56m4thmeaZfeI9</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php4nkfqrp2edhf1z15v1I</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -16544,7 +16550,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpdcekg60o42lq3to4DHJ</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpi23lhhaak86kadUQwsC</code></p>
         </div>
         </form>
 
@@ -17100,8 +17106,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "title=Summer Collection"\
     --form "description=Eius et animi quos velit et."\
-    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php7njn81a7n7g3daEkfWB" \
-    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php0r5td9qjl1ra6Znk5T3" </code></pre></div>
+    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpkp6fg9c05hl09arpQIl" \
+    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpumi17c2vnd183ywj6Ah" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -17150,11 +17156,11 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'video',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php7njn81a7n7g3daEkfWB', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpkp6fg9c05hl09arpQIl', 'r')
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php0r5td9qjl1ra6Znk5T3', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpumi17c2vnd183ywj6Ah', 'r')
             ],
         ],
     ]
@@ -17296,7 +17302,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php7njn81a7n7g3daEkfWB</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpkp6fg9c05hl09arpQIl</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -17308,7 +17314,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php0r5td9qjl1ra6Znk5T3</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpumi17c2vnd183ywj6Ah</code></p>
         </div>
         </form>
 
@@ -24323,6 +24329,159 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                    <h2 id="catalog-GETapi-tags--tag_id-">Get tag</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-tags--tag_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/tags/16" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/tags/16"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/tags/16';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-tags--tag_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;sale&quot;,
+        &quot;slug&quot;: &quot;sale&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-tags--tag_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-tags--tag_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-tags--tag_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-tags--tag_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-tags--tag_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-tags--tag_id-" data-method="GET"
+      data-path="api/tags/{tag_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-tags--tag_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-tags--tag_id-"
+                    onclick="tryItOut('GETapi-tags--tag_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-tags--tag_id-"
+                    onclick="cancelTryOut('GETapi-tags--tag_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-tags--tag_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/tags/{tag_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-tags--tag_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-tags--tag_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>tag_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="tag_id"                data-endpoint="GETapi-tags--tag_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the tag. Example: <code>16</code></p>
+            </div>
+                    </form>
+
                     <h2 id="catalog-GETapi-tags--tag_id--products">List products by tag</h2>
 
 <p>
@@ -26170,6 +26329,159 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                    <h2 id="catalog-GETapi-v1-tags--tag_id-">Get tag</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-tags--tag_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/v1/tags/16" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/v1/tags/16"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/v1/tags/16';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-tags--tag_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;sale&quot;,
+        &quot;slug&quot;: &quot;sale&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-tags--tag_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-tags--tag_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-tags--tag_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-tags--tag_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-tags--tag_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-tags--tag_id-" data-method="GET"
+      data-path="api/v1/tags/{tag_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-tags--tag_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-tags--tag_id-"
+                    onclick="tryItOut('GETapi-v1-tags--tag_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-tags--tag_id-"
+                    onclick="cancelTryOut('GETapi-v1-tags--tag_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-tags--tag_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/tags/{tag_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-tags--tag_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-tags--tag_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>tag_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="tag_id"                data-endpoint="GETapi-v1-tags--tag_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the tag. Example: <code>16</code></p>
+            </div>
+                    </form>
 
                     <h2 id="catalog-GETapi-v1-tags--tag_id--products">List products by tag</h2>
 
@@ -41383,14 +41695,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/notifications/architecto/mark-as-read" \
+    "https://fleepness-app.test/api/notifications/16/mark-as-read" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/notifications/architecto/mark-as-read"
+    "https://fleepness-app.test/api/notifications/16/mark-as-read"
 );
 
 const headers = {
@@ -41407,7 +41719,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/notifications/architecto/mark-as-read';
+$url = 'https://fleepness-app.test/api/notifications/16/mark-as-read';
 $response = $client-&gt;post(
     $url,
     [
@@ -41498,15 +41810,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>notification_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="notification_id"                data-endpoint="POSTapi-notifications--notification_id--mark-as-read"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="notification_id"                data-endpoint="POSTapi-notifications--notification_id--mark-as-read"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the notification. Example: <code>architecto</code></p>
+<p>The ID of the notification. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -42918,7 +43230,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/me/notifications/architecto/read" \
+    "https://fleepness-app.test/api/me/notifications/16/read" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -42926,7 +43238,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/notifications/architecto/read"
+    "https://fleepness-app.test/api/me/notifications/16/read"
 );
 
 const headers = {
@@ -42944,7 +43256,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/notifications/architecto/read';
+$url = 'https://fleepness-app.test/api/me/notifications/16/read';
 $response = $client-&gt;post(
     $url,
     [
@@ -43057,15 +43369,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>notification_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="notification_id"                data-endpoint="POSTapi-me-notifications--notification_id--read"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="notification_id"                data-endpoint="POSTapi-me-notifications--notification_id--read"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the notification. Example: <code>architecto</code></p>
+<p>The ID of the notification. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -43434,7 +43746,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/notifications/architecto/read" \
+    "https://fleepness-app.test/api/v1/me/notifications/16/read" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -43442,7 +43754,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/notifications/architecto/read"
+    "https://fleepness-app.test/api/v1/me/notifications/16/read"
 );
 
 const headers = {
@@ -43460,7 +43772,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/notifications/architecto/read';
+$url = 'https://fleepness-app.test/api/v1/me/notifications/16/read';
 $response = $client-&gt;post(
     $url,
     [
@@ -43573,15 +43885,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>notification_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="notification_id"                data-endpoint="POSTapi-v1-me-notifications--notification_id--read"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="notification_id"                data-endpoint="POSTapi-v1-me-notifications--notification_id--read"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the notification. Example: <code>architecto</code></p>
+<p>The ID of the notification. Example: <code>16</code></p>
             </div>
                     </form>
 

@@ -24,14 +24,14 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 class OTPAuthController extends Controller
 {
     #[BodyParam('phone_number', 'string', 'The user\'s phone number.', required: true, example: '+8801712345678')]
-    #[BodyParam('name', 'string', 'The user\'s full name.', required: true, example: 'John Doe')]
+    #[BodyParam('name', 'string', 'Optional display name for the new user.', required: false, example: 'John Doe')]
     #[Endpoint('Register', 'Register a new user and send an OTP to the provided phone number.')]
     #[Response(['message' => 'OTP sent to your phone number.'], 200, 'OTP sent successfully.')]
     #[Unauthenticated]
     public function register(RegisterData $data): JsonResponse|Responsable
     {
         $user = User::create([
-            'name' => $data->name,
+            'name' => $data->name ?? $data->phoneNumber,
             'phone_number' => $data->phoneNumber,
         ]);
 

@@ -25,6 +25,18 @@ it('lists livestreams publicly', function (): void {
         ->assertJsonCount(3, 'data');
 });
 
+it('filters livestreams by vendor id', function (): void {
+    $vendor = VendorProfile::factory()->approved()->create();
+    $otherVendor = VendorProfile::factory()->approved()->create();
+    $matchingLivestream = Livestream::factory()->create(['vendor_profile_id' => $vendor->getKey()]);
+    Livestream::factory()->create(['vendor_profile_id' => $otherVendor->getKey()]);
+
+    $this->getJson('/api/livestreams?vendor_id='.$vendor->getKey())
+        ->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $matchingLivestream->getKey());
+});
+
 it('shows a livestream publicly', function (): void {
     $livestream = Livestream::factory()->create();
 

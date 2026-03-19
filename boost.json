@@ -18,6 +18,7 @@
     "skills": [
         "configuring-horizon",
         "socialite-development",
+        "wayfinder-development",
         "pest-testing",
         "medialibrary-development",
         "spatie-laravel-php-standards",

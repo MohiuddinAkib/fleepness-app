@@ -9,6 +9,7 @@ use App\Data\ProductData;
 use App\Models\Livestream;
 use Illuminate\Support\Str;
 use App\Data\LivestreamData;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
@@ -32,9 +33,13 @@ class LivestreamController extends Controller
     #[Endpoint('List livestreams')]
     #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}', 200)]
     #[Unauthenticated]
-    public function index(): JsonResponse|Responsable
+    public function index(Request $request): JsonResponse|Responsable
     {
         $livestreams = Livestream::query()
+            ->when(
+                $request->filled('vendor_id'),
+                fn ($query) => $query->where('vendor_profile_id', $request->integer('vendor_id'))
+            )
             ->with(['media', 'vendorProfile'])
             ->latest()
             ->paginate();
