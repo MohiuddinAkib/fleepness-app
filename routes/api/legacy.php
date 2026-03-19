@@ -13,8 +13,8 @@ use App\Http\Controllers\Public\ShortVideoController;
 Route::middleware(['auth:sanctum'])->group(function (): void {
     // Legacy aliases kept for the current React Native client.
     // Preferred modern replacements:
-    // - `/api/me/role` -> `/api/me` and `/api/me/vendors`
-    // - `/api/seller/status` -> `/api/vendor-applications/status` or `/api/me/vendors`
+    // - `/api/me/role` -> `/api/me/summaries` and `/api/me/vendors`
+    // - `/api/seller/status` -> `/api/me/summaries`, `/api/vendor-applications/status`, or `/api/me/vendors`
     // - `/api/notifications*` -> `/api/me/notifications*`
     // - `/api/addresses/default` -> `/api/me/addresses` and `is_default`
     // - `/api/followers` -> `/api/me/vendors/followers`

@@ -9,6 +9,7 @@ it('generates and serves API documentation artifacts', function (): void {
     expect(file_exists(storage_path('app/private/scribe/openapi.yaml')))->toBeTrue();
     expect(file_get_contents(storage_path('app/private/scribe/openapi.yaml')))
         ->toContain('/api/me/vendors/followers')
+        ->toContain('/api/me/summaries')
         ->toContain('/api/me/notifications')
         ->toContain('/api/me/short-videos/saved')
         ->toContain('/api/me/livestreams/liked')

@@ -22,7 +22,7 @@ it('returns role and seller status on legacy compatibility endpoints', function 
         ->assertHeader('X-Fleepness-Legacy-Endpoint', 'true')
         ->assertHeader('X-Fleepness-Migration-Key', 'me.role')
         ->assertHeader('X-Fleepness-Legacy-Path', '/api/me/role')
-        ->assertHeader('X-Fleepness-Replacement-Endpoints', '/api/me,/api/me/vendors')
+        ->assertHeader('X-Fleepness-Replacement-Endpoints', '/api/me/summaries,/api/me/vendors')
         ->assertJsonPath('user_id', $user->getKey())
         ->assertJsonPath('role', 'vendor')
         ->assertJsonPath('status', VendorStatus::Approved->value);
@@ -31,6 +31,7 @@ it('returns role and seller status on legacy compatibility endpoints', function 
         ->assertOk()
         ->assertHeader('X-Fleepness-Legacy-Endpoint', 'true')
         ->assertHeader('X-Fleepness-Migration-Key', 'seller.status')
+        ->assertHeader('X-Fleepness-Replacement-Endpoints', '/api/me/summaries,/api/vendor-applications/status,/api/me/vendors')
         ->assertJsonPath('status', VendorStatus::Approved->value);
 });
 

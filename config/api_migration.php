@@ -6,11 +6,11 @@ return [
     'legacy_endpoints' => [
         'me.role' => [
             'path' => '/api/me/role',
-            'replacements' => ['/api/me', '/api/me/vendors'],
+            'replacements' => ['/api/me/summaries', '/api/me/vendors'],
         ],
         'seller.status' => [
             'path' => '/api/seller/status',
-            'replacements' => ['/api/vendor-applications/status', '/api/me/vendors'],
+            'replacements' => ['/api/me/summaries', '/api/vendor-applications/status', '/api/me/vendors'],
         ],
         'notifications.index' => [
             'path' => '/api/notifications',

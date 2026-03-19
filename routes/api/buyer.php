@@ -9,6 +9,7 @@ use App\Http\Controllers\Me\FollowController;
 use App\Http\Controllers\Me\AddressController;
 use App\Http\Controllers\Me\ProfileController;
 use App\Http\Controllers\Me\NotificationController;
+use App\Http\Controllers\Me\AccountSummaryController;
 use App\Http\Controllers\Me\LikedLivestreamController;
 use App\Http\Controllers\Me\SavedLivestreamController;
 use App\Http\Controllers\Me\SavedShortVideoController;
@@ -19,6 +20,7 @@ Route::middleware(['auth:sanctum'])
     ->group(function (): void {
         Route::get('/', [ProfileController::class, 'show']);
         Route::patch('/', [ProfileController::class, 'update']);
+        Route::get('summaries', [AccountSummaryController::class, 'index']);
 
         Route::prefix('notifications')->group(function (): void {
             Route::get('/', [NotificationController::class, 'index']);
