@@ -101,19 +101,19 @@ class Livestream extends Model implements HasMedia
         return $this->belongsToMany(Product::class, 'livestream_products');
     }
 
-    public function getRoomName(): string
+    public function roomName(): Attribute
     {
-        return sprintf('livestream_%s', $this->getKey());
+        return Attribute::get(fn (): string => sprintf('livestream_%s', $this->getKey()));
     }
 
-    public function getRecordingOutputPath(): string
+    public function recordingOutputPath(): Attribute
     {
-        return sprintf('livestreams/%s/%s', $this->getRoomName(), now()->timestamp);
+        return Attribute::get(fn (): string => sprintf('livestreams/%s/%s', $this->room_name, now()->timestamp));
     }
 
     public function startRecording(): void
     {
-        $egress = LivestreamFacade::startRecording($this->getRoomName(), $this->getRecordingOutputPath());
+        $egress = LivestreamFacade::startRecording($this->room_name, $this->recording_output_path);
 
         $this->update(['egress_id' => $egress->getEgressId()]);
     }

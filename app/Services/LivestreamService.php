@@ -159,7 +159,7 @@ class LivestreamService
 
     public function getRecordingsFor(Livestream $livestream)
     {
-        $listEgress = $this->egressService->listEgress($livestream->getRoomName(), $livestream->egress_id);
+        $listEgress = $this->egressService->listEgress($livestream->room_name, $livestream->egress_id);
 
         /** @var Collection<int,EgressInfo> */
         $egressInfoCollection = collect($listEgress->getItems());
@@ -195,7 +195,7 @@ class LivestreamService
 
     public function getThumbnailsFor(Livestream $livestream)
     {
-        $listEgress = $this->egressService->listEgress($livestream->getRoomName(), $livestream->egress_id);
+        $listEgress = $this->egressService->listEgress($livestream->room_name, $livestream->egress_id);
 
         /** @var Collection<int,EgressInfo> */
         $egressInfoCollection = collect($listEgress->getItems());
@@ -234,7 +234,7 @@ class LivestreamService
 
     public function getShortVideosFor(Livestream $livestream)
     {
-        $listEgress = $this->egressService->listEgress($livestream->getRoomName(), $livestream->egress_id);
+        $listEgress = $this->egressService->listEgress($livestream->room_name, $livestream->egress_id);
 
         /** @var Collection<int,EgressInfo> */
         $egressInfoCollection = collect($listEgress->getItems());

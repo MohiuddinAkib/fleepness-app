@@ -114,7 +114,7 @@ class LivestreamController extends Controller
         $displayName = $user?->name ?? 'Guest';
 
         $data = new GenerateSubscriberTokenData(
-            roomName: $livestream->getRoomName(),
+            roomName: $livestream->room_name,
             identity: $identity,
             displayName: $displayName,
             isPublic: null === $user,

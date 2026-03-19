@@ -40,7 +40,7 @@ class NewLivestreamCommentNotification extends Notification implements ShouldBro
     public function broadcastOn(): array
     {
         return [
-            new PresenceChannel($this->comment->livestream->getRoomName()),
+            new PresenceChannel($this->comment->livestream->room_name),
         ];
     }
 

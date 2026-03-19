@@ -49,7 +49,7 @@ class LivestreamLikeCountChangedNotification extends Notification implements Sho
     public function broadcastOn(): array
     {
         return [
-            new PresenceChannel($this->livestream->getRoomName()),
+            new PresenceChannel($this->livestream->room_name),
         ];
     }
 

@@ -62,7 +62,7 @@ class LivestreamController extends Controller
 
         $token = LivestreamFacade::generatePublisherToken(
             new GeneratePublisherTokenData(
-                roomName: $livestream->getRoomName(),
+                roomName: $livestream->room_name,
                 identity: (string) $user->getKey(),
                 displayName: $user->name ?? 'Vendor',
                 metadata: ['livestream_id' => $livestream->getKey()],
@@ -116,7 +116,7 @@ class LivestreamController extends Controller
                 $updates['started_at'] = now();
                 $token = LivestreamFacade::generatePublisherToken(
                     new GeneratePublisherTokenData(
-                        roomName: $livestream->getRoomName(),
+                        roomName: $livestream->room_name,
                         identity: (string) $user->getKey(),
                         displayName: $user->name ?? 'Vendor',
                         metadata: ['livestream_id' => $livestream->getKey()],
@@ -183,7 +183,7 @@ class LivestreamController extends Controller
         );
 
         $data = new GeneratePublisherTokenData(
-            roomName: $livestream->getRoomName(),
+            roomName: $livestream->room_name,
             identity: (string) $user->getKey(),
             displayName: $user->name ?? 'Vendor',
             metadata: ['livestream_identity' => $livestream->getKey()],
