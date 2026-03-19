@@ -5,10 +5,10 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Me\FollowController;
 use App\Http\Controllers\Me\AddressController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\CompatibilityController;
 use App\Http\Controllers\Public\LivestreamController;
 use App\Http\Controllers\Public\ShortVideoController;
+use App\Http\Controllers\Legacy\NotificationController;
+use App\Http\Controllers\Legacy\CompatibilityController;
 
 Route::middleware(['auth:sanctum'])->group(function (): void {
     // Legacy aliases kept for the current React Native client.

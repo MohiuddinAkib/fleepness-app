@@ -9,26 +9,23 @@ it('keeps the top-level controller namespace on an explicit allowlist', function
         ->values()
         ->all();
 
-    expect($controllers)->toEqualCanonicalizing([
-        'CompatibilityController.php',
-        'NotificationController.php',
-    ]);
+    expect($controllers)->toBeEmpty();
 });
 
 it('keeps compatibility-only controllers referenced from the dedicated legacy route file', function (): void {
     expect(file_get_contents(base_path('routes/api/legacy.php')))
         ->toContain('CompatibilityController::class')
-        ->toContain('App\Http\Controllers\NotificationController');
+        ->toContain('App\Http\Controllers\Legacy\NotificationController');
 
     expect(file_get_contents(base_path('routes/api.php')))
         ->not->toContain('CompatibilityController::class')
-        ->not->toContain('App\Http\Controllers\NotificationController');
+        ->not->toContain('App\Http\Controllers\Legacy\NotificationController');
 
     expect(file_get_contents(base_path('routes/api/buyer.php')))
         ->not->toContain('CompatibilityController::class')
-        ->not->toContain('App\Http\Controllers\NotificationController');
+        ->not->toContain('App\Http\Controllers\Legacy\NotificationController');
 
     expect(file_get_contents(base_path('routes/api/vendor.php')))
         ->not->toContain('CompatibilityController::class')
-        ->not->toContain('App\Http\Controllers\NotificationController');
+        ->not->toContain('App\Http\Controllers\Legacy\NotificationController');
 });
