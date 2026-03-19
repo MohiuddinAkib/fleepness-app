@@ -27,10 +27,13 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 #[Group('Vendors', 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.')]
 class VendorController extends Controller
 {
-    #[Endpoint('List vendors')]
-    #[QueryParam('search', 'string', required: false)]
-    #[QueryParam('shop_category_id', 'integer', required: false)]
-    #[QueryParam('similar_to_vendor_id', 'integer', required: false)]
+    #[Endpoint(
+        'List vendors',
+        'Browse approved vendors. This endpoint also replaces the old `/similarvendors/{vendor}` flow by accepting `similar_to_vendor_id`, and replaces vendor discovery filtering that previously lived on ad-hoc staging routes.'
+    )]
+    #[QueryParam('search', 'string', required: false, description: 'Filter vendors by shop name.', example: 'flash')]
+    #[QueryParam('shop_category_id', 'integer', required: false, description: 'Limit the vendor list to a specific shop category.', example: 2)]
+    #[QueryParam('similar_to_vendor_id', 'integer', required: false, description: 'Modern replacement for the old `/similarvendors/{vendor}` endpoint. Pass a vendor id to return other approved vendors from the same shop category.', example: 12)]
     #[Response('{"data": [{"id": 1, "shop_name": "Flash Store", "status": "approved"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
     public function index(ListVendorsData $data): JsonResponse|Responsable
@@ -97,11 +100,14 @@ class VendorController extends Controller
         return response()->json(['message' => 'Vendor unfollowed.']);
     }
 
-    #[Endpoint('List vendor products')]
-    #[QueryParam('q', 'string', required: false)]
-    #[QueryParam('min_price', 'number', required: false)]
-    #[QueryParam('max_price', 'number', required: false)]
-    #[QueryParam('price_category', 'string', required: false, example: 'low')]
+    #[Endpoint(
+        'List vendor products',
+        'Browse a vendor storefront. This modern endpoint replaces the old vendor-specific staging routes for product search, price-range filtering, and price-category filtering.'
+    )]
+    #[QueryParam('q', 'string', required: false, description: 'Search within the selected vendor storefront. This is the replacement for the old vendor product search route.', example: 'flash tee')]
+    #[QueryParam('min_price', 'number', required: false, description: 'Minimum effective product price. Use together with `max_price` as the replacement for the old in-price-range endpoint.', example: 200)]
+    #[QueryParam('max_price', 'number', required: false, description: 'Maximum effective product price. Use together with `min_price` as the replacement for the old in-price-range endpoint.', example: 500)]
+    #[QueryParam('price_category', 'string', required: false, description: 'Named price-band replacement for the old in-price-category endpoint. Supported values: `low`, `medium`, `premium`.', example: 'low')]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
     public function products(
