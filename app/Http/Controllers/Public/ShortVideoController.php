@@ -22,6 +22,7 @@ use App\Data\ShortVideo\StoreCommentData;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
+use App\Actions\Me\ListSavedShortVideosAction;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -176,13 +177,11 @@ class ShortVideoController extends Controller
      *
      * Kept only so the current React Native client continues to function during migration.
      */
-    public function saved(#[CurrentUser] User $user): JsonResponse|Responsable
-    {
-        $videos = ShortVideo::query()
-            ->whereHas('saves', fn ($query) => $query->where('user_id', $user->getKey()))
-            ->with(['media', 'vendorProfile'])
-            ->latest()
-            ->paginate();
+    public function saved(
+        #[CurrentUser] User $user,
+        ListSavedShortVideosAction $listSavedShortVideos,
+    ): JsonResponse|Responsable {
+        $videos = $listSavedShortVideos->execute($user);
 
         return ShortVideoData::collect($videos, PaginatedDataCollection::class);
     }

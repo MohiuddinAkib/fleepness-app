@@ -22,6 +22,8 @@ use Knuckles\Scribe\Attributes\BodyParam;
 use App\Data\Dto\GenerateSubscriberTokenData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
+use App\Actions\Me\ListLikedLivestreamsAction;
+use App\Actions\Me\ListSavedLivestreamsAction;
 use App\Facades\Livestream as LivestreamFacade;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -147,13 +149,11 @@ class LivestreamController extends Controller
      *
      * Retained only for backward compatibility with the mobile client.
      */
-    public function liked(#[CurrentUser] User $user): JsonResponse|Responsable
-    {
-        $livestreams = Livestream::query()
-            ->whereHas('likes', fn ($query) => $query->where('user_id', $user->getKey()))
-            ->with(['media', 'vendorProfile'])
-            ->latest()
-            ->paginate();
+    public function liked(
+        #[CurrentUser] User $user,
+        ListLikedLivestreamsAction $listLikedLivestreams,
+    ): JsonResponse|Responsable {
+        $livestreams = $listLikedLivestreams->execute($user);
 
         return LivestreamData::collect($livestreams, PaginatedDataCollection::class);
     }
@@ -168,13 +168,11 @@ class LivestreamController extends Controller
      * - use `/api/me/livestreams/saved` for the authenticated saved collection
      * - keep `/api/livestreams` as the canonical public content collection
      */
-    public function saved(#[CurrentUser] User $user): JsonResponse|Responsable
-    {
-        $livestreams = Livestream::query()
-            ->whereHas('saves', fn ($query) => $query->where('user_id', $user->getKey()))
-            ->with(['media', 'vendorProfile'])
-            ->latest()
-            ->paginate();
+    public function saved(
+        #[CurrentUser] User $user,
+        ListSavedLivestreamsAction $listSavedLivestreams,
+    ): JsonResponse|Responsable {
+        $livestreams = $listSavedLivestreams->execute($user);
 
         return LivestreamData::collect($livestreams, PaginatedDataCollection::class);
     }

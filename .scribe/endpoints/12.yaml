@@ -1,19 +1,19 @@
-name: Vendors
-description: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+name: Livestreams
+description: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/me/following
+    uri: api/me/livestreams
     metadata:
       custom: []
-      groupName: Vendors
-      groupDescription: ''
+      groupName: Livestreams
+      groupDescription: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'List followed vendors'
-      description: 'Returns a paginated list of vendor profiles that the authenticated user follows.'
+      title: 'List own livestreams'
+      description: ''
       authenticated: true
       deprecated: false
     headers:
@@ -31,7 +31,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data": [{"id": 1, "shop_name": "Flash Store"}]}'
+        content: '{"data":[{"id":1,"title":"Flash Sale","status":"started"}],"meta":{"current_page":1}}'
         headers: []
         description: ''
     responseFields: []
@@ -45,433 +45,173 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/vendors
+      - POST
+    uri: api/me/livestreams
     metadata:
       custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      groupName: Livestreams
+      groupDescription: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'List vendors'
-      description: ''
-      authenticated: false
+      title: 'Create & start a livestream'
+      description: 'Creates a new livestream with status=started, begins LiveKit egress recording, and returns a publisher token to connect to the room.'
+      authenticated: true
       deprecated: false
     headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      search:
-        custom: []
-        name: search
-        description: ''
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      shop_category_id:
-        custom: []
-        name: shop_category_id
-        description: ''
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      search: architecto
-      shop_category_id: 16
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "shop_name": "Flash Store", "status": "approved"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/vendors/{vendorProfile_id}'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get vendor profile'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": {"id": 1, "shop_name": "Flash Store", "description": "Best deals", "order_count": 120}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/vendors/{vendorProfile_id}/products'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List vendor products'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "name": "Blue T-Shirt"}], "meta": {"current_page": 1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/vendors/{vendorProfile_id}/short-videos'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List vendor short videos'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "title": "New Collection Drop"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/vendors/{vendorProfile_id}/reviews'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List vendor reviews'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "rating": 5, "comment": "Great vendor!"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/vendors/{vendorProfile_id}/follow'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Follow vendor'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message": "Following."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'api/vendors/{vendorProfile_id}/follow'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Unfollow vendor'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message": "Unfollowed."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/vendors/{vendorProfile_id}/reviews'
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Write vendor review'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      vendorProfile_id:
-        custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      vendorProfile_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      rating:
+      title:
         custom: []
-        name: rating
+        name: title
         description: ''
         required: true
-        example: 4
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      comment:
-        custom: []
-        name: comment
-        description: ''
-        required: false
-        example: architecto
+        example: 'Friday Flash Sale'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
+      description:
+        custom: []
+        name: description
+        description: ''
+        required: false
+        example: 'Huge discounts on all items'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      scheduled_at:
+        custom: []
+        name: scheduled_at
+        description: ''
+        required: false
+        example: '2026-03-25 18:00:00'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
     cleanBodyParameters:
-      rating: 4
-      comment: architecto
+      title: 'Friday Flash Sale'
+      description: 'Huge discounts on all items'
+      scheduled_at: '2026-03-25 18:00:00'
     fileParameters: []
     responses:
       -
         custom: []
         status: 201
-        content: '{"data": {"id": 1, "rating": 4}}'
+        content: '{"data":{"id":1,"title":"Friday Flash Sale","status":"started","room_name":"livestream_1"},"token":"eyJhbGci..."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/me/livestreams/{livestream_id}'
+    metadata:
+      custom: []
+      groupName: Livestreams
+      groupDescription: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a livestream'
+      description: 'Update title/description, or transition status. Use status=started to go live (from scheduled), status=finished to end the stream.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        custom: []
+        name: title
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: ''
+        required: false
+        example: 'Eius et animi quos velit et.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      scheduled_at:
+        custom: []
+        name: scheduled_at
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      status:
+        custom: []
+        name: status
+        description: ''
+        required: false
+        example: finished
+        type: string
+        enumValues:
+          - started
+          - finished
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      title: architecto
+      description: 'Eius et animi quos velit et.'
+      scheduled_at: architecto
+      status: finished
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":1,"status":"finished","total_duration":3600}}'
         headers: []
         description: ''
     responseFields: []
@@ -486,15 +226,15 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/vendors/{vendorProfile_id}/reviews/{review_id}'
+    uri: 'api/me/livestreams/{livestream_id}'
     metadata:
       custom: []
-      groupName: Vendors
-      groupDescription: 'Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.'
+      groupName: Livestreams
+      groupDescription: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete own vendor review'
-      description: ''
+      title: 'Delete a scheduled livestream'
+      description: 'Can only delete livestreams with status=scheduled.'
       authenticated: true
       deprecated: false
     headers:
@@ -502,21 +242,10 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      vendorProfile_id:
+      livestream_id:
         custom: []
-        name: vendorProfile_id
-        description: 'The ID of the vendorProfile.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      review_id:
-        custom: []
-        name: review_id
-        description: 'The ID of the review.'
+        name: livestream_id
+        description: 'The ID of the livestream.'
         required: true
         example: 16
         type: integer
@@ -525,8 +254,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      vendorProfile_id: 16
-      review_id: 16
+      livestream_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -536,7 +264,190 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"message": "Review deleted."}'
+        content: '{"message":"Livestream deleted."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/me/livestreams/{livestream_id}/publisher-token'
+    metadata:
+      custom: []
+      groupName: Livestreams
+      groupDescription: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get publisher token'
+      description: 'Generates a fresh LiveKit publisher token for the vendor to (re)connect to the room.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"token":"eyJhbGci..."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/me/livestreams/{livestream_id}/products'
+    metadata:
+      custom: []
+      groupName: Livestreams
+      groupDescription: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Attach product to livestream'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      product_id:
+        custom: []
+        name: product_id
+        description: ''
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      product_id: 5
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Product attached."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/me/livestreams/{livestream_id}/products/{product_id}'
+    metadata:
+      custom: []
+      groupName: Livestreams
+      groupDescription: 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Detach product from livestream'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      livestream_id:
+        custom: []
+        name: livestream_id
+        description: 'The ID of the livestream.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      product_id:
+        custom: []
+        name: product_id
+        description: 'The ID of the product.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      livestream_id: 16
+      product_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"message":"Product detached."}'
         headers: []
         description: ''
     responseFields: []

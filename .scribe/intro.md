@@ -34,6 +34,13 @@ Fleepness is a quick-commerce multi-vendor marketplace API. It powers a mobile s
     - Protected `/api/me/*`, `/api/cart/*`, `/api/orders`, and engagement endpoints require Sanctum bearer authentication
     - Social login endpoints redirect to third-party providers and are best exercised in a browser or mobile deep-link flow
 
+    ### Legacy Compatibility Routes
+    Some historical mobile-client routes are still published under the main API surface while the React Native app migrates.
+
+    - Legacy endpoints are documented with explicit replacement paths in their endpoint descriptions
+    - Runtime responses from those aliases include `X-Fleepness-Legacy-Endpoint`, `X-Fleepness-Migration-Key`, and `X-Fleepness-Replacement-Endpoints` headers
+    - New integrations should always prefer the modern me-scoped or resource-scoped replacement paths over the legacy aliases
+
     ### Response Format
     Most successful responses follow one of these shapes:
     ```json

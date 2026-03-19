@@ -5,9 +5,11 @@ declare(strict_types=1);
 use Illuminate\Http\Request;
 use App\Http\Controllers\Me\CartController;
 use App\Http\Controllers\Me\OrderController;
+use App\Http\Controllers\Me\FollowController;
 use App\Http\Controllers\Me\ProductController;
 use App\Http\Controllers\Me\VendorOrderController;
 use App\Http\Controllers\Me\ProductStatusController;
+use App\Http\Controllers\Me\VendorProfileController;
 
 it('keeps buyer and vendor API routes registered after splitting route files', function (): void {
     $routes = app('router')->getRoutes();
@@ -26,4 +28,13 @@ it('keeps buyer and vendor API routes registered after splitting route files', f
 
     expect(ltrim($routes->match(Request::create('/api/me/vendor-orders', 'GET'))->getActionName(), '\\'))
         ->toBe(VendorOrderController::class.'@index');
+
+    expect(ltrim($routes->match(Request::create('/api/me/followings', 'GET'))->getActionName(), '\\'))
+        ->toBe(FollowController::class.'@followings');
+
+    expect(ltrim($routes->match(Request::create('/api/me/vendors', 'GET'))->getActionName(), '\\'))
+        ->toBe(VendorProfileController::class.'@show');
+
+    expect(ltrim($routes->match(Request::create('/api/me/balances', 'GET'))->getActionName(), '\\'))
+        ->toBe(VendorProfileController::class.'@balance');
 });

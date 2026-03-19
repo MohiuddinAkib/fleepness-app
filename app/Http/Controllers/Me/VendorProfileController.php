@@ -18,6 +18,7 @@ use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
+use App\Actions\Me\GetVendorBalanceDataAction;
 use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -75,19 +76,13 @@ class VendorProfileController extends Controller
 
     #[Authenticated]
     #[Endpoint('Get vendor balance', 'Returns balance, total sales, withdrawn amount and pending withdrawal for the vendor.')]
-    #[Response('{"data": {"balance": "150.00", "total_sales": "1200.00", "withdrawn_amount": "500.00"}}', 200)]
-    public function balance(#[CurrentUser] User $user): JsonResponse|Responsable
-    {
-        $vendorProfile = $user->vendorProfile;
-
-        abort_if(null === $vendorProfile, HttpResponse::HTTP_NOT_FOUND, 'No vendor profile found.');
-
+    #[Response('{"data": {"balance": "150.00", "total_sales": "1200.00", "withdrawn_amount": "500.00", "daily_balance": "50.00"}}', 200)]
+    public function balance(
+        #[CurrentUser] User $user,
+        GetVendorBalanceDataAction $getVendorBalanceData,
+    ): JsonResponse|Responsable {
         return response()->json([
-            'data' => [
-                'balance' => $vendorProfile->balance,
-                'total_sales' => $vendorProfile->total_sales,
-                'withdrawn_amount' => $vendorProfile->withdrawn_amount,
-            ],
+            'data' => $getVendorBalanceData->execute($user),
         ]);
     }
 

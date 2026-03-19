@@ -6,11 +6,11 @@ return [
     'legacy_endpoints' => [
         'me.role' => [
             'path' => '/api/me/role',
-            'replacements' => ['/api/me', '/api/me/vendor'],
+            'replacements' => ['/api/me', '/api/me/vendors'],
         ],
         'seller.status' => [
             'path' => '/api/seller/status',
-            'replacements' => ['/api/vendor-application/status', '/api/me/vendor'],
+            'replacements' => ['/api/vendor-applications/status', '/api/me/vendors'],
         ],
         'notifications.index' => [
             'path' => '/api/notifications',
@@ -34,15 +34,15 @@ return [
         ],
         'following.index' => [
             'path' => '/api/following',
-            'replacements' => ['/api/me/following'],
+            'replacements' => ['/api/me/followings'],
         ],
         'followers.index' => [
             'path' => '/api/followers',
-            'replacements' => ['/api/vendors/{vendorProfile}/follow'],
+            'replacements' => ['/api/me/vendors/followers'],
         ],
         'user.balance-stats' => [
             'path' => '/api/user/balance-stats',
-            'replacements' => ['/api/me/balance'],
+            'replacements' => ['/api/me/balances'],
         ],
         'shorts.saved' => [
             'path' => '/api/shorts/saved',

@@ -13,6 +13,7 @@ use App\Data\Me\ListNotificationsData;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\QueryParam;
+use App\Actions\Me\ListNotificationsAction;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -29,15 +30,12 @@ class NotificationController extends Controller
     public function index(
         ListNotificationsData $data,
         #[CurrentUser] User $user,
+        ListNotificationsAction $listNotifications,
     ): JsonResponse|Responsable {
-        $notifications = match ($data->type) {
-            'read' => $user->readNotifications(),
-            'unread' => $user->unreadNotifications(),
-            default => $user->notifications(),
-        };
+        $notifications = $listNotifications->execute($user, $data);
 
         return NotificationData::collect(
-            $notifications->latest()->paginate($data->perPage),
+            $notifications,
             PaginatedDataCollection::class
         );
     }

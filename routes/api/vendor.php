@@ -9,6 +9,7 @@ use App\Http\Controllers\Me\SizeTemplateController;
 use App\Http\Controllers\Me\ProductStatusController;
 use App\Http\Controllers\Me\VendorProfileController;
 use App\Http\Controllers\Me\PaymentAccountController;
+use App\Http\Controllers\Me\VendorFollowerController;
 use App\Http\Controllers\Me\ProductController as MeProductController;
 use App\Http\Controllers\Me\LivestreamController as MeLivestreamController;
 use App\Http\Controllers\Me\ShortVideoController as MeShortVideoController;
@@ -16,11 +17,12 @@ use App\Http\Controllers\Me\ShortVideoController as MeShortVideoController;
 Route::middleware(['auth:sanctum'])
     ->prefix('me')
     ->group(function (): void {
-        Route::prefix('vendor')->group(function (): void {
+        Route::prefix('vendors')->group(function (): void {
             Route::get('/', [VendorProfileController::class, 'show']);
             Route::patch('/', [VendorProfileController::class, 'update']);
+            Route::get('followers', [VendorFollowerController::class, 'index']);
         });
-        Route::get('balance', [VendorProfileController::class, 'balance']);
+        Route::get('balances', [VendorProfileController::class, 'balance']);
 
         Route::prefix('payment-accounts')->group(function (): void {
             Route::get('/', [PaymentAccountController::class, 'index']);
@@ -123,7 +125,7 @@ Route::middleware(['auth:sanctum'])
     });
 
 Route::middleware(['auth:sanctum'])
-    ->prefix('vendor-application')
+    ->prefix('vendor-applications')
     ->group(function (): void {
         Route::post('/', [VendorProfileController::class, 'apply']);
         Route::get('status', [

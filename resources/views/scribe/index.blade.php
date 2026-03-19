@@ -120,20 +120,23 @@
                     <a href="#vendor-profile">Vendor Profile</a>
                 </li>
                                     <ul id="tocify-subheader-vendor-profile" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="vendor-profile-GETapi-me-vendor">
-                                <a href="#vendor-profile-GETapi-me-vendor">Get vendor profile</a>
+                                                    <li class="tocify-item level-2" data-unique="vendor-profile-GETapi-me-vendors">
+                                <a href="#vendor-profile-GETapi-me-vendors">Get vendor profile</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-PATCHapi-me-vendor">
-                                <a href="#vendor-profile-PATCHapi-me-vendor">Update vendor profile</a>
+                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-PATCHapi-me-vendors">
+                                <a href="#vendor-profile-PATCHapi-me-vendors">Update vendor profile</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-GETapi-me-balance">
-                                <a href="#vendor-profile-GETapi-me-balance">Get vendor balance</a>
+                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-GETapi-me-vendors-followers">
+                                <a href="#vendor-profile-GETapi-me-vendors-followers">List vendor followers</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-POSTapi-vendor-application">
-                                <a href="#vendor-profile-POSTapi-vendor-application">Apply to become a vendor</a>
+                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-GETapi-me-balances">
+                                <a href="#vendor-profile-GETapi-me-balances">Get vendor balance</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-GETapi-vendor-application-status">
-                                <a href="#vendor-profile-GETapi-vendor-application-status">Check vendor application status</a>
+                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-POSTapi-vendor-applications">
+                                <a href="#vendor-profile-POSTapi-vendor-applications">Apply to become a vendor</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="vendor-profile-GETapi-vendor-applications-status">
+                                <a href="#vendor-profile-GETapi-vendor-applications-status">Check vendor application status</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -156,6 +159,12 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="addresses-POSTapi-me-addresses--address_id--default">
                                 <a href="#addresses-POSTapi-me-addresses--address_id--default">Set default address</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="addresses-GETapi-addresses-default">
+                                <a href="#addresses-GETapi-addresses-default">Get default address</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="addresses-POSTapi-addresses--address_id--set-default">
+                                <a href="#addresses-POSTapi-addresses--address_id--set-default">Set default address</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -195,8 +204,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="products-DELETEapi-me-products--product_id-">
                                 <a href="#products-DELETEapi-me-products--product_id-">Delete product</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="products-POSTapi-me-products--product_id--toggle-status">
-                                <a href="#products-POSTapi-me-products--product_id--toggle-status">Toggle product status</a>
+                                                                                <li class="tocify-item level-2" data-unique="products-PUTapi-me-products--product_id--status">
+                                <a href="#products-PUTapi-me-products--product_id--status">Update product status</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="products-DELETEapi-me-products--product_id--images--mediaId-">
                                 <a href="#products-DELETEapi-me-products--product_id--images--mediaId-">Delete product image</a>
@@ -390,8 +399,14 @@
                     <a href="#vendors">Vendors</a>
                 </li>
                                     <ul id="tocify-subheader-vendors" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="vendors-GETapi-me-following">
-                                <a href="#vendors-GETapi-me-following">List followed vendors</a>
+                                                    <li class="tocify-item level-2" data-unique="vendors-GETapi-me-followings">
+                                <a href="#vendors-GETapi-me-followings">List followed vendors</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="vendors-GETapi-following">
+                                <a href="#vendors-GETapi-following">List followed vendors</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="vendors-GETapi-followers">
+                                <a href="#vendors-GETapi-followers">List vendor followers</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="vendors-GETapi-vendors">
                                 <a href="#vendors-GETapi-vendors">List vendors</a>
@@ -427,7 +442,28 @@
                     <a href="#content">Content</a>
                 </li>
                                     <ul id="tocify-subheader-content" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="content-GETapi-short-videos">
+                                                    <li class="tocify-item level-2" data-unique="content-GETapi-me-short-videos-saved">
+                                <a href="#content-GETapi-me-short-videos-saved">List saved short videos</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-me-livestreams-liked">
+                                <a href="#content-GETapi-me-livestreams-liked">List liked livestreams</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-me-livestreams-saved">
+                                <a href="#content-GETapi-me-livestreams-saved">List saved livestreams</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-shorts-saved">
+                                <a href="#content-GETapi-shorts-saved">List saved short videos</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-lives-liked">
+                                <a href="#content-GETapi-lives-liked">List liked livestreams</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-lives-saved">
+                                <a href="#content-GETapi-lives-saved">List saved livestreams</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-lives--livestream_id--likes-count">
+                                <a href="#content-GETapi-lives--livestream_id--likes-count">Get livestream likes count</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="content-GETapi-short-videos">
                                 <a href="#content-GETapi-short-videos">List short videos</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="content-GETapi-short-videos--shortVideo_id-">
@@ -505,6 +541,54 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-compatibility" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="compatibility">
+                    <a href="#compatibility">Compatibility</a>
+                </li>
+                                    <ul id="tocify-subheader-compatibility" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="compatibility-GETapi-me-role">
+                                <a href="#compatibility-GETapi-me-role">Get user role summary</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="compatibility-GETapi-seller-status">
+                                <a href="#compatibility-GETapi-seller-status">Get seller status</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="compatibility-GETapi-user-balance-stats">
+                                <a href="#compatibility-GETapi-user-balance-stats">Get vendor balance stats</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-misc" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="misc">
+                    <a href="#misc">Misc</a>
+                </li>
+                                    <ul id="tocify-subheader-misc" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="misc-GETapi-notifications">
+                                <a href="#misc-GETapi-notifications">Legacy notifications listing endpoint used by the mobile client.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-POSTapi-notifications-mark-as-read">
+                                <a href="#misc-POSTapi-notifications-mark-as-read">Legacy bulk mark-as-read alias kept for the current mobile client contract.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="misc-POSTapi-notifications--notification_id--mark-as-read">
+                                <a href="#misc-POSTapi-notifications--notification_id--mark-as-read">Legacy alias for marking a single notification as read.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-notifications" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="notifications">
+                    <a href="#notifications">Notifications</a>
+                </li>
+                                    <ul id="tocify-subheader-notifications" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="notifications-GETapi-me-notifications">
+                                <a href="#notifications-GETapi-me-notifications">List notifications</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="notifications-POSTapi-me-notifications-read">
+                                <a href="#notifications-POSTapi-me-notifications-read">Mark all notifications as read</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="notifications-POSTapi-me-notifications--notification_id--read">
+                                <a href="#notifications-POSTapi-me-notifications--notification_id--read">Mark a notification as read</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
             </div>
 
     <ul class="toc-footer" id="toc-footer">
@@ -553,6 +637,13 @@ All API endpoints are prefixed with `/api`. The API uses **Laravel Sanctum** bea
 - Public browsing endpoints can be called without authentication
 - Protected `/api/me/*`, `/api/cart/*`, `/api/orders`, and engagement endpoints require Sanctum bearer authentication
 - Social login endpoints redirect to third-party providers and are best exercised in a browser or mobile deep-link flow
+
+### Legacy Compatibility Routes
+Some historical mobile-client routes are still published under the main API surface while the React Native app migrates.
+
+- Legacy endpoints are documented with explicit replacement paths in their endpoint descriptions
+- Runtime responses from those aliases include `X-Fleepness-Legacy-Endpoint`, `X-Fleepness-Migration-Key`, and `X-Fleepness-Replacement-Endpoints` headers
+- New integrations should always prefer the modern me-scoped or resource-scoped replacement paths over the legacy aliases
 
 ### Response Format
 Most successful responses follow one of these shapes:
@@ -2434,7 +2525,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
     <p>Manage your vendor/seller profile, apply to become a vendor, and check application status.</p>
 
-                                <h2 id="vendor-profile-GETapi-me-vendor">Get vendor profile</h2>
+                                <h2 id="vendor-profile-GETapi-me-vendors">Get vendor profile</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2442,13 +2533,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <p>Returns the authenticated user's vendor profile. Returns 404 if not a vendor.</p>
 
-<span id="example-requests-GETapi-me-vendor">
+<span id="example-requests-GETapi-me-vendors">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/me/vendor" \
+    --get "https://fleepness-app.test/api/me/vendors" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2456,7 +2547,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/vendor"
+    "https://fleepness-app.test/api/me/vendors"
 );
 
 const headers = {
@@ -2474,7 +2565,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/vendor';
+$url = 'https://fleepness-app.test/api/me/vendors';
 $response = $client-&gt;get(
     $url,
     [
@@ -2490,7 +2581,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-GETapi-me-vendor">
+<span id="example-responses-GETapi-me-vendors">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -2506,43 +2597,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-me-vendor" hidden>
+<span id="execution-results-GETapi-me-vendors" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-me-vendor"></span>:
+                id="execution-response-status-GETapi-me-vendors"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-me-vendor"
+    <pre class="json"><code id="execution-response-content-GETapi-me-vendors"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-me-vendor" hidden>
+<span id="execution-error-GETapi-me-vendors" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-me-vendor">
+    <pre><code id="execution-error-message-GETapi-me-vendors">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-me-vendor" data-method="GET"
-      data-path="api/me/vendor"
+<form id="form-GETapi-me-vendors" data-method="GET"
+      data-path="api/me/vendors"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-vendor', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-vendors', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-me-vendor"
-                    onclick="tryItOut('GETapi-me-vendor');">Try it out ⚡
+                    id="btn-tryout-GETapi-me-vendors"
+                    onclick="tryItOut('GETapi-me-vendors');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-me-vendor"
-                    onclick="cancelTryOut('GETapi-me-vendor');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-me-vendors"
+                    onclick="cancelTryOut('GETapi-me-vendors');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-me-vendor"
+                    id="btn-executetryout-GETapi-me-vendors"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2550,7 +2641,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/me/vendor</code></b>
+            <b><code>api/me/vendors</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2559,7 +2650,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-vendor"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-vendors"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -2571,7 +2662,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-me-vendor"
+                              name="Content-Type"                data-endpoint="GETapi-me-vendors"
                value="application/json"
                data-component="header">
     <br>
@@ -2583,7 +2674,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-me-vendor"
+                              name="Accept"                data-endpoint="GETapi-me-vendors"
                value="application/json"
                data-component="header">
     <br>
@@ -2591,7 +2682,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="vendor-profile-PATCHapi-me-vendor">Update vendor profile</h2>
+                    <h2 id="vendor-profile-PATCHapi-me-vendors">Update vendor profile</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2599,13 +2690,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-PATCHapi-me-vendor">
+<span id="example-requests-PATCHapi-me-vendors">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/me/vendor" \
+    "https://fleepness-app.test/api/me/vendors" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2619,7 +2710,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/vendor"
+    "https://fleepness-app.test/api/me/vendors"
 );
 
 const headers = {
@@ -2643,7 +2734,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/vendor';
+$url = 'https://fleepness-app.test/api/me/vendors';
 $response = $client-&gt;patch(
     $url,
     [
@@ -2664,7 +2755,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-PATCHapi-me-vendor">
+<span id="example-responses-PATCHapi-me-vendors">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -2678,43 +2769,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-PATCHapi-me-vendor" hidden>
+<span id="execution-results-PATCHapi-me-vendors" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-me-vendor"></span>:
+                id="execution-response-status-PATCHapi-me-vendors"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-me-vendor"
+    <pre class="json"><code id="execution-response-content-PATCHapi-me-vendors"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-PATCHapi-me-vendor" hidden>
+<span id="execution-error-PATCHapi-me-vendors" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-me-vendor">
+    <pre><code id="execution-error-message-PATCHapi-me-vendors">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-PATCHapi-me-vendor" data-method="PATCH"
-      data-path="api/me/vendor"
+<form id="form-PATCHapi-me-vendors" data-method="PATCH"
+      data-path="api/me/vendors"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-me-vendor', this);">
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-me-vendors', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-me-vendor"
-                    onclick="tryItOut('PATCHapi-me-vendor');">Try it out ⚡
+                    id="btn-tryout-PATCHapi-me-vendors"
+                    onclick="tryItOut('PATCHapi-me-vendors');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-me-vendor"
-                    onclick="cancelTryOut('PATCHapi-me-vendor');" hidden>Cancel 🛑
+                    id="btn-canceltryout-PATCHapi-me-vendors"
+                    onclick="cancelTryOut('PATCHapi-me-vendors');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-me-vendor"
+                    id="btn-executetryout-PATCHapi-me-vendors"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2722,7 +2813,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-purple">PATCH</small>
-            <b><code>api/me/vendor</code></b>
+            <b><code>api/me/vendors</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2731,7 +2822,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="PATCHapi-me-vendor"
+                              name="Authorization" class="auth-value"               data-endpoint="PATCHapi-me-vendors"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -2743,7 +2834,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PATCHapi-me-vendor"
+                              name="Content-Type"                data-endpoint="PATCHapi-me-vendors"
                value="application/json"
                data-component="header">
     <br>
@@ -2755,7 +2846,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PATCHapi-me-vendor"
+                              name="Accept"                data-endpoint="PATCHapi-me-vendors"
                value="application/json"
                data-component="header">
     <br>
@@ -2768,7 +2859,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="shop_name"                data-endpoint="PATCHapi-me-vendor"
+                              name="shop_name"                data-endpoint="PATCHapi-me-vendors"
                value="My Cool Shop"
                data-component="body">
     <br>
@@ -2780,7 +2871,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="description"                data-endpoint="PATCHapi-me-vendor"
+                              name="description"                data-endpoint="PATCHapi-me-vendors"
                value="Eius et animi quos velit et."
                data-component="body">
     <br>
@@ -2792,7 +2883,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="pickup_location"                data-endpoint="PATCHapi-me-vendor"
+                              name="pickup_location"                data-endpoint="PATCHapi-me-vendors"
                value="architecto"
                data-component="body">
     <br>
@@ -2800,21 +2891,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="vendor-profile-GETapi-me-balance">Get vendor balance</h2>
+                    <h2 id="vendor-profile-GETapi-me-vendors-followers">List vendor followers</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-<p>Returns balance, total sales, withdrawn amount and pending withdrawal for the vendor.</p>
 
-<span id="example-requests-GETapi-me-balance">
+
+<span id="example-requests-GETapi-me-vendors-followers">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/me/balance" \
+    --get "https://fleepness-app.test/api/me/vendors/followers" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2822,7 +2913,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/balance"
+    "https://fleepness-app.test/api/me/vendors/followers"
 );
 
 const headers = {
@@ -2840,7 +2931,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/balance';
+$url = 'https://fleepness-app.test/api/me/vendors/followers';
 $response = $client-&gt;get(
     $url,
     [
@@ -2856,58 +2947,59 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-GETapi-me-balance">
+<span id="example-responses-GETapi-me-vendors-followers">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;balance&quot;: &quot;150.00&quot;,
-        &quot;total_sales&quot;: &quot;1200.00&quot;,
-        &quot;withdrawn_amount&quot;: &quot;500.00&quot;
-    }
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Jane Doe&quot;
+        }
+    ]
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-me-balance" hidden>
+<span id="execution-results-GETapi-me-vendors-followers" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-me-balance"></span>:
+                id="execution-response-status-GETapi-me-vendors-followers"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-me-balance"
+    <pre class="json"><code id="execution-response-content-GETapi-me-vendors-followers"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-me-balance" hidden>
+<span id="execution-error-GETapi-me-vendors-followers" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-me-balance">
+    <pre><code id="execution-error-message-GETapi-me-vendors-followers">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-me-balance" data-method="GET"
-      data-path="api/me/balance"
+<form id="form-GETapi-me-vendors-followers" data-method="GET"
+      data-path="api/me/vendors/followers"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-balance', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-vendors-followers', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-me-balance"
-                    onclick="tryItOut('GETapi-me-balance');">Try it out ⚡
+                    id="btn-tryout-GETapi-me-vendors-followers"
+                    onclick="tryItOut('GETapi-me-vendors-followers');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-me-balance"
-                    onclick="cancelTryOut('GETapi-me-balance');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-me-vendors-followers"
+                    onclick="cancelTryOut('GETapi-me-vendors-followers');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-me-balance"
+                    id="btn-executetryout-GETapi-me-vendors-followers"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2915,7 +3007,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/me/balance</code></b>
+            <b><code>api/me/vendors/followers</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2924,7 +3016,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-balance"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-vendors-followers"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -2936,7 +3028,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-me-balance"
+                              name="Content-Type"                data-endpoint="GETapi-me-vendors-followers"
                value="application/json"
                data-component="header">
     <br>
@@ -2948,7 +3040,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-me-balance"
+                              name="Accept"                data-endpoint="GETapi-me-vendors-followers"
                value="application/json"
                data-component="header">
     <br>
@@ -2956,7 +3048,164 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="vendor-profile-POSTapi-vendor-application">Apply to become a vendor</h2>
+                    <h2 id="vendor-profile-GETapi-me-balances">Get vendor balance</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Returns balance, total sales, withdrawn amount and pending withdrawal for the vendor.</p>
+
+<span id="example-requests-GETapi-me-balances">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/me/balances" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/balances"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/balances';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-me-balances">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;balance&quot;: &quot;150.00&quot;,
+        &quot;total_sales&quot;: &quot;1200.00&quot;,
+        &quot;withdrawn_amount&quot;: &quot;500.00&quot;,
+        &quot;daily_balance&quot;: &quot;50.00&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me-balances" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me-balances"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me-balances"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-me-balances" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me-balances">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-me-balances" data-method="GET"
+      data-path="api/me/balances"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-balances', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me-balances"
+                    onclick="tryItOut('GETapi-me-balances');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me-balances"
+                    onclick="cancelTryOut('GETapi-me-balances');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me-balances"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me/balances</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-balances"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-me-balances"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-me-balances"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="vendor-profile-POSTapi-vendor-applications">Apply to become a vendor</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2964,13 +3213,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-POSTapi-vendor-application">
+<span id="example-requests-POSTapi-vendor-applications">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/vendor-application" \
+    "https://fleepness-app.test/api/vendor-applications" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2983,7 +3232,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/vendor-application"
+    "https://fleepness-app.test/api/vendor-applications"
 );
 
 const headers = {
@@ -3006,7 +3255,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/vendor-application';
+$url = 'https://fleepness-app.test/api/vendor-applications';
 $response = $client-&gt;post(
     $url,
     [
@@ -3026,7 +3275,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-POSTapi-vendor-application">
+<span id="example-responses-POSTapi-vendor-applications">
             <blockquote>
             <p>Example response (201):</p>
         </blockquote>
@@ -3040,43 +3289,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-POSTapi-vendor-application" hidden>
+<span id="execution-results-POSTapi-vendor-applications" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-vendor-application"></span>:
+                id="execution-response-status-POSTapi-vendor-applications"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-vendor-application"
+    <pre class="json"><code id="execution-response-content-POSTapi-vendor-applications"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-vendor-application" hidden>
+<span id="execution-error-POSTapi-vendor-applications" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-vendor-application">
+    <pre><code id="execution-error-message-POSTapi-vendor-applications">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-vendor-application" data-method="POST"
-      data-path="api/vendor-application"
+<form id="form-POSTapi-vendor-applications" data-method="POST"
+      data-path="api/vendor-applications"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-vendor-application', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-vendor-applications', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-vendor-application"
-                    onclick="tryItOut('POSTapi-vendor-application');">Try it out ⚡
+                    id="btn-tryout-POSTapi-vendor-applications"
+                    onclick="tryItOut('POSTapi-vendor-applications');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-vendor-application"
-                    onclick="cancelTryOut('POSTapi-vendor-application');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-vendor-applications"
+                    onclick="cancelTryOut('POSTapi-vendor-applications');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-vendor-application"
+                    id="btn-executetryout-POSTapi-vendor-applications"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -3084,7 +3333,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>api/vendor-application</code></b>
+            <b><code>api/vendor-applications</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -3093,7 +3342,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-vendor-application"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-vendor-applications"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -3105,7 +3354,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-vendor-application"
+                              name="Content-Type"                data-endpoint="POSTapi-vendor-applications"
                value="application/json"
                data-component="header">
     <br>
@@ -3117,7 +3366,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-vendor-application"
+                              name="Accept"                data-endpoint="POSTapi-vendor-applications"
                value="application/json"
                data-component="header">
     <br>
@@ -3130,7 +3379,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="shop_name"                data-endpoint="POSTapi-vendor-application"
+                              name="shop_name"                data-endpoint="POSTapi-vendor-applications"
                value="Flash Store"
                data-component="body">
     <br>
@@ -3142,7 +3391,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="shop_category_id"                data-endpoint="POSTapi-vendor-application"
+               step="any"               name="shop_category_id"                data-endpoint="POSTapi-vendor-applications"
                value="16"
                data-component="body">
     <br>
@@ -3150,7 +3399,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="vendor-profile-GETapi-vendor-application-status">Check vendor application status</h2>
+                    <h2 id="vendor-profile-GETapi-vendor-applications-status">Check vendor application status</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -3158,13 +3407,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-GETapi-vendor-application-status">
+<span id="example-requests-GETapi-vendor-applications-status">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/vendor-application/status" \
+    --get "https://fleepness-app.test/api/vendor-applications/status" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3172,7 +3421,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/vendor-application/status"
+    "https://fleepness-app.test/api/vendor-applications/status"
 );
 
 const headers = {
@@ -3190,7 +3439,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/vendor-application/status';
+$url = 'https://fleepness-app.test/api/vendor-applications/status';
 $response = $client-&gt;get(
     $url,
     [
@@ -3206,7 +3455,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-GETapi-vendor-application-status">
+<span id="example-responses-GETapi-vendor-applications-status">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -3219,43 +3468,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-vendor-application-status" hidden>
+<span id="execution-results-GETapi-vendor-applications-status" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-vendor-application-status"></span>:
+                id="execution-response-status-GETapi-vendor-applications-status"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-vendor-application-status"
+    <pre class="json"><code id="execution-response-content-GETapi-vendor-applications-status"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-vendor-application-status" hidden>
+<span id="execution-error-GETapi-vendor-applications-status" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-vendor-application-status">
+    <pre><code id="execution-error-message-GETapi-vendor-applications-status">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-vendor-application-status" data-method="GET"
-      data-path="api/vendor-application/status"
+<form id="form-GETapi-vendor-applications-status" data-method="GET"
+      data-path="api/vendor-applications/status"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-vendor-application-status', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-vendor-applications-status', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-vendor-application-status"
-                    onclick="tryItOut('GETapi-vendor-application-status');">Try it out ⚡
+                    id="btn-tryout-GETapi-vendor-applications-status"
+                    onclick="tryItOut('GETapi-vendor-applications-status');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-vendor-application-status"
-                    onclick="cancelTryOut('GETapi-vendor-application-status');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-vendor-applications-status"
+                    onclick="cancelTryOut('GETapi-vendor-applications-status');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-vendor-application-status"
+                    id="btn-executetryout-GETapi-vendor-applications-status"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -3263,7 +3512,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/vendor-application/status</code></b>
+            <b><code>api/vendor-applications/status</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -3272,7 +3521,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-vendor-application-status"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-vendor-applications-status"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -3284,7 +3533,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-vendor-application-status"
+                              name="Content-Type"                data-endpoint="GETapi-vendor-applications-status"
                value="application/json"
                data-component="header">
     <br>
@@ -3296,7 +3545,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-vendor-application-status"
+                              name="Accept"                data-endpoint="GETapi-vendor-applications-status"
                value="application/json"
                data-component="header">
     <br>
@@ -4392,6 +4641,327 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="POSTapi-me-addresses--address_id--default"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the address. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="addresses-GETapi-addresses-default">Get default address</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/addresses/default</code>. Prefer <code>/api/me/addresses</code> plus the <code>is_default</code> flag, or <code>/api/me/addresses/{address}/default</code> for updates in new clients.</p>
+
+<span id="example-requests-GETapi-addresses-default">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/addresses/default" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/addresses/default"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/addresses/default';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-addresses-default">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;default_address&quot;: {
+        &quot;id&quot;: 1,
+        &quot;label&quot;: &quot;Home&quot;,
+        &quot;is_default&quot;: true
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-addresses-default" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-addresses-default"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-addresses-default"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-addresses-default" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-addresses-default">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-addresses-default" data-method="GET"
+      data-path="api/addresses/default"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-addresses-default', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-addresses-default"
+                    onclick="tryItOut('GETapi-addresses-default');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-addresses-default"
+                    onclick="cancelTryOut('GETapi-addresses-default');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-addresses-default"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/addresses/default</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-addresses-default"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-addresses-default"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-addresses-default"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="addresses-POSTapi-addresses--address_id--set-default">Set default address</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Marks the specified address as the default delivery address.</p>
+
+<span id="example-requests-POSTapi-addresses--address_id--set-default">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/addresses/16/set-default" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/addresses/16/set-default"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/addresses/16/set-default';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-addresses--address_id--set-default">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Default address updated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-addresses--address_id--set-default" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-addresses--address_id--set-default"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-addresses--address_id--set-default"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-addresses--address_id--set-default" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-addresses--address_id--set-default">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-addresses--address_id--set-default" data-method="POST"
+      data-path="api/addresses/{address_id}/set-default"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-addresses--address_id--set-default', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-addresses--address_id--set-default"
+                    onclick="tryItOut('POSTapi-addresses--address_id--set-default');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-addresses--address_id--set-default"
+                    onclick="cancelTryOut('POSTapi-addresses--address_id--set-default');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-addresses--address_id--set-default"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/addresses/{address_id}/set-default</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-addresses--address_id--set-default"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-addresses--address_id--set-default"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-addresses--address_id--set-default"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address_id"                data-endpoint="POSTapi-addresses--address_id--set-default"
                value="16"
                data-component="url">
     <br>
@@ -6056,7 +6626,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="products-POSTapi-me-products--product_id--toggle-status">Toggle product status</h2>
+                    <h2 id="products-PUTapi-me-products--product_id--status">Update product status</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -6064,13 +6634,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <p>Toggles the product between active and inactive status.</p>
 
-<span id="example-requests-POSTapi-me-products--product_id--toggle-status">
+<span id="example-requests-PUTapi-me-products--product_id--status">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/me/products/16/toggle-status" \
+    <pre><code class="language-bash">curl --request PUT \
+    "https://fleepness-app.test/api/me/products/16/status" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -6078,7 +6648,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/products/16/toggle-status"
+    "https://fleepness-app.test/api/me/products/16/status"
 );
 
 const headers = {
@@ -6089,15 +6659,15 @@ const headers = {
 
 
 fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers,
 }).then(response =&gt; response.json());</code></pre></div>
 
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/products/16/toggle-status';
-$response = $client-&gt;post(
+$url = 'https://fleepness-app.test/api/me/products/16/status';
+$response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
@@ -6112,7 +6682,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-POSTapi-me-products--product_id--toggle-status">
+<span id="example-responses-PUTapi-me-products--product_id--status">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -6120,57 +6690,60 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: 1,
         &quot;status&quot;: &quot;inactive&quot;
     }
 }</code>
  </pre>
     </span>
-<span id="execution-results-POSTapi-me-products--product_id--toggle-status" hidden>
+<span id="execution-results-PUTapi-me-products--product_id--status" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-me-products--product_id--toggle-status"></span>:
+                id="execution-response-status-PUTapi-me-products--product_id--status"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-me-products--product_id--toggle-status"
+    <pre class="json"><code id="execution-response-content-PUTapi-me-products--product_id--status"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-me-products--product_id--toggle-status" hidden>
+<span id="execution-error-PUTapi-me-products--product_id--status" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-me-products--product_id--toggle-status">
+    <pre><code id="execution-error-message-PUTapi-me-products--product_id--status">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-me-products--product_id--toggle-status" data-method="POST"
-      data-path="api/me/products/{product_id}/toggle-status"
+<form id="form-PUTapi-me-products--product_id--status" data-method="PUT"
+      data-path="api/me/products/{product_id}/status"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-me-products--product_id--toggle-status', this);">
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-me-products--product_id--status', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-me-products--product_id--toggle-status"
-                    onclick="tryItOut('POSTapi-me-products--product_id--toggle-status');">Try it out ⚡
+                    id="btn-tryout-PUTapi-me-products--product_id--status"
+                    onclick="tryItOut('PUTapi-me-products--product_id--status');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-me-products--product_id--toggle-status"
-                    onclick="cancelTryOut('POSTapi-me-products--product_id--toggle-status');" hidden>Cancel 🛑
+                    id="btn-canceltryout-PUTapi-me-products--product_id--status"
+                    onclick="cancelTryOut('PUTapi-me-products--product_id--status');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-me-products--product_id--toggle-status"
+                    id="btn-executetryout-PUTapi-me-products--product_id--status"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
             </button>
             </h3>
             <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/me/products/{product_id}/toggle-status</code></b>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/me/products/{product_id}/status</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/me/products/{product_id}/status</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -6179,7 +6752,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-me-products--product_id--toggle-status"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-me-products--product_id--status"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -6191,7 +6764,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-me-products--product_id--toggle-status"
+                              name="Content-Type"                data-endpoint="PUTapi-me-products--product_id--status"
                value="application/json"
                data-component="header">
     <br>
@@ -6203,7 +6776,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-me-products--product_id--toggle-status"
+                              name="Accept"                data-endpoint="PUTapi-me-products--product_id--status"
                value="application/json"
                data-component="header">
     <br>
@@ -6216,7 +6789,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="product_id"                data-endpoint="POSTapi-me-products--product_id--toggle-status"
+               step="any"               name="product_id"                data-endpoint="PUTapi-me-products--product_id--status"
                value="16"
                data-component="url">
     <br>
@@ -8828,8 +9401,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "title=Summer Collection"\
     --form "description=Eius et animi quos velit et."\
-    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpn1iabpqascba5N3nVId" \
-    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phprtgi8ibcgoke66IAhEx" </code></pre></div>
+    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpr9f6mqu0dc8g4YGgSmr" \
+    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpb0bn28ijml587HP15T0" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -8878,11 +9451,11 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'video',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpn1iabpqascba5N3nVId', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpr9f6mqu0dc8g4YGgSmr', 'r')
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phprtgi8ibcgoke66IAhEx', 'r')
+                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpb0bn28ijml587HP15T0', 'r')
             ],
         ],
     ]
@@ -9024,7 +9597,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpn1iabpqascba5N3nVId</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpr9f6mqu0dc8g4YGgSmr</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -9036,7 +9609,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phprtgi8ibcgoke66IAhEx</code></p>
+<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phpb0bn28ijml587HP15T0</code></p>
         </div>
         </form>
 
@@ -13149,14 +13722,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/categories/1" \
+    --get "https://fleepness-app.test/api/categories/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/categories/1"
+    "https://fleepness-app.test/api/categories/16"
 );
 
 const headers = {
@@ -13173,7 +13746,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/categories/1';
+$url = 'https://fleepness-app.test/api/categories/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -13281,10 +13854,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="category_id"                data-endpoint="GETapi-categories--category_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>1</code></p>
+<p>The ID of the category. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -13301,14 +13874,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/categories/1/products" \
+    --get "https://fleepness-app.test/api/categories/16/products" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/categories/1/products"
+    "https://fleepness-app.test/api/categories/16/products"
 );
 
 const headers = {
@@ -13325,7 +13898,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/categories/1/products';
+$url = 'https://fleepness-app.test/api/categories/16/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -13438,10 +14011,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="category_id"                data-endpoint="GETapi-categories--category_id--products"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>1</code></p>
+<p>The ID of the category. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -13748,7 +14321,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
     <p>Browse vendor profiles, their products, short videos and reviews. Follow/unfollow vendors.</p>
 
-                                <h2 id="vendors-GETapi-me-following">List followed vendors</h2>
+                                <h2 id="vendors-GETapi-me-followings">List followed vendors</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -13756,13 +14329,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <p>Returns a paginated list of vendor profiles that the authenticated user follows.</p>
 
-<span id="example-requests-GETapi-me-following">
+<span id="example-requests-GETapi-me-followings">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/me/following" \
+    --get "https://fleepness-app.test/api/me/followings" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13770,7 +14343,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/me/following"
+    "https://fleepness-app.test/api/me/followings"
 );
 
 const headers = {
@@ -13788,7 +14361,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/me/following';
+$url = 'https://fleepness-app.test/api/me/followings';
 $response = $client-&gt;get(
     $url,
     [
@@ -13804,7 +14377,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 </span>
 
-<span id="example-responses-GETapi-me-following">
+<span id="example-responses-GETapi-me-followings">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -13820,43 +14393,43 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-me-following" hidden>
+<span id="execution-results-GETapi-me-followings" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-me-following"></span>:
+                id="execution-response-status-GETapi-me-followings"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-me-following"
+    <pre class="json"><code id="execution-response-content-GETapi-me-followings"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-me-following" hidden>
+<span id="execution-error-GETapi-me-followings" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-me-following">
+    <pre><code id="execution-error-message-GETapi-me-followings">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-me-following" data-method="GET"
-      data-path="api/me/following"
+<form id="form-GETapi-me-followings" data-method="GET"
+      data-path="api/me/followings"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-following', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-followings', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-me-following"
-                    onclick="tryItOut('GETapi-me-following');">Try it out ⚡
+                    id="btn-tryout-GETapi-me-followings"
+                    onclick="tryItOut('GETapi-me-followings');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-me-following"
-                    onclick="cancelTryOut('GETapi-me-following');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-me-followings"
+                    onclick="cancelTryOut('GETapi-me-followings');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-me-following"
+                    id="btn-executetryout-GETapi-me-followings"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -13864,7 +14437,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/me/following</code></b>
+            <b><code>api/me/followings</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -13873,7 +14446,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-following"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-followings"
                value="Bearer {YOUR_BEARER_TOKEN}"
                data-component="header">
     <br>
@@ -13885,7 +14458,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-me-following"
+                              name="Content-Type"                data-endpoint="GETapi-me-followings"
                value="application/json"
                data-component="header">
     <br>
@@ -13897,7 +14470,321 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-me-following"
+                              name="Accept"                data-endpoint="GETapi-me-followings"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="vendors-GETapi-following">List followed vendors</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Returns a paginated list of vendor profiles that the authenticated user follows.</p>
+
+<span id="example-requests-GETapi-following">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/following" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/following"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/following';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-following">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;shop_name&quot;: &quot;Flash Store&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-following" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-following"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-following"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-following" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-following">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-following" data-method="GET"
+      data-path="api/following"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-following', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-following"
+                    onclick="tryItOut('GETapi-following');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-following"
+                    onclick="cancelTryOut('GETapi-following');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-following"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/following</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-following"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-following"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-following"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="vendors-GETapi-followers">List vendor followers</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/followers</code>. Prefer <code>/api/me/vendors/followers</code> for the canonical authenticated vendor follower collection.</p>
+
+<span id="example-requests-GETapi-followers">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/followers" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/followers"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/followers';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-followers">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Jane Doe&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-followers" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-followers"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-followers"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-followers" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-followers">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-followers" data-method="GET"
+      data-path="api/followers"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-followers', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-followers"
+                    onclick="tryItOut('GETapi-followers');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-followers"
+                    onclick="cancelTryOut('GETapi-followers');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-followers"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/followers</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-followers"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-followers"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-followers"
                value="application/json"
                data-component="header">
     <br>
@@ -15422,9 +16309,1125 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
                 <h1 id="content">Content</h1>
 
-    <p>Browse short videos and interact with comments, likes, and saves.</p>
+    <p>Manage the authenticated user's saved short videos.</p>
 
-                                <h2 id="content-GETapi-short-videos">List short videos</h2>
+                                <h2 id="content-GETapi-me-short-videos-saved">List saved short videos</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-me-short-videos-saved">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/me/short-videos/saved" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/short-videos/saved"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/short-videos/saved';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-me-short-videos-saved">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;New Collection Drop&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me-short-videos-saved" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me-short-videos-saved"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me-short-videos-saved"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-me-short-videos-saved" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me-short-videos-saved">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-me-short-videos-saved" data-method="GET"
+      data-path="api/me/short-videos/saved"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-short-videos-saved', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me-short-videos-saved"
+                    onclick="tryItOut('GETapi-me-short-videos-saved');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me-short-videos-saved"
+                    onclick="cancelTryOut('GETapi-me-short-videos-saved');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me-short-videos-saved"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me/short-videos/saved</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-short-videos-saved"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-me-short-videos-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-me-short-videos-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="content-GETapi-me-livestreams-liked">List liked livestreams</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-me-livestreams-liked">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/me/livestreams/liked" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/livestreams/liked"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/livestreams/liked';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-me-livestreams-liked">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;Friday Live Sale&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me-livestreams-liked" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me-livestreams-liked"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me-livestreams-liked"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-me-livestreams-liked" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me-livestreams-liked">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-me-livestreams-liked" data-method="GET"
+      data-path="api/me/livestreams/liked"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-livestreams-liked', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me-livestreams-liked"
+                    onclick="tryItOut('GETapi-me-livestreams-liked');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me-livestreams-liked"
+                    onclick="cancelTryOut('GETapi-me-livestreams-liked');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me-livestreams-liked"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me/livestreams/liked</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-livestreams-liked"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-me-livestreams-liked"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-me-livestreams-liked"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="content-GETapi-me-livestreams-saved">List saved livestreams</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-me-livestreams-saved">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/me/livestreams/saved" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/livestreams/saved"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/livestreams/saved';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-me-livestreams-saved">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;Friday Live Sale&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me-livestreams-saved" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me-livestreams-saved"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me-livestreams-saved"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-me-livestreams-saved" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me-livestreams-saved">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-me-livestreams-saved" data-method="GET"
+      data-path="api/me/livestreams/saved"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-livestreams-saved', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me-livestreams-saved"
+                    onclick="tryItOut('GETapi-me-livestreams-saved');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me-livestreams-saved"
+                    onclick="cancelTryOut('GETapi-me-livestreams-saved');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me-livestreams-saved"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me/livestreams/saved</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-livestreams-saved"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-me-livestreams-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-me-livestreams-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="content-GETapi-shorts-saved">List saved short videos</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/shorts/saved</code>. Prefer <code>/api/me/short-videos/saved</code> for the authenticated saved collection in new clients.</p>
+
+<span id="example-requests-GETapi-shorts-saved">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/shorts/saved" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/shorts/saved"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/shorts/saved';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-shorts-saved">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;New Collection Drop&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-shorts-saved" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-shorts-saved"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-shorts-saved"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-shorts-saved" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-shorts-saved">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-shorts-saved" data-method="GET"
+      data-path="api/shorts/saved"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-shorts-saved', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-shorts-saved"
+                    onclick="tryItOut('GETapi-shorts-saved');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-shorts-saved"
+                    onclick="cancelTryOut('GETapi-shorts-saved');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-shorts-saved"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/shorts/saved</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-shorts-saved"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-shorts-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-shorts-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="content-GETapi-lives-liked">List liked livestreams</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/lives/liked</code>. Prefer <code>/api/me/livestreams/liked</code> in new consumers.</p>
+
+<span id="example-requests-GETapi-lives-liked">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/lives/liked" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/lives/liked"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/lives/liked';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-lives-liked">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;Friday Live Sale&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-lives-liked" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-lives-liked"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-lives-liked"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-lives-liked" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-lives-liked">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-lives-liked" data-method="GET"
+      data-path="api/lives/liked"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-lives-liked', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-lives-liked"
+                    onclick="tryItOut('GETapi-lives-liked');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-lives-liked"
+                    onclick="cancelTryOut('GETapi-lives-liked');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-lives-liked"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/lives/liked</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-lives-liked"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-lives-liked"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-lives-liked"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="content-GETapi-lives-saved">List saved livestreams</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/lives/saved</code>. Prefer <code>/api/me/livestreams/saved</code> in new clients.</p>
+
+<span id="example-requests-GETapi-lives-saved">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/lives/saved" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/lives/saved"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/lives/saved';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-lives-saved">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;title&quot;: &quot;Friday Live Sale&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-lives-saved" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-lives-saved"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-lives-saved"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-lives-saved" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-lives-saved">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-lives-saved" data-method="GET"
+      data-path="api/lives/saved"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-lives-saved', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-lives-saved"
+                    onclick="tryItOut('GETapi-lives-saved');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-lives-saved"
+                    onclick="cancelTryOut('GETapi-lives-saved');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-lives-saved"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/lives/saved</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-lives-saved"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-lives-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-lives-saved"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="content-GETapi-lives--livestream_id--likes-count">Get livestream likes count</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/lives/{livestream}/likes-count</code>. Prefer the main livestream resource payload and real-time events for new clients.</p>
+
+<span id="example-requests-GETapi-lives--livestream_id--likes-count">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/lives/16/likes-count" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/lives/16/likes-count"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/lives/16/likes-count';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-lives--livestream_id--likes-count">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;likes_count&quot;: 1
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-lives--livestream_id--likes-count" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-lives--livestream_id--likes-count"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-lives--livestream_id--likes-count"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-lives--livestream_id--likes-count" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-lives--livestream_id--likes-count">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-lives--livestream_id--likes-count" data-method="GET"
+      data-path="api/lives/{livestream_id}/likes-count"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-lives--livestream_id--likes-count', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-lives--livestream_id--likes-count"
+                    onclick="tryItOut('GETapi-lives--livestream_id--likes-count');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-lives--livestream_id--likes-count"
+                    onclick="cancelTryOut('GETapi-lives--livestream_id--likes-count');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-lives--livestream_id--likes-count"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/lives/{livestream_id}/likes-count</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-lives--livestream_id--likes-count"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-lives--livestream_id--likes-count"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-lives--livestream_id--likes-count"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>livestream_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="livestream_id"                data-endpoint="GETapi-lives--livestream_id--likes-count"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the livestream. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="content-GETapi-short-videos">List short videos</h2>
 
 <p>
 </p>
@@ -19069,6 +21072,1394 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>flash sale</code></p>
             </div>
                 </form>
+
+                <h1 id="compatibility">Compatibility</h1>
+
+    <p>Legacy compatibility aliases retained for the current mobile client. Prefer the replacement paths called out in each endpoint description.</p>
+
+                                <h2 id="compatibility-GETapi-me-role">Get user role summary</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/me/role</code>. Prefer <code>/api/me</code> and <code>/api/me/vendors</code> for the canonical authenticated-user and vendor payloads.</p>
+
+<span id="example-requests-GETapi-me-role">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/me/role" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/role"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/role';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-me-role">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;user_id&quot;: 1,
+    &quot;name&quot;: &quot;Vendor User&quot;,
+    &quot;role&quot;: &quot;vendor&quot;,
+    &quot;status&quot;: &quot;approved&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me-role" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me-role"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me-role"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-me-role" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me-role">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-me-role" data-method="GET"
+      data-path="api/me/role"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-role', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me-role"
+                    onclick="tryItOut('GETapi-me-role');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me-role"
+                    onclick="cancelTryOut('GETapi-me-role');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me-role"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me/role</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-role"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-me-role"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-me-role"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="compatibility-GETapi-seller-status">Get seller status</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/seller/status</code>. Prefer <code>/api/vendor-applications/status</code> for application workflow checks or <code>/api/me/vendors</code> for the richer vendor payload.</p>
+
+<span id="example-requests-GETapi-seller-status">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/seller/status" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/seller/status"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/seller/status';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-seller-status">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;approved&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-seller-status" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-seller-status"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-seller-status"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-seller-status" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-seller-status">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-seller-status" data-method="GET"
+      data-path="api/seller/status"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-seller-status', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-seller-status"
+                    onclick="tryItOut('GETapi-seller-status');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-seller-status"
+                    onclick="cancelTryOut('GETapi-seller-status');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-seller-status"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/seller/status</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-seller-status"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-seller-status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-seller-status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="compatibility-GETapi-user-balance-stats">Get vendor balance stats</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Legacy compatibility alias for <code>/api/user/balance-stats</code>. Prefer <code>/api/me/balances</code>, which now includes both current balance fields and delivered-order aggregates.</p>
+
+<span id="example-requests-GETapi-user-balance-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/user/balance-stats" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/user/balance-stats"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/user/balance-stats';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-user-balance-stats">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;user_id&quot;: 1,
+    &quot;name&quot;: &quot;Vendor User&quot;,
+    &quot;daily_balance&quot;: &quot;50.00&quot;,
+    &quot;weekly_balance&quot;: &quot;50.00&quot;,
+    &quot;monthly_balance&quot;: &quot;50.00&quot;,
+    &quot;lifetime_balance&quot;: &quot;250.00&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-user-balance-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-user-balance-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-user-balance-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-user-balance-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-user-balance-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-user-balance-stats" data-method="GET"
+      data-path="api/user/balance-stats"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-user-balance-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-user-balance-stats"
+                    onclick="tryItOut('GETapi-user-balance-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-user-balance-stats"
+                    onclick="cancelTryOut('GETapi-user-balance-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-user-balance-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/user/balance-stats</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-user-balance-stats"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-user-balance-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-user-balance-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                <h1 id="misc">Misc</h1>
+
+    
+
+                                <h2 id="misc-GETapi-notifications">Legacy notifications listing endpoint used by the mobile client.</h2>
+
+<p>
+</p>
+
+<p>Prefer <code>/api/me/notifications</code> for new consumers so authenticated resources stay grouped
+consistently with the rest of the API.</p>
+
+<span id="example-requests-GETapi-notifications">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/notifications" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/notifications"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/notifications';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-notifications">
+    </span>
+<span id="execution-results-GETapi-notifications" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-notifications"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-notifications"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-notifications" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-notifications">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-notifications" data-method="GET"
+      data-path="api/notifications"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-notifications', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-notifications"
+                    onclick="tryItOut('GETapi-notifications');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-notifications"
+                    onclick="cancelTryOut('GETapi-notifications');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-notifications"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/notifications</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-notifications"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-notifications"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="misc-POSTapi-notifications-mark-as-read">Legacy bulk mark-as-read alias kept for the current mobile client contract.</h2>
+
+<p>
+</p>
+
+<p>New consumers should prefer <code>/api/me/notifications/read</code>.</p>
+
+<span id="example-requests-POSTapi-notifications-mark-as-read">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/notifications/mark-as-read" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/notifications/mark-as-read"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/notifications/mark-as-read';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-notifications-mark-as-read">
+</span>
+<span id="execution-results-POSTapi-notifications-mark-as-read" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-notifications-mark-as-read"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-notifications-mark-as-read"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-notifications-mark-as-read" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-notifications-mark-as-read">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-notifications-mark-as-read" data-method="POST"
+      data-path="api/notifications/mark-as-read"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-notifications-mark-as-read', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-notifications-mark-as-read"
+                    onclick="tryItOut('POSTapi-notifications-mark-as-read');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-notifications-mark-as-read"
+                    onclick="cancelTryOut('POSTapi-notifications-mark-as-read');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-notifications-mark-as-read"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/notifications/mark-as-read</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-notifications-mark-as-read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-notifications-mark-as-read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="misc-POSTapi-notifications--notification_id--mark-as-read">Legacy alias for marking a single notification as read.</h2>
+
+<p>
+</p>
+
+<p>Retained for <code>/api/notifications/{notification}/mark-as-read</code>. New consumers should prefer
+<code>/api/me/notifications/{notification}/read</code>.</p>
+
+<span id="example-requests-POSTapi-notifications--notification_id--mark-as-read">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/notifications/architecto/mark-as-read" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/notifications/architecto/mark-as-read"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/notifications/architecto/mark-as-read';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-notifications--notification_id--mark-as-read">
+</span>
+<span id="execution-results-POSTapi-notifications--notification_id--mark-as-read" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-notifications--notification_id--mark-as-read"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-notifications--notification_id--mark-as-read"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-notifications--notification_id--mark-as-read" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-notifications--notification_id--mark-as-read">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-notifications--notification_id--mark-as-read" data-method="POST"
+      data-path="api/notifications/{notification_id}/mark-as-read"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-notifications--notification_id--mark-as-read', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-notifications--notification_id--mark-as-read"
+                    onclick="tryItOut('POSTapi-notifications--notification_id--mark-as-read');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-notifications--notification_id--mark-as-read"
+                    onclick="cancelTryOut('POSTapi-notifications--notification_id--mark-as-read');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-notifications--notification_id--mark-as-read"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/notifications/{notification_id}/mark-as-read</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-notifications--notification_id--mark-as-read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-notifications--notification_id--mark-as-read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>notification_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="notification_id"                data-endpoint="POSTapi-notifications--notification_id--mark-as-read"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the notification. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                <h1 id="notifications">Notifications</h1>
+
+    <p>Manage the authenticated user's notifications.</p>
+
+                                <h2 id="notifications-GETapi-me-notifications">List notifications</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-me-notifications">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://fleepness-app.test/api/me/notifications?per_page=15&amp;type=unread" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/notifications"
+);
+
+const params = {
+    "per_page": "15",
+    "type": "unread",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/notifications';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'per_page' =&gt; '15',
+            'type' =&gt; 'unread',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-me-notifications">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;uuid&quot;,
+            &quot;type&quot;: &quot;legacy.test&quot;,
+            &quot;data&quot;: {
+                &quot;message&quot;: &quot;Hello&quot;
+            }
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me-notifications" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me-notifications"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me-notifications"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-me-notifications" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me-notifications">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-me-notifications" data-method="GET"
+      data-path="api/me/notifications"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me-notifications', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me-notifications"
+                    onclick="tryItOut('GETapi-me-notifications');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me-notifications"
+                    onclick="cancelTryOut('GETapi-me-notifications');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me-notifications"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me/notifications</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-me-notifications"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-me-notifications"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-me-notifications"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-me-notifications"
+               value="15"
+               data-component="query">
+    <br>
+<p>Example: <code>15</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="type"                data-endpoint="GETapi-me-notifications"
+               value="unread"
+               data-component="query">
+    <br>
+<p>Example: <code>unread</code></p>
+            </div>
+                </form>
+
+                    <h2 id="notifications-POSTapi-me-notifications-read">Mark all notifications as read</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-me-notifications-read">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/me/notifications/read" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/notifications/read"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/notifications/read';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-me-notifications-read">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Notifications marked as read.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-me-notifications-read" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-me-notifications-read"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-me-notifications-read"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-me-notifications-read" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-me-notifications-read">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-me-notifications-read" data-method="POST"
+      data-path="api/me/notifications/read"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-me-notifications-read', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-me-notifications-read"
+                    onclick="tryItOut('POSTapi-me-notifications-read');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-me-notifications-read"
+                    onclick="cancelTryOut('POSTapi-me-notifications-read');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-me-notifications-read"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/me/notifications/read</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-me-notifications-read"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-me-notifications-read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-me-notifications-read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="notifications-POSTapi-me-notifications--notification_id--read">Mark a notification as read</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-me-notifications--notification_id--read">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://fleepness-app.test/api/me/notifications/architecto/read" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://fleepness-app.test/api/me/notifications/architecto/read"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'https://fleepness-app.test/api/me/notifications/architecto/read';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_BEARER_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-me-notifications--notification_id--read">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Notification marked as read.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-me-notifications--notification_id--read" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-me-notifications--notification_id--read"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-me-notifications--notification_id--read"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-me-notifications--notification_id--read" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-me-notifications--notification_id--read">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-me-notifications--notification_id--read" data-method="POST"
+      data-path="api/me/notifications/{notification_id}/read"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-me-notifications--notification_id--read', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-me-notifications--notification_id--read"
+                    onclick="tryItOut('POSTapi-me-notifications--notification_id--read');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-me-notifications--notification_id--read"
+                    onclick="cancelTryOut('POSTapi-me-notifications--notification_id--read');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-me-notifications--notification_id--read"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/me/notifications/{notification_id}/read</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-me-notifications--notification_id--read"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-me-notifications--notification_id--read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-me-notifications--notification_id--read"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>notification_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="notification_id"                data-endpoint="POSTapi-me-notifications--notification_id--read"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the notification. Example: <code>architecto</code></p>
+            </div>
+                    </form>
 
             
 

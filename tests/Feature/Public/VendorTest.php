@@ -157,7 +157,7 @@ it('lists following vendors', function (): void {
     }
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/me/following');
+    $response = $this->withToken($token)->getJson('/api/me/followings');
 
     $response->assertOk()->assertJsonCount(2, 'data');
 });

@@ -1,0 +1,112 @@
+name: Misc
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/notifications
+    metadata:
+      custom: []
+      groupName: Misc
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Legacy notifications listing endpoint used by the mobile client.'
+      description: |-
+        Prefer `/api/me/notifications` for new consumers so authenticated resources stay grouped
+        consistently with the rest of the API.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/notifications/mark-as-read
+    metadata:
+      custom: []
+      groupName: Misc
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Legacy bulk mark-as-read alias kept for the current mobile client contract.'
+      description: 'New consumers should prefer `/api/me/notifications/read`.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/notifications/{notification_id}/mark-as-read'
+    metadata:
+      custom: []
+      groupName: Misc
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Legacy alias for marking a single notification as read.'
+      description: |-
+        Retained for `/api/notifications/{notification}/mark-as-read`. New consumers should prefer
+        `/api/me/notifications/{notification}/read`.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      notification_id:
+        custom: []
+        name: notification_id
+        description: 'The ID of the notification.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      notification_id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

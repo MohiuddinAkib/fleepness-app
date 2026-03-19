@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
+use App\Data\Me\ListNotificationsData;
+use App\Actions\Me\ListNotificationsAction;
+use App\Actions\Me\MarkNotificationReadAction;
 use Illuminate\Container\Attributes\CurrentUser;
+use App\Actions\Me\MarkAllNotificationsReadAction;
 use Illuminate\Notifications\DatabaseNotification;
 
 /**
@@ -32,17 +34,12 @@ class NotificationController extends Controller
      * Prefer `/api/me/notifications` for new consumers so authenticated resources stay grouped
      * consistently with the rest of the API.
      */
-    public function index(Request $request, #[CurrentUser] User $user)
-    {
-        $perPage = $request->integer('per_page', 15);
-
-        $notifications = $user
-            ->when('read' === $request->get('type'))
-            ->readNotifications()
-            ->when('unread' === $request->get('type'))
-            ->unreadNotifications()
-            ->latest()
-            ->paginate(perPage: $perPage);
+    public function index(
+        ListNotificationsData $data,
+        #[CurrentUser] User $user,
+        ListNotificationsAction $listNotifications,
+    ) {
+        $notifications = $listNotifications->execute($user, $data);
 
         return response()->json([
             'success' => true,
@@ -57,11 +54,12 @@ class NotificationController extends Controller
      * Retained for `/api/notifications/{notification}/mark-as-read`. New consumers should prefer
      * `/api/me/notifications/{notification}/read`.
      */
-    public function markAsRead(DatabaseNotification $notification, #[CurrentUser] User $user)
-    {
-        abort_if($notification->notifiable()->isNot($user), Response::HTTP_NOT_FOUND);
-
-        $notification->markAsRead();
+    public function markAsRead(
+        DatabaseNotification $notification,
+        #[CurrentUser] User $user,
+        MarkNotificationReadAction $markNotificationRead,
+    ) {
+        $markNotificationRead->execute($user, $notification);
 
         return response()->json(['message' => 'Notifications marked as read']);
     }
@@ -71,12 +69,12 @@ class NotificationController extends Controller
      *
      * New consumers should prefer `/api/me/notifications/read`.
      */
-    public function markAllAsRead(#[CurrentUser] User $user)
-    {
-        return DB::transaction(function () use ($user) {
-            $user->notifications->markAsRead();
+    public function markAllAsRead(
+        #[CurrentUser] User $user,
+        MarkAllNotificationsReadAction $markAllNotificationsRead,
+    ) {
+        $markAllNotificationsRead->execute($user);
 
-            return response()->json(['message' => 'Notifications marked as read']);
-        });
+        return response()->json(['message' => 'Notifications marked as read']);
     }
 }

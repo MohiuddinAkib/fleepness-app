@@ -45,8 +45,7 @@ Route::middleware(['auth:sanctum'])
             Route::get('{order}', [OrderController::class, 'show']);
         });
 
-        Route::get('following', [FollowController::class, 'following']);
-
+        Route::get('followings', [FollowController::class, 'followings']);
         Route::prefix('short-videos')->group(function (): void {
             Route::get('saved', [SavedShortVideoController::class, 'index']);
         });

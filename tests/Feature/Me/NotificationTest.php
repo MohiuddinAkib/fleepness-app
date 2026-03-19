@@ -64,5 +64,5 @@ it('marks a single notification as read on the canonical me endpoint', function 
         ->assertOk()
         ->assertJsonPath('message', 'Notification marked as read.');
 
-    expect($notification->fresh()->read_at)->not->toBeNull();
+    expect($notification->fresh()->read())->toBeTrue();
 });

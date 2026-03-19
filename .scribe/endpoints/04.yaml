@@ -1,19 +1,19 @@
-name: 'Payment Accounts'
-description: "Manage the user's linked payment accounts for withdrawals."
+name: Orders
+description: 'Customer order history and placement.'
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/me/payment-accounts
+    uri: api/me/orders
     metadata:
       custom: []
-      groupName: 'Payment Accounts'
-      groupDescription: "Manage the user's linked payment accounts for withdrawals."
+      groupName: Orders
+      groupDescription: 'Customer order history and placement.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'List payment accounts'
-      description: ''
+      title: 'List own orders'
+      description: 'Returns a paginated list of all orders placed by the authenticated user.'
       authenticated: true
       deprecated: false
     headers:
@@ -31,7 +31,60 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data": [{"id": 1, "account_number": "01712345678", "is_primary": true}]}'
+        content: '{"data":[{"id":1,"order_number":"ORD-001","grand_total":"250.00","is_completed":false}],"meta":{"current_page":1}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/me/orders/{order_id}'
+    metadata:
+      custom: []
+      groupName: Orders
+      groupDescription: 'Customer order history and placement.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get order details'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The ID of the order.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      order_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":1,"order_number":"ORD-001","grand_total":"250.00","vendor_orders":[]}}'
         headers: []
         description: ''
     responseFields: []
@@ -46,19 +99,18 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: api/me/payment-accounts
+    uri: api/orders
     metadata:
       custom: []
-      groupName: 'Payment Accounts'
-      groupDescription: "Manage the user's linked payment accounts for withdrawals."
+      groupName: Orders
+      groupDescription: 'Customer order history and placement.'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Add payment account'
-      description: ''
-      authenticated: true
+      title: 'Place order'
+      description: 'Places an order from the selected cart items. Creates separate vendor orders for each vendor. Cart items with is_selected=true are used.'
+      authenticated: false
       deprecated: false
     headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -66,9 +118,9 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      payment_method_id:
+      delivery_option_id:
         custom: []
-        name: payment_method_id
+        name: delivery_option_id
         description: ''
         required: true
         example: 1
@@ -77,98 +129,30 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      account_number:
+      address_id:
         custom: []
-        name: account_number
-        description: ''
-        required: true
-        example: '01712345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      is_primary:
-        custom: []
-        name: is_primary
+        name: address_id
         description: ''
         required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      payment_method_id: 1
-      account_number: '01712345678'
-      is_primary: false
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 201
-        content: '{"data": {"id": 2, "account_number": "01712345678"}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'api/me/payment-accounts/{paymentAccount_id}'
-    metadata:
-      custom: []
-      groupName: 'Payment Accounts'
-      groupDescription: "Manage the user's linked payment accounts for withdrawals."
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Remove payment account'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      paymentAccount_id:
-        custom: []
-        name: paymentAccount_id
-        description: 'The ID of the paymentAccount.'
-        required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanUrlParameters:
-      paymentAccount_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    cleanBodyParameters:
+      delivery_option_id: 1
+      address_id: 1
     fileParameters: []
     responses:
       -
         custom: []
-        status: 200
-        content: '{"message": "Payment account removed."}'
+        status: 201
+        content: '{"message":"Order placed.","data":{"id":1,"order_number":"ORD-001","grand_total":"250.00"}}'
         headers: []
         description: ''
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    auth: []
     controller: null
     method: null
     route: null

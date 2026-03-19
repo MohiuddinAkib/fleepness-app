@@ -1,18 +1,18 @@
-name: Transactions
-description: 'View wallet transactions and request withdrawals.'
+name: 'Size Templates'
+description: 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).'
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/me/transactions
+    uri: api/me/size-templates
     metadata:
       custom: []
-      groupName: Transactions
-      groupDescription: 'View wallet transactions and request withdrawals.'
+      groupName: 'Size Templates'
+      groupDescription: 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).'
       subgroup: ''
       subgroupDescription: ''
-      title: 'List transactions'
+      title: 'List size templates'
       description: ''
       authenticated: true
       deprecated: false
@@ -31,7 +31,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}],"meta":{"current_page":1}}'
+        content: '{"data": [{"id": 1, "name": "Shirt Sizes", "items": [{"label": "M", "value": "38-40 inches"}]}]}'
         headers: []
         description: ''
     responseFields: []
@@ -46,14 +46,14 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: api/me/withdrawals
+    uri: api/me/size-templates
     metadata:
       custom: []
-      groupName: Transactions
-      groupDescription: 'View wallet transactions and request withdrawals.'
+      groupName: 'Size Templates'
+      groupDescription: 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).'
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create withdrawal request'
+      title: 'Create size template'
       description: ''
       authenticated: true
       deprecated: false
@@ -66,49 +66,25 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      payment_method_id:
+      name:
         custom: []
-        name: payment_method_id
+        name: name
         description: ''
         required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      amount:
-        custom: []
-        name: amount
-        description: ''
-        required: true
-        example: 500
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      note:
-        custom: []
-        name: note
-        description: ''
-        required: false
-        example: 'Weekly payout request'
+        example: 'Shirt Sizes'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      payment_method_id: 1
-      amount: 500
-      note: 'Weekly payout request'
+      name: 'Shirt Sizes'
     fileParameters: []
     responses:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}}'
+        content: '{"data": {"id": 1, "name": "Shirt Sizes"}}'
         headers: []
         description: ''
     responseFields: []
@@ -116,6 +92,202 @@ endpoints:
       - headers
       - Authorization
       - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/me/size-templates/{sizeTemplate_id}'
+    metadata:
+      custom: []
+      groupName: 'Size Templates'
+      groupDescription: 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).'
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      sizeTemplate_id:
+        custom: []
+        name: sizeTemplate_id
+        description: 'The ID of the sizeTemplate.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      sizeTemplate_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/me/size-templates/{sizeTemplate_id}/items'
+    metadata:
+      custom: []
+      groupName: 'Size Templates'
+      groupDescription: 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).'
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      sizeTemplate_id:
+        custom: []
+        name: sizeTemplate_id
+        description: 'The ID of the sizeTemplate.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      sizeTemplate_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}'
+    metadata:
+      custom: []
+      groupName: 'Size Templates'
+      groupDescription: 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).'
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      sizeTemplate_id:
+        custom: []
+        name: sizeTemplate_id
+        description: 'The ID of the sizeTemplate.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      sizeTemplateItem_id:
+        custom: []
+        name: sizeTemplateItem_id
+        description: 'The ID of the sizeTemplateItem.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      sizeTemplate_id: 16
+      sizeTemplateItem_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/me/size-templates/{sizeTemplate_id}/items/{sizeTemplateItem_id}'
+    metadata:
+      custom: []
+      groupName: 'Size Templates'
+      groupDescription: 'Manage reusable size templates for products. A size template groups labelled size options (e.g. S, M, L) with their values (e.g. chest 36–38 inches).'
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      sizeTemplate_id:
+        custom: []
+        name: sizeTemplate_id
+        description: 'The ID of the sizeTemplate.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      sizeTemplateItem_id:
+        custom: []
+        name: sizeTemplateItem_id
+        description: 'The ID of the sizeTemplateItem.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      sizeTemplate_id: 16
+      sizeTemplateItem_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
     controller: null
     method: null
     route: null
