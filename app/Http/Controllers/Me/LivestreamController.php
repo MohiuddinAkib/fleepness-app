@@ -35,6 +35,7 @@ class LivestreamController extends Controller
     #[Authenticated]
     #[Endpoint('List own livestreams')]
     #[Response('{"data":[{"id":1,"title":"Flash Sale","status":"started"}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<LivestreamData> */
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $livestreams = Livestream::query()

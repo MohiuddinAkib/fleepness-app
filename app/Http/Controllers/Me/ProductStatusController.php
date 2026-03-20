@@ -14,7 +14,9 @@ use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
+use App\Data\Response\Product\ProductStatusData;
 use Illuminate\Container\Attributes\CurrentUser;
+use App\Data\Response\Product\ProductStatusResponseData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Products', 'Vendor product status management. Requires an approved vendor profile.')]
@@ -23,6 +25,7 @@ class ProductStatusController extends Controller
     #[Authenticated]
     #[Endpoint('Update product status', 'Toggles the product between active and inactive status.')]
     #[Response('{"data": {"status": "inactive"}}', 200)]
+    /** @return ProductStatusResponseData */
     public function update(
         Product $product,
         #[CurrentUser] User $user,
@@ -37,10 +40,10 @@ class ProductStatusController extends Controller
                 : ProductStatus::Active,
         ]);
 
-        return response()->json([
-            'data' => [
+        return response()->json(ProductStatusResponseData::from([
+            'data' => ProductStatusData::from([
                 'status' => $product->fresh()->status,
-            ],
-        ]);
+            ]),
+        ])->toArray());
     }
 }

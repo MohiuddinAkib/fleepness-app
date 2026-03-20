@@ -27,6 +27,7 @@ class NotificationController extends Controller
     #[QueryParam('per_page', 'integer', required: false, example: 15)]
     #[QueryParam('type', 'string', required: false, example: 'unread')]
     #[Response('{"data":[{"id":"uuid","type":"legacy.test","data":{"message":"Hello"}}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<NotificationData> */
     public function index(
         ListNotificationsData $data,
         #[CurrentUser] User $user,

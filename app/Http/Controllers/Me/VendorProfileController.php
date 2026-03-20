@@ -77,9 +77,39 @@ class VendorProfileController extends Controller
             $vendorProfile->update($updates);
         }
 
+        $userUpdates = [];
+
+        if (! $data->email instanceof Optional) {
+            $userUpdates['email'] = $data->email;
+        }
+
+        if (! $data->phoneNumber instanceof Optional) {
+            $userUpdates['phone_number'] = $data->phoneNumber;
+        }
+
+        if ([] !== $userUpdates) {
+            $user->update($userUpdates);
+        }
+
+        if (! $data->bannerImage instanceof Optional) {
+            $vendorProfile
+                ->addMedia($data->bannerImage)
+                ->toMediaCollection('banner_image');
+        }
+
+        if (! $data->coverImage instanceof Optional) {
+            if (null === $data->coverImage) {
+                $vendorProfile->clearMediaCollection('cover_image');
+            } else {
+                $vendorProfile
+                    ->addMedia($data->coverImage)
+                    ->toMediaCollection('cover_image');
+            }
+        }
+
         return response()->json(VendorProfileResponseData::from([
             'message' => 'Vendor profile updated.',
-            'data' => VendorProfileData::fromModel($vendorProfile->fresh()),
+            'data' => VendorProfileData::fromModel($vendorProfile->fresh()->load('user')),
         ])->toArray());
     }
 
@@ -110,12 +140,48 @@ class VendorProfileController extends Controller
             'shop_name' => $data->shopName,
             'description' => $data->description,
             'shop_category_id' => $data->shopCategoryId,
+            'pickup_location' => $data->pickupLocation,
             'status' => VendorStatus::Pending,
         ]);
 
+        $userUpdates = array_filter([
+            'name' => $data->name,
+            'email' => $data->email,
+            'phone_number' => $data->phoneNumber,
+        ], static fn (mixed $value): bool => null !== $value && '' !== $value);
+
+        if ([] !== $userUpdates) {
+            $user->update($userUpdates);
+        }
+
+        if (null !== $data->bannerImage) {
+            $vendorProfile
+                ->addMedia($data->bannerImage)
+                ->toMediaCollection('banner_image');
+        }
+
+        if (null !== $data->coverImage) {
+            $vendorProfile
+                ->addMedia($data->coverImage)
+                ->toMediaCollection('cover_image');
+        }
+
+        $selectedPaymentMethodId = collect($data->payments)
+            ->filter(static fn (int $selected): bool => 1 === $selected)
+            ->keys()
+            ->map(static fn (string $paymentMethodId): int => (int) $paymentMethodId)
+            ->first();
+
+        if (null !== $selectedPaymentMethodId && null !== $data->paymentNumber && '' !== $data->paymentNumber) {
+            $user->paymentAccounts()->updateOrCreate(
+                ['payment_method_id' => $selectedPaymentMethodId],
+                ['account_number' => $data->paymentNumber, 'is_primary' => false],
+            );
+        }
+
         return response()->json(VendorProfileResponseData::from([
             'message' => 'Vendor application submitted.',
-            'data' => VendorProfileData::fromModel($vendorProfile),
+            'data' => VendorProfileData::fromModel($vendorProfile->load('user')),
         ])->toArray(), HttpResponse::HTTP_CREATED);
     }
 

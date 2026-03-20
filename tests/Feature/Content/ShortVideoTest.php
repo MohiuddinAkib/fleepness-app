@@ -3,11 +3,14 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use App\Models\Product;
 use App\Models\ShortVideo;
 use App\Models\VendorProfile;
 use App\Models\ShortVideoLike;
 use App\Models\ShortVideoSave;
 use App\Models\ShortVideoComment;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 // Public browsing
 it('lists short videos publicly', function (): void {
@@ -125,27 +128,6 @@ it('saves a short video', function (): void {
     expect(ShortVideoSave::where('short_video_id', $video->getKey())->count())->toBe(1);
 });
 
-it('returns saved shorts on the legacy endpoint', function (): void {
-    $user = User::factory()->create();
-    $token = $user->createToken('test')->plainTextToken;
-    $savedVideo = ShortVideo::factory()->create();
-    $otherVideo = ShortVideo::factory()->create();
-
-    ShortVideoSave::factory()->create([
-        'user_id' => $user->getKey(),
-        'short_video_id' => $savedVideo->getKey(),
-    ]);
-    ShortVideoSave::factory()->create([
-        'user_id' => User::factory()->create()->getKey(),
-        'short_video_id' => $otherVideo->getKey(),
-    ]);
-
-    $this->withToken($token)->getJson('/api/shorts/saved')
-        ->assertOk()
-        ->assertJsonCount(1, 'data')
-        ->assertJsonPath('data.0.id', $savedVideo->getKey());
-});
-
 it('returns saved shorts on the canonical me endpoint', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
@@ -174,38 +156,78 @@ it('requires auth to create a short video', function (): void {
 });
 
 it('vendor creates a short video', function (): void {
+    Storage::fake('public');
+
     $user = User::factory()->create();
-    VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
+    $vendorProfile = VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
+    $products = Product::factory()->count(2)->create(['vendor_profile_id' => $vendorProfile->getKey()]);
     $token = $user->createToken('test')->plainTextToken;
+    $video = UploadedFile::fake()->create('short.mp4', 1024, 'video/mp4');
+    $thumbnail = UploadedFile::fake()->image('short.jpg');
 
     $this->withToken($token)
-        ->postJson('/api/me/short-videos', [
+        ->post('/api/me/short-videos', [
             'title' => 'Amazing Deal',
             'description' => 'Check this out',
+            'video' => $video,
+            'thumbnail' => $thumbnail,
+            'product_ids' => $products->pluck('id')->all(),
         ])
         ->assertCreated()
-        ->assertJsonPath('data.title', 'Amazing Deal');
+        ->assertJsonPath('data.title', 'Amazing Deal')
+        ->assertJsonCount(2, 'data.products');
+
+    $shortVideo = ShortVideo::query()->latest('id')->firstOrFail();
+
+    expect($shortVideo->getFirstMedia('video'))->not->toBeNull();
+    expect($shortVideo->getFirstMedia('thumbnail'))->not->toBeNull();
+    expect($shortVideo->products()->pluck('products.id')->all())->toEqualCanonicalizing($products->pluck('id')->all());
 });
 
 it('non-vendor cannot create short video', function (): void {
+    Storage::fake('public');
+
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->postJson('/api/me/short-videos', ['title' => 'My Video'])
+        ->post('/api/me/short-videos', [
+            'title' => 'My Video',
+            'video' => UploadedFile::fake()->create('short.mp4', 1024, 'video/mp4'),
+        ])
         ->assertForbidden();
 });
 
 it('vendor updates own short video', function (): void {
+    Storage::fake('public');
+
     $user = User::factory()->create();
     $vendor = VendorProfile::factory()->approved()->create(['user_id' => $user->getKey()]);
     $video = ShortVideo::factory()->create(['vendor_profile_id' => $vendor->getKey()]);
+    $video->addMedia(UploadedFile::fake()->create('old.mp4', 512, 'video/mp4'))->toMediaCollection('video');
+    $existingProduct = Product::factory()->create(['vendor_profile_id' => $vendor->getKey()]);
+    $replacementProducts = Product::factory()->count(2)->create(['vendor_profile_id' => $vendor->getKey()]);
+    $video->products()->sync([$existingProduct->getKey()]);
     $token = $user->createToken('test')->plainTextToken;
+    $newVideo = UploadedFile::fake()->create('updated.mp4', 1024, 'video/mp4');
+    $thumbnail = UploadedFile::fake()->image('updated.jpg');
 
     $this->withToken($token)
-        ->patchJson("/api/me/short-videos/{$video->getKey()}", ['title' => 'Updated Title'])
+        ->patch("/api/me/short-videos/{$video->getKey()}", [
+            'title' => 'Updated Title',
+            'video' => $newVideo,
+            'thumbnail' => $thumbnail,
+            'product_ids' => $replacementProducts->pluck('id')->all(),
+        ])
         ->assertOk()
-        ->assertJsonPath('data.title', 'Updated Title');
+        ->assertJsonPath('data.title', 'Updated Title')
+        ->assertJsonCount(2, 'data.products');
+
+    $video->refresh();
+
+    expect($video->getMedia('video'))->toHaveCount(1);
+    expect($video->getFirstMedia('thumbnail'))->not->toBeNull();
+    expect($video->products()->pluck('products.id')->all())->toEqualCanonicalizing($replacementProducts->pluck('id')->all());
 });
 
 it('vendor cannot update another vendors short video', function (): void {

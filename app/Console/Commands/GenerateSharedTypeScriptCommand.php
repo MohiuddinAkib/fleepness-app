@@ -6,7 +6,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Contracts\Console\Kernel;
 use Spatie\TypeScriptTransformer\TypeScriptTransformerConfig;
 
 class GenerateSharedTypeScriptCommand extends Command
@@ -15,10 +14,8 @@ class GenerateSharedTypeScriptCommand extends Command
 
     protected $description = 'Generate shared TypeScript API contract types and sync them to the frontend app';
 
-    public function __construct(
-        private readonly Filesystem $files,
-        private readonly Kernel $kernel,
-    ) {
+    public function __construct(private readonly Filesystem $files)
+    {
         parent::__construct();
     }
 
@@ -35,7 +32,7 @@ class GenerateSharedTypeScriptCommand extends Command
         $this->files->deleteDirectory($config->outputDirectory);
         $this->files->ensureDirectoryExists($config->outputDirectory);
 
-        $transformExitCode = $this->kernel->call('typescript:transform');
+        $transformExitCode = $this->call('typescript:transform');
 
         if (self::SUCCESS !== $transformExitCode) {
             $this->error('Failed to generate TypeScript transformer output.');
@@ -46,15 +43,21 @@ class GenerateSharedTypeScriptCommand extends Command
         $this->files->deleteDirectory($destination);
         $this->files->ensureDirectoryExists($destination);
         $this->files->copyDirectory($config->outputDirectory, $destination);
+        $this->normalizeGeneratedTypesFile($destination);
         $this->normalizeGeneratedRouteHelper($destination);
         $this->normalizeGeneratedControllerFiles($destination);
 
-        $echoExitCode = $this->kernel->call('app:generate-echo-payload-types', [
-            '--path' => $destination,
-        ]);
+        $echoExitCode = $this->call(
+            'app:generate-echo-payload-types',
+            [
+                '--path' => $destination,
+            ],
+        );
 
         if (self::SUCCESS !== $echoExitCode) {
-            $this->error('Generated shared API types, but failed to append Echo payload types.');
+            $this->error(
+                'Generated shared API types, but failed to append Echo payload types.',
+            );
 
             return self::FAILURE;
         }
@@ -78,29 +81,81 @@ class GenerateSharedTypeScriptCommand extends Command
 
         $content = str_replace(
             <<<'TS'
-if (absolute) {
-    url = window.location.origin + url;
-}
-TS,
+            if (absolute) {
+                url = window.location.origin + url;
+            }
+            TS
+            ,
             <<<'TS'
-if (absolute) {
-    const origin = typeof globalThis !== 'undefined' && 'location' in globalThis
-        ? (globalThis as { location?: { origin?: string } }).location?.origin
-        : undefined;
+            if (absolute) {
+                const origin = typeof globalThis !== 'undefined' && 'location' in globalThis
+                    ? (globalThis as { location?: { origin?: string } }).location?.origin
+                    : undefined;
 
-    if (origin) {
-        url = origin + url;
-    }
-}
-TS,
+                if (origin) {
+                    url = origin + url;
+                }
+            }
+            TS
+            ,
             $content,
         );
 
         $this->files->put($routeHelperPath, $content);
     }
 
-    private function normalizeGeneratedControllerFiles(string $destination): void
+    private function normalizeGeneratedTypesFile(string $destination): void
     {
+        $typesPath = "{$destination}/types.d.ts";
+
+        if (! $this->files->exists($typesPath)) {
+            return;
+        }
+
+        $content = $this->files->get($typesPath);
+
+        if (! str_contains($content, 'type UploadFilePart = {')) {
+            $content = preg_replace(
+                '/^declare namespace App \{/m',
+                <<<'TS'
+                type UploadFilePart = {
+                readonly uri: string,
+                readonly type: string,
+                readonly name: string,
+                };
+
+                declare namespace App {
+                TS,
+                $content,
+                1,
+            ) ?? $content;
+        }
+
+        $replacements = [
+            'readonly banner_image?: undefined,' => 'readonly banner_image?: UploadFilePart,',
+            'readonly cover_image?: undefined | null,' => 'readonly cover_image?: UploadFilePart | null,',
+            'readonly banner_image: undefined | null,' => 'readonly banner_image: UploadFilePart | null,',
+            'readonly cover_image: undefined | null,' => 'readonly cover_image: UploadFilePart | null,',
+            'readonly images: undefined[],' => 'readonly images: UploadFilePart[],',
+            'readonly images?: undefined[],' => 'readonly images?: UploadFilePart[],',
+            'readonly video: undefined,' => 'readonly video: UploadFilePart,',
+            'readonly thumbnail: undefined | null,' => 'readonly thumbnail: UploadFilePart | null,',
+            'readonly video?: undefined,' => 'readonly video?: UploadFilePart,',
+            'readonly thumbnail?: undefined | null,' => 'readonly thumbnail?: UploadFilePart | null,',
+        ];
+
+        $content = str_replace(
+            array_keys($replacements),
+            array_values($replacements),
+            $content,
+        );
+
+        $this->files->put($typesPath, $content);
+    }
+
+    private function normalizeGeneratedControllerFiles(
+        string $destination,
+    ): void {
         $controllersPath = "{$destination}/controllers";
 
         if (! $this->files->isDirectory($controllersPath)) {
@@ -127,8 +182,9 @@ TS,
         }
     }
 
-    private function normalizeGeneratedEchoPayloadTypes(string $destination): void
-    {
+    private function normalizeGeneratedEchoPayloadTypes(
+        string $destination,
+    ): void {
         $path = "{$destination}/echo-notification-payloads.ts";
 
         if (! $this->files->exists($path)) {
@@ -138,14 +194,8 @@ TS,
         $content = $this->files->get($path);
 
         $content = str_replace(
-            [
-                'App.Models.Transaction',
-                'App.Models.VendorOrder',
-            ],
-            [
-                'App.Data.TransactionData',
-                'App.Data.VendorOrderData',
-            ],
+            ['App.Models.Transaction', 'App.Models.VendorOrder'],
+            ['App.Data.TransactionData', 'App.Data.VendorOrderData'],
             $content,
         );
 
@@ -154,19 +204,28 @@ TS,
 
     private function normalizeGeneratedControllerTypes(string $content): string
     {
-        $content = preg_replace('/\bundefined<([^>]+)>/', 'Array<$1>', $content) ?? $content;
-        $content = preg_replace(
-            '/Spatie\.LaravelData\.(PaginatedDataCollection|CursorPaginatedDataCollection)<([^,>]+)>/',
-            'Spatie.LaravelData.$1<number, $2>',
+        $content =
+            preg_replace("/\bundefined<([^>]+)>/", 'Array<$1>', $content) ??
+            $content;
+        $content = str_replace(
+            ['export type Request = object;', 'export type Response = object;'],
+            ['export type Request = Record<string, never>;', 'export type Response = Record<string, never>;'],
             $content,
-        ) ?? $content;
+        );
+        $content =
+            preg_replace(
+                "/Spatie\.LaravelData\.(PaginatedDataCollection|CursorPaginatedDataCollection)<([^,>]+)>/",
+                'Spatie.LaravelData.$1<number, $2>',
+                $content,
+            ) ?? $content;
 
         return $content;
     }
 
-    private function mergeDuplicateControllerDeclarations(string $content): string
-    {
-        $lines = preg_split('/\R/', $content) ?: [];
+    private function mergeDuplicateControllerDeclarations(
+        string $content,
+    ): string {
+        $lines = preg_split("/\R/", $content) ?: [];
 
         $prefixLines = [];
         $constBlocks = [];
@@ -174,7 +233,11 @@ TS,
         $controllerNames = [];
         $index = 0;
 
-        while ($index < count($lines) && ! str_starts_with($lines[$index], 'export const ') && ! str_starts_with($lines[$index], 'export namespace ')) {
+        while (
+            $index < count($lines) &&
+            ! str_starts_with($lines[$index], 'export const ') &&
+            ! str_starts_with($lines[$index], 'export namespace ')
+        ) {
             $prefixLines[] = $lines[$index];
             $index++;
         }
@@ -182,12 +245,22 @@ TS,
         while ($index < count($lines)) {
             $line = $lines[$index];
 
-            if (1 === preg_match('/^export const (?<name>[A-Za-z0-9_]+) = \{$/', $line, $matches)) {
+            if (
+                1 ===
+                preg_match(
+                    '/^export const (?<name>[A-Za-z0-9_]+) = \{$/',
+                    $line,
+                    $matches,
+                )
+            ) {
                 $name = $matches['name'];
                 $body = [];
                 $index++;
 
-                while ($index < count($lines) && '} as const' !== $lines[$index]) {
+                while (
+                    $index < count($lines) &&
+                    '} as const' !== $lines[$index]
+                ) {
                     $body[] = $lines[$index];
                     $index++;
                 }
@@ -195,12 +268,21 @@ TS,
                 $constBlocks[$name] ??= [];
                 $controllerNames[$name] ??= count($controllerNames);
 
-                foreach ($this->parseConstMethods($body) as $method => $methodLines) {
+                foreach (
+                    $this->parseConstMethods($body) as $method => $methodLines
+                ) {
                     $constBlocks[$name][$method] = $methodLines;
                 }
             }
 
-            if (1 === preg_match('/^export namespace (?<name>[A-Za-z0-9_]+) \{$/', $line, $matches)) {
+            if (
+                1 ===
+                preg_match(
+                    '/^export namespace (?<name>[A-Za-z0-9_]+) \{$/',
+                    $line,
+                    $matches,
+                )
+            ) {
                 $name = $matches['name'];
                 $body = [];
                 $braceDepth = 1;
@@ -221,7 +303,9 @@ TS,
                 $namespaceBlocks[$name] ??= [];
                 $controllerNames[$name] ??= count($controllerNames);
 
-                foreach ($this->parseNamespaceMethods($body) as $method => $methodLines) {
+                foreach (
+                    $this->parseNamespaceMethods($body) as $method => $methodLines
+                ) {
                     $namespaceBlocks[$name][$method] = $methodLines;
                 }
 
@@ -274,7 +358,10 @@ TS,
         while ($index < count($lines)) {
             $line = $lines[$index];
 
-            if (1 !== preg_match('/^(?<name>[A-Za-z0-9_]+):/', trim($line), $matches)) {
+            if (
+                1 !==
+                preg_match('/^(?<name>[A-Za-z0-9_]+):/', trim($line), $matches)
+            ) {
                 $index++;
 
                 continue;
@@ -314,7 +401,14 @@ TS,
         while ($index < count($lines)) {
             $line = $lines[$index];
 
-            if (1 !== preg_match('/^export namespace (?<name>[A-Za-z0-9_]+) \{$/', trim($line), $matches)) {
+            if (
+                1 !==
+                preg_match(
+                    '/^export namespace (?<name>[A-Za-z0-9_]+) \{$/',
+                    trim($line),
+                    $matches,
+                )
+            ) {
                 $index++;
 
                 continue;
@@ -341,14 +435,14 @@ TS,
 
     private function typeScriptExpressionDepth(string $line): int
     {
-        return substr_count($line, '{')
-            + substr_count($line, '(')
-            + substr_count($line, '[')
-            + substr_count($line, '<')
-            - substr_count($line, '}')
-            - substr_count($line, ')')
-            - substr_count($line, ']')
-            - substr_count($line, '>');
+        return substr_count($line, '{') +
+            substr_count($line, '(') +
+            substr_count($line, '[') +
+            substr_count($line, '<') -
+            substr_count($line, '}') -
+            substr_count($line, ')') -
+            substr_count($line, ']') -
+            substr_count($line, '>');
     }
 
     private function destinationPath(): string

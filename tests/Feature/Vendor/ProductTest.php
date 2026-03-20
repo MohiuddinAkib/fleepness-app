@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Product;
 use App\Enums\ProductStatus;
 use App\Models\VendorProfile;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 it('requires vendor profile to list products', function (): void {
     $user = User::factory()->create();
@@ -40,21 +43,33 @@ it('filters vendor own products by search query', function (): void {
 });
 
 it('creates a product', function (): void {
+    Storage::fake('public');
+
     $user = User::factory()->create();
     VendorProfile::factory()->for($user)->approved()->create();
+    $tag = Tag::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->postJson('/api/me/products', [
+    $response = $this->withToken($token)->post('/api/me/products', [
         'name' => 'Cool T-Shirt',
         'quantity' => 50,
         'selling_price' => 500,
+        'tags' => [$tag->getKey()],
+        'images' => [
+            UploadedFile::fake()->image('product.jpg'),
+        ],
     ]);
 
     $response->assertCreated()
         ->assertJsonPath('data.name', 'Cool T-Shirt')
-        ->assertJsonPath('data.is_approved', false);
+        ->assertJsonPath('data.is_approved', false)
+        ->assertJsonCount(1, 'data.images')
+        ->assertJsonCount(1, 'data.tags');
 
-    expect(Product::where('name', 'Cool T-Shirt')->count())->toBe(1);
+    $product = Product::query()->where('name', 'Cool T-Shirt')->firstOrFail();
+
+    expect($product->getMedia('images'))->toHaveCount(1)
+        ->and($product->tags()->whereKey($tag->getKey())->exists())->toBeTrue();
 });
 
 it('returns 422 for missing required fields', function (): void {
@@ -87,17 +102,33 @@ it('cannot see another vendor\'s product', function (): void {
 });
 
 it('updates a product', function (): void {
+    Storage::fake('public');
+
     $user = User::factory()->create();
     $vendor = VendorProfile::factory()->for($user)->approved()->create();
     $product = Product::factory()->for($vendor, 'vendorProfile')->create();
+    $existingTag = Tag::factory()->create();
+    $replacementTag = Tag::factory()->create();
+    $product->tags()->sync([$existingTag->getKey()]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->patchJson("/api/me/products/{$product->getKey()}", [
+    $this->withToken($token)->patch("/api/me/products/{$product->getKey()}", [
         'name' => 'Updated Name',
         'quantity' => 99,
-    ])->assertOk()->assertJsonPath('data.name', 'Updated Name');
+        'is_active' => true,
+        'tags' => [$replacementTag->getKey()],
+        'images' => [
+            UploadedFile::fake()->image('updated.jpg'),
+        ],
+    ])->assertOk()
+        ->assertJsonPath('data.name', 'Updated Name')
+        ->assertJsonCount(1, 'data.images')
+        ->assertJsonCount(1, 'data.tags');
 
-    expect($product->fresh()->quantity)->toBe(99);
+    expect($product->fresh()->quantity)->toBe(99)
+        ->and($product->fresh()->status)->toBe(ProductStatus::Active)
+        ->and($product->fresh()->getMedia('images'))->toHaveCount(1)
+        ->and($product->fresh()->tags()->whereKey($replacementTag->getKey())->exists())->toBeTrue();
 });
 
 it('deletes a product', function (): void {

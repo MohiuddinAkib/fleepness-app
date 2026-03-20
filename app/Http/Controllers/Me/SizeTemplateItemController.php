@@ -10,6 +10,7 @@ use App\Models\SizeTemplateItem;
 use Illuminate\Http\JsonResponse;
 use App\Data\SizeTemplateItemData;
 use App\Http\Controllers\Controller;
+use App\Data\Response\MessageResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -24,6 +25,7 @@ class SizeTemplateItemController extends Controller
     }
 
     #[Authenticated]
+    /** @return SizeTemplateItemData */
     public function store(
         StoreSizeTemplateItemData $data,
         SizeTemplate $sizeTemplate,
@@ -47,6 +49,7 @@ class SizeTemplateItemController extends Controller
     }
 
     #[Authenticated]
+    /** @return SizeTemplateItemData */
     public function update(
         StoreSizeTemplateItemData $data,
         SizeTemplate $sizeTemplate,
@@ -67,6 +70,7 @@ class SizeTemplateItemController extends Controller
     }
 
     #[Authenticated]
+    /** @return MessageResponseData */
     public function destroy(
         SizeTemplate $sizeTemplate,
         SizeTemplateItem $sizeTemplateItem,
@@ -79,6 +83,8 @@ class SizeTemplateItemController extends Controller
 
         $sizeTemplateItem->delete();
 
-        return response()->json(['message' => 'Item deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Item deleted.',
+        ])->toArray());
     }
 }

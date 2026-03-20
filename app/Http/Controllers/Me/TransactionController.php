@@ -28,6 +28,7 @@ class TransactionController extends Controller
     #[Authenticated]
     #[Endpoint('List transactions')]
     #[Response('{"data":[{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<TransactionData> */
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $transactions = Transaction::query()
@@ -44,6 +45,7 @@ class TransactionController extends Controller
     #[BodyParam('note', 'string', required: false, example: 'Weekly payout request')]
     #[Endpoint('Create withdrawal request')]
     #[Response('{"data":{"id":1,"type":"withdrawal","status":"pending","amount":"500.00"}}', 201)]
+    /** @return TransactionData */
     public function store(
         StoreWithdrawalData $data,
         #[CurrentUser] User $user,

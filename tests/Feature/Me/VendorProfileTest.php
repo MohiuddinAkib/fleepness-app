@@ -5,8 +5,11 @@ declare(strict_types=1);
 use App\Models\User;
 use App\Enums\VendorStatus;
 use App\Models\VendorOrder;
+use App\Models\PaymentMethod;
 use App\Models\VendorProfile;
 use App\Enums\VendorOrderStatus;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 it('returns 404 when user has no vendor profile', function (): void {
     $user = User::factory()->create();
@@ -26,24 +29,49 @@ it('returns vendor profile', function (): void {
 });
 
 it('updates vendor profile', function (): void {
+    Storage::fake('public');
+
     $user = User::factory()->create();
     VendorProfile::factory()->for($user)->approved()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->patchJson('/api/me/vendors', [
+    $response = $this->withToken($token)->patch('/api/me/vendors', [
         'shop_name' => 'Updated Shop',
         'description' => 'A great shop',
+        'email' => 'vendor@example.com',
+        'phone_number' => '01718888888',
+        'banner_image' => UploadedFile::fake()->image('banner.jpg'),
+        'cover_image' => UploadedFile::fake()->image('cover.jpg'),
     ]);
 
     $response->assertOk()->assertJsonPath('data.shop_name', 'Updated Shop');
+
+    $vendorProfile = $user->fresh()->vendorProfile;
+
+    expect($user->fresh()->email)->toBe('vendor@example.com')
+        ->and($user->fresh()->phone_number)->toBe('01718888888')
+        ->and($vendorProfile?->getFirstMedia('banner_image'))->not->toBeNull()
+        ->and($vendorProfile?->getFirstMedia('cover_image'))->not->toBeNull();
 });
 
 it('applies to become a vendor', function (): void {
+    Storage::fake('public');
+
     $user = User::factory()->create();
+    $paymentMethod = PaymentMethod::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->postJson('/api/vendor-applications', [
+    $response = $this->withToken($token)->post('/api/vendor-applications', [
+        'name' => 'Updated User',
         'shop_name' => 'My New Shop',
+        'phone_number' => '01717777777',
+        'pickup_location' => 'Dhaka',
+        'banner_image' => UploadedFile::fake()->image('banner.jpg'),
+        'cover_image' => UploadedFile::fake()->image('cover.jpg'),
+        'payment_number' => '01717777777',
+        'payments' => [
+            (string) $paymentMethod->getKey() => 1,
+        ],
     ]);
 
     $response->assertCreated()
@@ -51,6 +79,11 @@ it('applies to become a vendor', function (): void {
         ->assertJsonPath('data.status', VendorStatus::Pending->value);
 
     expect(VendorProfile::where('user_id', $user->getKey())->count())->toBe(1);
+    expect($user->fresh()->name)->toBe('Updated User')
+        ->and($user->fresh()->phone_number)->toBe('01717777777')
+        ->and($user->paymentAccounts()->where('payment_method_id', $paymentMethod->getKey())->exists())->toBeTrue()
+        ->and($user->vendorProfile?->getFirstMedia('banner_image'))->not->toBeNull()
+        ->and($user->vendorProfile?->getFirstMedia('cover_image'))->not->toBeNull();
 });
 
 it('cannot apply twice', function (): void {

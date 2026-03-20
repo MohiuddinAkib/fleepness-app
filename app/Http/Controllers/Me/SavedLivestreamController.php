@@ -23,6 +23,7 @@ class SavedLivestreamController extends Controller
     #[Authenticated]
     #[Endpoint('List saved livestreams')]
     #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<LivestreamData> */
     public function index(
         #[CurrentUser] User $user,
         ListSavedLivestreamsAction $listSavedLivestreams,

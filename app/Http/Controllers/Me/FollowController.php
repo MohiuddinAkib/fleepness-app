@@ -22,6 +22,7 @@ class FollowController extends Controller
     #[Authenticated]
     #[Endpoint('List followed vendors', 'Returns a paginated list of vendor profiles that the authenticated user follows.')]
     #[Response('{"data": [{"id": 1, "shop_name": "Flash Store"}]}', 200)]
+    /** @return DataCollection<VendorProfileData> */
     public function followings(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfiles = $user->following()->get();

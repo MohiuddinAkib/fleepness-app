@@ -5,15 +5,19 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Me;
 
 use App\Models\User;
+use App\Models\Product;
 use App\Models\ShortVideo;
 use App\Data\ShortVideoData;
+use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
 use App\Data\ShortVideo\StoreShortVideoData;
+use App\Data\ShortVideo\UpdateShortVideoData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -26,11 +30,12 @@ class ShortVideoController extends Controller
     #[Authenticated]
     #[Endpoint('List own short videos')]
     #[Response('{"data":[{"id":1,"title":"New Collection Drop"}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<ShortVideoData> */
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $videos = ShortVideo::query()
             ->where('vendor_profile_id', $user->vendorProfile?->getKey())
-            ->with(['media', 'vendorProfile'])
+            ->with(['media', 'vendorProfile', 'products.media', 'products.vendorProfile', 'products.category'])
             ->latest()
             ->paginate();
 
@@ -44,6 +49,7 @@ class ShortVideoController extends Controller
     #[BodyParam('thumbnail', 'file', required: false, nullable: true)]
     #[Endpoint('Upload short video')]
     #[Response('{"data":{"id":1,"title":"Summer Collection"}}', 201)]
+    /** @return ShortVideoData */
     public function store(
         StoreShortVideoData $data,
         #[CurrentUser] User $user,
@@ -57,7 +63,19 @@ class ShortVideoController extends Controller
             'description' => $data->description,
         ]);
 
-        $video->load(['media', 'vendorProfile']);
+        $video
+            ->addMedia($data->video)
+            ->toMediaCollection('video');
+
+        if (null !== $data->thumbnail) {
+            $video
+                ->addMedia($data->thumbnail)
+                ->toMediaCollection('thumbnail');
+        }
+
+        $this->syncProducts($video, $vendorProfile->getKey(), $data->productIds);
+
+        $video->load(['media', 'vendorProfile', 'products.media', 'products.vendorProfile', 'products.category']);
 
         return ShortVideoData::fromModel($video);
     }
@@ -67,8 +85,9 @@ class ShortVideoController extends Controller
     #[BodyParam('description', 'string', required: false, nullable: true)]
     #[Endpoint('Update short video')]
     #[Response('{"data":{"id":1,"title":"Updated Title"}}', 200)]
+    /** @return ShortVideoData */
     public function update(
-        StoreShortVideoData $data,
+        UpdateShortVideoData $data,
         ShortVideo $shortVideo,
         #[CurrentUser] User $user,
     ): JsonResponse|Responsable {
@@ -76,12 +95,41 @@ class ShortVideoController extends Controller
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
         abort_unless($shortVideo->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 
-        $shortVideo->update([
-            'title' => $data->title,
-            'description' => $data->description,
-        ]);
+        $attributes = [];
 
-        $shortVideo->load(['media', 'vendorProfile']);
+        if (! $data->title instanceof Optional) {
+            $attributes['title'] = $data->title;
+        }
+
+        if (! $data->description instanceof Optional) {
+            $attributes['description'] = $data->description;
+        }
+
+        if ([] !== $attributes) {
+            $shortVideo->update($attributes);
+        }
+
+        if (! $data->video instanceof Optional) {
+            $shortVideo
+                ->addMedia($data->video)
+                ->toMediaCollection('video');
+        }
+
+        if (! $data->thumbnail instanceof Optional) {
+            if (null === $data->thumbnail) {
+                $shortVideo->clearMediaCollection('thumbnail');
+            } else {
+                $shortVideo
+                    ->addMedia($data->thumbnail)
+                    ->toMediaCollection('thumbnail');
+            }
+        }
+
+        if (! $data->productIds instanceof Optional) {
+            $this->syncProducts($shortVideo, $vendorProfile->getKey(), $data->productIds);
+        }
+
+        $shortVideo->load(['media', 'vendorProfile', 'products.media', 'products.vendorProfile', 'products.category']);
 
         return ShortVideoData::fromModel($shortVideo);
     }
@@ -89,6 +137,7 @@ class ShortVideoController extends Controller
     #[Authenticated]
     #[Endpoint('Delete short video')]
     #[Response('{"message":"Short video deleted."}', 200)]
+    /** @return MessageResponseData */
     public function destroy(
         ShortVideo $shortVideo,
         #[CurrentUser] User $user,
@@ -99,6 +148,28 @@ class ShortVideoController extends Controller
 
         $shortVideo->delete();
 
-        return response()->json(['message' => 'Short video deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Short video deleted.',
+        ])->toArray());
+    }
+
+    /** @param array<int, int> $productIds */
+    protected function syncProducts(ShortVideo $shortVideo, int $vendorProfileId, array $productIds): void
+    {
+        if ([] === $productIds) {
+            $shortVideo->products()->sync([]);
+
+            return;
+        }
+
+        $ownedProductIds = Product::query()
+            ->where('vendor_profile_id', $vendorProfileId)
+            ->whereKey($productIds)
+            ->pluck('id')
+            ->all();
+
+        abort_unless(count($ownedProductIds) === count(array_unique($productIds)), HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
+
+        $shortVideo->products()->sync($ownedProductIds);
     }
 }

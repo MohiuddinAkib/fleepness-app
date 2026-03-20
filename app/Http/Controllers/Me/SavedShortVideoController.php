@@ -23,6 +23,7 @@ class SavedShortVideoController extends Controller
     #[Authenticated]
     #[Endpoint('List saved short videos')]
     #[Response('{"data":[{"id":1,"title":"New Collection Drop"}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<ShortVideoData> */
     public function index(
         #[CurrentUser] User $user,
         ListSavedShortVideosAction $listSavedShortVideos,

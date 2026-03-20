@@ -30,6 +30,7 @@ class LivestreamCommentController extends Controller
     #[Endpoint('List livestream comments')]
     #[Response('{"data":[{"id":1,"comment":"Watching now!"}],"meta":{"current_page":1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<CommentData> */
     public function index(Livestream $livestream): JsonResponse|Responsable
     {
         $comments = $livestream->comments()
@@ -47,6 +48,7 @@ class LivestreamCommentController extends Controller
     #[BodyParam('comment', 'string', required: true, example: 'Watching now!')]
     #[Endpoint('Post livestream comment')]
     #[Response('{"data":{"id":1,"comment":"Watching now!"}}', 201)]
+    /** @return CommentData */
     public function store(
         StoreCommentData $data,
         Livestream $livestream,
@@ -66,6 +68,7 @@ class LivestreamCommentController extends Controller
     #[BodyParam('comment', 'string', required: true, example: 'Updated message')]
     #[Endpoint('Update livestream comment')]
     #[Response('{"data":{"id":1,"comment":"Updated message"}}', 200)]
+    /** @return CommentData */
     public function update(
         UpdateCommentData $data,
         Livestream $livestream,

@@ -14,6 +14,7 @@ use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
 use App\Data\Public\StoreProductReviewData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
@@ -28,6 +29,7 @@ class ProductReviewController extends Controller
     #[Endpoint('List product reviews')]
     #[Response('{"data": [{"id": 1, "rating": 5, "review": "Great quality!"}]}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<ProductReviewData> */
     public function index(Product $product): JsonResponse|Responsable
     {
         abort_unless($product->is_active && $product->is_approved, HttpResponse::HTTP_NOT_FOUND);
@@ -42,6 +44,7 @@ class ProductReviewController extends Controller
     #[BodyParam('review', 'string', required: false, example: 'Great quality!')]
     #[Endpoint('Write a product review')]
     #[Response('{"data": {"id": 1, "rating": 5}}', 201)]
+    /** @return ProductReviewData */
     public function store(
         StoreProductReviewData $data,
         Product $product,
@@ -77,6 +80,7 @@ class ProductReviewController extends Controller
     #[Authenticated]
     #[Endpoint('Delete own product review')]
     #[Response('{"message": "Review deleted."}', 200)]
+    /** @return MessageResponseData */
     public function destroy(
         Product $product,
         ProductReview $review,
@@ -87,6 +91,8 @@ class ProductReviewController extends Controller
 
         $review->delete();
 
-        return response()->json(['message' => 'Review deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Review deleted.',
+        ])->toArray());
     }
 }

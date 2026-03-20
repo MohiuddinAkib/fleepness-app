@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
+use App\Data\Response\MessageResponseData;
 use Knuckles\Scribe\Attributes\QueryParam;
 use App\Data\Public\ListVendorProductsData;
 use Illuminate\Contracts\Support\Responsable;
@@ -83,25 +84,29 @@ class VendorController extends Controller
     #[Authenticated]
     #[Endpoint('Follow vendor')]
     #[Response('{"message": "Following."}', 200)]
-    /** @return JsonResponse<array{message: string}> */
+    /** @return MessageResponseData */
     public function follow(VendorProfile $vendorProfile, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($vendorProfile->is_approved, HttpResponse::HTTP_NOT_FOUND);
 
         $user->following()->syncWithoutDetaching([$vendorProfile->getKey()]);
 
-        return response()->json(['message' => 'Vendor followed.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Vendor followed.',
+        ])->toArray());
     }
 
     #[Authenticated]
     #[Endpoint('Unfollow vendor')]
     #[Response('{"message": "Unfollowed."}', 200)]
-    /** @return JsonResponse<array{message: string}> */
+    /** @return MessageResponseData */
     public function unfollow(VendorProfile $vendorProfile, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $user->following()->detach($vendorProfile->getKey());
 
-        return response()->json(['message' => 'Vendor unfollowed.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Vendor unfollowed.',
+        ])->toArray());
     }
 
     #[Endpoint(

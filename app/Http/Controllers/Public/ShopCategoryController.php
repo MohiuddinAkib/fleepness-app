@@ -21,6 +21,7 @@ class ShopCategoryController extends Controller
     #[Endpoint('List shop categories')]
     #[Response('{"data":[{"id":1,"name":"Fashion"}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<ShopCategoryData> */
     public function index(): JsonResponse|Responsable
     {
         $categories = ShopCategory::query()->orderBy('name')->get();

@@ -49,8 +49,28 @@ class ProfileController extends Controller
             $updates['email'] = $data->email;
         }
 
+        if (! $data->phoneNumber instanceof Optional) {
+            $updates['phone_number'] = $data->phoneNumber;
+        }
+
         if ([] !== $updates) {
             $user->update($updates);
+        }
+
+        if (! $data->bannerImage instanceof Optional) {
+            $user
+                ->addMedia($data->bannerImage)
+                ->toMediaCollection('banner_image');
+        }
+
+        if (! $data->coverImage instanceof Optional) {
+            if (null === $data->coverImage) {
+                $user->clearMediaCollection('cover_image');
+            } else {
+                $user
+                    ->addMedia($data->coverImage)
+                    ->toMediaCollection('cover_image');
+            }
         }
 
         return response()->json(UserResponseData::from([

@@ -10,13 +10,16 @@ use App\Data\ProductData;
 use App\Enums\ProductStatus;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\UploadedFile;
 use App\Data\Me\ListOwnProductsData;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use App\Data\Product\StoreProductData;
+use App\Data\Product\UpdateProductData;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
 use Knuckles\Scribe\Attributes\QueryParam;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
@@ -31,6 +34,7 @@ class ProductController extends Controller
     #[Endpoint('List own products', 'Returns a paginated list of products belonging to the authenticated vendor.')]
     #[QueryParam('q', 'string', required: false, example: 'sku-001')]
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00", "status": "active"}], "meta": {"current_page": 1}}', 200)]
+    /** @return PaginatedDataCollection<ProductData> */
     public function index(
         ListOwnProductsData $data,
         #[CurrentUser] User $user,
@@ -67,6 +71,7 @@ class ProductController extends Controller
     #[BodyParam('size_template_id', 'integer', required: false)]
     #[Endpoint('Create product')]
     #[Response('{"data": {"id": 1, "name": "Blue T-Shirt", "status": "active"}}', 201)]
+    /** @return ProductData */
     public function store(
         StoreProductData $data,
         #[CurrentUser] User $user,
@@ -84,10 +89,15 @@ class ProductController extends Controller
             'discount_price' => $data->discountPrice instanceof Optional ? null : $data->discountPrice,
             'short_description' => $data->shortDescription instanceof Optional ? null : $data->shortDescription,
             'description' => $data->description instanceof Optional ? null : $data->description,
-            'status' => ProductStatus::Inactive,
+            'status' => $data->isActive instanceof Optional
+                ? ProductStatus::Inactive
+                : ($data->isActive ? ProductStatus::Active : ProductStatus::Inactive),
             'is_approved' => false,
             'quantity' => $data->quantity instanceof Optional ? 0 : (int) $data->quantity,
         ]);
+
+        $this->syncProductTags($product, $data->tags);
+        $this->attachProductImages($product, $data->images);
 
         $product->load(['media', 'category', 'tags']);
 
@@ -97,6 +107,7 @@ class ProductController extends Controller
     #[Authenticated]
     #[Endpoint('Get own product')]
     #[Response('{"data": {"id": 1, "name": "Blue T-Shirt"}}', 200)]
+    /** @return ProductData */
     public function show(
         Product $product,
         #[CurrentUser] User $user,
@@ -122,8 +133,9 @@ class ProductController extends Controller
     #[BodyParam('size_template_id', 'integer', required: false)]
     #[Endpoint('Update product')]
     #[Response('{"data": {"id": 1, "name": "Updated T-Shirt"}}', 200)]
+    /** @return ProductData */
     public function update(
-        StoreProductData $data,
+        UpdateProductData $data,
         Product $product,
         #[CurrentUser] User $user,
     ): JsonResponse|Responsable {
@@ -131,17 +143,32 @@ class ProductController extends Controller
         abort_if(null === $vendorProfile, HttpResponse::HTTP_FORBIDDEN);
         abort_unless($product->vendorProfile()->is($vendorProfile), HttpResponse::HTTP_FORBIDDEN);
 
-        $product->update(array_filter([
-            'name' => $data->name,
-            'category_id' => $data->categoryId instanceof Optional ? $product->category_id : $data->categoryId,
-            'size_template_id' => $data->sizeTemplateId instanceof Optional ? $product->size_template_id : $data->sizeTemplateId,
-            'sku' => $data->skuValue instanceof Optional ? $product->sku : $data->skuValue,
-            'selling_price' => $data->sellingPrice instanceof Optional ? $product->selling_price : $data->sellingPrice,
-            'discount_price' => $data->discountPrice instanceof Optional ? $product->discount_price : $data->discountPrice,
-            'short_description' => $data->shortDescription instanceof Optional ? $product->short_description : $data->shortDescription,
-            'description' => $data->description instanceof Optional ? $product->description : $data->description,
-            'quantity' => $data->quantity instanceof Optional ? $product->quantity : (int) $data->quantity,
-        ], fn ($v) => null !== $v));
+        $updates = array_filter([
+            'name' => $data->name instanceof Optional ? null : $data->name,
+            'category_id' => $data->categoryId instanceof Optional ? null : $data->categoryId,
+            'size_template_id' => $data->sizeTemplateId instanceof Optional ? null : $data->sizeTemplateId,
+            'sku' => $data->skuValue instanceof Optional ? null : $data->skuValue,
+            'selling_price' => $data->sellingPrice instanceof Optional ? null : $data->sellingPrice,
+            'discount_price' => $data->discountPrice instanceof Optional ? null : $data->discountPrice,
+            'short_description' => $data->shortDescription instanceof Optional ? null : $data->shortDescription,
+            'description' => $data->description instanceof Optional ? null : $data->description,
+            'quantity' => $data->quantity instanceof Optional ? null : (int) $data->quantity,
+            'status' => $data->isActive instanceof Optional
+                ? null
+                : ($data->isActive ? ProductStatus::Active : ProductStatus::Inactive),
+        ], static fn (mixed $value): bool => null !== $value);
+
+        if ([] !== $updates) {
+            $product->update($updates);
+        }
+
+        if (! $data->tags instanceof Optional) {
+            $this->syncProductTags($product, $data->tags);
+        }
+
+        if (! $data->images instanceof Optional) {
+            $this->attachProductImages($product, $data->images);
+        }
 
         $product->load(['media', 'category', 'tags', 'variants']);
 
@@ -151,6 +178,7 @@ class ProductController extends Controller
     #[Authenticated]
     #[Endpoint('Delete product')]
     #[Response('{"message": "Product deleted."}', 200)]
+    /** @return MessageResponseData */
     public function destroy(
         Product $product,
         #[CurrentUser] User $user,
@@ -161,6 +189,22 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return response()->json(['message' => 'Product deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Product deleted.',
+        ])->toArray());
+    }
+
+    /** @param array<int, int> $tags */
+    protected function syncProductTags(Product $product, array $tags): void
+    {
+        $product->tags()->sync($tags);
+    }
+
+    /** @param array<int, UploadedFile> $images */
+    protected function attachProductImages(Product $product, array $images): void
+    {
+        foreach ($images as $image) {
+            $product->addMedia($image)->toMediaCollection('images');
+        }
     }
 }

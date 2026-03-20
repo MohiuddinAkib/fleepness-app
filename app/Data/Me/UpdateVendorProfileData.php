@@ -6,6 +6,8 @@ namespace App\Data\Me;
 
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rules\File;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 use Spatie\LaravelData\Attributes\Validation\Max;
@@ -23,6 +25,16 @@ class UpdateVendorProfileData extends Data
         public readonly Optional|string $pickupLocation,
 
         public readonly int|Optional $shopCategoryId,
+
+        #[Max(255)]
+        public readonly Optional|string $email,
+
+        #[Max(30)]
+        public readonly Optional|string $phoneNumber,
+
+        public readonly Optional|UploadedFile $bannerImage,
+
+        public readonly null|Optional|UploadedFile $coverImage,
     ) {}
 
     /** @return array<string, mixed> */
@@ -30,6 +42,9 @@ class UpdateVendorProfileData extends Data
     {
         return [
             'shop_category_id' => ['nullable', 'integer', 'exists:shop_categories,id'],
+            'phone_number' => ['sometimes', 'string', 'max:30'],
+            'banner_image' => ['sometimes', File::image()->max(5 * 1024)],
+            'cover_image' => ['sometimes', 'nullable', File::image()->max(5 * 1024)],
         ];
     }
 }

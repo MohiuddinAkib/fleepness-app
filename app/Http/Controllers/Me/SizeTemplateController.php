@@ -14,6 +14,7 @@ use Spatie\LaravelData\DataCollection;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use App\Data\SizeTemplate\StoreSizeTemplateData;
@@ -26,6 +27,7 @@ class SizeTemplateController extends Controller
     #[Authenticated]
     #[Endpoint('List size templates')]
     #[Response('{"data": [{"id": 1, "name": "Shirt Sizes", "items": [{"label": "M", "value": "38-40 inches"}]}]}', 200)]
+    /** @return DataCollection<SizeTemplateData> */
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -43,6 +45,7 @@ class SizeTemplateController extends Controller
     #[BodyParam('name', 'string', required: true, example: 'Shirt Sizes')]
     #[Endpoint('Create size template')]
     #[Response('{"data": {"id": 1, "name": "Shirt Sizes"}}', 201)]
+    /** @return SizeTemplateData */
     public function store(
         StoreSizeTemplateData $data,
         #[CurrentUser] User $user,
@@ -60,6 +63,7 @@ class SizeTemplateController extends Controller
         return SizeTemplateData::fromModel($template);
     }
 
+    /** @return MessageResponseData */
     public function destroy(
         SizeTemplate $sizeTemplate,
         #[CurrentUser] User $user,
@@ -70,6 +74,8 @@ class SizeTemplateController extends Controller
 
         $sizeTemplate->delete();
 
-        return response()->json(['message' => 'Size template deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Size template deleted.',
+        ])->toArray());
     }
 }

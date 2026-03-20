@@ -21,6 +21,7 @@ class PaymentMethodController extends Controller
     #[Endpoint('List payment methods')]
     #[Response('{"data":[{"id":1,"name":"Cash on Delivery"}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<PaymentMethodData> */
     public function index(): JsonResponse|Responsable
     {
         $methods = PaymentMethod::query()

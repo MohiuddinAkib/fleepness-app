@@ -14,10 +14,10 @@ use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapInputName(SnakeCaseMapper::class)]
-class StoreProductData extends Data
+class UpdateProductData extends Data
 {
     public function __construct(
-        public readonly string $name,
+        public readonly Optional|string $name,
         public readonly null|int|Optional $categoryId,
         public readonly null|int|Optional $sizeTemplateId,
         public readonly null|Optional|string $skuValue,
@@ -26,23 +26,23 @@ class StoreProductData extends Data
         public readonly null|Optional|string $shortDescription,
         public readonly null|Optional|string $description,
         public readonly null|int|Optional $quantity,
-        /** @var array<int, UploadedFile> */
-        public readonly array $images = [],
-        /** @var array<int, int> */
-        public readonly array $tags = [],
-        public readonly bool|Optional $isActive = new Optional,
+        /** @var array<int, UploadedFile>|Optional */
+        public readonly array|Optional $images,
+        /** @var array<int, int>|Optional */
+        public readonly array|Optional $tags,
+        public readonly bool|Optional $isActive,
     ) {}
 
     /** @return array<string, mixed> */
     public static function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
-            'size_template_id' => ['nullable', 'integer', 'exists:size_templates,id'],
-            'selling_price' => ['required', 'numeric', 'min:0'],
-            'discount_price' => ['nullable', 'numeric', 'min:0'],
-            'quantity' => ['nullable', 'integer', 'min:0'],
+            'name' => ['sometimes', 'string', 'max:255'],
+            'category_id' => ['sometimes', 'nullable', 'integer', 'exists:categories,id'],
+            'size_template_id' => ['sometimes', 'nullable', 'integer', 'exists:size_templates,id'],
+            'selling_price' => ['sometimes', 'numeric', 'min:0'],
+            'discount_price' => ['sometimes', 'nullable', 'numeric', 'min:0'],
+            'quantity' => ['sometimes', 'nullable', 'integer', 'min:0'],
             'images' => ['sometimes', 'array'],
             'images.*' => [File::image()->max(5 * 1024)],
             'tags' => ['sometimes', 'array'],

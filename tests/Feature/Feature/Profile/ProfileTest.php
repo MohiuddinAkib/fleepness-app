@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 it('returns media-backed image fields on the authenticated profile payload', function (): void {
     $user = User::factory()->create();
@@ -29,4 +31,30 @@ it('returns media-backed image fields on the authenticated profile payload', fun
         ->toBe($user->getFirstMediaUrl('cover_image'))
         ->and(data_get($json, 'notification_channel') ?? data_get($json, 'data.notification_channel'))
         ->toBe($user->receivesBroadcastNotificationsOn());
+});
+
+it('updates phone number and media-backed profile images', function (): void {
+    Storage::fake('public');
+
+    $user = User::factory()->create([
+        'phone_number' => '01710000000',
+    ]);
+
+    $token = $user->createToken('test')->plainTextToken;
+
+    $response = $this->withToken($token)->patch('/api/me', [
+        'name' => 'Updated User',
+        'phone_number' => '01719999999',
+        'banner_image' => UploadedFile::fake()->image('banner.jpg'),
+        'cover_image' => UploadedFile::fake()->image('cover.jpg'),
+    ]);
+
+    $response->assertOk()
+        ->assertJsonPath('data.name', 'Updated User')
+        ->assertJsonPath('data.phone_number', '01719999999');
+
+    $user->refresh();
+
+    expect($user->getFirstMedia('banner_image'))->not->toBeNull()
+        ->and($user->getFirstMedia('cover_image'))->not->toBeNull();
 });

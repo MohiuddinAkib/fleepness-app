@@ -15,6 +15,7 @@ use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use App\Data\ShortVideo\StoreCommentData;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Unauthenticated;
@@ -28,6 +29,7 @@ class ShortVideoCommentController extends Controller
     #[Endpoint('List short video comments')]
     #[Response('{"data":[{"id":1,"comment":"Great video!"}],"meta":{"current_page":1}}', 200)]
     #[Unauthenticated]
+    /** @return PaginatedDataCollection<CommentData> */
     public function index(ShortVideo $shortVideo): JsonResponse|Responsable
     {
         $comments = $shortVideo->comments()
@@ -45,6 +47,7 @@ class ShortVideoCommentController extends Controller
     #[BodyParam('comment', 'string', required: true, example: 'Great video!')]
     #[Endpoint('Post short video comment')]
     #[Response('{"data":{"id":1,"comment":"Great video!"}}', 201)]
+    /** @return CommentData */
     public function store(
         StoreCommentData $data,
         ShortVideo $shortVideo,
@@ -73,6 +76,7 @@ class ShortVideoCommentController extends Controller
     #[Authenticated]
     #[Endpoint('Delete short video comment')]
     #[Response('{"message":"Comment deleted."}', 200)]
+    /** @return MessageResponseData */
     public function destroy(
         ShortVideo $shortVideo,
         ShortVideoComment $comment,
@@ -83,6 +87,8 @@ class ShortVideoCommentController extends Controller
 
         $comment->delete();
 
-        return response()->json(['message' => 'Comment deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Comment deleted.',
+        ])->toArray());
     }
 }

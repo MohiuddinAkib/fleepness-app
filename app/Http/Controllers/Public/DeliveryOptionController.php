@@ -21,6 +21,7 @@ class DeliveryOptionController extends Controller
     #[Endpoint('List delivery options')]
     #[Response('{"data":[{"id":1,"name":"Standard Delivery","fee":"60.00"}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<DeliveryOptionData> */
     public function index(): JsonResponse|Responsable
     {
         $options = DeliveryOption::query()

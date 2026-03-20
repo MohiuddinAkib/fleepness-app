@@ -23,6 +23,7 @@ class SectionController extends Controller
     #[Endpoint('List visible sections')]
     #[Response('{"data":[{"id":1,"title":"Featured","items":[]}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<SectionData> */
     public function index(): JsonResponse|Responsable
     {
         $sections = Section::query()
@@ -37,6 +38,7 @@ class SectionController extends Controller
     #[Endpoint('List active sliders')]
     #[Response('{"data":[{"id":1,"image_url":"https://example.com/slider.jpg","url":"https://example.com/promo"}]}', 200)]
     #[Unauthenticated]
+    /** @return DataCollection<SliderData> */
     public function sliders(): JsonResponse|Responsable
     {
         $sliders = Slider::query()

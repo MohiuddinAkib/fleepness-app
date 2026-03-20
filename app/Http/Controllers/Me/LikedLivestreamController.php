@@ -23,6 +23,7 @@ class LikedLivestreamController extends Controller
     #[Authenticated]
     #[Endpoint('List liked livestreams')]
     #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}', 200)]
+    /** @return PaginatedDataCollection<LivestreamData> */
     public function index(
         #[CurrentUser] User $user,
         ListLikedLivestreamsAction $listLikedLivestreams,

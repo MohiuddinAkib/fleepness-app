@@ -23,6 +23,7 @@ class VendorFollowerController extends Controller
     #[Authenticated]
     #[Endpoint('List vendor followers')]
     #[Response('{"data":[{"id":1,"name":"Jane Doe"}]}', 200)]
+    /** @return DataCollection<UserData> */
     public function index(
         #[CurrentUser] User $user,
         ListVendorFollowersAction $listVendorFollowers,
