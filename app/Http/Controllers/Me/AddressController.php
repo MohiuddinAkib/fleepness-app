@@ -20,7 +20,6 @@ use App\Data\Response\Me\AddressResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Illuminate\Container\Attributes\CurrentUser;
-use App\Data\Response\Me\DefaultAddressResponseData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Addresses', 'Manage delivery addresses for the authenticated user.')]
@@ -133,29 +132,6 @@ class AddressController extends Controller
         return response()->json(AddressResponseData::from([
             'message' => 'Default address updated.',
             'data' => AddressData::fromModel($address->fresh()),
-        ])->toArray());
-    }
-
-    #[Authenticated]
-    #[Endpoint('Get default address', 'Legacy compatibility alias for `/api/addresses/default`. Prefer `/api/me/addresses` plus the `is_default` flag, or `/api/me/addresses/{address}/default` for updates in new clients.')]
-    #[Response('{"default_address":{"id":1,"label":"Home","is_default":true}}', 200)]
-    /**
-     * Legacy alias for the historical `/api/addresses/default` contract.
-     *
-     * Preferred modern path:
-     * - read `/api/me/addresses` and pick the item with `is_default = true`
-     * - update via `/api/me/addresses/{address}/default`
-     *
-     * This method remains only to keep the older React Native client working during migration.
-     */
-    /** @return DefaultAddressResponseData */
-    public function default(#[CurrentUser] User $user): JsonResponse|Responsable
-    {
-        $address = $user->defaultAddress()->first();
-
-        return response()->json(DefaultAddressResponseData::from([
-            'default_address' => null === $address ? null : AddressData::fromModel($address),
-            'data' => null === $address ? null : AddressData::fromModel($address),
         ])->toArray());
     }
 }

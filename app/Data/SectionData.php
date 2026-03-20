@@ -36,14 +36,8 @@ class SectionData extends Data
         public readonly ?string $bannerImage,
         public readonly bool $showProducts,
         public readonly ?TagData $tag,
-        /**
-         * Legacy compatibility aliases for clients still expecting a flattened tag shape.
-         * Remove these after consumers migrate to the nested `tag` object.
-         */
-        public readonly ?int $tagId,
-        public readonly ?string $tagName,
         public readonly ?CategoryData $category,
-        /** @var list<array{id: int, title: ?string, description: ?string, image_url: ?string, image: ?string, bio: ?string, sort_order: int, index: int, is_visible: bool, visibility: bool, tag_id: ?int, tag_name: ?string}> */
+        /** @var list<array{id: int, title: ?string, description: ?string, image_url: ?string, image: ?string, bio: ?string, sort_order: int, index: int, is_visible: bool, visibility: bool, tag: ?array{id: int, name: string, slug: ?string}}> */
         public readonly array $items,
     ) {}
 
@@ -78,8 +72,6 @@ class SectionData extends Data
             bannerImage: $bannerImageUrl,
             showProducts: $section->type->showsProducts(),
             tag: null !== $firstTag ? TagData::fromModel($firstTag) : null,
-            tagId: $firstTag?->getKey(),
-            tagName: $firstTag?->name,
             category: $section->relationLoaded('category') && null !== $section->category
                 ? CategoryData::fromModel($section->category)
                 : null,

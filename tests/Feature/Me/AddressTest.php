@@ -84,17 +84,6 @@ it('sets an address as default', function (): void {
     expect($address1->fresh()->is_default)->toBeFalse();
 });
 
-it('returns the default address on the legacy endpoint', function (): void {
-    $user = User::factory()->create();
-    $address = Address::factory()->for($user)->asDefault()->create();
-    $token = $user->createToken('test')->plainTextToken;
-
-    $this->withToken($token)->getJson('/api/addresses/default')
-        ->assertOk()
-        ->assertJsonPath('default_address.id', $address->getKey())
-        ->assertJsonPath('data.id', $address->getKey());
-});
-
 it('returns 401 when unauthenticated', function (): void {
     $this->getJson('/api/me/addresses')->assertUnauthorized();
 });

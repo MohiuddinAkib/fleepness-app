@@ -12,11 +12,9 @@ it('keeps the top-level controller namespace on an explicit allowlist', function
     expect($controllers)->toBeEmpty();
 });
 
-it('keeps compatibility-only controllers referenced from the dedicated legacy route file', function (): void {
-    expect(file_get_contents(base_path('routes/api/legacy.php')))
-        ->toContain('CompatibilityController::class')
-        ->toContain('App\Http\Controllers\Legacy\NotificationController');
-
+it('removes compatibility-only controllers once legacy routes are deleted', function (): void {
+    expect(file_exists(app_path('Http/Controllers/Legacy/CompatibilityController.php')))->toBeFalse();
+    expect(file_exists(app_path('Http/Controllers/Legacy/NotificationController.php')))->toBeFalse();
     expect(file_get_contents(base_path('routes/api.php')))
         ->not->toContain('CompatibilityController::class')
         ->not->toContain('App\Http\Controllers\Legacy\NotificationController');
@@ -28,4 +26,7 @@ it('keeps compatibility-only controllers referenced from the dedicated legacy ro
     expect(file_get_contents(base_path('routes/api/vendor.php')))
         ->not->toContain('CompatibilityController::class')
         ->not->toContain('App\Http\Controllers\Legacy\NotificationController');
+
+    expect(trim((string) file_get_contents(base_path('routes/api/legacy.php'))))
+        ->toBe("<?php\n\ndeclare(strict_types=1);");
 });

@@ -24,12 +24,6 @@ class SectionItemData extends Data
         public readonly bool $isVisible,
         public readonly bool $visibility,
         public readonly ?TagData $tag,
-        /**
-         * Legacy compatibility aliases for clients still expecting a flattened tag shape.
-         * Remove these after consumers migrate to the nested `tag` object.
-         */
-        public readonly ?int $tagId,
-        public readonly ?string $tagName,
     ) {}
 
     public static function fromModel(SectionItem $sectionItem): self
@@ -49,8 +43,6 @@ class SectionItemData extends Data
             isVisible: (bool) $sectionItem->is_visible,
             visibility: (bool) $sectionItem->is_visible,
             tag: null !== $tag ? TagData::fromModel($tag) : null,
-            tagId: $tag?->getKey(),
-            tagName: $tag?->name,
         );
     }
 }

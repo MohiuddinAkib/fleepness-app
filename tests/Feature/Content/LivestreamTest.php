@@ -157,27 +157,6 @@ it('saves a livestream', function (): void {
     expect(LivestreamSave::where('livestream_id', $livestream->getKey())->count())->toBe(1);
 });
 
-it('returns liked livestreams on the legacy endpoint', function (): void {
-    $user = User::factory()->create();
-    $token = $user->createToken('test')->plainTextToken;
-    $likedLivestream = Livestream::factory()->create();
-    $otherLivestream = Livestream::factory()->create();
-
-    LivestreamLike::factory()->create([
-        'user_id' => $user->getKey(),
-        'livestream_id' => $likedLivestream->getKey(),
-    ]);
-    LivestreamLike::factory()->create([
-        'user_id' => User::factory()->create()->getKey(),
-        'livestream_id' => $otherLivestream->getKey(),
-    ]);
-
-    $this->withToken($token)->getJson('/api/lives/liked')
-        ->assertOk()
-        ->assertJsonCount(1, 'data')
-        ->assertJsonPath('data.0.id', $likedLivestream->getKey());
-});
-
 it('returns liked livestreams on the canonical me endpoint', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
@@ -199,27 +178,6 @@ it('returns liked livestreams on the canonical me endpoint', function (): void {
         ->assertJsonPath('data.0.id', $likedLivestream->getKey());
 });
 
-it('returns saved livestreams on the legacy endpoint', function (): void {
-    $user = User::factory()->create();
-    $token = $user->createToken('test')->plainTextToken;
-    $savedLivestream = Livestream::factory()->create();
-    $otherLivestream = Livestream::factory()->create();
-
-    LivestreamSave::factory()->create([
-        'user_id' => $user->getKey(),
-        'livestream_id' => $savedLivestream->getKey(),
-    ]);
-    LivestreamSave::factory()->create([
-        'user_id' => User::factory()->create()->getKey(),
-        'livestream_id' => $otherLivestream->getKey(),
-    ]);
-
-    $this->withToken($token)->getJson('/api/lives/saved')
-        ->assertOk()
-        ->assertJsonCount(1, 'data')
-        ->assertJsonPath('data.0.id', $savedLivestream->getKey());
-});
-
 it('returns saved livestreams on the canonical me endpoint', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
@@ -239,18 +197,6 @@ it('returns saved livestreams on the canonical me endpoint', function (): void {
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $savedLivestream->getKey());
-});
-
-it('returns livestream likes count on the legacy endpoint', function (): void {
-    $user = User::factory()->create();
-    $token = $user->createToken('test')->plainTextToken;
-    $livestream = Livestream::factory()->create();
-
-    LivestreamLike::factory()->count(2)->create(['livestream_id' => $livestream->getKey()]);
-
-    $this->withToken($token)->getJson("/api/lives/{$livestream->getKey()}/likes-count")
-        ->assertOk()
-        ->assertJsonPath('likes_count', 2);
 });
 
 // Vendor CRUD

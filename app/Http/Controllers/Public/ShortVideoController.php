@@ -18,7 +18,6 @@ use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
-use App\Actions\Me\ListSavedShortVideosAction;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -107,27 +106,6 @@ class ShortVideoController extends Controller
             'saved' => true,
             'save_count' => $shortVideo->saves()->count(),
         ]);
-    }
-
-    #[Authenticated]
-    #[Endpoint('List saved short videos', 'Legacy compatibility alias for `/api/shorts/saved`. Prefer `/api/me/short-videos/saved` for the authenticated saved collection in new clients.')]
-    #[Response('{"data":[{"id":1,"title":"New Collection Drop"}]}', 200)]
-    /**
-     * Legacy alias for the historical `/api/shorts/saved` route.
-     *
-     * Preferred modern path:
-     * - use `/api/me/short-videos/saved` for the authenticated saved collection
-     * - keep `/api/short-videos` as the canonical public browsing collection
-     *
-     * Kept only so the current React Native client continues to function during migration.
-     */
-    public function saved(
-        #[CurrentUser] User $user,
-        ListSavedShortVideosAction $listSavedShortVideos,
-    ): JsonResponse|Responsable {
-        $videos = $listSavedShortVideos->execute($user);
-
-        return ShortVideoData::collect($videos, PaginatedDataCollection::class);
     }
 
     #[Endpoint('List short video products')]

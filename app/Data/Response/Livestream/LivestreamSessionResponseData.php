@@ -15,6 +15,5 @@ class LivestreamSessionResponseData extends Data
     public function __construct(
         public readonly LivestreamData $data,
         public readonly ?string $token,
-        public readonly ?string $publishedToken,
     ) {}
 }

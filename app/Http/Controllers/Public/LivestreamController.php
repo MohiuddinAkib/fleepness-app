@@ -21,13 +21,10 @@ use App\Data\Response\MessageResponseData;
 use App\Data\Dto\GenerateSubscriberTokenData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
-use App\Actions\Me\ListLikedLivestreamsAction;
-use App\Actions\Me\ListSavedLivestreamsAction;
 use App\Facades\Livestream as LivestreamFacade;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
-use App\Data\Response\Livestream\LikesCountResponseData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Content', 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.')]
@@ -105,66 +102,6 @@ class LivestreamController extends Controller
         $products = $livestream->products()->with(['media', 'vendorProfile', 'category'])->get();
 
         return ProductData::collect($products, DataCollection::class);
-    }
-
-    #[Authenticated]
-    #[Endpoint('List liked livestreams', 'Legacy compatibility alias for `/api/lives/liked`. Prefer `/api/me/livestreams/liked` in new consumers.')]
-    #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}]}', 200)]
-    /**
-     * Legacy alias for the historical `/api/lives/liked` route.
-     *
-     * Preferred modern path:
-     * - use `/api/me/livestreams/liked` for the authenticated liked collection
-     * - keep `/api/livestreams` as the canonical public content collection
-     *
-     * Retained only for backward compatibility with the mobile client.
-     */
-    /** @return PaginatedDataCollection<LivestreamData> */
-    public function liked(
-        #[CurrentUser] User $user,
-        ListLikedLivestreamsAction $listLikedLivestreams,
-    ): JsonResponse|Responsable {
-        $livestreams = $listLikedLivestreams->execute($user);
-
-        return LivestreamData::collect($livestreams, PaginatedDataCollection::class);
-    }
-
-    #[Authenticated]
-    #[Endpoint('List saved livestreams', 'Legacy compatibility alias for `/api/lives/saved`. Prefer `/api/me/livestreams/saved` in new clients.')]
-    #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}]}', 200)]
-    /**
-     * Legacy alias for the historical `/api/lives/saved` route.
-     *
-     * Preferred modern path:
-     * - use `/api/me/livestreams/saved` for the authenticated saved collection
-     * - keep `/api/livestreams` as the canonical public content collection
-     */
-    /** @return PaginatedDataCollection<LivestreamData> */
-    public function saved(
-        #[CurrentUser] User $user,
-        ListSavedLivestreamsAction $listSavedLivestreams,
-    ): JsonResponse|Responsable {
-        $livestreams = $listSavedLivestreams->execute($user);
-
-        return LivestreamData::collect($livestreams, PaginatedDataCollection::class);
-    }
-
-    #[Authenticated]
-    #[Endpoint('Get livestream likes count', 'Legacy compatibility alias for `/api/lives/{livestream}/likes-count`. Prefer the main livestream resource payload and real-time events for new clients.')]
-    #[Response('{"likes_count":1}', 200)]
-    /**
-     * Legacy alias for older clients polling `/api/lives/{livestream}/likes-count`.
-     *
-     * Preferred modern path:
-     * - consume `/api/livestreams/{livestream}` for the canonical resource
-     * - subscribe to real-time broadcast updates for like counters where possible
-     */
-    /** @return LikesCountResponseData */
-    public function likesCount(Livestream $livestream): JsonResponse|Responsable
-    {
-        return response()->json(LikesCountResponseData::from([
-            'likesCount' => $livestream->likes()->count(),
-        ])->toArray());
     }
 
     #[Endpoint('Generate livestream subscriber token', 'Returns a LiveKit subscriber token for an authenticated user or a guest viewer.')]

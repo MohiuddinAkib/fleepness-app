@@ -92,7 +92,6 @@ class LivestreamController extends Controller
         return response()->json(LivestreamSessionResponseData::from([
             'data' => LivestreamData::fromModel($livestream),
             'token' => $token,
-            'publishedToken' => $token,
         ])->toArray(), HttpResponse::HTTP_CREATED);
     }
 
@@ -174,7 +173,6 @@ class LivestreamController extends Controller
         return response()->json(LivestreamSessionResponseData::from([
             'data' => LivestreamData::fromModel($livestream),
             'token' => $token,
-            'publishedToken' => $token,
         ])->toArray());
     }
 
