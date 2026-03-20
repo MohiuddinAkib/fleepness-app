@@ -29,7 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withBroadcasting(__DIR__.'/../routes/channels.php', [
         'prefix' => 'api',
-        'middleware' => ['api'],
+        'middleware' => ['api', 'auth:sanctum'],
     ])
     ->withExceptions(function (Exceptions $exceptions): void {
         Integration::handles($exceptions);

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\VendorOrderStatusChanged;
 
 it('requires auth to place order', function (): void {
-    $this->postJson('/api/orders')->assertUnauthorized();
+    $this->postJson('/api/v1/orders')->assertUnauthorized();
 });
 
 it('places an order from selected cart items', function (): void {
@@ -39,7 +39,7 @@ it('places an order from selected cart items', function (): void {
     Fee::factory()->create(['vat' => '0.00', 'platform_fee' => '0.00', 'commission' => '0.00']);
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->postJson('/api/orders', [
+    $response = $this->withToken($token)->postJson('/api/v1/orders', [
         'delivery_option_id' => $deliveryOption->getKey(),
     ]);
 
@@ -64,7 +64,7 @@ it('rejects order when cart is empty', function (): void {
     $token = $user->createToken('test')->plainTextToken;
     $deliveryOption = DeliveryOption::factory()->create();
 
-    $this->withToken($token)->postJson('/api/orders', [
+    $this->withToken($token)->postJson('/api/v1/orders', [
         'delivery_option_id' => $deliveryOption->getKey(),
     ])->assertUnprocessable();
 });
@@ -85,7 +85,7 @@ it('creates vendor orders grouped by vendor', function (): void {
     Fee::factory()->create(['vat' => '0.00', 'platform_fee' => '0.00', 'commission' => '0.00']);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson('/api/orders', [
+    $this->withToken($token)->postJson('/api/v1/orders', [
         'delivery_option_id' => $deliveryOption->getKey(),
     ])->assertCreated();
 
@@ -99,7 +99,7 @@ it('lists own orders', function (): void {
     Order::factory()->count(2)->create(); // other users
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson('/api/me/orders')
+    $this->withToken($token)->getJson('/api/v1/me/orders')
         ->assertOk()
         ->assertJsonCount(3, 'data');
 });
@@ -116,7 +116,7 @@ it('filters own orders by order code', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson('/api/me/orders?order_code=MATCH')
+    $this->withToken($token)->getJson('/api/v1/me/orders?order_code=MATCH')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $matchingOrder->getKey());
@@ -127,7 +127,7 @@ it('shows own order', function (): void {
     $order = Order::factory()->create(['user_id' => $user->getKey()]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson("/api/me/orders/{$order->getKey()}")
+    $this->withToken($token)->getJson("/api/v1/me/orders/{$order->getKey()}")
         ->assertOk()
         ->assertJsonPath('data.order_number', $order->order_number);
 });
@@ -137,7 +137,7 @@ it('cannot see another user order', function (): void {
     $order = Order::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson("/api/me/orders/{$order->getKey()}")->assertForbidden();
+    $this->withToken($token)->getJson("/api/v1/me/orders/{$order->getKey()}")->assertForbidden();
 });
 
 it('lists vendor orders', function (): void {
@@ -147,7 +147,7 @@ it('lists vendor orders', function (): void {
     VendorOrder::factory()->count(2)->create(); // other vendors
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson('/api/me/vendor-orders')
+    $this->withToken($token)->getJson('/api/v1/me/vendor-orders')
         ->assertOk()
         ->assertJsonCount(3, 'data');
 });
@@ -165,7 +165,7 @@ it('filters vendor orders by status', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson('/api/me/vendor-orders?status=pending')
+    $this->withToken($token)->getJson('/api/v1/me/vendor-orders?status=pending')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $matchingOrder->getKey());
@@ -184,7 +184,7 @@ it('vendor can accept pending order', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->patchJson("/api/me/vendor-orders/{$vendorOrder->getKey()}/accept")
+    $this->withToken($token)->patchJson("/api/v1/me/vendor-orders/{$vendorOrder->getKey()}/accept")
         ->assertOk();
 
     expect($vendorOrder->fresh()->status)->toBe(VendorOrderStatus::Packaging);
@@ -205,7 +205,7 @@ it('vendor can reject pending order', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->patchJson("/api/me/vendor-orders/{$vendorOrder->getKey()}/reject")
+    $this->withToken($token)->patchJson("/api/v1/me/vendor-orders/{$vendorOrder->getKey()}/reject")
         ->assertOk();
 
     expect($vendorOrder->fresh()->status)->toBe(VendorOrderStatus::Rejected);
@@ -222,6 +222,6 @@ it('cannot accept an already-accepted order', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->patchJson("/api/me/vendor-orders/{$vendorOrder->getKey()}/accept")
+    $this->withToken($token)->patchJson("/api/v1/me/vendor-orders/{$vendorOrder->getKey()}/accept")
         ->assertUnprocessable();
 });

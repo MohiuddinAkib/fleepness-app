@@ -10,7 +10,7 @@ describe('POST /api/auth/register', function (): void {
     it('registers a new user and returns OTP in non-production', function (): void {
         Notification::fake();
 
-        $response = $this->postJson('/api/auth/register', [
+        $response = $this->postJson('/api/v1/auth/register', [
             'phone_number' => '01712345678',
             'name' => 'Test User',
         ]);
@@ -24,7 +24,7 @@ describe('POST /api/auth/register', function (): void {
     it('returns 422 when phone number is already taken', function (): void {
         User::factory()->create(['phone_number' => '01712345678']);
 
-        $response = $this->postJson('/api/auth/register', [
+        $response = $this->postJson('/api/v1/auth/register', [
             'phone_number' => '01712345678',
         ]);
 
@@ -32,7 +32,7 @@ describe('POST /api/auth/register', function (): void {
     });
 
     it('returns 422 when phone number is not 11 digits', function (): void {
-        $response = $this->postJson('/api/auth/register', [
+        $response = $this->postJson('/api/v1/auth/register', [
             'phone_number' => '0171234',
         ]);
 
@@ -40,7 +40,7 @@ describe('POST /api/auth/register', function (): void {
     });
 
     it('returns 422 when phone number is missing', function (): void {
-        $response = $this->postJson('/api/auth/register', []);
+        $response = $this->postJson('/api/v1/auth/register', []);
 
         $response->assertUnprocessable();
     });
@@ -48,7 +48,7 @@ describe('POST /api/auth/register', function (): void {
     it('registers a new user without a name', function (): void {
         Notification::fake();
 
-        $response = $this->postJson('/api/auth/register', [
+        $response = $this->postJson('/api/v1/auth/register', [
             'phone_number' => '01712345679',
         ]);
 
@@ -68,7 +68,7 @@ describe('POST /api/auth/verify-otp', function (): void {
         $user = User::factory()->create(['phone_number' => '01712345678']);
         Cache::put("otp_{$user->phone_number}", '1111', now()->addMinutes(10));
 
-        $response = $this->postJson('/api/auth/verify-otp', [
+        $response = $this->postJson('/api/v1/auth/verify-otp', [
             'phone_number' => '01712345678',
             'otp' => '1111',
         ]);
@@ -80,7 +80,7 @@ describe('POST /api/auth/verify-otp', function (): void {
     it('returns 422 when OTP has expired', function (): void {
         User::factory()->create(['phone_number' => '01712345678']);
 
-        $response = $this->postJson('/api/auth/verify-otp', [
+        $response = $this->postJson('/api/v1/auth/verify-otp', [
             'phone_number' => '01712345678',
             'otp' => '1111',
         ]);
@@ -93,7 +93,7 @@ describe('POST /api/auth/verify-otp', function (): void {
         $user = User::factory()->create(['phone_number' => '01712345678']);
         Cache::put("otp_{$user->phone_number}", '1111', now()->addMinutes(10));
 
-        $response = $this->postJson('/api/auth/verify-otp', [
+        $response = $this->postJson('/api/v1/auth/verify-otp', [
             'phone_number' => '01712345678',
             'otp' => '9999',
         ]);
@@ -103,7 +103,7 @@ describe('POST /api/auth/verify-otp', function (): void {
     });
 
     it('returns 422 when phone number does not exist', function (): void {
-        $response = $this->postJson('/api/auth/verify-otp', [
+        $response = $this->postJson('/api/v1/auth/verify-otp', [
             'phone_number' => '01799999999',
             'otp' => '1111',
         ]);
@@ -117,7 +117,7 @@ describe('POST /api/auth/resend-otp', function (): void {
         Notification::fake();
         User::factory()->create(['phone_number' => '01712345678']);
 
-        $response = $this->postJson('/api/auth/resend-otp', [
+        $response = $this->postJson('/api/v1/auth/resend-otp', [
             'phone_number' => '01712345678',
         ]);
 
@@ -126,7 +126,7 @@ describe('POST /api/auth/resend-otp', function (): void {
     });
 
     it('returns 422 when phone number does not exist', function (): void {
-        $response = $this->postJson('/api/auth/resend-otp', [
+        $response = $this->postJson('/api/v1/auth/resend-otp', [
             'phone_number' => '01799999999',
         ]);
 
@@ -139,7 +139,7 @@ describe('POST /api/auth/login', function (): void {
         Notification::fake();
         User::factory()->create(['phone_number' => '01712345678']);
 
-        $response = $this->postJson('/api/auth/login', [
+        $response = $this->postJson('/api/v1/auth/login', [
             'phone_number' => '01712345678',
         ]);
 
@@ -148,7 +148,7 @@ describe('POST /api/auth/login', function (): void {
     });
 
     it('returns 422 when phone number does not exist', function (): void {
-        $response = $this->postJson('/api/auth/login', [
+        $response = $this->postJson('/api/v1/auth/login', [
             'phone_number' => '01799999999',
         ]);
 
@@ -161,13 +161,13 @@ describe('POST /api/auth/logout', function (): void {
         $user = User::factory()->create();
         $token = $user->createToken('test')->plainTextToken;
 
-        $response = $this->withToken($token)->postJson('/api/auth/logout');
+        $response = $this->withToken($token)->postJson('/api/v1/auth/logout');
 
         $response->assertOk()->assertJson(['message' => 'Logged out successfully.']);
         expect($user->tokens()->count())->toBe(0);
     });
 
     it('returns 401 for unauthenticated request', function (): void {
-        $this->postJson('/api/auth/logout')->assertUnauthorized();
+        $this->postJson('/api/v1/auth/logout')->assertUnauthorized();
     });
 });

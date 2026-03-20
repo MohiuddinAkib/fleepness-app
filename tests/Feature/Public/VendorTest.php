@@ -15,7 +15,7 @@ it('lists approved vendors', function (): void {
     VendorProfile::factory()->count(3)->approved()->create();
     VendorProfile::factory()->count(2)->create(['status' => VendorStatus::Pending]);
 
-    $response = $this->getJson('/api/vendors');
+    $response = $this->getJson('/api/v1/vendors');
 
     $response->assertOk()->assertJsonCount(3, 'data');
 });
@@ -24,7 +24,7 @@ it('filters vendors by search query', function (): void {
     VendorProfile::factory()->approved()->create(['shop_name' => 'Flash Store']);
     VendorProfile::factory()->approved()->create(['shop_name' => 'Winter House']);
 
-    $this->getJson('/api/vendors?search=flash')
+    $this->getJson('/api/v1/vendors?search=flash')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.shop_name', 'Flash Store');
@@ -37,7 +37,7 @@ it('lists similar vendors through the canonical vendor query', function (): void
     $similarVendor = VendorProfile::factory()->approved()->create(['shop_category_id' => $sharedCategory->getKey()]);
     VendorProfile::factory()->approved()->create(['shop_category_id' => $otherCategory->getKey()]);
 
-    $this->getJson('/api/vendors?similar_to_vendor_id='.$sourceVendor->getKey())
+    $this->getJson('/api/v1/vendors?similar_to_vendor_id='.$sourceVendor->getKey())
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $similarVendor->getKey());
@@ -46,7 +46,7 @@ it('lists similar vendors through the canonical vendor query', function (): void
 it('shows an approved vendor', function (): void {
     $vendor = VendorProfile::factory()->approved()->create(['shop_name' => 'Best Shop']);
 
-    $response = $this->getJson("/api/vendors/{$vendor->getKey()}");
+    $response = $this->getJson("/api/v1/vendors/{$vendor->getKey()}");
 
     $response->assertOk()->assertJsonPath('data.shop_name', 'Best Shop');
 });
@@ -54,7 +54,7 @@ it('shows an approved vendor', function (): void {
 it('returns 404 for a pending vendor', function (): void {
     $vendor = VendorProfile::factory()->create(['status' => VendorStatus::Pending]);
 
-    $this->getJson("/api/vendors/{$vendor->getKey()}")->assertNotFound();
+    $this->getJson("/api/v1/vendors/{$vendor->getKey()}")->assertNotFound();
 });
 
 it('follows a vendor', function (): void {
@@ -62,7 +62,7 @@ it('follows a vendor', function (): void {
     $vendor = VendorProfile::factory()->approved()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson("/api/vendors/{$vendor->getKey()}/follow")->assertOk();
+    $this->withToken($token)->postJson("/api/v1/vendors/{$vendor->getKey()}/follow")->assertOk();
 
     expect(VendorFollower::where('user_id', $user->getKey())
         ->where('vendor_profile_id', $vendor->getKey())
@@ -74,8 +74,8 @@ it('cannot follow the same vendor twice', function (): void {
     $vendor = VendorProfile::factory()->approved()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson("/api/vendors/{$vendor->getKey()}/follow")->assertOk();
-    $this->withToken($token)->postJson("/api/vendors/{$vendor->getKey()}/follow")->assertOk();
+    $this->withToken($token)->postJson("/api/v1/vendors/{$vendor->getKey()}/follow")->assertOk();
+    $this->withToken($token)->postJson("/api/v1/vendors/{$vendor->getKey()}/follow")->assertOk();
 
     expect(VendorFollower::where('user_id', $user->getKey())
         ->where('vendor_profile_id', $vendor->getKey())
@@ -91,7 +91,7 @@ it('unfollows a vendor', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->deleteJson("/api/vendors/{$vendor->getKey()}/follow")->assertOk();
+    $this->withToken($token)->deleteJson("/api/v1/vendors/{$vendor->getKey()}/follow")->assertOk();
 
     expect(VendorFollower::where('user_id', $user->getKey())
         ->where('vendor_profile_id', $vendor->getKey())
@@ -101,14 +101,14 @@ it('unfollows a vendor', function (): void {
 it('returns 401 when following without auth', function (): void {
     $vendor = VendorProfile::factory()->approved()->create();
 
-    $this->postJson("/api/vendors/{$vendor->getKey()}/follow")->assertUnauthorized();
+    $this->postJson("/api/v1/vendors/{$vendor->getKey()}/follow")->assertUnauthorized();
 });
 
 it('lists vendor reviews', function (): void {
     $vendor = VendorProfile::factory()->approved()->create();
     VendorReview::factory()->count(3)->for($vendor)->create();
 
-    $response = $this->getJson("/api/vendors/{$vendor->getKey()}/reviews");
+    $response = $this->getJson("/api/v1/vendors/{$vendor->getKey()}/reviews");
 
     $response->assertOk()->assertJsonCount(3, 'data');
 });
@@ -118,7 +118,7 @@ it('submits a vendor review', function (): void {
     $vendor = VendorProfile::factory()->approved()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->postJson("/api/vendors/{$vendor->getKey()}/reviews", [
+    $response = $this->withToken($token)->postJson("/api/v1/vendors/{$vendor->getKey()}/reviews", [
         'rating' => 4,
         'comment' => 'Great vendor!',
     ]);
@@ -136,7 +136,7 @@ it('cannot review the same vendor twice', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson("/api/vendors/{$vendor->getKey()}/reviews", [
+    $this->withToken($token)->postJson("/api/v1/vendors/{$vendor->getKey()}/reviews", [
         'rating' => 5,
     ])->assertUnprocessable();
 });
@@ -151,7 +151,7 @@ it('deletes own vendor review', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->deleteJson("/api/vendors/{$vendor->getKey()}/reviews/{$review->getKey()}")
+        ->deleteJson("/api/v1/vendors/{$vendor->getKey()}/reviews/{$review->getKey()}")
         ->assertOk();
 
     expect(VendorReview::find($review->getKey()))->toBeNull();
@@ -168,7 +168,7 @@ it('cannot delete another user\'s review', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->deleteJson("/api/vendors/{$vendor->getKey()}/reviews/{$review->getKey()}")
+        ->deleteJson("/api/v1/vendors/{$vendor->getKey()}/reviews/{$review->getKey()}")
         ->assertForbidden();
 });
 
@@ -183,7 +183,7 @@ it('lists following vendors', function (): void {
     }
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/me/followings');
+    $response = $this->withToken($token)->getJson('/api/v1/me/followings');
 
     $response->assertOk()->assertJsonCount(2, 'data');
 });
@@ -201,7 +201,7 @@ it('filters vendor products by search query', function (): void {
         'is_approved' => true,
     ]);
 
-    $this->getJson("/api/vendors/{$vendor->getKey()}/products?q=flash")
+    $this->getJson("/api/v1/vendors/{$vendor->getKey()}/products?q=flash")
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.name', 'Flash Tee');
@@ -224,7 +224,7 @@ it('filters vendor products by explicit price range', function (): void {
         'is_approved' => true,
     ]);
 
-    $this->getJson("/api/vendors/{$vendor->getKey()}/products?min_price=200&max_price=500")
+    $this->getJson("/api/v1/vendors/{$vendor->getKey()}/products?min_price=200&max_price=500")
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.name', 'Budget Tee');
@@ -247,7 +247,7 @@ it('filters vendor products by price category', function (): void {
         'is_approved' => true,
     ]);
 
-    $this->getJson("/api/vendors/{$vendor->getKey()}/products?price_category=premium")
+    $this->getJson("/api/v1/vendors/{$vendor->getKey()}/products?price_category=premium")
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.name', 'Premium Tee');

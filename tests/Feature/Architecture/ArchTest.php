@@ -19,11 +19,15 @@ arch('strict types declared everywhere')
 
 arch('models extend Eloquent Model')
     ->expect('App\Models')
-    ->toExtend('Illuminate\Database\Eloquent\Model');
+    ->classes()
+    ->toExtend('Illuminate\Database\Eloquent\Model')
+    ->ignoring('App\Models\Concerns');
 
 arch('models are not final')
     ->expect('App\Models')
-    ->not->toBeFinal();
+    ->classes()
+    ->not->toBeFinal()
+    ->ignoring('App\Models\Concerns');
 
 arch('enums are backed enums')
     ->expect('App\Enums')

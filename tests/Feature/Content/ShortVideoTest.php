@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 it('lists short videos publicly', function (): void {
     ShortVideo::factory()->count(3)->create();
 
-    $this->getJson('/api/short-videos')
+    $this->getJson('/api/v1/short-videos')
         ->assertOk()
         ->assertJsonCount(3, 'data');
 });
@@ -24,7 +24,7 @@ it('lists short videos publicly', function (): void {
 it('shows a short video publicly', function (): void {
     $video = ShortVideo::factory()->create();
 
-    $this->getJson("/api/short-videos/{$video->getKey()}")
+    $this->getJson("/api/v1/short-videos/{$video->getKey()}")
         ->assertOk()
         ->assertJsonPath('data.id', $video->getKey());
 });
@@ -33,7 +33,7 @@ it('lists comments on a short video', function (): void {
     $video = ShortVideo::factory()->create();
     ShortVideoComment::factory()->count(2)->create(['short_video_id' => $video->getKey()]);
 
-    $this->getJson("/api/short-videos/{$video->getKey()}/comments")
+    $this->getJson("/api/v1/short-videos/{$video->getKey()}/comments")
         ->assertOk()
         ->assertJsonCount(2, 'data');
 });
@@ -41,7 +41,7 @@ it('lists comments on a short video', function (): void {
 // Auth-required engagement
 it('requires auth to comment on short video', function (): void {
     $video = ShortVideo::factory()->create();
-    $this->postJson("/api/short-videos/{$video->getKey()}/comments", ['comment' => 'Nice!'])
+    $this->postJson("/api/v1/short-videos/{$video->getKey()}/comments", ['comment' => 'Nice!'])
         ->assertUnauthorized();
 });
 
@@ -51,7 +51,7 @@ it('posts a comment on a short video', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->postJson("/api/short-videos/{$video->getKey()}/comments", ['comment' => 'Great video!'])
+        ->postJson("/api/v1/short-videos/{$video->getKey()}/comments", ['comment' => 'Great video!'])
         ->assertCreated()
         ->assertJsonPath('data.comment', 'Great video!');
 });
@@ -62,7 +62,7 @@ it('cannot delete another users comment', function (): void {
     $comment = ShortVideoComment::factory()->create();
 
     $this->withToken($token)
-        ->deleteJson("/api/short-videos/{$comment->short_video_id}/comments/{$comment->getKey()}")
+        ->deleteJson("/api/v1/short-videos/{$comment->short_video_id}/comments/{$comment->getKey()}")
         ->assertForbidden();
 });
 
@@ -76,7 +76,7 @@ it('deletes own comment on short video', function (): void {
     ]);
 
     $this->withToken($token)
-        ->deleteJson("/api/short-videos/{$video->getKey()}/comments/{$comment->getKey()}")
+        ->deleteJson("/api/v1/short-videos/{$video->getKey()}/comments/{$comment->getKey()}")
         ->assertOk();
 
     expect(ShortVideoComment::find($comment->getKey()))->toBeNull();
@@ -88,7 +88,7 @@ it('likes a short video', function (): void {
     $video = ShortVideo::factory()->create(['likes_count' => 0]);
 
     $this->withToken($token)
-        ->postJson("/api/short-videos/{$video->getKey()}/like")
+        ->postJson("/api/v1/short-videos/{$video->getKey()}/like")
         ->assertOk()
         ->assertJsonPath('liked', true)
         ->assertJsonPath('like_count', 1);
@@ -102,10 +102,10 @@ it('toggles a short video like without inflating likes count', function (): void
     $token = $user->createToken('test')->plainTextToken;
     $video = ShortVideo::factory()->create(['likes_count' => 0]);
 
-    $this->withToken($token)->postJson("/api/short-videos/{$video->getKey()}/like")->assertOk();
+    $this->withToken($token)->postJson("/api/v1/short-videos/{$video->getKey()}/like")->assertOk();
 
     $this->withToken($token)
-        ->postJson("/api/short-videos/{$video->getKey()}/like")
+        ->postJson("/api/v1/short-videos/{$video->getKey()}/like")
         ->assertOk()
         ->assertJsonPath('liked', false)
         ->assertJsonPath('like_count', 0);
@@ -120,7 +120,7 @@ it('saves a short video', function (): void {
     $video = ShortVideo::factory()->create();
 
     $this->withToken($token)
-        ->postJson("/api/short-videos/{$video->getKey()}/save")
+        ->postJson("/api/v1/short-videos/{$video->getKey()}/save")
         ->assertOk()
         ->assertJsonPath('saved', true)
         ->assertJsonPath('save_count', 1);
@@ -143,7 +143,7 @@ it('returns saved shorts on the canonical me endpoint', function (): void {
         'short_video_id' => $otherVideo->getKey(),
     ]);
 
-    $this->withToken($token)->getJson('/api/me/short-videos/saved')
+    $this->withToken($token)->getJson('/api/v1/me/short-videos/saved')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $savedVideo->getKey());
@@ -151,7 +151,7 @@ it('returns saved shorts on the canonical me endpoint', function (): void {
 
 // Vendor CRUD
 it('requires auth to create a short video', function (): void {
-    $this->postJson('/api/me/short-videos', ['title' => 'My Video'])
+    $this->postJson('/api/v1/me/short-videos', ['title' => 'My Video'])
         ->assertUnauthorized();
 });
 
@@ -166,7 +166,7 @@ it('vendor creates a short video', function (): void {
     $thumbnail = UploadedFile::fake()->image('short.jpg');
 
     $this->withToken($token)
-        ->post('/api/me/short-videos', [
+        ->post('/api/v1/me/short-videos', [
             'title' => 'Amazing Deal',
             'description' => 'Check this out',
             'video' => $video,
@@ -191,7 +191,7 @@ it('non-vendor cannot create short video', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->post('/api/me/short-videos', [
+        ->post('/api/v1/me/short-videos', [
             'title' => 'My Video',
             'video' => UploadedFile::fake()->create('short.mp4', 1024, 'video/mp4'),
         ])
@@ -213,7 +213,7 @@ it('vendor updates own short video', function (): void {
     $thumbnail = UploadedFile::fake()->image('updated.jpg');
 
     $this->withToken($token)
-        ->patch("/api/me/short-videos/{$video->getKey()}", [
+        ->patch("/api/v1/me/short-videos/{$video->getKey()}", [
             'title' => 'Updated Title',
             'video' => $newVideo,
             'thumbnail' => $thumbnail,
@@ -237,7 +237,7 @@ it('vendor cannot update another vendors short video', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->patchJson("/api/me/short-videos/{$otherVideo->getKey()}", ['title' => 'Hijack'])
+        ->patchJson("/api/v1/me/short-videos/{$otherVideo->getKey()}", ['title' => 'Hijack'])
         ->assertForbidden();
 });
 
@@ -248,7 +248,7 @@ it('vendor deletes own short video', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->deleteJson("/api/me/short-videos/{$video->getKey()}")
+        ->deleteJson("/api/v1/me/short-videos/{$video->getKey()}")
         ->assertOk();
 
     expect(ShortVideo::find($video->getKey()))->toBeNull();

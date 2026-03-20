@@ -23,7 +23,7 @@ it('lists notifications on the canonical me endpoint', function (): void {
     ]);
 
     $this->withToken($token)
-        ->getJson('/api/me/notifications?type=read&per_page=10')
+        ->getJson('/api/v1/me/notifications?type=read&per_page=10')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $readNotification->getKey())
@@ -42,7 +42,7 @@ it('marks all notifications as read on the canonical me endpoint', function (): 
     ]);
 
     $this->withToken($token)
-        ->postJson('/api/me/notifications/read')
+        ->postJson('/api/v1/me/notifications/read')
         ->assertOk()
         ->assertJsonPath('message', 'Notifications marked as read.');
 
@@ -60,7 +60,7 @@ it('marks a single notification as read on the canonical me endpoint', function 
     ]);
 
     $this->withToken($token)
-        ->postJson("/api/me/notifications/{$notification->getKey()}/read")
+        ->postJson("/api/v1/me/notifications/{$notification->getKey()}/read")
         ->assertOk()
         ->assertJsonPath('message', 'Notification marked as read.');
 

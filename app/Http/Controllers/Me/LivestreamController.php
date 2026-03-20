@@ -29,13 +29,23 @@ use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use App\Data\Response\Livestream\LivestreamSessionResponseData;
 
-#[Group('Livestreams', 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.')]
+#[
+    Group(
+        'Livestreams',
+        'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.',
+    ),
+]
 class LivestreamController extends Controller
 {
+    /** @return PaginatedDataCollection<LivestreamData> */
     #[Authenticated]
     #[Endpoint('List own livestreams')]
-    #[Response('{"data":[{"id":1,"title":"Flash Sale","status":"started"}],"meta":{"current_page":1}}', 200)]
-    /** @return PaginatedDataCollection<LivestreamData> */
+    #[
+        Response(
+            '{"data":[{"id":1,"title":"Flash Sale","status":"started"}],"meta":{"current_page":1}}',
+            200,
+        ),
+    ]
     public function index(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $livestreams = Livestream::query()
@@ -50,13 +60,46 @@ class LivestreamController extends Controller
         );
     }
 
-    #[Authenticated]
-    #[BodyParam('title', 'string', required: true, example: 'Friday Flash Sale')]
-    #[BodyParam('description', 'string', required: false, nullable: true, example: 'Huge discounts on all items')]
-    #[BodyParam('scheduled_at', 'string', required: false, nullable: true, example: '2026-03-25 18:00:00')]
-    #[Endpoint('Create & start a livestream', 'Creates a new livestream with status=started, begins LiveKit egress recording, and returns a publisher token to connect to the room.')]
-    #[Response('{"data":{"id":1,"title":"Friday Flash Sale","status":"started","room_name":"livestream_1"},"token":"eyJhbGci..."}', 201)]
     /** @return LivestreamSessionResponseData */
+    #[Authenticated]
+    #[
+        BodyParam(
+            'title',
+            'string',
+            required: true,
+            example: 'Friday Flash Sale',
+        ),
+    ]
+    #[
+        BodyParam(
+            'description',
+            'string',
+            required: false,
+            nullable: true,
+            example: 'Huge discounts on all items',
+        ),
+    ]
+    #[
+        BodyParam(
+            'scheduled_at',
+            'string',
+            required: false,
+            nullable: true,
+            example: '2026-03-25 18:00:00',
+        ),
+    ]
+    #[
+        Endpoint(
+            'Create & start a livestream',
+            'Creates a new livestream with status=started, begins LiveKit egress recording, and returns a publisher token to connect to the room.',
+        ),
+    ]
+    #[
+        Response(
+            '{"data":{"id":1,"title":"Friday Flash Sale","status":"started","room_name":"livestream_1"},"token":"eyJhbGci..."}',
+            201,
+        ),
+    ]
     public function store(
         StoreLivestreamData $data,
         #[CurrentUser] User $user,
@@ -90,20 +133,41 @@ class LivestreamController extends Controller
         $livestream->startRecording();
         $livestream->load(['media', 'vendorProfile']);
 
-        return response()->json(LivestreamSessionResponseData::from([
-            'data' => LivestreamData::fromModel($livestream),
-            'token' => $token,
-        ])->toArray(), HttpResponse::HTTP_CREATED);
+        return response()->json(
+            LivestreamSessionResponseData::from([
+                'data' => LivestreamData::fromModel($livestream),
+                'token' => $token,
+            ])->toArray(),
+            HttpResponse::HTTP_CREATED,
+        );
     }
 
+    /** @return LivestreamSessionResponseData */
     #[Authenticated]
     #[BodyParam('title', 'string', required: false)]
     #[BodyParam('description', 'string', required: false, nullable: true)]
     #[BodyParam('scheduled_at', 'string', required: false, nullable: true)]
-    #[BodyParam('status', 'string', required: false, enum: ['started', 'finished'], example: 'finished')]
-    #[Endpoint('Update a livestream', 'Update title/description, or transition status. Use status=started to go live (from scheduled), status=finished to end the stream.')]
-    #[Response('{"data":{"id":1,"status":"finished","total_duration":3600}}', 200)]
-    /** @return LivestreamSessionResponseData */
+    #[
+        BodyParam(
+            'status',
+            'string',
+            required: false,
+            enum: ['started', 'finished'],
+            example: 'finished',
+        ),
+    ]
+    #[
+        Endpoint(
+            'Update a livestream',
+            'Update title/description, or transition status. Use status=started to go live (from scheduled), status=finished to end the stream.',
+        ),
+    ]
+    #[
+        Response(
+            '{"data":{"id":1,"status":"finished","total_duration":3600}}',
+            200,
+        ),
+    ]
     public function update(
         UpdateLivestreamData $data,
         Livestream $livestream,
@@ -155,7 +219,9 @@ class LivestreamController extends Controller
                 $updates['status'] = LivestreamStatus::Finished;
                 $updates['ended_at'] = now();
                 if (null !== $livestream->started_at) {
-                    $updates['total_duration'] = (int) $livestream->started_at->diffInSeconds(now());
+                    $updates[
+                        'total_duration'
+                    ] = (int) $livestream->started_at->diffInSeconds(now());
                 }
             }
         }
@@ -171,16 +237,23 @@ class LivestreamController extends Controller
         }
         $livestream->load(['media', 'vendorProfile']);
 
-        return response()->json(LivestreamSessionResponseData::from([
-            'data' => LivestreamData::fromModel($livestream),
-            'token' => $token,
-        ])->toArray());
+        return response()->json(
+            LivestreamSessionResponseData::from([
+                'data' => LivestreamData::fromModel($livestream),
+                'token' => $token,
+            ])->toArray(),
+        );
     }
 
-    #[Authenticated]
-    #[Endpoint('Delete a scheduled livestream', 'Can only delete livestreams with status=scheduled.')]
-    #[Response('{"message":"Livestream deleted."}', 200)]
     /** @return MessageResponseData */
+    #[Authenticated]
+    #[
+        Endpoint(
+            'Delete a scheduled livestream',
+            'Can only delete livestreams with status=scheduled.',
+        ),
+    ]
+    #[Response('{"message":"Livestream deleted."}', 200)]
     public function destroy(
         Livestream $livestream,
         #[CurrentUser] User $user,
@@ -198,15 +271,22 @@ class LivestreamController extends Controller
 
         $livestream->delete();
 
-        return response()->json(MessageResponseData::from([
-            'message' => 'Livestream deleted.',
-        ])->toArray());
+        return response()->json(
+            MessageResponseData::from([
+                'message' => 'Livestream deleted.',
+            ])->toArray(),
+        );
     }
 
-    #[Authenticated]
-    #[Endpoint('Get publisher token', 'Generates a fresh LiveKit publisher token for the vendor to (re)connect to the room.')]
-    #[Response('{"token":"eyJhbGci..."}', 200)]
     /** @return TokenResponseData */
+    #[Authenticated]
+    #[
+        Endpoint(
+            'Get publisher token',
+            'Generates a fresh LiveKit publisher token for the vendor to (re)connect to the room.',
+        ),
+    ]
+    #[Response('{"token":"eyJhbGci..."}', 200)]
     public function publisherToken(
         Livestream $livestream,
         #[CurrentUser] User $user,
@@ -231,8 +311,10 @@ class LivestreamController extends Controller
 
         $token = LivestreamFacade::generatePublisherToken($data);
 
-        return response()->json(TokenResponseData::from([
-            'token' => $token,
-        ])->toArray());
+        return response()->json(
+            TokenResponseData::from([
+                'token' => $token,
+            ])->toArray(),
+        );
     }
 }

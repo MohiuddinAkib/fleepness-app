@@ -44,11 +44,11 @@ class LivestreamComment extends Model
     /** @return list<Channel> */
     public function broadcastOn(string $event): array
     {
-        if ('created' !== $event) {
+        if ('created' !== $event && 'deleted' !== $event) {
             return [];
         }
 
-        $this->loadMissing(['livestream', 'user']);
+        $this->loadMissing('livestream');
 
         if ($this->livestream->status->isFinished()) {
             return [];
@@ -63,6 +63,7 @@ class LivestreamComment extends Model
     {
         return match ($event) {
             'created' => BroadcastEvent::LivestreamCommentCreated->value,
+            'deleted' => BroadcastEvent::LivestreamCommentDeleted->value,
             default => "livestream_comment_{$event}",
         };
     }
@@ -70,6 +71,10 @@ class LivestreamComment extends Model
     /** @return array<string, mixed> */
     public function broadcastWith(string $event): array
     {
+        if ('deleted' === $event) {
+            return ['id' => $this->getKey()];
+        }
+
         $this->loadMissing(['livestream', 'user']);
 
         return new LivestreamCommentBroadcastData(

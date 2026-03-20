@@ -10,7 +10,7 @@ it('lists own addresses', function (): void {
     Address::factory()->count(3)->for($user)->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/me/addresses');
+    $response = $this->withToken($token)->getJson('/api/v1/me/addresses');
 
     $response->assertOk()->assertJsonCount(3, 'data');
 });
@@ -19,7 +19,7 @@ it('stores a new address', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->postJson('/api/me/addresses', [
+    $response = $this->withToken($token)->postJson('/api/v1/me/addresses', [
         'label' => 'Home',
         'city' => 'Dhaka',
         'address_line_1' => '123 Main St',
@@ -34,7 +34,7 @@ it('updates an address', function (): void {
     $address = Address::factory()->for($user)->create(['city' => 'Old City']);
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->patchJson("/api/me/addresses/{$address->getKey()}", [
+    $response = $this->withToken($token)->patchJson("/api/v1/me/addresses/{$address->getKey()}", [
         'city' => 'New City',
     ]);
 
@@ -47,7 +47,7 @@ it('cannot update another user\'s address', function (): void {
     $address = Address::factory()->for($other)->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->patchJson("/api/me/addresses/{$address->getKey()}", ['city' => 'X'])
+    $this->withToken($token)->patchJson("/api/v1/me/addresses/{$address->getKey()}", ['city' => 'X'])
         ->assertForbidden();
 });
 
@@ -56,7 +56,7 @@ it('deletes an address', function (): void {
     $address = Address::factory()->for($user)->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->deleteJson("/api/me/addresses/{$address->getKey()}")->assertOk();
+    $this->withToken($token)->deleteJson("/api/v1/me/addresses/{$address->getKey()}")->assertOk();
 
     expect(Address::find($address->getKey()))->toBeNull();
 });
@@ -67,7 +67,7 @@ it('cannot delete another user\'s address', function (): void {
     $address = Address::factory()->for($other)->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->deleteJson("/api/me/addresses/{$address->getKey()}")->assertForbidden();
+    $this->withToken($token)->deleteJson("/api/v1/me/addresses/{$address->getKey()}")->assertForbidden();
 });
 
 it('sets an address as default', function (): void {
@@ -77,7 +77,7 @@ it('sets an address as default', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->postJson("/api/me/addresses/{$address2->getKey()}/default")
+        ->postJson("/api/v1/me/addresses/{$address2->getKey()}/default")
         ->assertOk();
 
     expect($address2->fresh()->is_default)->toBeTrue();
@@ -85,5 +85,5 @@ it('sets an address as default', function (): void {
 });
 
 it('returns 401 when unauthenticated', function (): void {
-    $this->getJson('/api/me/addresses')->assertUnauthorized();
+    $this->getJson('/api/v1/me/addresses')->assertUnauthorized();
 });

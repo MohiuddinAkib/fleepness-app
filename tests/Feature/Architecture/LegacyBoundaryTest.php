@@ -27,6 +27,5 @@ it('removes compatibility-only controllers once legacy routes are deleted', func
         ->not->toContain('CompatibilityController::class')
         ->not->toContain('App\Http\Controllers\Legacy\NotificationController');
 
-    expect(trim((string) file_get_contents(base_path('routes/api/legacy.php'))))
-        ->toBe("<?php\n\ndeclare(strict_types=1);");
+    expect(file_exists(base_path('routes/api/legacy.php')))->toBeFalse();
 });

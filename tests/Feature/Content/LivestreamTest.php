@@ -20,7 +20,7 @@ beforeEach(function (): void {
 it('lists livestreams publicly', function (): void {
     Livestream::factory()->count(3)->create();
 
-    $this->getJson('/api/livestreams')
+    $this->getJson('/api/v1/livestreams')
         ->assertOk()
         ->assertJsonCount(3, 'data');
 });
@@ -31,7 +31,7 @@ it('filters livestreams by vendor id', function (): void {
     $matchingLivestream = Livestream::factory()->create(['vendor_profile_id' => $vendor->getKey()]);
     Livestream::factory()->create(['vendor_profile_id' => $otherVendor->getKey()]);
 
-    $this->getJson('/api/livestreams?vendor_id='.$vendor->getKey())
+    $this->getJson('/api/v1/livestreams?vendor_id='.$vendor->getKey())
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $matchingLivestream->getKey());
@@ -40,7 +40,7 @@ it('filters livestreams by vendor id', function (): void {
 it('shows a livestream publicly', function (): void {
     $livestream = Livestream::factory()->create();
 
-    $this->getJson("/api/livestreams/{$livestream->getKey()}")
+    $this->getJson("/api/v1/livestreams/{$livestream->getKey()}")
         ->assertOk()
         ->assertJsonPath('data.id', $livestream->getKey())
         ->assertJsonPath('data.room_name', $livestream->room_name)
@@ -52,7 +52,7 @@ it('lists comments on a livestream', function (): void {
     $livestream = Livestream::factory()->create();
     LivestreamComment::factory()->count(3)->create(['livestream_id' => $livestream->getKey()]);
 
-    $this->getJson("/api/livestreams/{$livestream->getKey()}/comments")
+    $this->getJson("/api/v1/livestreams/{$livestream->getKey()}/comments")
         ->assertOk()
         ->assertJsonCount(3, 'data');
 });
@@ -60,7 +60,7 @@ it('lists comments on a livestream', function (): void {
 // Auth-required engagement
 it('requires auth to comment on livestream', function (): void {
     $livestream = Livestream::factory()->create();
-    $this->postJson("/api/livestreams/{$livestream->getKey()}/comments", ['comment' => 'Nice!'])
+    $this->postJson("/api/v1/livestreams/{$livestream->getKey()}/comments", ['comment' => 'Nice!'])
         ->assertUnauthorized();
 });
 
@@ -70,7 +70,7 @@ it('posts a comment on a livestream', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->postJson("/api/livestreams/{$livestream->getKey()}/comments", ['comment' => 'Going live!'])
+        ->postJson("/api/v1/livestreams/{$livestream->getKey()}/comments", ['comment' => 'Going live!'])
         ->assertCreated()
         ->assertJsonPath('data.comment', 'Going live!');
 });
@@ -86,7 +86,7 @@ it('updates own comment on a livestream', function (): void {
     ]);
 
     $this->withToken($token)
-        ->putJson("/api/livestreams/{$livestream->getKey()}/comments/{$comment->getKey()}", [
+        ->putJson("/api/v1/livestreams/{$livestream->getKey()}/comments/{$comment->getKey()}", [
             'comment' => 'Updated comment',
         ])
         ->assertOk()
@@ -101,7 +101,7 @@ it('cannot update another users comment on a livestream', function (): void {
     $comment = LivestreamComment::factory()->create();
 
     $this->withToken($token)
-        ->putJson("/api/livestreams/{$comment->livestream_id}/comments/{$comment->getKey()}", [
+        ->putJson("/api/v1/livestreams/{$comment->livestream_id}/comments/{$comment->getKey()}", [
             'comment' => 'Updated comment',
         ])
         ->assertForbidden();
@@ -113,7 +113,7 @@ it('cannot delete another users comment on livestream', function (): void {
     $comment = LivestreamComment::factory()->create();
 
     $this->withToken($token)
-        ->deleteJson("/api/livestreams/{$comment->livestream_id}/comments/{$comment->getKey()}")
+        ->deleteJson("/api/v1/livestreams/{$comment->livestream_id}/comments/{$comment->getKey()}")
         ->assertForbidden();
 });
 
@@ -127,7 +127,7 @@ it('deletes own comment on livestream', function (): void {
     ]);
 
     $this->withToken($token)
-        ->deleteJson("/api/livestreams/{$livestream->getKey()}/comments/{$comment->getKey()}")
+        ->deleteJson("/api/v1/livestreams/{$livestream->getKey()}/comments/{$comment->getKey()}")
         ->assertOk();
 
     expect(LivestreamComment::find($comment->getKey()))->toBeNull();
@@ -139,7 +139,7 @@ it('likes a livestream', function (): void {
     $livestream = Livestream::factory()->create();
 
     $this->withToken($token)
-        ->postJson("/api/livestreams/{$livestream->getKey()}/like")
+        ->postJson("/api/v1/livestreams/{$livestream->getKey()}/like")
         ->assertOk();
 
     expect(LivestreamLike::where('livestream_id', $livestream->getKey())->count())->toBe(1);
@@ -151,7 +151,7 @@ it('saves a livestream', function (): void {
     $livestream = Livestream::factory()->create();
 
     $this->withToken($token)
-        ->postJson("/api/livestreams/{$livestream->getKey()}/save")
+        ->postJson("/api/v1/livestreams/{$livestream->getKey()}/save")
         ->assertOk();
 
     expect(LivestreamSave::where('livestream_id', $livestream->getKey())->count())->toBe(1);
@@ -172,7 +172,7 @@ it('returns liked livestreams on the canonical me endpoint', function (): void {
         'livestream_id' => $otherLivestream->getKey(),
     ]);
 
-    $this->withToken($token)->getJson('/api/me/livestreams/liked')
+    $this->withToken($token)->getJson('/api/v1/me/livestreams/liked')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $likedLivestream->getKey());
@@ -193,7 +193,7 @@ it('returns saved livestreams on the canonical me endpoint', function (): void {
         'livestream_id' => $otherLivestream->getKey(),
     ]);
 
-    $this->withToken($token)->getJson('/api/me/livestreams/saved')
+    $this->withToken($token)->getJson('/api/v1/me/livestreams/saved')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $savedLivestream->getKey());
@@ -201,7 +201,7 @@ it('returns saved livestreams on the canonical me endpoint', function (): void {
 
 // Vendor CRUD
 it('requires auth to create a livestream', function (): void {
-    $this->postJson('/api/me/livestreams', ['title' => 'My Stream'])
+    $this->postJson('/api/v1/me/livestreams', ['title' => 'My Stream'])
         ->assertUnauthorized();
 });
 
@@ -216,7 +216,7 @@ it('vendor creates a livestream and receives publisher token', function (): void
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->postJson('/api/me/livestreams', ['title' => 'Flash Sale Stream'])
+        ->postJson('/api/v1/me/livestreams', ['title' => 'Flash Sale Stream'])
         ->assertCreated()
         ->assertJsonPath('data.title', 'Flash Sale Stream')
         ->assertJsonPath('data.status', LivestreamStatus::Started->value)
@@ -228,7 +228,7 @@ it('non-vendor cannot create livestream', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->postJson('/api/me/livestreams', ['title' => 'My Stream'])
+        ->postJson('/api/v1/me/livestreams', ['title' => 'My Stream'])
         ->assertForbidden();
 });
 
@@ -239,7 +239,7 @@ it('vendor updates own livestream', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['title' => 'Updated Stream'])
+        ->patchJson("/api/v1/me/livestreams/{$livestream->getKey()}", ['title' => 'Updated Stream'])
         ->assertOk()
         ->assertJsonPath('data.title', 'Updated Stream');
 });
@@ -256,7 +256,7 @@ it('vendor starts a scheduled livestream via update', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['status' => 'started'])
+        ->patchJson("/api/v1/me/livestreams/{$livestream->getKey()}", ['status' => 'started'])
         ->assertOk()
         ->assertJsonPath('data.status', LivestreamStatus::Started->value)
         ->assertJsonPath('token', 'start-token');
@@ -271,7 +271,7 @@ it('vendor cannot start an already started livestream', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['status' => 'started'])
+        ->patchJson("/api/v1/me/livestreams/{$livestream->getKey()}", ['status' => 'started'])
         ->assertUnprocessable();
 });
 
@@ -285,7 +285,7 @@ it('vendor ends a started livestream via update', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['status' => 'finished'])
+        ->patchJson("/api/v1/me/livestreams/{$livestream->getKey()}", ['status' => 'finished'])
         ->assertOk()
         ->assertJsonPath('data.status', LivestreamStatus::Finished->value);
 
@@ -301,7 +301,7 @@ it('vendor cannot update a finished livestream', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->patchJson("/api/me/livestreams/{$livestream->getKey()}", ['title' => 'Too Late'])
+        ->patchJson("/api/v1/me/livestreams/{$livestream->getKey()}", ['title' => 'Too Late'])
         ->assertUnprocessable();
 });
 
@@ -312,7 +312,7 @@ it('vendor cannot update another vendors livestream', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->patchJson("/api/me/livestreams/{$otherLivestream->getKey()}", ['title' => 'Hijack'])
+        ->patchJson("/api/v1/me/livestreams/{$otherLivestream->getKey()}", ['title' => 'Hijack'])
         ->assertForbidden();
 });
 
@@ -323,7 +323,7 @@ it('vendor deletes own livestream', function (): void {
     $token = $user->createToken('test')->plainTextToken;
 
     $this->withToken($token)
-        ->deleteJson("/api/me/livestreams/{$livestream->getKey()}")
+        ->deleteJson("/api/v1/me/livestreams/{$livestream->getKey()}")
         ->assertOk();
 
     expect(Livestream::find($livestream->getKey()))->toBeNull();

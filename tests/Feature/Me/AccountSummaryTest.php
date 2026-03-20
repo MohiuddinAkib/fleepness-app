@@ -13,7 +13,7 @@ it('returns the canonical account summary on the me summaries endpoint', functio
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson('/api/me/summaries')
+    $this->withToken($token)->getJson('/api/v1/me/summaries')
         ->assertOk()
         ->assertJsonPath('data.user_id', $user->getKey())
         ->assertJsonPath('data.name', 'Vendor User')

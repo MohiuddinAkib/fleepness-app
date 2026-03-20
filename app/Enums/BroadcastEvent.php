@@ -13,5 +13,6 @@ enum BroadcastEvent: string
     case LivestreamCreated = 'livestream_created';
     case LivestreamUpdated = 'livestream_updated';
     case LivestreamCommentCreated = 'livestream_comment_created';
+    case LivestreamCommentDeleted = 'livestream_comment_deleted';
     case LivestreamLikeCountUpdated = 'livestream_like_count_updated';
 }

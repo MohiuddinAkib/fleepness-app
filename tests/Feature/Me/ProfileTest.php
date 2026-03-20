@@ -8,7 +8,7 @@ it('returns own profile', function (): void {
     $user = User::factory()->create(['name' => 'John Doe']);
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/me');
+    $response = $this->withToken($token)->getJson('/api/v1/me');
 
     $response->assertOk()->assertJsonStructure([
         'data' => ['id', 'name', 'phone_number'],
@@ -16,14 +16,14 @@ it('returns own profile', function (): void {
 });
 
 it('returns 401 when unauthenticated', function (): void {
-    $this->getJson('/api/me')->assertUnauthorized();
+    $this->getJson('/api/v1/me')->assertUnauthorized();
 });
 
 it('updates own profile', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->patchJson('/api/me', [
+    $response = $this->withToken($token)->patchJson('/api/v1/me', [
         'name' => 'Updated Name',
     ]);
 
@@ -38,7 +38,7 @@ it('only updates provided fields', function (): void {
     $user = User::factory()->create(['name' => 'Original Name', 'email' => 'original@test.com']);
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->patchJson('/api/me', ['name' => 'New Name'])->assertOk();
+    $this->withToken($token)->patchJson('/api/v1/me', ['name' => 'New Name'])->assertOk();
 
     expect($user->fresh())
         ->name->toBe('New Name')
@@ -46,5 +46,5 @@ it('only updates provided fields', function (): void {
 });
 
 it('returns 401 updating profile when unauthenticated', function (): void {
-    $this->patchJson('/api/me', ['name' => 'X'])->assertUnauthorized();
+    $this->patchJson('/api/v1/me', ['name' => 'X'])->assertUnauthorized();
 });

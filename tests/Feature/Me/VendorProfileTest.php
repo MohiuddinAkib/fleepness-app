@@ -15,7 +15,7 @@ it('returns 404 when user has no vendor profile', function (): void {
     $user = User::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->getJson('/api/me/vendors')->assertNotFound();
+    $this->withToken($token)->getJson('/api/v1/me/vendors')->assertNotFound();
 });
 
 it('returns vendor profile', function (): void {
@@ -23,7 +23,7 @@ it('returns vendor profile', function (): void {
     VendorProfile::factory()->for($user)->approved()->create(['shop_name' => 'My Shop']);
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/me/vendors');
+    $response = $this->withToken($token)->getJson('/api/v1/me/vendors');
 
     $response->assertOk()->assertJsonPath('data.shop_name', 'My Shop');
 });
@@ -35,7 +35,7 @@ it('updates vendor profile', function (): void {
     VendorProfile::factory()->for($user)->approved()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->patch('/api/me/vendors', [
+    $response = $this->withToken($token)->patch('/api/v1/me/vendors', [
         'shop_name' => 'Updated Shop',
         'description' => 'A great shop',
         'email' => 'vendor@example.com',
@@ -61,7 +61,7 @@ it('applies to become a vendor', function (): void {
     $paymentMethod = PaymentMethod::factory()->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->post('/api/vendor-applications', [
+    $response = $this->withToken($token)->post('/api/v1/vendor-applications', [
         'name' => 'Updated User',
         'shop_name' => 'My New Shop',
         'phone_number' => '01717777777',
@@ -91,7 +91,7 @@ it('cannot apply twice', function (): void {
     VendorProfile::factory()->for($user)->create();
     $token = $user->createToken('test')->plainTextToken;
 
-    $this->withToken($token)->postJson('/api/vendor-applications', [
+    $this->withToken($token)->postJson('/api/v1/vendor-applications', [
         'shop_name' => 'Another Shop',
     ])->assertUnprocessable();
 });
@@ -101,13 +101,13 @@ it('returns vendor application status', function (): void {
     VendorProfile::factory()->for($user)->create(['status' => VendorStatus::Pending]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/vendor-applications/status');
+    $response = $this->withToken($token)->getJson('/api/v1/vendor-applications/status');
 
     $response->assertOk()->assertJsonPath('data.status', VendorStatus::Pending->value);
 });
 
 it('returns 401 for unauthenticated vendor application', function (): void {
-    $this->postJson('/api/vendor-applications', ['shop_name' => 'X'])->assertUnauthorized();
+    $this->postJson('/api/v1/vendor-applications', ['shop_name' => 'X'])->assertUnauthorized();
 });
 
 it('returns vendor balance', function (): void {
@@ -125,7 +125,7 @@ it('returns vendor balance', function (): void {
     ]);
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->getJson('/api/me/balances');
+    $response = $this->withToken($token)->getJson('/api/v1/me/balances');
 
     $response->assertOk()
         ->assertJsonPath('data.balance', '250.00')
@@ -147,7 +147,7 @@ it('returns vendor followers on the canonical me endpoint', function (): void {
         'user_id' => $follower->getKey(),
     ]);
 
-    $this->withToken($token)->getJson('/api/me/vendors/followers')
+    $this->withToken($token)->getJson('/api/v1/me/vendors/followers')
         ->assertOk()
         ->assertJsonCount(1, 'data')
         ->assertJsonPath('data.0.id', $follower->getKey());

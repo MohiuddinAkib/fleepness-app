@@ -39,7 +39,7 @@ it('lists visible sections', function (): void {
     Section::factory()->count(2)->create();
     Section::factory()->count(2)->create(['is_visible' => false]);
 
-    $response = $this->getJson('/api/sections');
+    $response = $this->getJson('/api/v1/sections');
     $sectionPayload = collect($response->json('data'))->firstWhere('id', $section->getKey());
 
     $response->assertOk()
@@ -81,7 +81,7 @@ it('lists active sliders', function (): void {
     Slider::factory()->count(3)->create();
     Slider::factory()->count(1)->create(['is_active' => false]);
 
-    $response = $this->getJson('/api/sliders');
+    $response = $this->getJson('/api/v1/sliders');
     $sliderPayload = collect($response->json('data'))->firstWhere('id', $slider->getKey());
 
     $response->assertOk()

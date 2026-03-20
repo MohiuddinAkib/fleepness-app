@@ -20,7 +20,7 @@ it('returns media-backed image fields on the authenticated profile payload', fun
     $token = $user->createToken('test')->plainTextToken;
 
     $response = $this->withToken($token)
-        ->getJson('/api/me')
+        ->getJson('/api/v1/me')
         ->assertOk();
 
     $json = $response->json();
@@ -42,7 +42,7 @@ it('updates phone number and media-backed profile images', function (): void {
 
     $token = $user->createToken('test')->plainTextToken;
 
-    $response = $this->withToken($token)->patch('/api/me', [
+    $response = $this->withToken($token)->patch('/api/v1/me', [
         'name' => 'Updated User',
         'phone_number' => '01719999999',
         'banner_image' => UploadedFile::fake()->image('banner.jpg'),

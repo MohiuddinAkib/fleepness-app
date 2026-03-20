@@ -9,7 +9,7 @@ describe('POST /api/auth/device-tokens', function (): void {
     it('stores a device token for authenticated user', function (): void {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->postJson('/api/auth/device-tokens', [
+        $response = $this->actingAs($user)->postJson('/api/v1/auth/device-tokens', [
             'token' => 'fcm-token-abc-123',
             'platform' => 'android',
         ]);
@@ -27,7 +27,7 @@ describe('POST /api/auth/device-tokens', function (): void {
         $user = User::factory()->create();
         DeviceToken::factory()->create(['user_id' => $user->getKey(), 'token' => 'existing-token']);
 
-        $this->actingAs($user)->postJson('/api/auth/device-tokens', [
+        $this->actingAs($user)->postJson('/api/v1/auth/device-tokens', [
             'token' => 'existing-token',
         ]);
 
@@ -35,7 +35,7 @@ describe('POST /api/auth/device-tokens', function (): void {
     });
 
     it('returns 401 for unauthenticated request', function (): void {
-        $this->postJson('/api/auth/device-tokens', ['token' => 'some-token'])->assertUnauthorized();
+        $this->postJson('/api/v1/auth/device-tokens', ['token' => 'some-token'])->assertUnauthorized();
     });
 });
 
@@ -44,7 +44,7 @@ describe('DELETE /api/auth/device-tokens/{deviceToken}', function (): void {
         $user = User::factory()->create();
         $token = DeviceToken::factory()->create(['user_id' => $user->getKey()]);
 
-        $response = $this->actingAs($user)->deleteJson("/api/auth/device-tokens/{$token->getKey()}");
+        $response = $this->actingAs($user)->deleteJson("/api/v1/auth/device-tokens/{$token->getKey()}");
 
         $response->assertOk()->assertJson(['message' => 'Device token removed.']);
         $this->assertDatabaseMissing('device_tokens', ['id' => $token->getKey()]);
@@ -55,11 +55,11 @@ describe('DELETE /api/auth/device-tokens/{deviceToken}', function (): void {
         $other = User::factory()->create();
         $token = DeviceToken::factory()->create(['user_id' => $other->getKey()]);
 
-        $this->actingAs($user)->deleteJson("/api/auth/device-tokens/{$token->getKey()}")->assertForbidden();
+        $this->actingAs($user)->deleteJson("/api/v1/auth/device-tokens/{$token->getKey()}")->assertForbidden();
     });
 
     it('returns 401 for unauthenticated request', function (): void {
         $token = DeviceToken::factory()->create();
-        $this->deleteJson("/api/auth/device-tokens/{$token->getKey()}")->assertUnauthorized();
+        $this->deleteJson("/api/v1/auth/device-tokens/{$token->getKey()}")->assertUnauthorized();
     });
 });
