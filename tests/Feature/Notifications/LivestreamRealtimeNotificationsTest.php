@@ -47,7 +47,7 @@ it('broadcasts like count updates via the LivestreamLike model event contract', 
 
     expect($like->broadcastAs('created'))->toBe('livestream_like_count_updated')
         ->and($like->broadcastAs('deleted'))->toBe('livestream_like_count_updated')
-        ->and($like->broadcastAs('updated'))->toBeNull()
+        ->and($like->broadcastAs('updated'))->toBe('livestream_like_updated')
         ->and($like->broadcastOn('created'))->toHaveCount(1)
         ->and($like->broadcastOn('updated'))->toHaveCount(0)
         ->and($like->broadcastWith('created'))->toHaveKey('likes_count');

@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notification;
 use App\Notifications\LoginOtpNotification;
 use Filament\Models\Contracts\FilamentUser;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Support\Broadcasting\BroadcastChannels;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -104,7 +105,7 @@ class User extends Authenticatable implements FcmBroadcastNotifiableByDevice, Fc
 
     public function receivesBroadcastNotificationsOn(): string
     {
-        return "user_{$this->getKey()}";
+        return BroadcastChannels::user($this);
     }
 
     /** @return list<string> */

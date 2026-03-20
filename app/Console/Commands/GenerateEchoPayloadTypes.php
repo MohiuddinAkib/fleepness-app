@@ -4,14 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Laravel\Ranger\Ranger;
+use App\Enums\BroadcastEvent;
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
-use Laravel\Wayfinder\Langs\TypeScript;
-use Laravel\Ranger\Components\BroadcastEvent;
-use Laravel\Wayfinder\Registry\ResultConverter;
-use Laravel\Wayfinder\Registry\TypeScriptConverter;
 
 class GenerateEchoPayloadTypes extends Command
 {
@@ -21,7 +16,6 @@ class GenerateEchoPayloadTypes extends Command
 
     public function __construct(
         private readonly Filesystem $files,
-        private readonly Ranger $ranger,
     ) {
         parent::__construct();
     }
@@ -36,41 +30,17 @@ class GenerateEchoPayloadTypes extends Command
             return self::FAILURE;
         }
 
-        $this->ranger->onBroadcastEvents(function (Collection $events) use ($path): void {
-            $this->writePayloadTypes($events, $path);
-        });
-
-        $registry = ResultConverter::getRegistry();
-
-        if (! $registry->hasConverter(TypeScriptConverter::class)) {
-            ResultConverter::register(TypeScriptConverter::class);
-        }
-
-        $this->ranger->setAppPaths(app_path());
-        $this->ranger->setBasePaths(base_path());
-        $this->ranger->walk();
+        $this->writePayloadTypes($path);
 
         $this->info("Echo payload types written to [{$path}].");
 
         return self::SUCCESS;
     }
 
-    /**
-     * @param  Collection<int, BroadcastEvent>  $events
-     */
-    private function writePayloadTypes(Collection $events, string $path): void
+    private function writePayloadTypes(string $path): void
     {
-        $events = $events
-            ->unique(fn (BroadcastEvent $event) => $event->name)
-            ->values();
-
-        $payloadEntries = $events
-            ->map(function (BroadcastEvent $event): string {
-                return '    '.(string) TypeScript::objectKeyValue(
-                    $this->eventName($event),
-                    (string) TypeScript::objectToTypeObject($event->data->value, false),
-                ).';';
-            })
+        $payloadEntries = collect($this->payloadTypes())
+            ->map(fn (string $payloadType, string $eventName): string => "    '{$eventName}': {$payloadType};")
             ->implode(PHP_EOL);
 
         $content = implode(PHP_EOL, [
@@ -92,8 +62,18 @@ class GenerateEchoPayloadTypes extends Command
         $this->files->put("{$path}/echo-notification-payloads.ts", $content);
     }
 
-    private function eventName(BroadcastEvent $event): string
+    /** @return array<string, string> */
+    private function payloadTypes(): array
     {
-        return '.'.str_replace('\\', '.', $event->name);
+        return [
+            '.'.BroadcastEvent::NewOrderForVendor->value => 'App.Data.Broadcast.VendorOrderBroadcastData',
+            '.'.BroadcastEvent::CustomerOrderStatusChanged->value => 'App.Data.Broadcast.VendorOrderBroadcastData',
+            '.'.BroadcastEvent::VendorApplicationStatusUpdated->value => 'App.Data.Broadcast.VendorApplicationStatusBroadcastData',
+            '.'.BroadcastEvent::WithdrawalRequestApproved->value => 'App.Data.Broadcast.WithdrawalApprovedBroadcastData',
+            '.'.BroadcastEvent::LivestreamCreated->value => 'App.Data.LivestreamData',
+            '.'.BroadcastEvent::LivestreamUpdated->value => 'App.Data.LivestreamData',
+            '.'.BroadcastEvent::LivestreamCommentCreated->value => 'App.Data.Broadcast.LivestreamCommentBroadcastData',
+            '.'.BroadcastEvent::LivestreamLikeCountUpdated->value => 'App.Data.Broadcast.LivestreamLikeCountBroadcastData',
+        ];
     }
 }

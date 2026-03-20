@@ -13,9 +13,11 @@ use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
+use App\Data\Response\TokenResponseData;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
 use App\Data\Dto\GeneratePublisherTokenData;
 use App\Data\Livestream\StoreLivestreamData;
 use App\Data\Livestream\UpdateLivestreamData;
@@ -25,6 +27,7 @@ use App\Facades\Livestream as LivestreamFacade;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use App\Data\Response\Livestream\LivestreamSessionResponseData;
 
 #[Group('Livestreams', 'Vendor livestream management. Creating a livestream immediately starts it on LiveKit and returns a publisher token.')]
 class LivestreamController extends Controller
@@ -52,6 +55,7 @@ class LivestreamController extends Controller
     #[BodyParam('scheduled_at', 'string', required: false, nullable: true, example: '2026-03-25 18:00:00')]
     #[Endpoint('Create & start a livestream', 'Creates a new livestream with status=started, begins LiveKit egress recording, and returns a publisher token to connect to the room.')]
     #[Response('{"data":{"id":1,"title":"Friday Flash Sale","status":"started","room_name":"livestream_1"},"token":"eyJhbGci..."}', 201)]
+    /** @return LivestreamSessionResponseData */
     public function store(
         StoreLivestreamData $data,
         #[CurrentUser] User $user,
@@ -85,7 +89,11 @@ class LivestreamController extends Controller
         $livestream->startRecording();
         $livestream->load(['media', 'vendorProfile']);
 
-        return LivestreamData::fromModel($livestream)->additional(['token' => $token]);
+        return response()->json(LivestreamSessionResponseData::from([
+            'data' => LivestreamData::fromModel($livestream),
+            'token' => $token,
+            'publishedToken' => $token,
+        ])->toArray(), HttpResponse::HTTP_CREATED);
     }
 
     #[Authenticated]
@@ -95,6 +103,7 @@ class LivestreamController extends Controller
     #[BodyParam('status', 'string', required: false, enum: ['started', 'finished'], example: 'finished')]
     #[Endpoint('Update a livestream', 'Update title/description, or transition status. Use status=started to go live (from scheduled), status=finished to end the stream.')]
     #[Response('{"data":{"id":1,"status":"finished","total_duration":3600}}', 200)]
+    /** @return LivestreamSessionResponseData */
     public function update(
         UpdateLivestreamData $data,
         Livestream $livestream,
@@ -162,14 +171,17 @@ class LivestreamController extends Controller
         }
         $livestream->load(['media', 'vendorProfile']);
 
-        return LivestreamData::fromModel($livestream)
-            ->when($token)
-            ->additional(['token' => $token]);
+        return response()->json(LivestreamSessionResponseData::from([
+            'data' => LivestreamData::fromModel($livestream),
+            'token' => $token,
+            'publishedToken' => $token,
+        ])->toArray());
     }
 
     #[Authenticated]
     #[Endpoint('Delete a scheduled livestream', 'Can only delete livestreams with status=scheduled.')]
     #[Response('{"message":"Livestream deleted."}', 200)]
+    /** @return MessageResponseData */
     public function destroy(
         Livestream $livestream,
         #[CurrentUser] User $user,
@@ -187,12 +199,15 @@ class LivestreamController extends Controller
 
         $livestream->delete();
 
-        return response()->json(['message' => 'Livestream deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Livestream deleted.',
+        ])->toArray());
     }
 
     #[Authenticated]
     #[Endpoint('Get publisher token', 'Generates a fresh LiveKit publisher token for the vendor to (re)connect to the room.')]
     #[Response('{"token":"eyJhbGci..."}', 200)]
+    /** @return TokenResponseData */
     public function publisherToken(
         Livestream $livestream,
         #[CurrentUser] User $user,
@@ -217,6 +232,8 @@ class LivestreamController extends Controller
 
         $token = LivestreamFacade::generatePublisherToken($data);
 
-        return response()->json(['token' => $token]);
+        return response()->json(TokenResponseData::from([
+            'token' => $token,
+        ])->toArray());
     }
 }

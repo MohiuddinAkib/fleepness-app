@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Notifications;
 
 use App\Enums\VendorStatus;
+use App\Enums\BroadcastEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
+use App\Data\Broadcast\VendorApplicationStatusBroadcastData;
 use Kreait\Firebase\Messaging\Notification as FcmNotification;
 use App\Support\Notification\Contracts\SupportsFcmDeviceChannel;
 
@@ -41,16 +43,16 @@ class VendorStatusUpdated extends Notification implements ShouldBroadcast, Shoul
 
     public function broadcastAs(): string
     {
-        return 'vendor_application_status_updated';
+        return BroadcastEvent::VendorApplicationStatusUpdated->value;
     }
 
     /** @return array<string, mixed> */
     public function toBroadcast(object $notifiable): array
     {
-        return [
-            'status' => $this->status->value,
-            'message' => $this->message(),
-        ];
+        return new VendorApplicationStatusBroadcastData(
+            status: $this->status,
+            message: $this->message(),
+        )->toArray();
     }
 
     public function toFcm(object $notifiable): CloudMessage
@@ -58,7 +60,7 @@ class VendorStatusUpdated extends Notification implements ShouldBroadcast, Shoul
         return CloudMessage::new()->withNotification(
             FcmNotification::create('Vendor Application Update', $this->message())
         )->withData([
-            'type' => 'vendor_application_status_updated',
+            'type' => BroadcastEvent::VendorApplicationStatusUpdated->value,
             'status' => $this->status->value,
         ]);
     }
@@ -73,7 +75,7 @@ class VendorStatusUpdated extends Notification implements ShouldBroadcast, Shoul
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'vendor_application_status_updated',
+            'type' => BroadcastEvent::VendorApplicationStatusUpdated->value,
             'status' => $this->status->value,
             'message' => $this->message(),
         ];

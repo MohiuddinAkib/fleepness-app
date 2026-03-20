@@ -15,6 +15,7 @@ use Knuckles\Scribe\Attributes\Response;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Unauthenticated;
+use App\Data\Response\Auth\AuthTokenResponseData;
 
 #[Group('Authentication')]
 class SocialAuthController extends Controller
@@ -30,6 +31,7 @@ class SocialAuthController extends Controller
     #[Endpoint('OAuth Callback', 'Handle the OAuth provider callback and issue an authentication token.')]
     #[Response(['data' => ['id' => 1, 'name' => 'John Doe'], 'token' => '1|abc123'], 200, 'Social login successful.')]
     #[Unauthenticated]
+    /** @return AuthTokenResponseData */
     public function callback(string $provider): JsonResponse|Responsable
     {
         $socialUser = Socialite::driver($provider)->stateless()->user();
@@ -46,10 +48,10 @@ class SocialAuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
+        return response()->json(AuthTokenResponseData::from([
             'message' => 'Social login successful.',
             'token' => $token,
             'user' => UserData::fromModel($user),
-        ]);
+        ])->toArray());
     }
 }

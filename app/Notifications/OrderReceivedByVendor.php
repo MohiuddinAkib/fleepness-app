@@ -6,9 +6,11 @@ namespace App\Notifications;
 
 use App\Models\VendorOrder;
 use App\Data\VendorOrderData;
+use App\Enums\BroadcastEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Kreait\Firebase\Messaging\CloudMessage;
+use App\Data\Broadcast\VendorOrderBroadcastData;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Kreait\Firebase\Messaging\Notification as FcmNotification;
@@ -32,15 +34,15 @@ class OrderReceivedByVendor extends Notification implements ShouldBroadcast, Sho
 
     public function broadcastAs(): string
     {
-        return 'new_order_for_vendor';
+        return BroadcastEvent::NewOrderForVendor->value;
     }
 
     /** @return array<string, mixed> */
     public function toBroadcast(object $notifiable): array
     {
-        return [
-            'vendor_order' => VendorOrderData::fromModel($this->vendorOrder)->toArray(),
-        ];
+        return new VendorOrderBroadcastData(
+            vendorOrder: VendorOrderData::fromModel($this->vendorOrder->loadMissing('items.product', 'vendorProfile')),
+        )->toArray();
     }
 
     public function toFcm(object $notifiable): CloudMessage
@@ -51,7 +53,7 @@ class OrderReceivedByVendor extends Notification implements ShouldBroadcast, Sho
                 "Order #{$this->vendorOrder->order_number} is waiting for your confirmation."
             )
         )->withData([
-            'type' => 'new_order_for_vendor',
+            'type' => BroadcastEvent::NewOrderForVendor->value,
             'vendor_order_id' => (string) $this->vendorOrder->getKey(),
         ]);
     }
@@ -66,7 +68,7 @@ class OrderReceivedByVendor extends Notification implements ShouldBroadcast, Sho
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'new_order_for_vendor',
+            'type' => BroadcastEvent::NewOrderForVendor->value,
             'vendor_order_id' => $this->vendorOrder->getKey(),
             'order_number' => $this->vendorOrder->order_number,
         ];

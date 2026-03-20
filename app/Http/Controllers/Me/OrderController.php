@@ -11,14 +11,15 @@ use App\Data\OrderData;
 use App\Models\CartItem;
 use App\Models\VendorOrder;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Models\DeliveryOption;
+use App\Data\Me\ListOrdersData;
 use App\Enums\VendorOrderStatus;
 use Illuminate\Http\JsonResponse;
 use App\Data\Order\PlaceOrderData;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
+use App\Data\Response\OrderResponseData;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
@@ -36,17 +37,17 @@ class OrderController extends Controller
     #[Endpoint('List own orders', 'Returns a paginated list of all orders placed by the authenticated user.')]
     #[Response('{"data":[{"id":1,"order_number":"ORD-001","grand_total":"250.00","is_completed":false}],"meta":{"current_page":1}}', 200)]
     /** @return PaginatedDataCollection<OrderData> */
-    public function index(Request $request, #[CurrentUser] User $user): JsonResponse|Responsable
+    public function index(ListOrdersData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $orders = Order::query()
             ->where('user_id', $user->getKey())
             ->when(
-                $request->filled('order_code'),
-                fn ($query) => $query->whereLike('order_number', '%'.$request->string('order_code')->toString().'%')
+                filled($data->orderCode),
+                fn ($query) => $query->whereLike('order_number', '%'.$data->orderCode.'%')
             )
             ->with(['vendorOrders.items.product'])
             ->latest()
-            ->paginate();
+            ->paginate(perPage: $data->perPage, page: $data->page);
 
         return OrderData::collect($orders, PaginatedDataCollection::class);
     }
@@ -68,7 +69,7 @@ class OrderController extends Controller
     #[BodyParam('address_id', 'integer', required: false, example: 1)]
     #[Endpoint('Place order', 'Places an order from the selected cart items. Creates separate vendor orders for each vendor. Cart items with is_selected=true are used.')]
     #[Response('{"message":"Order placed.","data":{"id":1,"order_number":"ORD-001","grand_total":"250.00"}}', 201)]
-    /** @return OrderData */
+    /** @return OrderResponseData */
     public function store(PlaceOrderData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $selectedItems = CartItem::query()
@@ -163,7 +164,10 @@ class OrderController extends Controller
 
         $order->load(['vendorOrders.items.product']);
 
-        return OrderData::fromModel($order)->additional(['message' => 'Order placed successfully.']);
+        return response()->json(OrderResponseData::from([
+            'message' => 'Order placed successfully.',
+            'data' => OrderData::fromModel($order),
+        ])->toArray(), HttpResponse::HTTP_CREATED);
     }
 
     private function resolveUnitPrice(CartItem $item): float

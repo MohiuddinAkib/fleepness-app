@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\BroadcastEvent;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Broadcasting\PresenceChannel;
+use App\Support\Broadcasting\BroadcastChannels;
 use Database\Factories\LivestreamCommentFactory;
+use App\Data\Broadcast\LivestreamCommentAuthorData;
+use App\Data\Broadcast\LivestreamCommentMessageData;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Data\Broadcast\LivestreamCommentBroadcastData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\BroadcastsEventsAfterCommit;
 
@@ -50,15 +55,15 @@ class LivestreamComment extends Model
         }
 
         return [
-            new PresenceChannel($this->livestream->room_name),
+            new PresenceChannel(BroadcastChannels::livestreamPresence($this->livestream)),
         ];
     }
 
-    public function broadcastAs(string $event): ?string
+    public function broadcastAs(string $event): string
     {
         return match ($event) {
-            'created' => 'livestream_comment_created',
-            default => null,
+            'created' => BroadcastEvent::LivestreamCommentCreated->value,
+            default => "livestream_comment_{$event}",
         };
     }
 
@@ -67,18 +72,9 @@ class LivestreamComment extends Model
     {
         $this->loadMissing(['livestream', 'user']);
 
-        return [
-            'commenter' => [
-                'id' => $this->user->getKey(),
-                'name' => $this->user->name,
-                'email' => $this->user->email,
-                'avatar' => $this->user->getFirstMediaUrl('cover_image') ?: null,
-                'phone_number' => $this->user->phone_number,
-            ],
-            'comment' => [
-                'id' => $this->getKey(),
-                'title' => $this->comment,
-            ],
-        ];
+        return new LivestreamCommentBroadcastData(
+            commenter: LivestreamCommentAuthorData::fromModel($this->user),
+            comment: LivestreamCommentMessageData::fromModel($this),
+        )->toArray();
     }
 }

@@ -25,12 +25,17 @@ it('generates shared typescript contracts for the frontend app repeatedly in the
         ->and(File::get("{$path}/helpers/route.ts"))->toContain('api/v1/me/products/{product}/status')
         ->and(File::get("{$path}/helpers/route.ts"))->not->toContain('window.location.origin')
         ->and(File::get("{$path}/controllers/App/Http/Controllers/Auth/index.ts"))->toContain('App.Data.Auth.RegisterData')
-        ->and(File::get("{$path}/controllers/App/Http/Controllers/Auth/index.ts"))->toContain('user: App.Data.UserData')
+        ->and(File::get("{$path}/controllers/App/Http/Controllers/Auth/index.ts"))->toContain('App.Data.Response.Auth.RegisterResponseData')
+        ->and(File::get("{$path}/types.d.ts"))->toContain('readonly user: App.Data.UserData')
         ->and(File::get("{$path}/controllers/App/Http/Controllers/Me/index.ts"))->toContain('Spatie.LaravelData.PaginatedDataCollection<number, App.Data.OrderData>')
+        ->and(File::get("{$path}/controllers/App/Http/Controllers/Me/index.ts"))->toContain('export type Request = App.Data.Me.ListOrdersData')
         ->and(File::get("{$path}/controllers/App/Http/Controllers/Public/index.ts"))->toContain('Array<App.Data.CategoryData>')
+        ->and(File::get("{$path}/controllers/App/Http/Controllers/Public/index.ts"))->toContain('export type Request = App.Data.Public.ListVendorsData')
+        ->and(File::get("{$path}/controllers/App/Http/Controllers/Public/index.ts"))->toContain('export type Request = App.Data.Public.SearchData')
+        ->and(File::get("{$path}/controllers/App/Http/Controllers/Public/index.ts"))->toContain('export type Request = App.Data.Public.ListLivestreamsData')
         ->and(File::get("{$path}/controllers/App/Http/Controllers/Public/index.ts"))->not->toContain('undefined<App.Data.')
         ->and(substr_count(File::get("{$path}/controllers/App/Http/Controllers/Me/index.ts"), 'export const OrderController = {'))->toBe(1)
         ->and(File::get("{$path}/echo-notification-payloads.ts"))->not->toContain("import type {App} from './types';")
-        ->and(File::get("{$path}/echo-notification-payloads.ts"))->toContain('App.Data.VendorOrderData')
-        ->and(File::get("{$path}/echo-notification-payloads.ts"))->toContain('App.Data.TransactionData');
+        ->and(File::get("{$path}/echo-notification-payloads.ts"))->toContain('App.Data.Broadcast.VendorOrderBroadcastData')
+        ->and(File::get("{$path}/echo-notification-payloads.ts"))->toContain('App.Data.Broadcast.WithdrawalApprovedBroadcastData');
 });

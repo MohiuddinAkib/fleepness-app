@@ -6,7 +6,6 @@ namespace App\Data\Livestream;
 
 use Spatie\LaravelData\Data;
 use App\Enums\LivestreamStatus;
-use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Optional;
 use Illuminate\Validation\Rules\Enum;
 use Spatie\LaravelData\Attributes\MapInputName;
@@ -31,10 +30,6 @@ class UpdateLivestreamData extends Data
             'status' => [
                 'sometimes',
                 new Enum(LivestreamStatus::class),
-                Rule::in([
-                    LivestreamStatus::Started->value,
-                    LivestreamStatus::Finished->value,
-                ]),
             ],
         ];
     }

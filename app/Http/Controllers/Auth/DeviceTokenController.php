@@ -13,6 +13,7 @@ use App\Data\Auth\StoreDeviceTokenData;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -26,6 +27,7 @@ class DeviceTokenController extends Controller
     #[BodyParam('platform', 'string', 'The device platform (android or ios).', required: false, example: 'android')]
     #[Endpoint('Register Device Token', 'Register an FCM device token for push notifications.')]
     #[Response(['message' => 'Device token registered.'], 201, 'Device token registered successfully.')]
+    /** @return MessageResponseData */
     public function store(StoreDeviceTokenData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $user->deviceTokens()->firstOrCreate(
@@ -33,18 +35,23 @@ class DeviceTokenController extends Controller
             ['platform' => $data->platform],
         );
 
-        return response()->json(['message' => 'Device token registered.'], HttpResponse::HTTP_CREATED);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Device token registered.',
+        ])->toArray(), HttpResponse::HTTP_CREATED);
     }
 
     #[Authenticated]
     #[Endpoint('Remove Device Token', 'Remove a registered FCM device token.')]
     #[Response(['message' => 'Device token removed.'], 200, 'Device token removed successfully.')]
+    /** @return MessageResponseData */
     public function destroy(DeviceToken $deviceToken, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($deviceToken->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $deviceToken->delete();
 
-        return response()->json(['message' => 'Device token removed.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Device token removed.',
+        ])->toArray());
     }
 }

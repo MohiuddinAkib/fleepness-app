@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\BroadcastEvent;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Broadcasting\PresenceChannel;
 use Database\Factories\LivestreamLikeFactory;
+use App\Support\Broadcasting\BroadcastChannels;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Data\Broadcast\LivestreamLikeCountBroadcastData;
 use Illuminate\Database\Eloquent\BroadcastsEventsAfterCommit;
 
 class LivestreamLike extends Model
@@ -49,15 +52,15 @@ class LivestreamLike extends Model
         }
 
         return [
-            new PresenceChannel($this->livestream->room_name),
+            new PresenceChannel(BroadcastChannels::livestreamPresence($this->livestream)),
         ];
     }
 
-    public function broadcastAs(string $event): ?string
+    public function broadcastAs(string $event): string
     {
         return match ($event) {
-            'created', 'deleted' => 'livestream_like_count_updated',
-            default => null,
+            'created', 'deleted' => BroadcastEvent::LivestreamLikeCountUpdated->value,
+            default => "livestream_like_{$event}",
         };
     }
 
@@ -66,8 +69,8 @@ class LivestreamLike extends Model
     {
         $this->loadMissing('livestream');
 
-        return [
-            'likes_count' => $this->livestream->likes()->count(),
-        ];
+        return new LivestreamLikeCountBroadcastData(
+            likesCount: $this->livestream->likes()->count(),
+        )->toArray();
     }
 }

@@ -14,6 +14,7 @@ use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\Me\UserResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -35,7 +36,7 @@ class ProfileController extends Controller
     #[BodyParam('email', 'string', 'The user\'s email address.', required: false, example: 'jane@example.com')]
     #[Endpoint('Update Profile', 'Update the authenticated user\'s profile fields.')]
     #[Response(['data' => ['id' => 1, 'name' => 'Jane Doe', 'email' => 'jane@example.com']], 200, 'Profile updated successfully.')]
-    /** @return UserData */
+    /** @return UserResponseData */
     public function update(UpdateProfileData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $updates = [];
@@ -52,6 +53,9 @@ class ProfileController extends Controller
             $user->update($updates);
         }
 
-        return UserData::fromModel($user->fresh())->additional(['message' => 'Profile updated.']);
+        return response()->json(UserResponseData::from([
+            'message' => 'Profile updated.',
+            'data' => UserData::fromModel($user->fresh()),
+        ])->toArray());
     }
 }

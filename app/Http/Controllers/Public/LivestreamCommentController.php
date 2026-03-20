@@ -16,6 +16,7 @@ use Knuckles\Scribe\Attributes\Response;
 use App\Data\Livestream\StoreCommentData;
 use Knuckles\Scribe\Attributes\BodyParam;
 use App\Data\Livestream\UpdateCommentData;
+use App\Data\Response\MessageResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Unauthenticated;
@@ -86,6 +87,7 @@ class LivestreamCommentController extends Controller
     #[Authenticated]
     #[Endpoint('Delete livestream comment')]
     #[Response('{"message":"Comment deleted."}', 200)]
+    /** @return MessageResponseData */
     public function destroy(
         Livestream $livestream,
         LivestreamComment $comment,
@@ -96,6 +98,8 @@ class LivestreamCommentController extends Controller
 
         $comment->delete();
 
-        return response()->json(['message' => 'Comment deleted.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Comment deleted.',
+        ])->toArray());
     }
 }

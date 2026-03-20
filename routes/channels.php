@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Livestream;
 use App\Enums\LivestreamStatus;
 use Illuminate\Support\Facades\Broadcast;
+use App\Support\Broadcasting\BroadcastChannels;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +21,15 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('user_{id}', function (User $user, int $id): bool {
+Broadcast::channel(BroadcastChannels::user('{id}'), function (User $user, int $id): bool {
     return $user->getKey() === $id;
 }, ['guards' => ['sanctum']]);
 
 // Must be declared BEFORE the presence channel to avoid route ambiguity
-Broadcast::channel('livestream_feed', fn (): bool => true);
+Broadcast::channel(BroadcastChannels::LivestreamFeed, fn (): bool => true);
 
 // Presence channel — returns member data so Reverb tracks who is watching
-Broadcast::channel('presence-livestream_{livestream}', function (User $user, Livestream $livestream): array|false {
+Broadcast::channel('presence-'.BroadcastChannels::livestreamPresence('{livestream}'), function (User $user, Livestream $livestream): array|false {
     if (LivestreamStatus::Started !== $livestream->status) {
         return false;
     }

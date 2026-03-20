@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Data\LivestreamData;
+use App\Enums\BroadcastEvent;
 use App\Enums\LivestreamStatus;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Broadcasting\Channel;
@@ -13,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Database\Factories\LivestreamFactory;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Facades\Livestream as LivestreamFacade;
+use App\Support\Broadcasting\BroadcastChannels;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -158,15 +160,19 @@ class Livestream extends Model implements HasMedia
     public function broadcastOn(string $event): array
     {
         return match ($event) {
-            'created' => [new Channel('livestream_feed')],
-            'updated' => [new Channel('livestream_feed'), new Channel($this->room_name)],
+            'created' => [new Channel(BroadcastChannels::LivestreamFeed)],
+            'updated' => [new Channel(BroadcastChannels::LivestreamFeed), new Channel(BroadcastChannels::livestreamPresence($this))],
             default => [],
         };
     }
 
-    public function broadcastAs(string $event): ?string
+    public function broadcastAs(string $event): string
     {
-        return "livestream_{$event}";
+        return match ($event) {
+            'created' => BroadcastEvent::LivestreamCreated->value,
+            'updated' => BroadcastEvent::LivestreamUpdated->value,
+            default => "livestream_{$event}",
+        };
     }
 
     /** @return array<string, mixed> */

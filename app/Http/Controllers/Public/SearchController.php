@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Public;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Models\VendorProfile;
+use App\Data\Public\SearchData;
 use App\Data\SearchResultsData;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -25,9 +25,9 @@ class SearchController extends Controller
     #[Response('{"data":{"products":[{"id":15,"name":"Flash Deal Tee"}],"vendors":[{"id":4,"shop_name":"Flash Store"}]}}', 200)]
     #[Unauthenticated]
     /** @return SearchResultsData */
-    public function index(Request $request): JsonResponse|Responsable
+    public function index(SearchData $data): JsonResponse|Responsable
     {
-        $query = (string) $request->string('q');
+        $query = (string) ($data->q ?? '');
 
         if ('' === $query) {
             return SearchResultsData::fromModels(collect(), collect());

@@ -9,7 +9,6 @@ use App\Enums\VendorStatus;
 use App\Data\VendorProfileData;
 use Spatie\LaravelData\Optional;
 use Illuminate\Http\JsonResponse;
-use App\Data\Me\VendorBalanceData;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use App\Data\Me\VendorApplicationData;
@@ -21,6 +20,10 @@ use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use App\Actions\Me\GetVendorBalanceDataAction;
 use Illuminate\Container\Attributes\CurrentUser;
+use App\Data\Response\Me\VendorBalanceResponseData;
+use App\Data\Response\Me\VendorProfileResponseData;
+use App\Data\Response\Me\VendorApplicationStatusData;
+use App\Data\Response\Me\VendorApplicationStatusResponseData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Vendor Profile', 'Manage your vendor/seller profile, apply to become a vendor, and check application status.')]
@@ -45,7 +48,7 @@ class VendorProfileController extends Controller
     #[BodyParam('pickup_location', 'string', required: false, example: null)]
     #[Endpoint('Update vendor profile')]
     #[Response('{"data": {"id": 1, "shop_name": "My Cool Shop"}}', 200)]
-    /** @return VendorProfileData */
+    /** @return VendorProfileResponseData */
     public function update(UpdateVendorProfileData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
@@ -74,20 +77,23 @@ class VendorProfileController extends Controller
             $vendorProfile->update($updates);
         }
 
-        return VendorProfileData::fromModel($vendorProfile->fresh())->additional(['message' => 'Vendor profile updated.']);
+        return response()->json(VendorProfileResponseData::from([
+            'message' => 'Vendor profile updated.',
+            'data' => VendorProfileData::fromModel($vendorProfile->fresh()),
+        ])->toArray());
     }
 
     #[Authenticated]
     #[Endpoint('Get vendor balance', 'Returns balance, total sales, withdrawn amount and pending withdrawal for the vendor.')]
     #[Response('{"data": {"balance": "150.00", "total_sales": "1200.00", "withdrawn_amount": "500.00", "daily_balance": "50.00"}}', 200)]
-    /** @return JsonResponse<array{data: VendorBalanceData}> */
+    /** @return VendorBalanceResponseData */
     public function balance(
         #[CurrentUser] User $user,
         GetVendorBalanceDataAction $getVendorBalanceData,
     ): JsonResponse|Responsable {
-        return response()->json([
+        return response()->json(VendorBalanceResponseData::from([
             'data' => $getVendorBalanceData->execute($user),
-        ]);
+        ])->toArray());
     }
 
     #[Authenticated]
@@ -95,7 +101,7 @@ class VendorProfileController extends Controller
     #[BodyParam('shop_category_id', 'integer', required: false, example: null)]
     #[Endpoint('Apply to become a vendor')]
     #[Response('{"message": "Application submitted.", "data": {"status": "pending"}}', 201)]
-    /** @return VendorProfileData */
+    /** @return VendorProfileResponseData */
     public function apply(VendorApplicationData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_if(null !== $user->vendorProfile, HttpResponse::HTTP_UNPROCESSABLE_ENTITY, 'Already applied as a vendor.');
@@ -107,24 +113,27 @@ class VendorProfileController extends Controller
             'status' => VendorStatus::Pending,
         ]);
 
-        return VendorProfileData::fromModel($vendorProfile)->additional(['message' => 'Vendor application submitted.']);
+        return response()->json(VendorProfileResponseData::from([
+            'message' => 'Vendor application submitted.',
+            'data' => VendorProfileData::fromModel($vendorProfile),
+        ])->toArray(), HttpResponse::HTTP_CREATED);
     }
 
     #[Authenticated]
     #[Endpoint('Check vendor application status')]
     #[Response('{"data": {"status": "pending"}}', 200)]
-    /** @return JsonResponse<array{data: array{status: VendorStatus, status_note: string|null}}> */
+    /** @return VendorApplicationStatusResponseData */
     public function applicationStatus(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $vendorProfile = $user->vendorProfile;
 
         abort_if(null === $vendorProfile, HttpResponse::HTTP_NOT_FOUND, 'No vendor application found.');
 
-        return response()->json([
-            'data' => [
+        return response()->json(VendorApplicationStatusResponseData::from([
+            'data' => VendorApplicationStatusData::from([
                 'status' => $vendorProfile->status,
                 'status_note' => $vendorProfile->status_note,
-            ],
-        ]);
+            ]),
+        ])->toArray());
     }
 }

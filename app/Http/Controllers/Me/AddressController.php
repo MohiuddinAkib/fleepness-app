@@ -15,9 +15,12 @@ use Spatie\LaravelData\DataCollection;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\BodyParam;
+use App\Data\Response\MessageResponseData;
+use App\Data\Response\Me\AddressResponseData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Illuminate\Container\Attributes\CurrentUser;
+use App\Data\Response\Me\DefaultAddressResponseData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Addresses', 'Manage delivery addresses for the authenticated user.')]
@@ -45,7 +48,7 @@ class AddressController extends Controller
     #[BodyParam('is_default', 'boolean', required: false, example: false)]
     #[Endpoint('Add address')]
     #[Response('{"data": {"id": 2, "label": "Home", "is_default": false}}', 201)]
-    /** @return AddressData */
+    /** @return AddressResponseData */
     public function store(StoreAddressData $data, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $address = $user->addresses()->create([
@@ -61,7 +64,10 @@ class AddressController extends Controller
             'is_default' => false,
         ]);
 
-        return AddressData::fromModel($address)->additional(['message' => 'Address added.']);
+        return response()->json(AddressResponseData::from([
+            'message' => 'Address added.',
+            'data' => AddressData::fromModel($address),
+        ])->toArray(), HttpResponse::HTTP_CREATED);
     }
 
     #[Authenticated]
@@ -75,7 +81,7 @@ class AddressController extends Controller
     #[BodyParam('is_default', 'boolean', required: false, example: false)]
     #[Endpoint('Update address')]
     #[Response('{"data": {"id": 1, "label": "Work"}}', 200)]
-    /** @return AddressData */
+    /** @return AddressResponseData */
     public function update(StoreAddressData $data, Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -92,26 +98,31 @@ class AddressController extends Controller
             'longitude' => $data->longitude,
         ]);
 
-        return AddressData::fromModel($address->fresh())->additional(['message' => 'Address updated.']);
+        return response()->json(AddressResponseData::from([
+            'message' => 'Address updated.',
+            'data' => AddressData::fromModel($address->fresh()),
+        ])->toArray());
     }
 
     #[Authenticated]
     #[Endpoint('Delete address')]
     #[Response('{"message": "Address deleted."}', 200)]
-    /** @return JsonResponse<array{message: string}> */
+    /** @return MessageResponseData */
     public function destroy(Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
 
         $address->delete();
 
-        return response()->json(['message' => 'Address removed.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Address removed.',
+        ])->toArray());
     }
 
     #[Authenticated]
     #[Endpoint('Set default address', 'Marks the specified address as the default delivery address.')]
     #[Response('{"message": "Default address updated."}', 200)]
-    /** @return JsonResponse<array{message: string, data: AddressData}> */
+    /** @return AddressResponseData */
     public function setDefault(Address $address, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         abort_unless($address->user()->is($user), HttpResponse::HTTP_FORBIDDEN);
@@ -119,7 +130,10 @@ class AddressController extends Controller
         $user->addresses()->update(['is_default' => false]);
         $address->update(['is_default' => true]);
 
-        return response()->json(['message' => 'Default address updated.', 'data' => AddressData::fromModel($address->fresh())]);
+        return response()->json(AddressResponseData::from([
+            'message' => 'Default address updated.',
+            'data' => AddressData::fromModel($address->fresh()),
+        ])->toArray());
     }
 
     #[Authenticated]
@@ -134,14 +148,14 @@ class AddressController extends Controller
      *
      * This method remains only to keep the older React Native client working during migration.
      */
-    /** @return JsonResponse<array{default_address: AddressData|null, data: AddressData|null}> */
+    /** @return DefaultAddressResponseData */
     public function default(#[CurrentUser] User $user): JsonResponse|Responsable
     {
         $address = $user->defaultAddress()->first();
 
-        return response()->json([
+        return response()->json(DefaultAddressResponseData::from([
             'default_address' => null === $address ? null : AddressData::fromModel($address),
             'data' => null === $address ? null : AddressData::fromModel($address),
-        ]);
+        ])->toArray());
     }
 }

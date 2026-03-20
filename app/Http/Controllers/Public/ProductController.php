@@ -6,9 +6,9 @@ namespace App\Http\Controllers\Public;
 
 use App\Models\Product;
 use App\Data\ProductData;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Data\Public\ListProductsData;
 use Knuckles\Scribe\Attributes\Group;
 use Spatie\LaravelData\DataCollection;
 use Knuckles\Scribe\Attributes\Endpoint;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 class ProductController extends Controller
 {
     #[Endpoint('List products', 'Browse all active approved products. Supports filtering by category, tag, vendor, price range, and full-text search.')]
-    #[QueryParam('search', 'string', required: false, example: 't-shirt')]
+    #[QueryParam('q', 'string', required: false, example: 't-shirt')]
     #[QueryParam('category_id', 'integer', required: false)]
     #[QueryParam('tag_id', 'integer', required: false)]
     #[QueryParam('vendor_id', 'integer', required: false)]
@@ -33,27 +33,47 @@ class ProductController extends Controller
     #[Response('{"data": [{"id": 1, "name": "Blue T-Shirt", "selling_price": "25.00"}], "meta": {"current_page": 1}}', 200)]
     #[Unauthenticated]
     /** @return PaginatedDataCollection<ProductData> */
-    public function index(Request $request): JsonResponse|Responsable
+    public function index(ListProductsData $data): JsonResponse|Responsable
     {
         $query = Product::query()
             ->active()
             ->approved()
             ->with(['media', 'category', 'vendorProfile']);
 
-        if ($request->filled('category_id')) {
-            $query->where('category_id', $request->integer('category_id'));
+        if (null !== $data->categoryId) {
+            $query->where('category_id', $data->categoryId);
         }
 
-        if ($request->filled('q')) {
-            $search = $request->string('q')->toString();
-            $query->whereLike('name', "%{$search}%");
+        if (filled($data->q)) {
+            $query->whereLike('name', "%{$data->q}%");
         }
 
-        if ($request->filled('tag_id')) {
-            $query->whereHas('tags', fn ($q) => $q->where('tags.id', $request->integer('tag_id')));
+        if (null !== $data->tagId) {
+            $query->whereHas('tags', fn ($query) => $query->where('tags.id', $data->tagId));
         }
 
-        return ProductData::collect($query->paginate(), PaginatedDataCollection::class);
+        if (null !== $data->vendorId) {
+            $query->where('vendor_profile_id', $data->vendorId);
+        }
+
+        if (null !== $data->minPrice || null !== $data->maxPrice) {
+            $query->whereRaw(
+                'CAST(COALESCE(discount_price, selling_price) AS REAL) >= ?',
+                [$data->minPrice ?? 0]
+            );
+
+            if (null !== $data->maxPrice) {
+                $query->whereRaw(
+                    'CAST(COALESCE(discount_price, selling_price) AS REAL) <= ?',
+                    [$data->maxPrice]
+                );
+            }
+        }
+
+        return ProductData::collect(
+            $query->paginate(perPage: $data->perPage, page: $data->page),
+            PaginatedDataCollection::class
+        );
     }
 
     #[Endpoint('Get product')]

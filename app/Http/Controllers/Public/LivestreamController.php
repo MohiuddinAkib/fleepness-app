@@ -9,13 +9,15 @@ use App\Data\ProductData;
 use App\Models\Livestream;
 use Illuminate\Support\Str;
 use App\Data\LivestreamData;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use Spatie\LaravelData\DataCollection;
+use App\Data\Public\ListLivestreamsData;
+use App\Data\Response\TokenResponseData;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Response;
+use App\Data\Response\MessageResponseData;
 use App\Data\Dto\GenerateSubscriberTokenData;
 use Illuminate\Contracts\Support\Responsable;
 use Knuckles\Scribe\Attributes\Authenticated;
@@ -25,6 +27,7 @@ use App\Facades\Livestream as LivestreamFacade;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Container\Attributes\CurrentUser;
+use App\Data\Response\Livestream\LikesCountResponseData;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 #[Group('Content', 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.')]
@@ -34,16 +37,16 @@ class LivestreamController extends Controller
     #[Response('{"data":[{"id":1,"title":"Friday Live Sale"}],"meta":{"current_page":1}}', 200)]
     #[Unauthenticated]
     /** @return PaginatedDataCollection<LivestreamData> */
-    public function index(Request $request): JsonResponse|Responsable
+    public function index(ListLivestreamsData $data): JsonResponse|Responsable
     {
         $livestreams = Livestream::query()
             ->when(
-                $request->filled('vendor_id'),
-                fn ($query) => $query->where('vendor_profile_id', $request->integer('vendor_id'))
+                null !== $data->vendorId,
+                fn ($query) => $query->where('vendor_profile_id', $data->vendorId)
             )
             ->with(['media', 'vendorProfile'])
             ->latest()
-            ->paginate();
+            ->paginate(perPage: $data->perPage, page: $data->page);
 
         return LivestreamData::collect($livestreams, PaginatedDataCollection::class);
     }
@@ -62,7 +65,7 @@ class LivestreamController extends Controller
     #[Authenticated]
     #[Endpoint('Like livestream')]
     #[Response('{"message":"Liked."}', 200)]
-    /** @return JsonResponse<array{message: string}> */
+    /** @return MessageResponseData */
     public function like(Livestream $livestream, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $existingLike = $livestream->likes()->where('user_id', $user->getKey())->first();
@@ -75,18 +78,22 @@ class LivestreamController extends Controller
             $message = 'Unliked.';
         }
 
-        return response()->json(['message' => $message]);
+        return response()->json(MessageResponseData::from([
+            'message' => $message,
+        ])->toArray());
     }
 
     #[Authenticated]
     #[Endpoint('Save livestream')]
     #[Response('{"message":"Saved."}', 200)]
-    /** @return JsonResponse<array{message: string}> */
+    /** @return MessageResponseData */
     public function save(Livestream $livestream, #[CurrentUser] User $user): JsonResponse|Responsable
     {
         $livestream->saves()->firstOrCreate(['user_id' => $user->getKey()]);
 
-        return response()->json(['message' => 'Saved.']);
+        return response()->json(MessageResponseData::from([
+            'message' => 'Saved.',
+        ])->toArray());
     }
 
     #[Endpoint('List livestream products')]
@@ -152,18 +159,18 @@ class LivestreamController extends Controller
      * - consume `/api/livestreams/{livestream}` for the canonical resource
      * - subscribe to real-time broadcast updates for like counters where possible
      */
-    /** @return JsonResponse<array{likes_count: int}> */
+    /** @return LikesCountResponseData */
     public function likesCount(Livestream $livestream): JsonResponse|Responsable
     {
-        return response()->json([
-            'likes_count' => $livestream->likes()->count(),
-        ]);
+        return response()->json(LikesCountResponseData::from([
+            'likesCount' => $livestream->likes()->count(),
+        ])->toArray());
     }
 
     #[Endpoint('Generate livestream subscriber token', 'Returns a LiveKit subscriber token for an authenticated user or a guest viewer.')]
     #[Response('{"token":"eyJhbGciOi..."}', 200)]
     #[Unauthenticated]
-    /** @return JsonResponse<array{token: string}> */
+    /** @return TokenResponseData */
     public function subscriberToken(
         Livestream $livestream,
         #[CurrentUser] ?User $user,
@@ -184,6 +191,8 @@ class LivestreamController extends Controller
 
         $token = LivestreamFacade::generateSubscriberToken($data);
 
-        return response()->json(['token' => $token]);
+        return response()->json(TokenResponseData::from([
+            'token' => $token,
+        ])->toArray());
     }
 }

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Notifications;
 
 use App\Models\Transaction;
+use App\Enums\BroadcastEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
+use App\Data\Broadcast\WithdrawalApprovedBroadcastData;
 
 /**
  * Sent to the user when their withdrawal transaction is approved.
@@ -28,23 +30,23 @@ class WithdrawalApproved extends Notification implements ShouldBroadcast, Should
 
     public function broadcastAs(): string
     {
-        return 'withdrawal_request_approved';
+        return BroadcastEvent::WithdrawalRequestApproved->value;
     }
 
     /** @return array<string, mixed> */
     public function toBroadcast(object $notifiable): array
     {
-        return [
-            'reference' => $this->transaction->reference,
-            'amount' => (string) $this->transaction->amount,
-        ];
+        return new WithdrawalApprovedBroadcastData(
+            reference: $this->transaction->reference,
+            amount: (string) $this->transaction->amount,
+        )->toArray();
     }
 
     /** @return array<string, mixed> */
     public function toArray(object $notifiable): array
     {
         return [
-            'type' => 'withdrawal_request_approved',
+            'type' => BroadcastEvent::WithdrawalRequestApproved->value,
             'reference' => $this->transaction->reference,
             'amount' => (string) $this->transaction->amount,
         ];

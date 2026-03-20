@@ -64,7 +64,7 @@ class VendorController extends Controller
                         ->whereKeyNot($sourceVendor->getKey());
                 }
             )
-            ->paginate();
+            ->paginate(perPage: $data->perPage, page: $data->page);
 
         return VendorProfileData::collect($vendors, PaginatedDataCollection::class);
     }
@@ -147,7 +147,7 @@ class VendorController extends Controller
                     }
                 }
             )
-            ->paginate();
+            ->paginate(perPage: $data->perPage, page: $data->page);
 
         return ProductData::collect($products, PaginatedDataCollection::class);
     }
