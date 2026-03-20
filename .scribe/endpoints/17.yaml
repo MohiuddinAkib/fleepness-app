@@ -22,9 +22,9 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
-      search:
+      q:
         custom: []
-        name: search
+        name: q
         description: ''
         required: false
         example: t-shirt
@@ -100,7 +100,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanQueryParameters:
-      search: t-shirt
+      q: t-shirt
       category_id: 16
       tag_id: 16
       vendor_id: 16
@@ -126,7 +126,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/products/{product_id}'
+    uri: 'api/products/{id}'
     metadata:
       custom: []
       groupName: Catalog
@@ -141,9 +141,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -153,7 +153,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -382,7 +382,7 @@ endpoints:
         name: id
         description: 'The ID of the review.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -390,7 +390,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       product_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -452,7 +452,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/categories/{category_id}'
+    uri: 'api/categories/{id}'
     metadata:
       custom: []
       groupName: Catalog
@@ -467,19 +467,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      category_id:
+      id:
         custom: []
-        name: category_id
+        name: id
         description: 'The ID of the category.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -521,14 +521,14 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 16
+      category_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -587,7 +587,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/tags/{tag_id}'
+    uri: 'api/tags/{id}'
     metadata:
       custom: []
       groupName: Catalog
@@ -602,9 +602,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      tag_id:
+      id:
         custom: []
-        name: tag_id
+        name: id
         description: 'The ID of the tag.'
         required: true
         example: 16
@@ -614,7 +614,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      tag_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -702,9 +702,9 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
-      search:
+      q:
         custom: []
-        name: search
+        name: q
         description: ''
         required: false
         example: t-shirt
@@ -780,7 +780,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanQueryParameters:
-      search: t-shirt
+      q: t-shirt
       category_id: 16
       tag_id: 16
       vendor_id: 16
@@ -806,7 +806,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/products/{product_id}'
+    uri: 'api/v1/products/{id}'
     metadata:
       custom: []
       groupName: Catalog
@@ -821,9 +821,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -833,7 +833,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1062,7 +1062,7 @@ endpoints:
         name: id
         description: 'The ID of the review.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -1070,7 +1070,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       product_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1132,7 +1132,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/categories/{category_id}'
+    uri: 'api/v1/categories/{id}'
     metadata:
       custom: []
       groupName: Catalog
@@ -1147,19 +1147,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      category_id:
+      id:
         custom: []
-        name: category_id
+        name: id
         description: 'The ID of the category.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1201,14 +1201,14 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 16
+      category_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1267,7 +1267,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/tags/{tag_id}'
+    uri: 'api/v1/tags/{id}'
     metadata:
       custom: []
       groupName: Catalog
@@ -1282,9 +1282,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      tag_id:
+      id:
         custom: []
-        name: tag_id
+        name: id
         description: 'The ID of the tag.'
         required: true
         example: 16
@@ -1294,7 +1294,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      tag_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

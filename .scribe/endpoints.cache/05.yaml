@@ -580,7 +580,7 @@ endpoints:
         name: id
         description: 'The ID of the review.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -588,7 +588,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       vendorProfile_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -599,88 +599,6 @@ endpoints:
         custom: []
         status: 200
         content: '{"message": "Review deleted."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/following
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List followed vendors'
-      description: 'Returns a paginated list of vendor profiles that the authenticated user follows.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data": [{"id": 1, "shop_name": "Flash Store"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/followers
-    metadata:
-      custom: []
-      groupName: Vendors
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List vendor followers'
-      description: 'Legacy compatibility alias for `/api/followers`. Prefer `/api/me/vendors/followers` for the canonical authenticated vendor follower collection.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":1,"name":"Jane Doe"}]}'
         headers: []
         description: ''
     responseFields: []
@@ -1268,7 +1186,7 @@ endpoints:
         name: id
         description: 'The ID of the review.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -1276,7 +1194,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       vendorProfile_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

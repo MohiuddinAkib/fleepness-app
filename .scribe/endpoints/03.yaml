@@ -183,7 +183,7 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'api/me/addresses/{address_id}'
+    uri: 'api/me/addresses/{id}'
     metadata:
       custom: []
       groupName: Addresses
@@ -199,9 +199,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      address_id:
+      id:
         custom: []
-        name: address_id
+        name: id
         description: 'The ID of the address.'
         required: true
         example: 16
@@ -211,7 +211,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      address_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -332,7 +332,7 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/me/addresses/{address_id}'
+    uri: 'api/me/addresses/{id}'
     metadata:
       custom: []
       groupName: Addresses
@@ -348,9 +348,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      address_id:
+      id:
         custom: []
-        name: address_id
+        name: id
         description: 'The ID of the address.'
         required: true
         example: 16
@@ -360,7 +360,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      address_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -386,100 +386,6 @@ endpoints:
     httpMethods:
       - POST
     uri: 'api/me/addresses/{address_id}/default'
-    metadata:
-      custom: []
-      groupName: Addresses
-      groupDescription: 'Manage delivery addresses for the authenticated user.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Set default address'
-      description: 'Marks the specified address as the default delivery address.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      address_id:
-        custom: []
-        name: address_id
-        description: 'The ID of the address.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      address_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message": "Default address updated."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/addresses/default
-    metadata:
-      custom: []
-      groupName: Addresses
-      groupDescription: 'Manage delivery addresses for the authenticated user.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get default address'
-      description: 'Legacy compatibility alias for `/api/addresses/default`. Prefer `/api/me/addresses` plus the `is_default` flag, or `/api/me/addresses/{address}/default` for updates in new clients.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"default_address":{"id":1,"label":"Home","is_default":true}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/addresses/{address_id}/set-default'
     metadata:
       custom: []
       groupName: Addresses
@@ -710,7 +616,7 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'api/v1/me/addresses/{address_id}'
+    uri: 'api/v1/me/addresses/{id}'
     metadata:
       custom: []
       groupName: Addresses
@@ -726,9 +632,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      address_id:
+      id:
         custom: []
-        name: address_id
+        name: id
         description: 'The ID of the address.'
         required: true
         example: 16
@@ -738,7 +644,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      address_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -859,7 +765,7 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/me/addresses/{address_id}'
+    uri: 'api/v1/me/addresses/{id}'
     metadata:
       custom: []
       groupName: Addresses
@@ -875,9 +781,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      address_id:
+      id:
         custom: []
-        name: address_id
+        name: id
         description: 'The ID of the address.'
         required: true
         example: 16
@@ -887,7 +793,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      address_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

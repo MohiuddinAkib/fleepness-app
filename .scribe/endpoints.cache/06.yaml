@@ -517,7 +517,7 @@ endpoints:
         name: id
         description: 'The ID of the comment.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -525,7 +525,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       short_video_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -587,7 +587,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/livestreams/{livestream_id}'
+    uri: 'api/livestreams/{id}'
     metadata:
       custom: []
       groupName: Content
@@ -602,9 +602,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      livestream_id:
+      id:
         custom: []
-        name: livestream_id
+        name: id
         description: 'The ID of the livestream.'
         required: true
         example: 16
@@ -614,7 +614,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      livestream_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -987,7 +987,7 @@ endpoints:
         name: id
         description: 'The ID of the comment.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -995,7 +995,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       livestream_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -1064,7 +1064,7 @@ endpoints:
         name: id
         description: 'The ID of the comment.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -1072,7 +1072,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       livestream_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1083,182 +1083,6 @@ endpoints:
         custom: []
         status: 200
         content: '{"message":"Comment deleted."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/shorts/saved
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse short videos and interact with comments, likes, and saves.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List saved short videos'
-      description: 'Legacy compatibility alias for `/api/shorts/saved`. Prefer `/api/me/short-videos/saved` for the authenticated saved collection in new clients.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":1,"title":"New Collection Drop"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/lives/liked
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List liked livestreams'
-      description: 'Legacy compatibility alias for `/api/lives/liked`. Prefer `/api/me/livestreams/liked` in new consumers.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":1,"title":"Friday Live Sale"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/lives/saved
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List saved livestreams'
-      description: 'Legacy compatibility alias for `/api/lives/saved`. Prefer `/api/me/livestreams/saved` in new clients.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":1,"title":"Friday Live Sale"}]}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/lives/{livestream_id}/likes-count'
-    metadata:
-      custom: []
-      groupName: Content
-      groupDescription: 'Browse livestreams and interact with products, comments, likes, saves, and subscriber tokens.'
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get livestream likes count'
-      description: 'Legacy compatibility alias for `/api/lives/{livestream}/likes-count`. Prefer the main livestream resource payload and real-time events for new clients.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      livestream_id:
-        custom: []
-        name: livestream_id
-        description: 'The ID of the livestream.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      livestream_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"likes_count":1}'
         headers: []
         description: ''
     responseFields: []
@@ -1783,7 +1607,7 @@ endpoints:
         name: id
         description: 'The ID of the comment.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -1791,7 +1615,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       short_video_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1853,7 +1677,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/livestreams/{livestream_id}'
+    uri: 'api/v1/livestreams/{id}'
     metadata:
       custom: []
       groupName: Content
@@ -1868,9 +1692,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      livestream_id:
+      id:
         custom: []
-        name: livestream_id
+        name: id
         description: 'The ID of the livestream.'
         required: true
         example: 16
@@ -1880,7 +1704,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      livestream_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -2253,7 +2077,7 @@ endpoints:
         name: id
         description: 'The ID of the comment.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -2261,7 +2085,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       livestream_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -2330,7 +2154,7 @@ endpoints:
         name: id
         description: 'The ID of the comment.'
         required: true
-        example: 16
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -2338,7 +2162,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       livestream_id: 16
-      id: 16
+      id: 70
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

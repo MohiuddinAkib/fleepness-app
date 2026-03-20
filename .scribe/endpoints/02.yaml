@@ -132,14 +132,14 @@ endpoints:
         name: notification_id
         description: 'The ID of the notification.'
         required: true
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      notification_id: 16
+      notification_id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -291,14 +291,14 @@ endpoints:
         name: notification_id
         description: 'The ID of the notification.'
         required: true
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      notification_id: 16
+      notification_id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

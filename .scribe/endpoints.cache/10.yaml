@@ -209,7 +209,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/me/products/{product_id}'
+    uri: 'api/me/products/{id}'
     metadata:
       custom: []
       groupName: Products
@@ -225,9 +225,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -237,7 +237,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -262,7 +262,7 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'api/me/products/{product_id}'
+    uri: 'api/me/products/{id}'
     metadata:
       custom: []
       groupName: Products
@@ -278,9 +278,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -290,7 +290,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -423,7 +423,7 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/me/products/{product_id}'
+    uri: 'api/me/products/{id}'
     metadata:
       custom: []
       groupName: Products
@@ -439,9 +439,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -451,7 +451,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -732,7 +732,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/me/products/{product_id}'
+    uri: 'api/v1/me/products/{id}'
     metadata:
       custom: []
       groupName: Products
@@ -748,9 +748,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -760,7 +760,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -785,7 +785,7 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'api/v1/me/products/{product_id}'
+    uri: 'api/v1/me/products/{id}'
     metadata:
       custom: []
       groupName: Products
@@ -801,9 +801,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -813,7 +813,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -946,7 +946,7 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/me/products/{product_id}'
+    uri: 'api/v1/me/products/{id}'
     metadata:
       custom: []
       groupName: Products
@@ -962,9 +962,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      product_id:
+      id:
         custom: []
-        name: product_id
+        name: id
         description: 'The ID of the product.'
         required: true
         example: 16
@@ -974,7 +974,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product_id: 16
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
