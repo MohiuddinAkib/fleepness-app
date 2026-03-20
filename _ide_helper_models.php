@@ -52,16 +52,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Bill newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Bill newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Bill query()
- */
-	class Bill extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * @property int $id
  * @property int $user_id
  * @property int $product_id
@@ -97,8 +87,6 @@ namespace App\Models{
  * @property string $slug
  * @property string|null $description
  * @property string|null $store_title
- * @property string|null $profile_image_path
- * @property string|null $cover_image_path
  * @property \App\Enums\CategoryStatus $status
  * @property int $sort_order
  * @property \Carbon\CarbonImmutable|null $created_at
@@ -122,13 +110,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereCoverImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereProfileImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Category whereStatus($value)
@@ -223,17 +209,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Fee whereVat($value)
  */
 	class Fee extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property-read \App\Models\User|null $follower
- * @property-read \App\Models\User|null $vendor
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Follower newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Follower newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Follower query()
- */
-	class Follower extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -588,16 +563,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property-read \App\Models\Product|null $product
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductSize newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductSize newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ProductSize query()
- */
-	class ProductSize extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * @property int $id
  * @property int $product_id
  * @property string $name
@@ -630,8 +595,6 @@ namespace App\Models{
  * @property \App\Enums\SectionType $type
  * @property string|null $description
  * @property string|null $placement_type
- * @property string|null $background_image_path
- * @property string|null $banner_image_path
  * @property int $sort_order
  * @property int $category_sort_order
  * @property bool $is_visible
@@ -652,8 +615,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section visible()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereBackgroundImagePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereBannerImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereCategorySortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Section whereCreatedAt($value)
@@ -675,7 +636,6 @@ namespace App\Models{
  * @property int $id
  * @property int $section_id
  * @property int|null $tag_id
- * @property string|null $image_path
  * @property string|null $title
  * @property string|null $description
  * @property int $sort_order
@@ -694,7 +654,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereIsVisible($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereSortOrder($value)
@@ -703,51 +662,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SectionItem whereUpdatedAt($value)
  */
 	class SectionItem extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
-}
-
-namespace App\Models{
-/**
- * @property-read User $seller
- * @property \App\Enums\SellerOrderStatus $status
- * @property-read \App\Models\User|null $customer
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SellerOrderItem> $items
- * @property-read int|null $items_count
- * @property-read bool|null $items_exists
- * @property-read \App\Models\Order|null $order
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerOrder newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerOrder newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerOrder query()
- */
-	class SellerOrder extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property-read \App\Models\Product|null $product
- * @property-read \App\Models\SellerOrder|null $sellerOrder
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerOrderItem newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerOrderItem newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerOrderItem query()
- */
-	class SellerOrderItem extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerTags newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerTags newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\SellerTags query()
- */
-	class SellerTags extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Setting newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Setting newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Setting query()
- */
-	class Setting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -784,8 +698,6 @@ namespace App\Models{
  * @property int $vendor_profile_id
  * @property string $title
  * @property string|null $description
- * @property string $video_path
- * @property string|null $thumbnail_path
  * @property-read int|null $likes_count
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
@@ -812,11 +724,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereLikesCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereThumbnailPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereVendorProfileId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortVideo whereVideoPath($value)
  */
 	class ShortVideo extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
@@ -891,50 +801,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property-read \App\Models\ShortVideo|null $shortVideo
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsComment newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsComment newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsComment query()
- */
-	class ShortsComment extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property-read \App\Models\ShortVideo|null $shortVideo
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsLike newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsLike newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsLike query()
- */
-	class ShortsLike extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property-read \App\Models\Product|null $product
- * @property-read \App\Models\ShortVideo|null $shortVideo
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsProduct newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsProduct newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsProduct query()
- */
-	class ShortsProduct extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property-read \App\Models\ShortVideo|null $shortVideo
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsSave newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsSave newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\ShortsSave query()
- */
-	class ShortsSave extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * @property int $id
  * @property int $vendor_profile_id
  * @property string $name
@@ -985,7 +851,6 @@ namespace App\Models{
  * @property int $id
  * @property int|null $category_id
  * @property int|null $tag_id
- * @property string $image_path
  * @property string|null $url
  * @property bool $is_active
  * @property int $sort_order
@@ -1007,7 +872,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereIsActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereTagId($value)
@@ -1015,15 +879,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Slider whereUrl($value)
  */
 	class Slider extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
-}
-
-namespace App\Models{
-/**
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Stock newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Stock newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Stock query()
- */
-	class Stock extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1159,17 +1014,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User withoutRole($roles, ?string $guard = null)
  */
 	class User extends \Eloquent implements \App\Support\Notification\Contracts\FcmBroadcastNotifiableByDevice, \App\Support\Notification\Contracts\FcmNotifiableByDevice, \Filament\Models\Contracts\FilamentUser, \Spatie\MediaLibrary\HasMedia {}
-}
-
-namespace App\Models{
-/**
- * @property-read \App\Models\PaymentMethod|null $paymentMethod
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPayment newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPayment newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\UserPayment query()
- */
-	class UserPayment extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1315,8 +1159,6 @@ namespace App\Models{
  * @property int|null $shop_category_id
  * @property string $shop_name
  * @property string|null $description
- * @property string|null $banner_image_path
- * @property string|null $cover_image_path
  * @property string|null $pickup_location
  * @property numeric $balance
  * @property numeric $total_sales
@@ -1355,8 +1197,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereBalance($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereBannerImagePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereCoverImagePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\VendorProfile whereId($value)

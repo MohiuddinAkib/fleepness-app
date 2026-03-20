@@ -29,7 +29,7 @@ class RoomProtobufService extends RoomServiceAbstractClient implements RoomServi
 
             $apiResponse = Http::withBody($req->getBody(), 'application/protobuf')
                 ->withHeaders($req->getHeaders())
-                ->send($req->getMethod(), $req->getUri(), [
+                ->send($req->getMethod(), (string) $req->getUri(), [
                     RequestOptions::VERSION => $req->getProtocolVersion(),
                 ]);
 

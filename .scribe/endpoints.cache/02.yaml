@@ -7,165 +7,6 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: api/me/notifications
-    metadata:
-      custom: []
-      groupName: Notifications
-      groupDescription: "Manage the authenticated user's notifications."
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List notifications'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters:
-      per_page:
-        custom: []
-        name: per_page
-        description: ''
-        required: false
-        example: 15
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      type:
-        custom: []
-        name: type
-        description: ''
-        required: false
-        example: unread
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      per_page: 15
-      type: unread
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":"uuid","type":"legacy.test","data":{"message":"Hello"}}],"meta":{"current_page":1}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/me/notifications/read
-    metadata:
-      custom: []
-      groupName: Notifications
-      groupDescription: "Manage the authenticated user's notifications."
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Mark all notifications as read'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message":"Notifications marked as read."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/me/notifications/{notification_id}/read'
-    metadata:
-      custom: []
-      groupName: Notifications
-      groupDescription: "Manage the authenticated user's notifications."
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Mark a notification as read'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      notification_id:
-        custom: []
-        name: notification_id
-        description: 'The ID of the notification.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      notification_id: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message":"Notification marked as read."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
     uri: api/v1/me/notifications
     metadata:
       custom: []
@@ -293,14 +134,14 @@ endpoints:
         name: notification_id
         description: 'The ID of the notification.'
         required: true
-        example: architecto
-        type: string
+        example: 16
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      notification_id: architecto
+      notification_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

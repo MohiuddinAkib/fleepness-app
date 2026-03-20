@@ -30,7 +30,7 @@ class EgressJsonService extends EgressAbstractClient implements Egress
             $apiResponse = Http::acceptJson()
                 ->withBody($req->getBody())
                 ->withHeaders($req->getHeaders())
-                ->send($req->getMethod(), $req->getUri(), [
+                ->send($req->getMethod(), (string) $req->getUri(), [
                     RequestOptions::VERSION => $req->getProtocolVersion(),
                 ]);
 
