@@ -3,7 +3,7 @@
 Fleepness is a quick-commerce multi-vendor marketplace API. It powers a mobile shopping experience combining product listings, live-stream commerce, short videos, vendor onboarding, order management, and real-time notifications.
 
 <aside>
-    <strong>Base URL</strong>: <code>https://fleepness-app.test</code>
+    <strong>Base URL</strong>: <code>http://localhost</code>
 </aside>
 
     Welcome to the **Fleepness API** — a quick-commerce multi-vendor marketplace platform.

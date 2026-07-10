@@ -27,13 +27,13 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "https://fleepness-app.test";
+        var tryItOutBaseUrl = "http://localhost";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
-    <script src="{{ asset("/vendor/scribe/js/tryitout-5.8.0.js") }}"></script>
+    <script src="{{ asset("/vendor/scribe/js/tryitout-5.9.0.js") }}"></script>
 
-    <script src="{{ asset("/vendor/scribe/js/theme-default-5.8.0.js") }}"></script>
+    <script src="{{ asset("/vendor/scribe/js/theme-default-5.9.0.js") }}"></script>
 
 </head>
 
@@ -558,7 +558,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: March 20, 2026</li>
+        <li>Last updated: July 11, 2026</li>
     </ul>
 </div>
 
@@ -568,7 +568,7 @@
         <h1 id="introduction">Introduction</h1>
 <p>Fleepness is a quick-commerce multi-vendor marketplace API. It powers a mobile shopping experience combining product listings, live-stream commerce, short videos, vendor onboarding, order management, and real-time notifications.</p>
 <aside>
-    <strong>Base URL</strong>: <code>https://fleepness-app.test</code>
+    <strong>Base URL</strong>: <code>http://localhost</code>
 </aside>
 <pre><code>Welcome to the **Fleepness API** — a quick-commerce multi-vendor marketplace platform.
 
@@ -657,7 +657,7 @@ Most successful responses follow one of these shapes:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/auth/register" \
+    "http://localhost/api/v1/auth/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -669,7 +669,7 @@ Most successful responses follow one of these shapes:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/register"
+    "http://localhost/api/v1/auth/register"
 );
 
 const headers = {
@@ -691,7 +691,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/register';
+$url = 'http://localhost/api/v1/auth/register';
 $response = $client-&gt;post(
     $url,
     [
@@ -832,7 +832,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/auth/verify-otp" \
+    "http://localhost/api/v1/auth/verify-otp" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -844,7 +844,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/verify-otp"
+    "http://localhost/api/v1/auth/verify-otp"
 );
 
 const headers = {
@@ -866,7 +866,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/verify-otp';
+$url = 'http://localhost/api/v1/auth/verify-otp';
 $response = $client-&gt;post(
     $url,
     [
@@ -1013,7 +1013,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/auth/resend-otp" \
+    "http://localhost/api/v1/auth/resend-otp" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1024,7 +1024,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/resend-otp"
+    "http://localhost/api/v1/auth/resend-otp"
 );
 
 const headers = {
@@ -1045,7 +1045,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/resend-otp';
+$url = 'http://localhost/api/v1/auth/resend-otp';
 $response = $client-&gt;post(
     $url,
     [
@@ -1173,7 +1173,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/auth/login" \
+    "http://localhost/api/v1/auth/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1184,7 +1184,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/login"
+    "http://localhost/api/v1/auth/login"
 );
 
 const headers = {
@@ -1205,7 +1205,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/login';
+$url = 'http://localhost/api/v1/auth/login';
 $response = $client-&gt;post(
     $url,
     [
@@ -1333,14 +1333,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/auth/social/architecto" \
+    --get "http://localhost/api/v1/auth/social/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/social/architecto"
+    "http://localhost/api/v1/auth/social/architecto"
 );
 
 const headers = {
@@ -1357,7 +1357,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/social/architecto';
+$url = 'http://localhost/api/v1/auth/social/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -1480,14 +1480,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/auth/social/architecto/callback" \
+    --get "http://localhost/api/v1/auth/social/architecto/callback" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/social/architecto/callback"
+    "http://localhost/api/v1/auth/social/architecto/callback"
 );
 
 const headers = {
@@ -1504,7 +1504,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/social/architecto/callback';
+$url = 'http://localhost/api/v1/auth/social/architecto/callback';
 $response = $client-&gt;get(
     $url,
     [
@@ -1634,7 +1634,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/auth/logout" \
+    "http://localhost/api/v1/auth/logout" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1642,7 +1642,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/logout"
+    "http://localhost/api/v1/auth/logout"
 );
 
 const headers = {
@@ -1660,7 +1660,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/logout';
+$url = 'http://localhost/api/v1/auth/logout';
 $response = $client-&gt;post(
     $url,
     [
@@ -1786,7 +1786,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/auth/device-tokens" \
+    "http://localhost/api/v1/auth/device-tokens" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -1799,7 +1799,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/device-tokens"
+    "http://localhost/api/v1/auth/device-tokens"
 );
 
 const headers = {
@@ -1822,7 +1822,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/device-tokens';
+$url = 'http://localhost/api/v1/auth/device-tokens';
 $response = $client-&gt;post(
     $url,
     [
@@ -1977,7 +1977,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/auth/device-tokens/16" \
+    "http://localhost/api/v1/auth/device-tokens/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1985,7 +1985,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/auth/device-tokens/16"
+    "http://localhost/api/v1/auth/device-tokens/16"
 );
 
 const headers = {
@@ -2003,7 +2003,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/auth/device-tokens/16';
+$url = 'http://localhost/api/v1/auth/device-tokens/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -2146,7 +2146,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me" \
+    --get "http://localhost/api/v1/me" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2154,7 +2154,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me"
+    "http://localhost/api/v1/me"
 );
 
 const headers = {
@@ -2172,7 +2172,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me';
+$url = 'http://localhost/api/v1/me';
 $response = $client-&gt;get(
     $url,
     [
@@ -2303,7 +2303,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me" \
+    "http://localhost/api/v1/me" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2316,7 +2316,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me"
+    "http://localhost/api/v1/me"
 );
 
 const headers = {
@@ -2339,7 +2339,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me';
+$url = 'http://localhost/api/v1/me';
 $response = $client-&gt;patch(
     $url,
     [
@@ -2498,7 +2498,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/summaries" \
+    --get "http://localhost/api/v1/me/summaries" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2506,7 +2506,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/summaries"
+    "http://localhost/api/v1/me/summaries"
 );
 
 const headers = {
@@ -2524,7 +2524,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/summaries';
+$url = 'http://localhost/api/v1/me/summaries';
 $response = $client-&gt;get(
     $url,
     [
@@ -2659,7 +2659,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/vendors" \
+    --get "http://localhost/api/v1/me/vendors" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2667,7 +2667,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/vendors"
+    "http://localhost/api/v1/me/vendors"
 );
 
 const headers = {
@@ -2685,7 +2685,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/vendors';
+$url = 'http://localhost/api/v1/me/vendors';
 $response = $client-&gt;get(
     $url,
     [
@@ -2816,7 +2816,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/vendors" \
+    "http://localhost/api/v1/me/vendors" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2830,7 +2830,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/vendors"
+    "http://localhost/api/v1/me/vendors"
 );
 
 const headers = {
@@ -2854,7 +2854,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/vendors';
+$url = 'http://localhost/api/v1/me/vendors';
 $response = $client-&gt;patch(
     $url,
     [
@@ -3025,7 +3025,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/vendors/followers" \
+    --get "http://localhost/api/v1/me/vendors/followers" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3033,7 +3033,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/vendors/followers"
+    "http://localhost/api/v1/me/vendors/followers"
 );
 
 const headers = {
@@ -3051,7 +3051,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/vendors/followers';
+$url = 'http://localhost/api/v1/me/vendors/followers';
 $response = $client-&gt;get(
     $url,
     [
@@ -3182,7 +3182,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/balances" \
+    --get "http://localhost/api/v1/me/balances" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3190,7 +3190,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/balances"
+    "http://localhost/api/v1/me/balances"
 );
 
 const headers = {
@@ -3208,7 +3208,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/balances';
+$url = 'http://localhost/api/v1/me/balances';
 $response = $client-&gt;get(
     $url,
     [
@@ -3339,7 +3339,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/vendor-applications" \
+    "http://localhost/api/v1/vendor-applications" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -3352,7 +3352,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendor-applications"
+    "http://localhost/api/v1/vendor-applications"
 );
 
 const headers = {
@@ -3375,7 +3375,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendor-applications';
+$url = 'http://localhost/api/v1/vendor-applications';
 $response = $client-&gt;post(
     $url,
     [
@@ -3533,7 +3533,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendor-applications/status" \
+    --get "http://localhost/api/v1/vendor-applications/status" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3541,7 +3541,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendor-applications/status"
+    "http://localhost/api/v1/vendor-applications/status"
 );
 
 const headers = {
@@ -3559,7 +3559,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendor-applications/status';
+$url = 'http://localhost/api/v1/vendor-applications/status';
 $response = $client-&gt;get(
     $url,
     [
@@ -3691,7 +3691,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/addresses" \
+    --get "http://localhost/api/v1/me/addresses" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3699,7 +3699,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/addresses"
+    "http://localhost/api/v1/me/addresses"
 );
 
 const headers = {
@@ -3717,7 +3717,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/addresses';
+$url = 'http://localhost/api/v1/me/addresses';
 $response = $client-&gt;get(
     $url,
     [
@@ -3850,7 +3850,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/addresses" \
+    "http://localhost/api/v1/me/addresses" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -3869,7 +3869,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/addresses"
+    "http://localhost/api/v1/me/addresses"
 );
 
 const headers = {
@@ -3898,7 +3898,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/addresses';
+$url = 'http://localhost/api/v1/me/addresses';
 $response = $client-&gt;post(
     $url,
     [
@@ -4145,7 +4145,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/addresses/16" \
+    "http://localhost/api/v1/me/addresses/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4164,7 +4164,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/addresses/16"
+    "http://localhost/api/v1/me/addresses/16"
 );
 
 const headers = {
@@ -4193,7 +4193,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/addresses/16';
+$url = 'http://localhost/api/v1/me/addresses/16';
 $response = $client-&gt;patch(
     $url,
     [
@@ -4452,7 +4452,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/addresses/16" \
+    "http://localhost/api/v1/me/addresses/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4460,7 +4460,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/addresses/16"
+    "http://localhost/api/v1/me/addresses/16"
 );
 
 const headers = {
@@ -4478,7 +4478,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/addresses/16';
+$url = 'http://localhost/api/v1/me/addresses/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -4617,7 +4617,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/addresses/16/default" \
+    "http://localhost/api/v1/me/addresses/16/default" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4625,7 +4625,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/addresses/16/default"
+    "http://localhost/api/v1/me/addresses/16/default"
 );
 
 const headers = {
@@ -4643,7 +4643,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/addresses/16/default';
+$url = 'http://localhost/api/v1/me/addresses/16/default';
 $response = $client-&gt;post(
     $url,
     [
@@ -4786,7 +4786,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/payment-accounts" \
+    --get "http://localhost/api/v1/me/payment-accounts" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4794,7 +4794,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/payment-accounts"
+    "http://localhost/api/v1/me/payment-accounts"
 );
 
 const headers = {
@@ -4812,7 +4812,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/payment-accounts';
+$url = 'http://localhost/api/v1/me/payment-accounts';
 $response = $client-&gt;get(
     $url,
     [
@@ -4944,7 +4944,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/payment-accounts" \
+    "http://localhost/api/v1/me/payment-accounts" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4958,7 +4958,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/payment-accounts"
+    "http://localhost/api/v1/me/payment-accounts"
 );
 
 const headers = {
@@ -4982,7 +4982,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/payment-accounts';
+$url = 'http://localhost/api/v1/me/payment-accounts';
 $response = $client-&gt;post(
     $url,
     [
@@ -5163,7 +5163,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/payment-accounts/16" \
+    "http://localhost/api/v1/me/payment-accounts/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -5171,7 +5171,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/payment-accounts/16"
+    "http://localhost/api/v1/me/payment-accounts/16"
 );
 
 const headers = {
@@ -5189,7 +5189,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/payment-accounts/16';
+$url = 'http://localhost/api/v1/me/payment-accounts/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -5332,7 +5332,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/products?q=sku-001" \
+    --get "http://localhost/api/v1/me/products?q=sku-001" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -5340,7 +5340,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products"
+    "http://localhost/api/v1/me/products"
 );
 
 const params = {
@@ -5364,7 +5364,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products';
+$url = 'http://localhost/api/v1/me/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -5516,7 +5516,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/products" \
+    "http://localhost/api/v1/me/products" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -5536,7 +5536,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products"
+    "http://localhost/api/v1/me/products"
 );
 
 const headers = {
@@ -5566,7 +5566,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products';
+$url = 'http://localhost/api/v1/me/products';
 $response = $client-&gt;post(
     $url,
     [
@@ -5816,7 +5816,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/products/16" \
+    --get "http://localhost/api/v1/me/products/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -5824,7 +5824,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products/16"
+    "http://localhost/api/v1/me/products/16"
 );
 
 const headers = {
@@ -5842,7 +5842,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products/16';
+$url = 'http://localhost/api/v1/me/products/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -5984,7 +5984,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/products/16" \
+    "http://localhost/api/v1/me/products/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -6004,7 +6004,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products/16"
+    "http://localhost/api/v1/me/products/16"
 );
 
 const headers = {
@@ -6034,7 +6034,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products/16';
+$url = 'http://localhost/api/v1/me/products/16';
 $response = $client-&gt;patch(
     $url,
     [
@@ -6296,7 +6296,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/products/16" \
+    "http://localhost/api/v1/me/products/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -6304,7 +6304,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products/16"
+    "http://localhost/api/v1/me/products/16"
 );
 
 const headers = {
@@ -6322,7 +6322,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products/16';
+$url = 'http://localhost/api/v1/me/products/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -6461,7 +6461,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://fleepness-app.test/api/v1/me/products/16/status" \
+    "http://localhost/api/v1/me/products/16/status" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -6469,7 +6469,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products/16/status"
+    "http://localhost/api/v1/me/products/16/status"
 );
 
 const headers = {
@@ -6487,7 +6487,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products/16/status';
+$url = 'http://localhost/api/v1/me/products/16/status';
 $response = $client-&gt;put(
     $url,
     [
@@ -6636,7 +6636,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/size-templates" \
+    --get "http://localhost/api/v1/me/size-templates" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -6644,7 +6644,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates"
+    "http://localhost/api/v1/me/size-templates"
 );
 
 const headers = {
@@ -6662,7 +6662,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates';
+$url = 'http://localhost/api/v1/me/size-templates';
 $response = $client-&gt;get(
     $url,
     [
@@ -6799,7 +6799,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/size-templates" \
+    "http://localhost/api/v1/me/size-templates" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -6811,7 +6811,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates"
+    "http://localhost/api/v1/me/size-templates"
 );
 
 const headers = {
@@ -6833,7 +6833,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates';
+$url = 'http://localhost/api/v1/me/size-templates';
 $response = $client-&gt;post(
     $url,
     [
@@ -6977,14 +6977,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/size-templates/16" \
+    "http://localhost/api/v1/me/size-templates/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates/16"
+    "http://localhost/api/v1/me/size-templates/16"
 );
 
 const headers = {
@@ -7001,7 +7001,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates/16';
+$url = 'http://localhost/api/v1/me/size-templates/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -7122,7 +7122,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/livestreams" \
+    --get "http://localhost/api/v1/me/livestreams" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7130,7 +7130,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams"
+    "http://localhost/api/v1/me/livestreams"
 );
 
 const headers = {
@@ -7148,7 +7148,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams';
+$url = 'http://localhost/api/v1/me/livestreams';
 $response = $client-&gt;get(
     $url,
     [
@@ -7283,7 +7283,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/livestreams" \
+    "http://localhost/api/v1/me/livestreams" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -7297,7 +7297,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams"
+    "http://localhost/api/v1/me/livestreams"
 );
 
 const headers = {
@@ -7321,7 +7321,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams';
+$url = 'http://localhost/api/v1/me/livestreams';
 $response = $client-&gt;post(
     $url,
     [
@@ -7495,7 +7495,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/livestreams/16" \
+    "http://localhost/api/v1/me/livestreams/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -7510,7 +7510,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/16"
+    "http://localhost/api/v1/me/livestreams/16"
 );
 
 const headers = {
@@ -7535,7 +7535,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/16';
+$url = 'http://localhost/api/v1/me/livestreams/16';
 $response = $client-&gt;patch(
     $url,
     [
@@ -7735,7 +7735,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/livestreams/16" \
+    "http://localhost/api/v1/me/livestreams/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7743,7 +7743,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/16"
+    "http://localhost/api/v1/me/livestreams/16"
 );
 
 const headers = {
@@ -7761,7 +7761,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/16';
+$url = 'http://localhost/api/v1/me/livestreams/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -7900,7 +7900,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/livestreams/16/publisher-token" \
+    --get "http://localhost/api/v1/me/livestreams/16/publisher-token" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7908,7 +7908,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/16/publisher-token"
+    "http://localhost/api/v1/me/livestreams/16/publisher-token"
 );
 
 const headers = {
@@ -7926,7 +7926,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/16/publisher-token';
+$url = 'http://localhost/api/v1/me/livestreams/16/publisher-token';
 $response = $client-&gt;get(
     $url,
     [
@@ -8069,7 +8069,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/short-videos" \
+    --get "http://localhost/api/v1/me/short-videos" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8077,7 +8077,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/short-videos"
+    "http://localhost/api/v1/me/short-videos"
 );
 
 const headers = {
@@ -8095,7 +8095,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/short-videos';
+$url = 'http://localhost/api/v1/me/short-videos';
 $response = $client-&gt;get(
     $url,
     [
@@ -8229,19 +8229,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/short-videos" \
+    "http://localhost/api/v1/me/short-videos" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "title=Summer Collection"\
     --form "description=Eius et animi quos velit et."\
-    --form "video=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php8g5ojdqtpafe94yHYxj" \
-    --form "thumbnail=@/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phplqb6m7ir5f3i4WxTSB3" </code></pre></div>
+    --form "video=@/private/var/folders/z4/gltxn_310t97c506y5d8_y940000gn/T/phpes68u3sta8ib5jqt4Rw" \
+    --form "thumbnail=@/private/var/folders/z4/gltxn_310t97c506y5d8_y940000gn/T/phpjnag0c37isr04cbSWky" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/short-videos"
+    "http://localhost/api/v1/me/short-videos"
 );
 
 const headers = {
@@ -8265,7 +8265,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/short-videos';
+$url = 'http://localhost/api/v1/me/short-videos';
 $response = $client-&gt;post(
     $url,
     [
@@ -8285,11 +8285,11 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'video',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php8g5ojdqtpafe94yHYxj', 'r')
+                'contents' =&gt; fopen('/private/var/folders/z4/gltxn_310t97c506y5d8_y940000gn/T/phpes68u3sta8ib5jqt4Rw', 'r')
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phplqb6m7ir5f3i4WxTSB3', 'r')
+                'contents' =&gt; fopen('/private/var/folders/z4/gltxn_310t97c506y5d8_y940000gn/T/phpjnag0c37isr04cbSWky', 'r')
             ],
         ],
     ]
@@ -8431,7 +8431,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/php8g5ojdqtpafe94yHYxj</code></p>
+<p>Example: <code>/private/var/folders/z4/gltxn_310t97c506y5d8_y940000gn/T/phpes68u3sta8ib5jqt4Rw</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -8443,7 +8443,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Example: <code>/private/var/folders/05/bnc7wl7j2zb4f1hss3mfrlnw0000gn/T/phplqb6m7ir5f3i4WxTSB3</code></p>
+<p>Example: <code>/private/var/folders/z4/gltxn_310t97c506y5d8_y940000gn/T/phpjnag0c37isr04cbSWky</code></p>
         </div>
         </form>
 
@@ -8461,7 +8461,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/short-videos/16" \
+    "http://localhost/api/v1/me/short-videos/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -8474,7 +8474,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/short-videos/16"
+    "http://localhost/api/v1/me/short-videos/16"
 );
 
 const headers = {
@@ -8497,7 +8497,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/short-videos/16';
+$url = 'http://localhost/api/v1/me/short-videos/16';
 $response = $client-&gt;patch(
     $url,
     [
@@ -8668,7 +8668,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/short-videos/16" \
+    "http://localhost/api/v1/me/short-videos/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8676,7 +8676,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/short-videos/16"
+    "http://localhost/api/v1/me/short-videos/16"
 );
 
 const headers = {
@@ -8694,7 +8694,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/short-videos/16';
+$url = 'http://localhost/api/v1/me/short-videos/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -8837,7 +8837,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/orders" \
+    --get "http://localhost/api/v1/me/orders" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8845,7 +8845,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/orders"
+    "http://localhost/api/v1/me/orders"
 );
 
 const headers = {
@@ -8863,7 +8863,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/orders';
+$url = 'http://localhost/api/v1/me/orders';
 $response = $client-&gt;get(
     $url,
     [
@@ -8999,7 +8999,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/orders/16" \
+    --get "http://localhost/api/v1/me/orders/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -9007,7 +9007,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/orders/16"
+    "http://localhost/api/v1/me/orders/16"
 );
 
 const headers = {
@@ -9025,7 +9025,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/orders/16';
+$url = 'http://localhost/api/v1/me/orders/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -9168,7 +9168,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/orders" \
+    "http://localhost/api/v1/orders" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9180,7 +9180,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/orders"
+    "http://localhost/api/v1/orders"
 );
 
 const headers = {
@@ -9202,7 +9202,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/orders';
+$url = 'http://localhost/api/v1/orders';
 $response = $client-&gt;post(
     $url,
     [
@@ -9353,7 +9353,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/vendor-orders" \
+    --get "http://localhost/api/v1/me/vendor-orders" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -9361,7 +9361,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/vendor-orders"
+    "http://localhost/api/v1/me/vendor-orders"
 );
 
 const headers = {
@@ -9379,7 +9379,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/vendor-orders';
+$url = 'http://localhost/api/v1/me/vendor-orders';
 $response = $client-&gt;get(
     $url,
     [
@@ -9514,7 +9514,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/vendor-orders/16" \
+    --get "http://localhost/api/v1/me/vendor-orders/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -9522,7 +9522,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/vendor-orders/16"
+    "http://localhost/api/v1/me/vendor-orders/16"
 );
 
 const headers = {
@@ -9540,7 +9540,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/vendor-orders/16';
+$url = 'http://localhost/api/v1/me/vendor-orders/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -9684,7 +9684,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/vendor-orders/16/accept" \
+    "http://localhost/api/v1/me/vendor-orders/16/accept" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -9692,7 +9692,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/vendor-orders/16/accept"
+    "http://localhost/api/v1/me/vendor-orders/16/accept"
 );
 
 const headers = {
@@ -9710,7 +9710,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/vendor-orders/16/accept';
+$url = 'http://localhost/api/v1/me/vendor-orders/16/accept';
 $response = $client-&gt;patch(
     $url,
     [
@@ -9852,7 +9852,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/me/vendor-orders/16/reject" \
+    "http://localhost/api/v1/me/vendor-orders/16/reject" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -9860,7 +9860,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/vendor-orders/16/reject"
+    "http://localhost/api/v1/me/vendor-orders/16/reject"
 );
 
 const headers = {
@@ -9878,7 +9878,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/vendor-orders/16/reject';
+$url = 'http://localhost/api/v1/me/vendor-orders/16/reject';
 $response = $client-&gt;patch(
     $url,
     [
@@ -10024,7 +10024,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/cart" \
+    --get "http://localhost/api/v1/cart" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -10032,7 +10032,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/cart"
+    "http://localhost/api/v1/cart"
 );
 
 const headers = {
@@ -10050,7 +10050,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/cart';
+$url = 'http://localhost/api/v1/cart';
 $response = $client-&gt;get(
     $url,
     [
@@ -10186,7 +10186,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/cart/summary" \
+    --get "http://localhost/api/v1/cart/summary" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -10194,7 +10194,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/cart/summary"
+    "http://localhost/api/v1/cart/summary"
 );
 
 const headers = {
@@ -10212,7 +10212,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/cart/summary';
+$url = 'http://localhost/api/v1/cart/summary';
 $response = $client-&gt;get(
     $url,
     [
@@ -10341,7 +10341,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/cart/items" \
+    "http://localhost/api/v1/cart/items" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -10355,7 +10355,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/cart/items"
+    "http://localhost/api/v1/cart/items"
 );
 
 const headers = {
@@ -10379,7 +10379,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/cart/items';
+$url = 'http://localhost/api/v1/cart/items';
 $response = $client-&gt;post(
     $url,
     [
@@ -10552,7 +10552,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://fleepness-app.test/api/v1/cart/items/16" \
+    "http://localhost/api/v1/cart/items/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -10565,7 +10565,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/cart/items/16"
+    "http://localhost/api/v1/cart/items/16"
 );
 
 const headers = {
@@ -10588,7 +10588,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/cart/items/16';
+$url = 'http://localhost/api/v1/cart/items/16';
 $response = $client-&gt;patch(
     $url,
     [
@@ -10771,7 +10771,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/cart/items/16" \
+    "http://localhost/api/v1/cart/items/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -10779,7 +10779,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/cart/items/16"
+    "http://localhost/api/v1/cart/items/16"
 );
 
 const headers = {
@@ -10797,7 +10797,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/cart/items/16';
+$url = 'http://localhost/api/v1/cart/items/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -10940,7 +10940,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/transactions" \
+    --get "http://localhost/api/v1/me/transactions" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -10948,7 +10948,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/transactions"
+    "http://localhost/api/v1/me/transactions"
 );
 
 const headers = {
@@ -10966,7 +10966,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/transactions';
+$url = 'http://localhost/api/v1/me/transactions';
 $response = $client-&gt;get(
     $url,
     [
@@ -11102,7 +11102,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/withdrawals" \
+    "http://localhost/api/v1/me/withdrawals" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -11116,7 +11116,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/withdrawals"
+    "http://localhost/api/v1/me/withdrawals"
 );
 
 const headers = {
@@ -11140,7 +11140,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/withdrawals';
+$url = 'http://localhost/api/v1/me/withdrawals';
 $response = $client-&gt;post(
     $url,
     [
@@ -11316,14 +11316,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/products?q=t-shirt&amp;category_id=16&amp;tag_id=16&amp;vendor_id=16&amp;min_price=4326.41688&amp;max_price=4326.41688&amp;per_page=15" \
+    --get "http://localhost/api/v1/products?q=t-shirt&amp;category_id=16&amp;tag_id=16&amp;vendor_id=16&amp;min_price=4326.41688&amp;max_price=4326.41688&amp;per_page=15" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/products"
+    "http://localhost/api/v1/products"
 );
 
 const params = {
@@ -11352,7 +11352,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/products';
+$url = 'http://localhost/api/v1/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -11567,14 +11567,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/products/16" \
+    --get "http://localhost/api/v1/products/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/products/16"
+    "http://localhost/api/v1/products/16"
 );
 
 const headers = {
@@ -11591,7 +11591,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/products/16';
+$url = 'http://localhost/api/v1/products/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -11721,14 +11721,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/products/16/similar" \
+    --get "http://localhost/api/v1/products/16/similar" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/products/16/similar"
+    "http://localhost/api/v1/products/16/similar"
 );
 
 const headers = {
@@ -11745,7 +11745,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/products/16/similar';
+$url = 'http://localhost/api/v1/products/16/similar';
 $response = $client-&gt;get(
     $url,
     [
@@ -11875,14 +11875,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/products/16/reviews" \
+    --get "http://localhost/api/v1/products/16/reviews" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/products/16/reviews"
+    "http://localhost/api/v1/products/16/reviews"
 );
 
 const headers = {
@@ -11899,7 +11899,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/products/16/reviews';
+$url = 'http://localhost/api/v1/products/16/reviews';
 $response = $client-&gt;get(
     $url,
     [
@@ -12031,7 +12031,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/products/16/reviews" \
+    "http://localhost/api/v1/products/16/reviews" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -12044,7 +12044,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/products/16/reviews"
+    "http://localhost/api/v1/products/16/reviews"
 );
 
 const headers = {
@@ -12067,7 +12067,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/products/16/reviews';
+$url = 'http://localhost/api/v1/products/16/reviews';
 $response = $client-&gt;post(
     $url,
     [
@@ -12238,7 +12238,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/products/16/reviews/16" \
+    "http://localhost/api/v1/products/16/reviews/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12246,7 +12246,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/products/16/reviews/16"
+    "http://localhost/api/v1/products/16/reviews/16"
 );
 
 const headers = {
@@ -12264,7 +12264,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/products/16/reviews/16';
+$url = 'http://localhost/api/v1/products/16/reviews/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -12414,14 +12414,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/categories" \
+    --get "http://localhost/api/v1/categories" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/categories"
+    "http://localhost/api/v1/categories"
 );
 
 const headers = {
@@ -12438,7 +12438,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/categories';
+$url = 'http://localhost/api/v1/categories';
 $response = $client-&gt;get(
     $url,
     [
@@ -12556,14 +12556,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/categories/16" \
+    --get "http://localhost/api/v1/categories/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/categories/16"
+    "http://localhost/api/v1/categories/16"
 );
 
 const headers = {
@@ -12580,7 +12580,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/categories/16';
+$url = 'http://localhost/api/v1/categories/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -12708,14 +12708,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/categories/16/products" \
+    --get "http://localhost/api/v1/categories/16/products" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/categories/16/products"
+    "http://localhost/api/v1/categories/16/products"
 );
 
 const headers = {
@@ -12732,7 +12732,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/categories/16/products';
+$url = 'http://localhost/api/v1/categories/16/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -12865,14 +12865,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/tags" \
+    --get "http://localhost/api/v1/tags" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/tags"
+    "http://localhost/api/v1/tags"
 );
 
 const headers = {
@@ -12889,7 +12889,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/tags';
+$url = 'http://localhost/api/v1/tags';
 $response = $client-&gt;get(
     $url,
     [
@@ -13007,14 +13007,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/tags/16" \
+    --get "http://localhost/api/v1/tags/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/tags/16"
+    "http://localhost/api/v1/tags/16"
 );
 
 const headers = {
@@ -13031,7 +13031,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/tags/16';
+$url = 'http://localhost/api/v1/tags/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -13160,14 +13160,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/tags/16/products" \
+    --get "http://localhost/api/v1/tags/16/products" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/tags/16/products"
+    "http://localhost/api/v1/tags/16/products"
 );
 
 const headers = {
@@ -13184,7 +13184,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/tags/16/products';
+$url = 'http://localhost/api/v1/tags/16/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -13322,7 +13322,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/followings" \
+    --get "http://localhost/api/v1/me/followings" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13330,7 +13330,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/followings"
+    "http://localhost/api/v1/me/followings"
 );
 
 const headers = {
@@ -13348,7 +13348,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/followings';
+$url = 'http://localhost/api/v1/me/followings';
 $response = $client-&gt;get(
     $url,
     [
@@ -13478,14 +13478,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors?search=flash&amp;shop_category_id=2&amp;similar_to_vendor_id=12" \
+    --get "http://localhost/api/v1/vendors?search=flash&amp;shop_category_id=2&amp;similar_to_vendor_id=12" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors"
+    "http://localhost/api/v1/vendors"
 );
 
 const params = {
@@ -13510,7 +13510,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors';
+$url = 'http://localhost/api/v1/vendors';
 $response = $client-&gt;get(
     $url,
     [
@@ -13673,14 +13673,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors/16" \
+    --get "http://localhost/api/v1/vendors/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16"
+    "http://localhost/api/v1/vendors/16"
 );
 
 const headers = {
@@ -13697,7 +13697,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16';
+$url = 'http://localhost/api/v1/vendors/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -13827,14 +13827,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors/16/products?q=flash+tee&amp;min_price=200&amp;max_price=500&amp;price_category=low" \
+    --get "http://localhost/api/v1/vendors/16/products?q=flash+tee&amp;min_price=200&amp;max_price=500&amp;price_category=low" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/products"
+    "http://localhost/api/v1/vendors/16/products"
 );
 
 const params = {
@@ -13860,7 +13860,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/products';
+$url = 'http://localhost/api/v1/vendors/16/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -14048,14 +14048,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors/16/short-videos" \
+    --get "http://localhost/api/v1/vendors/16/short-videos" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/short-videos"
+    "http://localhost/api/v1/vendors/16/short-videos"
 );
 
 const headers = {
@@ -14072,7 +14072,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/short-videos';
+$url = 'http://localhost/api/v1/vendors/16/short-videos';
 $response = $client-&gt;get(
     $url,
     [
@@ -14203,7 +14203,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/vendors/16/follow" \
+    "http://localhost/api/v1/vendors/16/follow" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14211,7 +14211,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/follow"
+    "http://localhost/api/v1/vendors/16/follow"
 );
 
 const headers = {
@@ -14229,7 +14229,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/follow';
+$url = 'http://localhost/api/v1/vendors/16/follow';
 $response = $client-&gt;post(
     $url,
     [
@@ -14368,7 +14368,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/vendors/16/follow" \
+    "http://localhost/api/v1/vendors/16/follow" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14376,7 +14376,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/follow"
+    "http://localhost/api/v1/vendors/16/follow"
 );
 
 const headers = {
@@ -14394,7 +14394,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/follow';
+$url = 'http://localhost/api/v1/vendors/16/follow';
 $response = $client-&gt;delete(
     $url,
     [
@@ -14532,14 +14532,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/vendors/16/reviews" \
+    --get "http://localhost/api/v1/vendors/16/reviews" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/reviews"
+    "http://localhost/api/v1/vendors/16/reviews"
 );
 
 const headers = {
@@ -14556,7 +14556,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/reviews';
+$url = 'http://localhost/api/v1/vendors/16/reviews';
 $response = $client-&gt;get(
     $url,
     [
@@ -14688,7 +14688,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/vendors/16/reviews" \
+    "http://localhost/api/v1/vendors/16/reviews" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -14701,7 +14701,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/reviews"
+    "http://localhost/api/v1/vendors/16/reviews"
 );
 
 const headers = {
@@ -14724,7 +14724,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/reviews';
+$url = 'http://localhost/api/v1/vendors/16/reviews';
 $response = $client-&gt;post(
     $url,
     [
@@ -14895,7 +14895,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/vendors/16/reviews/16" \
+    "http://localhost/api/v1/vendors/16/reviews/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14903,7 +14903,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/vendors/16/reviews/16"
+    "http://localhost/api/v1/vendors/16/reviews/16"
 );
 
 const headers = {
@@ -14921,7 +14921,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/vendors/16/reviews/16';
+$url = 'http://localhost/api/v1/vendors/16/reviews/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -15076,7 +15076,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/short-videos/saved" \
+    --get "http://localhost/api/v1/me/short-videos/saved" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -15084,7 +15084,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/short-videos/saved"
+    "http://localhost/api/v1/me/short-videos/saved"
 );
 
 const headers = {
@@ -15102,7 +15102,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/short-videos/saved';
+$url = 'http://localhost/api/v1/me/short-videos/saved';
 $response = $client-&gt;get(
     $url,
     [
@@ -15236,7 +15236,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/livestreams/liked" \
+    --get "http://localhost/api/v1/me/livestreams/liked" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -15244,7 +15244,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/liked"
+    "http://localhost/api/v1/me/livestreams/liked"
 );
 
 const headers = {
@@ -15262,7 +15262,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/liked';
+$url = 'http://localhost/api/v1/me/livestreams/liked';
 $response = $client-&gt;get(
     $url,
     [
@@ -15396,7 +15396,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/livestreams/saved" \
+    --get "http://localhost/api/v1/me/livestreams/saved" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -15404,7 +15404,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/saved"
+    "http://localhost/api/v1/me/livestreams/saved"
 );
 
 const headers = {
@@ -15422,7 +15422,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/saved';
+$url = 'http://localhost/api/v1/me/livestreams/saved';
 $response = $client-&gt;get(
     $url,
     [
@@ -15555,14 +15555,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/short-videos" \
+    --get "http://localhost/api/v1/short-videos" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos"
+    "http://localhost/api/v1/short-videos"
 );
 
 const headers = {
@@ -15579,7 +15579,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos';
+$url = 'http://localhost/api/v1/short-videos';
 $response = $client-&gt;get(
     $url,
     [
@@ -15699,14 +15699,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/short-videos/16" \
+    --get "http://localhost/api/v1/short-videos/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16"
+    "http://localhost/api/v1/short-videos/16"
 );
 
 const headers = {
@@ -15723,7 +15723,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16';
+$url = 'http://localhost/api/v1/short-videos/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -15852,14 +15852,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/short-videos/16/products" \
+    --get "http://localhost/api/v1/short-videos/16/products" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/products"
+    "http://localhost/api/v1/short-videos/16/products"
 );
 
 const headers = {
@@ -15876,7 +15876,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/products';
+$url = 'http://localhost/api/v1/short-videos/16/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -16007,7 +16007,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/short-videos/16/like" \
+    "http://localhost/api/v1/short-videos/16/like" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -16015,7 +16015,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/like"
+    "http://localhost/api/v1/short-videos/16/like"
 );
 
 const headers = {
@@ -16033,7 +16033,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/like';
+$url = 'http://localhost/api/v1/short-videos/16/like';
 $response = $client-&gt;post(
     $url,
     [
@@ -16172,7 +16172,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/short-videos/16/save" \
+    "http://localhost/api/v1/short-videos/16/save" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -16180,7 +16180,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/save"
+    "http://localhost/api/v1/short-videos/16/save"
 );
 
 const headers = {
@@ -16198,7 +16198,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/save';
+$url = 'http://localhost/api/v1/short-videos/16/save';
 $response = $client-&gt;post(
     $url,
     [
@@ -16336,14 +16336,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/short-videos/16/comments" \
+    --get "http://localhost/api/v1/short-videos/16/comments" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/comments"
+    "http://localhost/api/v1/short-videos/16/comments"
 );
 
 const headers = {
@@ -16360,7 +16360,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments';
+$url = 'http://localhost/api/v1/short-videos/16/comments';
 $response = $client-&gt;get(
     $url,
     [
@@ -16494,7 +16494,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/short-videos/16/comments" \
+    "http://localhost/api/v1/short-videos/16/comments" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -16506,7 +16506,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/comments"
+    "http://localhost/api/v1/short-videos/16/comments"
 );
 
 const headers = {
@@ -16528,7 +16528,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments';
+$url = 'http://localhost/api/v1/short-videos/16/comments';
 $response = $client-&gt;post(
     $url,
     [
@@ -16686,7 +16686,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/short-videos/16/comments/16" \
+    "http://localhost/api/v1/short-videos/16/comments/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -16694,7 +16694,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/short-videos/16/comments/16"
+    "http://localhost/api/v1/short-videos/16/comments/16"
 );
 
 const headers = {
@@ -16712,7 +16712,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/short-videos/16/comments/16';
+$url = 'http://localhost/api/v1/short-videos/16/comments/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -16862,14 +16862,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/livestreams" \
+    --get "http://localhost/api/v1/livestreams" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams"
+    "http://localhost/api/v1/livestreams"
 );
 
 const headers = {
@@ -16886,7 +16886,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams';
+$url = 'http://localhost/api/v1/livestreams';
 $response = $client-&gt;get(
     $url,
     [
@@ -17006,14 +17006,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/livestreams/16" \
+    --get "http://localhost/api/v1/livestreams/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16"
+    "http://localhost/api/v1/livestreams/16"
 );
 
 const headers = {
@@ -17030,7 +17030,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16';
+$url = 'http://localhost/api/v1/livestreams/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -17159,14 +17159,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/livestreams/16/products" \
+    --get "http://localhost/api/v1/livestreams/16/products" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/products"
+    "http://localhost/api/v1/livestreams/16/products"
 );
 
 const headers = {
@@ -17183,7 +17183,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/products';
+$url = 'http://localhost/api/v1/livestreams/16/products';
 $response = $client-&gt;get(
     $url,
     [
@@ -17314,7 +17314,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/livestreams/16/like" \
+    "http://localhost/api/v1/livestreams/16/like" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -17322,7 +17322,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/like"
+    "http://localhost/api/v1/livestreams/16/like"
 );
 
 const headers = {
@@ -17340,7 +17340,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/like';
+$url = 'http://localhost/api/v1/livestreams/16/like';
 $response = $client-&gt;post(
     $url,
     [
@@ -17479,7 +17479,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/livestreams/16/save" \
+    "http://localhost/api/v1/livestreams/16/save" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -17487,7 +17487,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/save"
+    "http://localhost/api/v1/livestreams/16/save"
 );
 
 const headers = {
@@ -17505,7 +17505,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/save';
+$url = 'http://localhost/api/v1/livestreams/16/save';
 $response = $client-&gt;post(
     $url,
     [
@@ -17643,14 +17643,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/livestreams/16/subscriber-token" \
+    --get "http://localhost/api/v1/livestreams/16/subscriber-token" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/subscriber-token"
+    "http://localhost/api/v1/livestreams/16/subscriber-token"
 );
 
 const headers = {
@@ -17667,7 +17667,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/subscriber-token';
+$url = 'http://localhost/api/v1/livestreams/16/subscriber-token';
 $response = $client-&gt;get(
     $url,
     [
@@ -17792,14 +17792,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/livestreams/16/comments" \
+    --get "http://localhost/api/v1/livestreams/16/comments" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/comments"
+    "http://localhost/api/v1/livestreams/16/comments"
 );
 
 const headers = {
@@ -17816,7 +17816,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments';
+$url = 'http://localhost/api/v1/livestreams/16/comments';
 $response = $client-&gt;get(
     $url,
     [
@@ -17950,7 +17950,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/livestreams/16/comments" \
+    "http://localhost/api/v1/livestreams/16/comments" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -17962,7 +17962,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/comments"
+    "http://localhost/api/v1/livestreams/16/comments"
 );
 
 const headers = {
@@ -17984,7 +17984,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments';
+$url = 'http://localhost/api/v1/livestreams/16/comments';
 $response = $client-&gt;post(
     $url,
     [
@@ -18142,7 +18142,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://fleepness-app.test/api/v1/livestreams/16/comments/16" \
+    "http://localhost/api/v1/livestreams/16/comments/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -18154,7 +18154,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/comments/16"
+    "http://localhost/api/v1/livestreams/16/comments/16"
 );
 
 const headers = {
@@ -18176,7 +18176,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments/16';
+$url = 'http://localhost/api/v1/livestreams/16/comments/16';
 $response = $client-&gt;put(
     $url,
     [
@@ -18350,7 +18350,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/livestreams/16/comments/16" \
+    "http://localhost/api/v1/livestreams/16/comments/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -18358,7 +18358,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/livestreams/16/comments/16"
+    "http://localhost/api/v1/livestreams/16/comments/16"
 );
 
 const headers = {
@@ -18376,7 +18376,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/livestreams/16/comments/16';
+$url = 'http://localhost/api/v1/livestreams/16/comments/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -18530,14 +18530,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/sections" \
+    --get "http://localhost/api/v1/sections" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/sections"
+    "http://localhost/api/v1/sections"
 );
 
 const headers = {
@@ -18554,7 +18554,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/sections';
+$url = 'http://localhost/api/v1/sections';
 $response = $client-&gt;get(
     $url,
     [
@@ -18672,14 +18672,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/sliders" \
+    --get "http://localhost/api/v1/sliders" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/sliders"
+    "http://localhost/api/v1/sliders"
 );
 
 const headers = {
@@ -18696,7 +18696,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/sliders';
+$url = 'http://localhost/api/v1/sliders';
 $response = $client-&gt;get(
     $url,
     [
@@ -18814,14 +18814,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/delivery-options" \
+    --get "http://localhost/api/v1/delivery-options" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/delivery-options"
+    "http://localhost/api/v1/delivery-options"
 );
 
 const headers = {
@@ -18838,7 +18838,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/delivery-options';
+$url = 'http://localhost/api/v1/delivery-options';
 $response = $client-&gt;get(
     $url,
     [
@@ -18956,14 +18956,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/shop-categories" \
+    --get "http://localhost/api/v1/shop-categories" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/shop-categories"
+    "http://localhost/api/v1/shop-categories"
 );
 
 const headers = {
@@ -18980,7 +18980,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/shop-categories';
+$url = 'http://localhost/api/v1/shop-categories';
 $response = $client-&gt;get(
     $url,
     [
@@ -19097,14 +19097,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/payment-methods" \
+    --get "http://localhost/api/v1/payment-methods" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/payment-methods"
+    "http://localhost/api/v1/payment-methods"
 );
 
 const headers = {
@@ -19121,7 +19121,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/payment-methods';
+$url = 'http://localhost/api/v1/payment-methods';
 $response = $client-&gt;get(
     $url,
     [
@@ -19238,14 +19238,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/search?q=flash+sale" \
+    --get "http://localhost/api/v1/search?q=flash+sale" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/search"
+    "http://localhost/api/v1/search"
 );
 
 const params = {
@@ -19268,7 +19268,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/search';
+$url = 'http://localhost/api/v1/search';
 $response = $client-&gt;get(
     $url,
     [
@@ -19414,7 +19414,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/products/16/images/architecto" \
+    "http://localhost/api/v1/me/products/16/images/architecto" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -19422,7 +19422,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/products/16/images/architecto"
+    "http://localhost/api/v1/me/products/16/images/architecto"
 );
 
 const headers = {
@@ -19440,7 +19440,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/products/16/images/architecto';
+$url = 'http://localhost/api/v1/me/products/16/images/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -19591,7 +19591,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items" \
+    "http://localhost/api/v1/me/size-templates/16/items" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -19599,7 +19599,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items"
+    "http://localhost/api/v1/me/size-templates/16/items"
 );
 
 const headers = {
@@ -19617,7 +19617,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items';
+$url = 'http://localhost/api/v1/me/size-templates/16/items';
 $response = $client-&gt;post(
     $url,
     [
@@ -19747,7 +19747,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16" \
+    "http://localhost/api/v1/me/size-templates/16/items/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -19755,7 +19755,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16"
+    "http://localhost/api/v1/me/size-templates/16/items/16"
 );
 
 const headers = {
@@ -19773,7 +19773,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items/16';
+$url = 'http://localhost/api/v1/me/size-templates/16/items/16';
 $response = $client-&gt;put(
     $url,
     [
@@ -19919,7 +19919,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16" \
+    "http://localhost/api/v1/me/size-templates/16/items/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -19927,7 +19927,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/size-templates/16/items/16"
+    "http://localhost/api/v1/me/size-templates/16/items/16"
 );
 
 const headers = {
@@ -19945,7 +19945,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/size-templates/16/items/16';
+$url = 'http://localhost/api/v1/me/size-templates/16/items/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -20087,7 +20087,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products" \
+    "http://localhost/api/v1/me/livestreams/16/products" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -20099,7 +20099,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products"
+    "http://localhost/api/v1/me/livestreams/16/products"
 );
 
 const headers = {
@@ -20121,7 +20121,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/16/products';
+$url = 'http://localhost/api/v1/me/livestreams/16/products';
 $response = $client-&gt;post(
     $url,
     [
@@ -20276,7 +20276,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products/16" \
+    "http://localhost/api/v1/me/livestreams/16/products/16" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -20284,7 +20284,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/livestreams/16/products/16"
+    "http://localhost/api/v1/me/livestreams/16/products/16"
 );
 
 const headers = {
@@ -20302,7 +20302,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/livestreams/16/products/16';
+$url = 'http://localhost/api/v1/me/livestreams/16/products/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -20457,7 +20457,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://fleepness-app.test/api/v1/me/notifications?per_page=15&amp;type=unread" \
+    --get "http://localhost/api/v1/me/notifications?per_page=15&amp;type=unread" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -20465,7 +20465,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/notifications"
+    "http://localhost/api/v1/me/notifications"
 );
 
 const params = {
@@ -20490,7 +20490,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/notifications';
+$url = 'http://localhost/api/v1/me/notifications';
 $response = $client-&gt;get(
     $url,
     [
@@ -20656,7 +20656,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/notifications/read" \
+    "http://localhost/api/v1/me/notifications/read" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -20664,7 +20664,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/notifications/read"
+    "http://localhost/api/v1/me/notifications/read"
 );
 
 const headers = {
@@ -20682,7 +20682,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/notifications/read';
+$url = 'http://localhost/api/v1/me/notifications/read';
 $response = $client-&gt;post(
     $url,
     [
@@ -20808,7 +20808,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://fleepness-app.test/api/v1/me/notifications/16/read" \
+    "http://localhost/api/v1/me/notifications/16/read" \
     --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -20816,7 +20816,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://fleepness-app.test/api/v1/me/notifications/16/read"
+    "http://localhost/api/v1/me/notifications/16/read"
 );
 
 const headers = {
@@ -20834,7 +20834,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://fleepness-app.test/api/v1/me/notifications/16/read';
+$url = 'http://localhost/api/v1/me/notifications/16/read';
 $response = $client-&gt;post(
     $url,
     [
